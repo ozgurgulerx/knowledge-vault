@@ -1,0 +1,103 @@
+site_name: Knowledge Vault
+site_description: Personal knowledge base on AI, engineering, and strategy
+site_url: https://ozgurgulerx.github.io/knowledge-vault/
+
+docs_dir: ../useful
+site_dir: site
+
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: amber
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: amber
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  font:
+    text: DM Sans
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - toc.follow
+
+plugins:
+  - search
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: index.md
+  - General Talk Points:
+    - AI Strategy & Market Intelligence: xxx 00 - General talk points/ai_strategy_and_market_intelligence.md
+    - Knowledge Graph: xxx 00 - General talk points/knowledge_graph.md
+  - Generative AI + LLMs:
+    - Generative AI and LLMs: xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md
+    - Knowledge Graph: xxx 01 - Generative AI + LLMs/knowledge_graph.md
+  - Systems & Inference Engineering:
+    - Inference Engineering: xxx 02 - Systems & Inference Engineering/inference_engineering.md
+    - GPU & Datacenter Infrastructure: xxx 02 - Systems & Inference Engineering/gpu_and_datacenter_infrastructure.md
+    - Multi-user B2C Architecture: xxx 02 - Systems & Inference Engineering/250821_multiuser_b2c_architecture.md
+    - Knowledge Graph: xxx 02 - Systems & Inference Engineering/knowledge_graph.md
+  - RAG, Knowledge & Memory:
+    - RAG Knowledge Memory Guide: xxx 03b - RAG, Knowledge, Memory/rag_knowledge_memory_guide.md
+    - Knowledge Graph: xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md
+  - AI Evals + GenAI Ops:
+    - LLM Evaluation & EvalOps: xxx 04 - AI Evals + GenAI Ops/llm_evaluation_and_evalops.md
+    - Knowledge Graph: xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md
+  - AI Products + UX:
+    - AI Products and UX: xxx 05 - AI Products + UX UI/ai_products_and_ux.md
+    - Figma Notes: xxx 05 - AI Products + UX UI/2603_figma.md
+    - Knowledge Graph: xxx 05 - AI Products + UX UI/knowledge_graph.md
+  - AI Security:
+    - AI Security Resources: xxx 06 - AI Security/251201_ai_security_resources.md
+    - Knowledge Graph: xxx 06 - AI Security/knowledge_graph.md
+  - Data & Knowledge Engineering:
+    - Data Knowledge Engineering: xxx 08 - Data & Knowledge Engineering for GenAI/data_knowledge_engineering.md
+    - Knowledge Graph: xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md
+  - Multimodal + Real-time:
+    - Multimodal and Realtime: xxx 09 - Multimodal + Real-time/multimodal_and_realtime.md
+    - Knowledge Graph: xxx 09 - Multimodal + Real-time/knowledge_graph.md
+  - AI Safety & Alignment:
+    - AI Safety and Alignment: xxx 10 - AI Safety & Alignment Science/ai_safety_and_alignment.md
+    - Knowledge Graph: xxx 10 - AI Safety & Alignment Science/knowledge_graph.md
+  - Quantum Computing:
+    - Primer on Quantum ML: xxx 11 - Quantum Computing/primer_quantum_ml.md
+  - Reinforcement Learning:
+    - "RL Principles & Frontiers": "xxx 12 - RL /reinforcement_learning_principles_frontiers.md"
+  - ClaudeCode & Codex:
+    - Claude Code Expert Guide: xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md
+  - New & Emerging AI:
+    - Generative Optimisation: xxx 14 - New & Emerging AI Themes/generative_optimisation.md
+  - Atlas:
+    - Healthy Snacks Turkey: atlas/atlas_healthy_snacks_turkey.md
+    - Learning & School Path: atlas/atlas_learning_and_school_path.md
+    - Healthy Parenting Attitudes: atlas/healthy_parenting_attitudes.md
+    - Knowledge Graph: atlas/knowledge_graph.md
+  - Graph Atlas:
+    - GCP Partner Playbook: graph atlas/gcp_partner_playbook.md
+    - Turkey AI Strategy: graph atlas/turkey_ai_strategy_and_execution.md
+    - Knowledge Graph: graph atlas/knowledge_graph.md
+  - Investing:
+    - AI Investing: investing/260306_ai_investing.md
+    - Startup Differentiation: investing/startup-differentiation.md
