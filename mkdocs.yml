@@ -6,6 +6,12 @@ docs_dir: ../useful
 site_dir: site
 exclude_docs: |
   API keys
+  __pycache__/*
+  **/__pycache__/*
+  *.pyc
+  **/*.pyc
+  ~$*
+  **/~$*
 
 theme:
   name: material
