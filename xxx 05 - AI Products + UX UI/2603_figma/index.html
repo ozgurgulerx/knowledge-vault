@@ -1,0 +1,2779 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/">
+      
+      
+        <link rel="prev" href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/">
+      
+      
+        <link rel="next" href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Figma Notes - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-ai-teams-use-figma" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Figma Notes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-figma-matters-for-ai-teams" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Figma Matters for AI Teams
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-usage-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Practical Usage Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical Usage Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#roles-touchpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles &amp; Touchpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-artefacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Artefacts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collaboration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collaboration Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modern-handoff-living-triangle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modern Handoff (Living Triangle)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typical-ai-product-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Typical AI Product Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-integrations-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Integrations &amp; Automation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Integrations & Automation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-surfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Surfaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-world-automation-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-World Automation Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations &amp; Gaps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emerging-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Emerging Opportunities
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#industry-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Industry Examples
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Context
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference URLs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-figma-matters-for-ai-teams" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Figma Matters for AI Teams
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-usage-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Practical Usage Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical Usage Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#roles-touchpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles &amp; Touchpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-artefacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Artefacts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collaboration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collaboration Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modern-handoff-living-triangle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modern Handoff (Living Triangle)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typical-ai-product-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Typical AI Product Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-integrations-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Integrations &amp; Automation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Integrations & Automation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-surfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Surfaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-world-automation-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-World Automation Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations &amp; Gaps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emerging-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Emerging Opportunities
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#industry-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Industry Examples
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Context
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference URLs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="how-ai-teams-use-figma">How AI Teams Use Figma<a class="headerlink" href="#how-ai-teams-use-figma" title="Permanent link">&para;</a></h1>
+<h2 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
+<p>Figma serves AI product teams as the <strong>shared interface "source of truth"</strong> spanning discovery, UX design, prototyping, developer handoff, design-system governance, and AI-assisted implementation. Core value: <strong>compressing alignment time</strong> across PM, ML, engineering, design, and data science when product behaviour is probabilistic and hard to specify in text.</p>
+<p><strong>Three usage modes:</strong>
+1. <strong>Collaboration + decision capture</strong> — real-time co-editing, comments, cursor chat, FigJam workshops turn ambiguous ML behaviours into concrete UI states, edge cases, and acceptance criteria
+2. <strong>Prototyping + user evidence</strong> — interactive prototypes validate "AI moments" (suggestions, confidence messaging, overrides); testable via Maze or UserTesting from prototype links
+3. <strong>Design-to-engineering translation</strong> — Dev Mode, Code Connect, and Figma MCP server enable extraction of specs, tokens, component mappings into developer workflows and agentic coding tools</p>
+<blockquote>
+<p><strong>Key:</strong> Mature AI orgs treat Figma as a "design database" queryable via REST APIs, webhooks, Dev Resources, and token pipelines. Enterprise constraint: Variables REST API is gated to <strong>Enterprise + Full seat</strong>; PATs have broad account reach, affecting governance.</p>
+</blockquote>
+<h2 id="why-figma-matters-for-ai-teams">Why Figma Matters for AI Teams<a class="headerlink" href="#why-figma-matters-for-ai-teams" title="Permanent link">&para;</a></h2>
+<p>AI products impose a <strong>specification problem</strong>: outputs are uncertain, data-dependent, and time-varying. Classic UX specs under-describe ML feature behaviour.</p>
+<table>
+<thead>
+<tr>
+<th>Problem Category</th>
+<th>How Figma Addresses It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Shared intent &amp; collaboration</strong></td>
+<td>Real-time multiplayer editing with visible cursors; reduces coordination overhead for resolving edge-case UI questions</td>
+</tr>
+<tr>
+<td><strong>Prototyping hard-to-specify behaviour</strong></td>
+<td>Interactive flows simulate AI-driven journeys: multi-step onboarding, suggestion accept/reject, escalation to human. Prototype-only sharing for broad review without edit access</td>
+</tr>
+<tr>
+<td><strong>Data viz / AI dashboards</strong></td>
+<td>Design monitoring surfaces (quality metrics, drift, confusion summaries, feedback queues). <strong>Datavizer</strong> plugin generates chart shapes from data for realistic mockups</td>
+</tr>
+<tr>
+<td><strong>Design systems &amp; tokens</strong></td>
+<td>Libraries package reusable components/styles/variables. Variables with modes implement design tokens (light/dark, brand themes) across web, mobile, internal tooling</td>
+</tr>
+<tr>
+<td><strong>Versioning &amp; safe iteration</strong></td>
+<td>Version history for restore/compare. Branching provides controlled exploration with review + merge workflows (mirrors engineering branch culture)</td>
+</tr>
+<tr>
+<td><strong>Developer handoff</strong></td>
+<td>Dev Mode exposes specs, layout/typography, assets, code snippets. Code Connect maps design components to actual repo components — improves both human and AI agent code generation</td>
+</tr>
+<tr>
+<td><strong>Accessibility</strong></td>
+<td>AI experiences are often text-heavy; inaccessible interfaces mean explanation/control mechanisms may never reach users. Plugins: <strong>Stark</strong>, <strong>eBay accessibility annotation</strong> (focus order, alt text, touch targets, semantics)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="practical-usage-patterns">Practical Usage Patterns<a class="headerlink" href="#practical-usage-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="roles-touchpoints">Roles &amp; Touchpoints<a class="headerlink" href="#roles-touchpoints" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>AI developers/ML engineers</strong> — Dev Mode inspection, linked dev resources, Code Connect / MCP-based design-informed code generation</li>
+<li><strong>PMs</strong> — FigJam for problem framing and journey mapping; prototype links for stakeholder buy-in and usability validation</li>
+<li><strong>Designers</strong> — Primary UI and design-system authors; document behavioural states (uncertainty, partial automation, fallback UX); collaborate on "model interaction contracts" (what the model can/can't do; what the UI must expose)</li>
+</ul>
+<h3 id="core-artefacts">Core Artefacts<a class="headerlink" href="#core-artefacts" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Mockups</strong> (low to high fidelity) — screens, dashboards, AI settings, transparency/explanations, admin tooling. File JSON accessible via API</li>
+<li><strong>Interactive prototypes</strong> — multi-step flows and "AI moments" (accept/reject, confirmations, escalation), shareable to broad audiences</li>
+<li><strong>Design systems</strong> — published libraries with analytics to monitor adoption and deprecations</li>
+<li><strong>Spec docs on canvas</strong> — "ready for dev" sections, layer-linked resources, comment threads capturing decisions</li>
+</ul>
+<h3 id="collaboration-patterns">Collaboration Patterns<a class="headerlink" href="#collaboration-patterns" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Comment-driven convergence</strong> — comments pinned to UI regions, resolved on decision. Heavily used for edge cases: error states, safety fallbacks, "what if the model is wrong?"</li>
+<li><strong>FigJam-first discovery, Figma-first delivery</strong> — ideation/retros/workshops in FigJam; decisions flow into design files. FigJam integrates with issue trackers and repos</li>
+<li><strong>Branching for parallel exploration</strong> — branch per experiment/feature slice, request review, merge (mirrors engineering workflows)</li>
+<li><strong>Dev-status signalling</strong> — designers mark frames "ready for dev"; developers focus on those in Dev Mode</li>
+</ol>
+<h3 id="modern-handoff-living-triangle">Modern Handoff (Living Triangle)<a class="headerlink" href="#modern-handoff-living-triangle" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Dev Mode inspect + snippets</strong> — language-specific code, box model, typography/layout</li>
+<li><strong>Dev Resources links</strong> — connect layers/components to tickets and repo artefacts (bidirectional via API)</li>
+<li><strong>Component-code grounding</strong> — Code Connect maps design components to actual code so developers and AI agents see real implementation, not generic snippets</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> Handoff is where ambiguity becomes cost. AI features already have inherent uncertainty — any UI ambiguity (states, copy, token mapping, missing accessibility specs) compounds into trust failures and rework.</p>
+</blockquote>
+<h3 id="typical-ai-product-workflow">Typical AI Product Workflow<a class="headerlink" href="#typical-ai-product-workflow" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart TD
+  A[Problem framing: user + model value hypothesis] --&gt; B[FigJam workshop: journeys, risks, edge cases]
+  B --&gt; C[Define AI interaction contract: inputs/outputs, uncertainty, fallbacks]
+  C --&gt; D[Design in Figma: flows, states, dashboards, settings]
+  D --&gt; E[Prototype: clickable flows + micro-interactions]
+  E --&gt; F[User testing: prototype link -&gt; Maze/UserTesting -&gt; findings]
+  F --&gt; D
+  D --&gt; G[Design system alignment: components, variables, modes, tokens]
+  G --&gt; H[Publish library + track adoption]
+  H --&gt; D
+  D --&gt; I[Developer handoff: Dev Mode "ready for dev" + linked dev resources]
+  I --&gt; J[Implementation: code + model integration]
+  J --&gt; K[Telemetry + eval: quality, drift, UX metrics]
+  K --&gt; B
+  G --&gt; L[Token sync automation: variables &lt;-&gt; repo]
+  L --&gt; J</code></pre>
+<h2 id="technical-integrations-automation">Technical Integrations &amp; Automation<a class="headerlink" href="#technical-integrations-automation" title="Permanent link">&para;</a></h2>
+<h3 id="integration-surfaces">Integration Surfaces<a class="headerlink" href="#integration-surfaces" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>What It Enables</th>
+<th>AI-Team Use Cases</th>
+<th>Auth / Access</th>
+<th>Key Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>REST API</strong> (files/images/comments/projects/components/styles)</td>
+<td>Programmatic access to file JSON, exports, comments, metadata</td>
+<td>Pipeline exports, design diff tooling, comment ingestion, design QA</td>
+<td>OAuth2 or PAT; PATs grant broad account access</td>
+<td>Rate limits aggregate on token owner — avoid PATs for shared automation</td>
+</tr>
+<tr>
+<td><strong>Webhooks</strong></td>
+<td>Event triggers (comments, file version updates)</td>
+<td>Auto-create tasks on "ready for dev"; notify CI on new version; run design lint on publish</td>
+<td>Webhooks write scope</td>
+<td>Retry/security handling is on you</td>
+</tr>
+<tr>
+<td><strong>Variables REST API</strong></td>
+<td>Query/create/update/delete variables and collections, bulk ops</td>
+<td>Token sync to code; enforce semantic token architecture; automate theme/mode updates</td>
+<td><strong>Enterprise + Full seat only</strong></td>
+<td>Requires publish step for cross-file use</td>
+</tr>
+<tr>
+<td><strong>Plugin API</strong></td>
+<td>Custom tooling inside Figma: data population, checks, exports</td>
+<td>AI-specific spec widgets, batch exports, internal integrations</td>
+<td>UI iframes + postMessage</td>
+<td>Dev Mode plugins are read-only</td>
+</tr>
+<tr>
+<td><strong>Dev Resources API</strong></td>
+<td>Attach links (repo files/issues/stories) to layers/components; bidirectional sync</td>
+<td>Layer-level traceability: UI state &lt;-&gt; ticket &lt;-&gt; PR; audit trails</td>
+<td>Via integrations (e.g., Jira); API for custom tooling</td>
+<td>Value depends on process discipline</td>
+</tr>
+<tr>
+<td><strong>Code Connect</strong></td>
+<td>Map design components to code components in repos; show real snippets in Dev Mode</td>
+<td>Reduce design-system/code drift; improve AI code gen via real component grounding</td>
+<td><strong>Org/Enterprise + Dev/Full seat</strong>; CLI/UI support</td>
+<td>Best ROI with mature design systems</td>
+</tr>
+<tr>
+<td><strong>MCP server</strong> (official)</td>
+<td>Provide design context/tools to AI coding agents; generate designs from live UI; leverage Code Connect mappings</td>
+<td>Design-informed agentic coding; faster UI implementation</td>
+<td><strong>OAuth only</strong> (PAT not supported); tool-call limits vary by plan/seat</td>
+<td>Requires supported MCP clients</td>
+</tr>
+<tr>
+<td><strong>Embed API</strong></td>
+<td>Control embedded prototypes via messages; listen to prototype events</td>
+<td>Instrument prototype usage; build "shell" apps; internal demo portals</td>
+<td>OAuth app + allowed embed origins</td>
+<td>Embed origins must be allowlisted</td>
+</tr>
+</tbody>
+</table>
+<h3 id="architecture-patterns">Architecture Patterns<a class="headerlink" href="#architecture-patterns" title="Permanent link">&para;</a></h3>
+<p><strong>Token synchronisation</strong> — Figma variables represent tokens; a sync tool (often plugin) exports/imports token JSON; CI transforms into platform formats (CSS variables, mobile constants). Many teams use <strong>Tokens Studio</strong> (stores tokens as JSON, syncs with GitHub, covers properties not natively tokenised in Figma). Enables "code review for tokens" via PR-based flow, often using <strong>Style Dictionary</strong> for transforms.</p>
+<p><strong>Event-driven automation</strong> — Webhooks observe events (comments, named versions) to: (a) advance work items when frames are marked ready, (b) run automated checks (token usage, naming conventions), (c) trigger asset export pipelines.</p>
+<p><strong>Dev Mode-centred implementation</strong> — Designers annotate layers with Dev Resources and mark sections "ready for dev." Developers implement via Dev Mode inspection + Code Connect's real component snippets. Framework-specific guidance in the open-source Code Connect repo.</p>
+<p><strong>AI-agent implementation (MCP + Code Connect)</strong> — Official Figma MCP server provides design context to AI agents generating code. Tools: get design context, variable definitions, Code Connect maps; some clients support generating design layers from live UI. Remote and desktop installation options.</p>
+<blockquote>
+<p><strong>Key:</strong> Third-party MCP bridges have had <strong>command-injection issues</strong> — treat "agent &lt;-&gt; design system" integrations as production attack surface (input validation, least privilege, audited dependencies).</p>
+</blockquote>
+<p><strong>Custom middleware</strong> — Teams build servers that accept agent requests and translate into Figma API calls, adding org-specific governance and caching, using Plugin API and REST API as building blocks.</p>
+<h3 id="real-world-automation-examples">Real-World Automation Examples<a class="headerlink" href="#real-world-automation-examples" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Design tokens -&gt; code</strong> — Tokens Studio two-way sync, Style Dictionary transforms, PR-based review, CI publishing</li>
+<li><strong>Prototype instrumentation</strong> — Embed API sends/receives messages for interaction analytics during demos</li>
+<li><strong>User research loop</strong> — Figma integrates with Maze and UserTesting for prototype -&gt; study -&gt; insights</li>
+<li><strong>AI-to-FigJam diagramming</strong> — ChatGPT integration creates FigJam diagrams directly</li>
+</ul>
+<h2 id="limitations-gaps">Limitations &amp; Gaps<a class="headerlink" href="#limitations-gaps" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Prototypes are not production</strong> — don't reproduce model latency, streaming, hallucinations, retrieval misses, or drift. Must explicitly design error/failure states</li>
+<li><strong>Enterprise gating fragments token automation</strong> — Variables REST API requires Enterprise + Full seat; others fall back to plugin-based sync or third-party tooling</li>
+<li><strong>Branching is powerful but heavy</strong> — reviews apply to all changes in a branch (no partial approvals); requires Org/Enterprise; needs small branches, frequent merges, clear ownership</li>
+<li><strong>PAT governance risks</strong> — broad account access + aggregated rate limits. OAuth apps with scoped access safer for regulated AI products</li>
+<li><strong>MCP server adds "design context supply chain"</strong> — new constraints: OAuth auth, plan-based tool-call limits, file structure affects output quality. Third-party bridges have shown security weaknesses</li>
+<li><strong>Design viz is not data truth</strong> — Figma helps design dashboards but is not BI. Don't over-trust mock chart states</li>
+</ul>
+<h2 id="emerging-opportunities">Emerging Opportunities<a class="headerlink" href="#emerging-opportunities" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Agentic coding convergence</strong> — MCP server + Code Connect direction points toward agent-assisted "implement this screen" workflows reducing pixel-level churn and improving component reuse</li>
+<li><strong>Spec as executable input</strong> — as variables/tokens and component mappings become more programmatically addressable, Figma file structure + token definitions + component maps become machine-consumable contracts enabling automatic conformance checks in CI</li>
+<li><strong>Model evaluation meets UI decisions</strong> — embed evaluation artefacts (failure taxonomies, red-team scenarios, measurement plans) alongside UI specs in FigJam/Figma so UI decisions reference known failure modes. Research tools like <strong>fAIlureNotes</strong> highlight this need</li>
+<li><strong>Accessibility shifting left</strong> — accessible prototypes + annotation tooling push focus order, semantics, alt text, and touch targets earlier into the process</li>
+</ul>
+<h2 id="industry-examples">Industry Examples<a class="headerlink" href="#industry-examples" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>ServiceNow</strong> — connects Figma MCP server into application generation workflow via OAuth; Figma context as input to automated build agents</li>
+<li><strong>Mozilla</strong> — uses Code Connect for recommended component snippets; representative of "design system grounding" for AI-assisted coding</li>
+</ul>
+<h2 id="academic-context">Academic Context<a class="headerlink" href="#academic-context" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Research highlights persistent challenges in designing ML-mediated UX, understanding model failures, and supporting practitioner workflows</li>
+<li><strong>Brickify</strong> — token-based intent specification</li>
+<li><strong>CoGen</strong> — Figma-centric component generation</li>
+</ul>
+<h2 id="reference-urls">Reference URLs<a class="headerlink" href="#reference-urls" title="Permanent link">&para;</a></h2>
+<p><strong>Dev Mode:</strong>
+- https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode
+- https://help.figma.com/hc/en-us/articles/15023202277399-Use-code-snippets-in-Dev-Mode</p>
+<p><strong>Code Connect:</strong>
+- https://help.figma.com/hc/en-us/articles/23920389749655-Code-Connect
+- https://developers.figma.com/docs/code-connect/
+- https://github.com/figma/code-connect</p>
+<p><strong>MCP Server:</strong>
+- https://developers.figma.com/docs/figma-mcp-server/
+- https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/
+- https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server
+- https://www.figma.com/blog/introducing-figma-mcp-server/</p>
+<p><strong>REST API + Webhooks + Variables:</strong>
+- https://developers.figma.com/docs/rest-api/
+- https://developers.figma.com/docs/rest-api/webhooks/
+- https://developers.figma.com/docs/rest-api/variables/</p>
+<p><strong>Embed API:</strong>
+- https://developers.figma.com/docs/embeds/embed-api/
+- https://github.com/figma/embed-kit-2.0-example</p>
+<p><strong>Libraries + Analytics:</strong>
+- https://help.figma.com/hc/en-us/articles/360041051154-Guide-to-libraries-in-Figma
+- https://help.figma.com/hc/en-us/articles/360039238353-View-and-explore-library-analytics
+- https://developers.figma.com/docs/rest-api/library-analytics-intro/</p>
+<p><strong>Tokens Studio:</strong>
+- https://github.com/tokens-studio/figma-plugin
+- https://docs.tokens.studio/token-storage/remote/sync-git-github
+- https://docs.tokens.studio/transform-tokens/style-dictionary</p>
+<p><strong>User Testing:</strong>
+- https://help.figma.com/hc/en-us/articles/360041246514-Test-your-Figma-prototypes-with-Maze
+- https://help.figma.com/hc/en-us/articles/19790203466263-Test-your-prototypes-with-UserTesting</p>
+<p><strong>Accessible Prototypes:</strong>
+- https://help.figma.com/hc/en-us/articles/7810391964695-Accessible-prototypes-in-Figma</p>
+<p><strong>Academic:</strong>
+- https://cdn.aaai.org/ocs/15363/15363-68257-1-PB.pdf (Yang, AAAI 2017 — ML-enhanced UX)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

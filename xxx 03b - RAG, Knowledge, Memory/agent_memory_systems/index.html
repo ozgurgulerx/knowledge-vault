@@ -1,0 +1,2643 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/agent_memory_systems/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Agent Memory Systems - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#agent-memory-systems" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Agent Memory Systems
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Concepts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-architectures-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Architectures Comparison
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-as-structured-evolving-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory as Structured Evolving State
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-as-reasoning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory as Reasoning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Evaluation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Memory Evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memory-benchmark-landscape-2024-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Benchmark Landscape (2024-2026)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparative-benchmark-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparative Benchmark Scores
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#five-architectural-patterns-that-separate-winners" class="md-nav__link">
+    <span class="md-ellipsis">
+      Five Architectural Patterns That Separate Winners
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmark-and-cicd-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmark and CI/CD Tooling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compaction-vs-summarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compaction vs Summarization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stateful-agent-platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stateful Agent Platforms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-source-memory-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open-Source Memory Ecosystem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Checklist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Links
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="agent-memory-systems">Agent Memory Systems<a class="headerlink" href="#agent-memory-systems" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>See also:</strong> <a href="../rag_knowledge_memory_guide/">RAG, Knowledge &amp; Context Engineering</a> | <a href="../../xxx%2001-01%20-%20LLM%20Landscape%20and%20Trends/llm_agentic_systems/">LLM Agentic Systems</a> | <a href="../../xxx%2013%20-%20Codex/ai_engineering_practices/">AI Engineering Practices</a></p>
+</blockquote>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The conventional framing of agent memory is "store the chat history and retrieve relevant parts later." That framing is wrong in a way that matters architecturally. Long-term memory is not storage — it is <strong>context precomputation</strong>. Every memory system in the current landscape, from Letta's OS-style tiered cache to Zep's temporal knowledge graph to Supermemory's update-edge model, answers the same question: given a future prompt whose content is unknown today, what derived artifacts should be materialized now so that the right 4k–8k tokens can be hydrated into a 128k window at query time? The engineering consequence is that memory design is inseparable from retrieval policy design — and getting the ordering wrong between compaction (reversible, should be default) and summarization (irreversible, only when signal-to-noise is the binding constraint) is the single most common cause of what practitioners call <strong>context rot</strong>: the gradual burial of true constraints under accumulated low-value tokens.</p>
+<p>The strongest emerging thesis pushes further: models are getting good at acting but remain bad at remembering. Supermemory's Dhravya Shah frames persistent agent intelligence as primarily a <strong>memory systems problem</strong>, not a model problem. The key insight is not that "memory is useful" — everyone says that — but that the <strong>data model of memory</strong> determines agent quality. Memory as structured evolving state with explicit update edges, selective forgetting, and cache-aware injection outperforms memory as flat vector retrieval or appended chat logs. The models converge across providers; the memory layer does not. This makes memory architecture the durable differentiator for agent systems that must maintain coherent behavior across sessions, users, and time.</p>
+<p>A sharper restatement: agent failure in production is mostly a memory and state problem, not an intelligence problem (Cognee demo, 2026). Classic RAG fetches context but does not give agents durable, structured, evolving memory across sessions or systems. Agentic systems can act but are often stateless — restart them weeks later and they have forgotten what happened, what worked, and what the system state was. The fix is not better retrieval but a <strong>memory layer above RAG</strong> — closer to an operating system for agent memory than a normal RAG framework. The novelty is not "graph + vector" (that pattern exists) but the productization: treating memory as a data architecture problem rather than "stuff more text into the prompt." A contrarian nuance applies, however: many companies do not have a "memory problem" first — they have an eventing, schema, and source-of-truth problem. If billing and entitlements are poorly modeled, no amount of graph memory saves them. Graph memory helps most after the operational backbone is sane. The deepest value is not "agents that remember like humans" but "agents operating over structured, persistent, scoped state."</p>
+<p>This document covers the representation, storage, retrieval, updating, and evaluation of agent memory — from ephemeral scratchpads through tiered caching to temporal knowledge graphs — with concrete architecture patterns, framework comparisons, and the failure modes that separate demos from deployed systems.</p>
+<h2 id="core-concepts">Core Concepts<a class="headerlink" href="#core-concepts" title="Permanent link">&para;</a></h2>
+<p>"Memory" is no longer synonymous with "include the chat transcript." Recent surveys characterize memory as a dedicated module with five concerns: <strong>representation</strong>, <strong>storage</strong>, <strong>retrieval</strong>, <strong>updating</strong>, and <strong>evaluation</strong>, distinguishing episodic (what happened), semantic (what is true), and procedural (how to do things) memory.</p>
+<p>Most modern systems combine three layers:</p>
+<ol>
+<li><strong>Raw event storage</strong> — immutable logs of messages, tool results, and observations</li>
+<li><strong>Derived memory artifacts</strong> — summaries, entity profiles, timelines, preference models</li>
+<li><strong>Retrieval policies</strong> — when to recall what, at what granularity, with what freshness requirements</li>
+</ol>
+<blockquote>
+<p><strong>Key — Agent Memory Architecture:</strong></p>
+<div class="highlight"><pre><span></span><code>Input -&gt; Scratchpad (ephemeral) -&gt; Tools
+      -&gt; Profile (long-term) -&gt; Ledger (task)
+</code></pre></div>
+<ul>
+<li>Define memory types and retention windows</li>
+<li>Source-of-truth + PII handling</li>
+<li>Summarization with confidence and citations</li>
+<li>Good/Better/Best: ephemeral scratchpad → task ledger with rollups → governed profile with consent and expiry</li>
+</ul>
+</blockquote>
+<h2 id="memory-architectures-comparison">Memory Architectures Comparison<a class="headerlink" href="#memory-architectures-comparison" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Architecture</th>
+<th>Core Idea</th>
+<th>Strengths</th>
+<th>Weaknesses</th>
+<th>Typical Use Cases</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Context window only</strong></td>
+<td>Keep last N turns; drop older</td>
+<td>Lowest complexity; low latency</td>
+<td>Forgetful; inconsistent persona; cannot learn</td>
+<td>Simple chat UIs; short tasks</td>
+</tr>
+<tr>
+<td><strong>Window + rolling summaries</strong></td>
+<td>Periodically summarize old turns; keep summary + recent window</td>
+<td>Token-efficient continuity</td>
+<td>Summary drift; loses details unless raw log retained</td>
+<td>Support bots; long chats</td>
+</tr>
+<tr>
+<td><strong>Vector-store episodic</strong></td>
+<td>Embed past interactions; retrieve similar episodes</td>
+<td>Scales to many memories; cheap</td>
+<td>Similarity ≠ relevance; weak temporal reasoning</td>
+<td>Personalization; "remember when..." recall</td>
+</tr>
+<tr>
+<td><strong>Profile/attribute (MemoryBank)</strong></td>
+<td>Maintain user portrait + past events; update with forgetting curve heuristics</td>
+<td>Stable personalization; controlled updates</td>
+<td>Requires careful schema design</td>
+<td>Personal assistants; preference learning</td>
+</tr>
+<tr>
+<td><strong>OS-style tiered (Letta)</strong></td>
+<td>Treat context as cache; use tools/interrupts to swap in/out "core" and external memory</td>
+<td>Handles long horizons; explicit control; persistent logs</td>
+<td>More orchestration complexity; tool dependence</td>
+<td>Stateful agents; long projects</td>
+</tr>
+<tr>
+<td><strong>Temporal knowledge-graph (Zep/Graphiti)</strong></td>
+<td>Extract entities/relations over time; maintain temporal KG; retrieve relationship-aware context</td>
+<td>Strong temporal + relational recall; supports change over time</td>
+<td>Graph extraction complexity; additional infra</td>
+<td>Enterprise assistants with evolving facts</td>
+</tr>
+<tr>
+<td><strong>Agentic memory network (A-MEM)</strong></td>
+<td>Store "notes" with attributes; agent autonomously links and evolves memories (Zettelkasten-inspired)</td>
+<td>Adaptive organization; supports memory evolution</td>
+<td>Extra compute; harder to reason about determinism</td>
+<td>Research agents; long-term learning</td>
+</tr>
+<tr>
+<td><strong>Orchestrator-native (LangGraph)</strong></td>
+<td>Short-term state in thread checkpoints; long-term store with namespaces + optional vector search</td>
+<td>Clean separation of ST/LT; supports replay and HITL</td>
+<td>Still need domain-specific memory schemas</td>
+<td>Production assistants needing observability</td>
+</tr>
+<tr>
+<td><strong>Structured evolving state (Supermemory)</strong></td>
+<td>Update edges between fact versions; selective forgetting; cache-aware injection; hybrid memory + raw fallback</td>
+<td>Versioned provenance; prompt-cache-friendly; graceful cold-start</td>
+<td>Newer; less battle-tested at scale</td>
+<td>Personalized agents; multi-session continuity</td>
+</tr>
+<tr>
+<td><strong>Graph-memory OS (Cognee)</strong></td>
+<td>Knowledge graphs on top of embeddings (Neo4j); domain-scoped memory per agent; graph-vector retrieval; write-back feedback loops; per-agent/session persistence</td>
+<td>Scoped least-privilege memory; agents improve future searches via write-back; session + persistent layers</td>
+<td>Some autonomous behaviors still hardcoded; requires sane upstream data modeling</td>
+<td>Multi-agent investigation pipelines; domain-partitioned enterprise systems</td>
+</tr>
+<tr>
+<td><strong>Reasoning-based identity model (Honcho)</strong></td>
+<td>Treat memory as a trained logical reasoning task — deductive, inductive, abductive inference over user/agent data produces composable conclusions scaffolded into identity models</td>
+<td>Rich predictions from sparse data; handles contradictions via reasoning rather than overwrite rules; traceable inference chains; exceeds human social cognition on consistency</td>
+<td>Requires trained reasoning models; compute cost of inference; newer paradigm with less production validation</td>
+<td>Personalization; user identity modeling; social cognition for AI; long-horizon agent personalization</td>
+</tr>
+<tr>
+<td><strong>Multi-layer typed memory (MIRIX)</strong></td>
+<td>Explicit separation of episodic (event sequences), semantic (factual knowledge), and procedural (how-to strategies) memory into distinct modules with typed storage and retrieval policies per type</td>
+<td>Large gains over RAG baselines by routing queries to the right memory type; structured separation prevents cross-contamination between event recall and factual lookup; procedural memory enables skill transfer across tasks</td>
+<td>Additional architectural complexity; requires classifying incoming information by type at write time; newer research system</td>
+<td>Multi-session agents requiring both factual recall and behavioral adaptation; systems where RAG alone underperforms because retrieval conflates events, facts, and strategies</td>
+</tr>
+</tbody>
+</table>
+<h2 id="memory-as-structured-evolving-state">Memory as Structured Evolving State<a class="headerlink" href="#memory-as-structured-evolving-state" title="Permanent link">&para;</a></h2>
+<p>The strongest design principles from Supermemory (Dhravya Shah, March 2026):</p>
+<p><strong>Update edges as a first-class primitive:</strong>
+Old facts are not simply overwritten or deleted — the system tracks that one fact supersedes another via explicit <strong>update edges</strong> connecting old and new versions. This preserves provenance and supports temporal reasoning ("what did we believe before?") while keeping the active memory current. Memory as a versioned graph, not a flat store.</p>
+<p><strong>Forgetting as a product feature:</strong>
+A good memory system must decide what to remember, what to ignore, and how to invalidate stale facts. Forgetting is active curation that prevents context rot. Without it, memory systems accumulate noise that eventually overwhelms signal.</p>
+<p><strong>Hybrid memory + raw context fallback:</strong>
+If no distilled memory exists for a query, the system surfaces relevant raw context via retrieval. This avoids cold-start failure — the system gracefully degrades to standard RAG until enough interactions accumulate to synthesize durable memories.</p>
+<p><strong>Prompt-cache-aware memory injection:</strong>
+Static profile and memory sits high in the prompt and changes rarely, exploiting cache discounts (Anthropic 90%, OpenAI 50%). Only the dynamic tail (recent conversation, task-specific context) changes per request. Structuring memory return order to maximize cache hit rates reduces cost and latency simultaneously.</p>
+<h2 id="memory-as-reasoning">Memory as Reasoning<a class="headerlink" href="#memory-as-reasoning" title="Permanent link">&para;</a></h2>
+<p>A fundamentally different approach reframes memory not as a storage problem but as a <strong>trained reasoning task</strong>. Where all other architectures above start from "what facts should we store and how do we retrieve them?", reasoning-based memory starts from "what conclusions can we derive from observed data, and how do we scaffold those conclusions into a predictive model of the user or agent?"</p>
+<p>The thesis, articulated by Plastic Labs/Honcho, draws on <strong>predictive processing</strong> from cognitive science: biological memory is not high-fidelity storage — it is a prediction system that constructs internal models from sparse data, checks predictions against new observations (surprisal), and updates the model at the margins. Human social cognition works the same way — we build mental models of other people through prediction and error correction, not by storing facts about them. The argument is that LLMs can replicate and exceed this process because they lack the compute constraints, cognitive biases, belief resistance, and neural inertia that limit human reasoning.</p>
+<p><strong>The approach trains specialized reasoning models</strong> to perform formal logical inference — <strong>deductive</strong> (certain conclusions from stated premises), <strong>inductive</strong> (generalizations from observed patterns), and <strong>abductive</strong> (best explanations for observed behavior) — over user and agent interaction data. The output is not stored facts but <strong>atomic, composable conclusions</strong>, each supported by premises and qualified with natural-language certainty. These conclusions scaffold on one another into a <strong>reasoning tree</strong> that constitutes a working model of personal identity — preferences, patterns, psychology, and predicted behavior.</p>
+<p>Key architectural properties that distinguish this from storage-based approaches:</p>
+<ul>
+<li><strong>Composability</strong> — conclusions are atomic units that can be dynamically recombined and scaffolded to answer any query, not pre-structured for specific retrieval patterns</li>
+<li><strong>Contradiction handling via reasoning</strong> — instead of overwrite rules or update edges, the system reasons through contradictions using formal logic, producing updated conclusions with explicit justification</li>
+<li><strong>Inference from sparse data</strong> — logical reasoning extracts latent information that static extraction misses, because the model derives implications and best-explanation hypotheses rather than just recording what was explicitly stated</li>
+<li><strong>Traceable predictions</strong> — every conclusion carries its reasoning trace (premises → inference → conclusion), making the memory system auditable and debuggable in ways that embedding-based retrieval cannot match</li>
+<li><strong>Asynchronous improvement</strong> — the reasoning tree can be computed over at any time to derive new conclusions from existing ones, improving the representation without new input data</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> The critical distinction is between <strong>memory as data</strong> (extract facts, embed, store, retrieve) and <strong>memory as model</strong> (reason over observations, derive conclusions, scaffold predictions, synthesize context at inference time). Storage-based memory requires the retrieval query to align with how information was stored; reasoning-based memory can answer questions that were never anticipated at storage time because the reasoning tree can be traversed from any entry point (Courtland Leer &amp; Vince Trost, Plastic Labs, "Memory as Reasoning," Aug 2025).</p>
+</blockquote>
+<h2 id="memory-evaluation">Memory Evaluation<a class="headerlink" href="#memory-evaluation" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key — Memory Recall Eval Snippet:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">recall_rate</span><span class="p">(</span><span class="n">prompts</span><span class="p">,</span> <span class="n">memory</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">intent</span> <span class="ow">in</span> <span class="n">memory</span><span class="p">)</span> <span class="k">for</span> <span class="n">intent</span> <span class="ow">in</span> <span class="n">prompts</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">prompts</span><span class="p">)</span>
+</code></pre></div>
+</blockquote>
+<p><strong>Evaluation dimensions</strong> (what separates good memory from bad):</p>
+<ul>
+<li><strong>Knowledge extraction quality</strong> — did the system correctly identify what matters?</li>
+<li><strong>Temporal reasoning</strong> — does it know what changed and when?</li>
+<li><strong>Multi-session reasoning</strong> — can it connect facts across separate conversations?</li>
+<li><strong>Preference understanding</strong> — has it learned user patterns and tastes?</li>
+<li><strong>User action tracking</strong> — does it remember what the user actually did (not just said)?</li>
+<li><strong>Assistant output tracking</strong> — does it remember what the agent itself said and recommended?</li>
+<li><strong>Write-back effectiveness</strong> — do feedback loops (where agents record what they learned about retrieval strategies) actually improve future investigation quality? This is the evaluation analog of Cognee-style write-back memory: after an investigation, the agent writes back what it learned about how future searches should be done, and the metric is whether subsequent searches improve as a result (Cognee demo, 2026)</li>
+</ul>
+<h3 id="memory-benchmark-landscape-2024-2026">Memory Benchmark Landscape (2024-2026)<a class="headerlink" href="#memory-benchmark-landscape-2024-2026" title="Permanent link">&para;</a></h3>
+<p>Seven major benchmarks now define the evaluation surface. The cross-benchmark consensus: <strong>temporal reasoning is consistently the hardest capability</strong>, showing up to 73% performance gaps between systems and humans.</p>
+<p><strong>LongMemEval</strong> (Wu et al., ICLR 2025) has emerged as the gold standard — testing five abilities (information extraction, multi-session reasoning, temporal reasoning, knowledge updates, abstention) across 500 curated questions in conversations scaling from ~115K tokens (LongMemEval_S) to 1.5M tokens (LongMemEval_M). Three-stage framework: Indexing → Retrieval → Reading with LLM-as-judge scoring. Commercial chat assistants show 30-60% accuracy drop on sustained interactions; full-context GPT-4o achieves only 60-64% (arXiv, OpenReview).</p>
+<p><strong>LoCoMo</strong> (ACL 2024, Snap Research/UNC Chapel Hill) tests 10 conversations of ~300 turns each across single-hop QA, multi-hop reasoning, temporal reasoning, and adversarial questions. Widely adopted but has significant limitations: short conversations (~9K tokens), data quality concerns, and vendor disputes — Mem0 and Zep have publicly contradicted each other's reported scores, making LoCoMo rankings unreliable for cross-vendor comparison (arXiv, ACL 2024).</p>
+<p><strong>Other benchmarks</strong>: <strong>MemBench</strong> (ACL 2025 Findings) distinguishes factual vs reflective memory. <strong>MemoryBench</strong> (Tsinghua, 2025) pioneers continual learning evaluation across 11 datasets, 3 domains, 2 languages. <strong>MemoryAgentBench</strong> (ICLR 2026) tests four competencies — accurate retrieval, test-time learning, long-range understanding, conflict resolution — revealing no existing method excels at all four. <strong>EverMemBench</strong> (Feb 2026) targets multi-party group conversations. <strong>Letta Leaderboard</strong> evaluates autonomous memory management through tool calls.</p>
+<h3 id="comparative-benchmark-scores">Comparative Benchmark Scores<a class="headerlink" href="#comparative-benchmark-scores" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>LongMemEval</th>
+<th>LoCoMo</th>
+<th>Key differentiator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hindsight</strong> (Vectorize, Dec 2025)</td>
+<td><strong>91.4%</strong> (Gemini-3 Pro) / 83.6% (20B) / 89.0% (120B)</td>
+<td><strong>89.61%</strong></td>
+<td>4 parallel retrieval strategies + cross-encoder reranking</td>
+</tr>
+<tr>
+<td><strong>Letta</strong> (filesystem approach)</td>
+<td>—</td>
+<td>74.0% (GPT-4o-mini)</td>
+<td>Agent + file tools outperforms specialized infra</td>
+</tr>
+<tr>
+<td><strong>Zep/Graphiti</strong></td>
+<td>71.2% (GPT-4o)</td>
+<td>75.14% ± 0.17 (corrected)</td>
+<td>Bi-temporal graph, no LLM calls during retrieval</td>
+</tr>
+<tr>
+<td><strong>Mem0</strong></td>
+<td>~49%</td>
+<td>66.9-68.5%</td>
+<td>Fastest latency (1.40s p95); weakest on diverse queries</td>
+</tr>
+<tr>
+<td>Full-context GPT-4o</td>
+<td>60-64%</td>
+<td>—</td>
+<td>Baseline without memory system</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> A 20B-parameter model with Hindsight's multi-strategy memory (83.6%) dramatically outperforms full-context GPT-4o (60.2%) on LongMemEval — <strong>architecture matters more than model size</strong>. Pure vector-store approaches plateau around 50%; systems combining graph + multi-strategy retrieval consistently dominate (Claude Opus 4.6 Research, synthesized from arXiv/benchmark papers, 2024-2026).</p>
+</blockquote>
+<h3 id="five-architectural-patterns-that-separate-winners">Five Architectural Patterns That Separate Winners<a class="headerlink" href="#five-architectural-patterns-that-separate-winners" title="Permanent link">&para;</a></h3>
+<p><strong>Pattern 1: Multi-strategy retrieval is the single biggest differentiator.</strong> Hindsight (4 strategies: semantic, BM25, graph traversal, temporal → 91.4%) &gt; Zep (3 strategies: cosine, BM25, BFS → 71.2%) &gt; Mem0 (1-2 strategies: vector, optional graph → 49%). The correlation is nearly linear: different query types demand different retrieval approaches. BM25 catches exact mentions embeddings miss; graph traversal finds multi-hop connections invisible to flat similarity; temporal filtering prevents returning outdated facts (Vectorize benchmark analysis, 2025-2026).</p>
+<p><strong>Pattern 2: Graph structure is essential for complex reasoning but vector search remains important for breadth.</strong> The 22-point gap between Zep (71.2%, graph-native) and Mem0 (49%, vector-primary) on LongMemEval directly reflects the limitation of pure vector approaches for multi-hop, temporal, and relational queries. But graph-only retrieval misses semantically similar content that lacks explicit edges — every top system uses hybrid storage. The specific graph implementation matters less than having one.</p>
+<p><strong>Pattern 3: Temporal modeling correlates with the largest performance gains.</strong> Systems with explicit temporal modeling — Hindsight's dual timestamps, Zep's bi-temporal model, Cognee's temporal search — score 20-60 points higher on temporal queries than systems treating time as metadata. Hindsight improved from 31.6% baseline to 91.0% on temporal queries specifically, a nearly 60-point gain.</p>
+<p><strong>Pattern 4: Active memory consolidation prevents degradation at scale.</strong> Systems that merely accumulate memories without consolidation suffer from noise. Hindsight's reflect operation updates beliefs on new evidence. Zep invalidates contradicted facts (preserving history while preventing stale retrieval). Cognee's memify pipeline prunes stale nodes and strengthens frequent connections. Letta's sleep-time compute enables background refinement.</p>
+<p><strong>Pattern 5: Agent-controlled memory can outperform specialized infrastructure.</strong> Letta's demonstration that a simple filesystem approach (agent + file tools) achieves 74.0% on LoCoMo — outperforming Mem0's specialized infrastructure at 68.5% — suggests that giving an LLM iterative search/read/organize capability can matter more than storage sophistication. However, this consumes tokens for memory operations and depends on model instruction-following quality.</p>
+<h3 id="benchmark-and-cicd-tooling">Benchmark and CI/CD Tooling<a class="headerlink" href="#benchmark-and-cicd-tooling" title="Permanent link">&para;</a></h3>
+<p>A concrete <strong>measurement layer</strong> for agent memory is emerging — moving memory evaluation from qualitative assessment to quantifiable, automatable metrics integrated into engineering pipelines.</p>
+<p><strong>MIRIX</strong> (arXiv:2507.07957): a multi-layer agent memory system that explicitly separates <strong>episodic</strong>, <strong>semantic</strong>, and <strong>procedural</strong> memory into distinct modules — each with its own storage format, retrieval policy, and update mechanism. Rather than treating all memory as a single vector store, MIRIX routes incoming information to the appropriate memory type at write time and selects the right memory module at query time based on the nature of the request (event recall vs. factual lookup vs. strategy retrieval). The system reports large gains over RAG baselines, validating the thesis that typed memory architecture outperforms undifferentiated retrieval. MIRIX's significance is less in its specific implementation than in what it proves: <strong>memory type separation is a performance lever</strong>, not just an organizational convenience. Systems that treat episodic, semantic, and procedural memory as interchangeable retrieval targets leave performance on the table.</p>
+<p><strong>Vectorize Agent Memory Benchmark (AMB)</strong> (Mar 2026): an open, runnable evaluation harness consisting of a CLI, datasets, and judge prompts. AMB records four core metrics — <strong>accuracy, ingestion time, retrieval time, and token cost</strong> — across two modes: <em>single-query</em> (isolated recall) and <em>agentic</em> (multi-query, tool-driven workflows). The agentic mode explicitly surfaces tradeoffs — whether a multi-step workflow improves answer quality at the cost of latency and tokens — making it possible to quantify retention and recall over time rather than eyeballing accuracy on static benchmarks. The harness is designed to grow to cover stress datasets, multilingual cases, and community contributions (Vectorize, Mar 2026).</p>
+<p><strong>Microsoft ai-agent-evals / Foundry GitHub Action</strong>: automates agent evaluations in CI/CD with statistical tests. Evaluator datasets feed into CI pipelines, collecting latency, token cost, and accuracy data across builds. Releases can be gated on memory regression thresholds — treating memory performance as a <strong>first-class metric in delivery pipelines</strong>, not an afterthought. This closes the loop between memory evaluation and deployment: memory degradation blocks the release rather than surfacing as a production incident (Microsoft, 2026).</p>
+<blockquote>
+<p><strong>Key:</strong> The combination of AMB-style benchmarks + CI/CD gating means memory systems can now be evaluated with the same rigor as retrieval pipelines: measurable metrics, automated regression detection, and release gates. The missing piece — connecting benchmarks to production-like memory backends — is addressed by MCP-based memory providers (see Mem0 under Stateful Agent Platforms).</p>
+</blockquote>
+<h2 id="compaction-vs-summarization">Compaction vs Summarization<a class="headerlink" href="#compaction-vs-summarization" title="Permanent link">&para;</a></h2>
+<p>Two operations reduce stored context. They are not interchangeable:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Compaction</th>
+<th>Summarization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>What it does</strong></td>
+<td>Moves raw data to external storage; keeps handles/references in active memory</td>
+<td>Condenses content into shorter representation; discards source</td>
+</tr>
+<tr>
+<td><strong>Reversibility</strong></td>
+<td>Fully reversible — original data retrievable on demand</td>
+<td>Irreversible — detail lost permanently</td>
+</tr>
+<tr>
+<td><strong>When to use</strong></td>
+<td>Default strategy. Token count is the binding constraint</td>
+<td>Only when signal-to-noise is the binding constraint, not token count</td>
+</tr>
+<tr>
+<td><strong>Risk</strong></td>
+<td>Retrieval latency for compacted data</td>
+<td>Context rot from accumulated lossy compressions</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Compaction should be the default. Summarization should be applied only when signal-to-noise ratio justifies permanent information loss. Getting this ordering wrong is the #1 cause of context rot.</p>
+</blockquote>
+<h2 id="stateful-agent-platforms">Stateful Agent Platforms<a class="headerlink" href="#stateful-agent-platforms" title="Permanent link">&para;</a></h2>
+<p><strong>Hindsight</strong> (Vectorize, Dec 2025, MIT license): current SOTA on LongMemEval (91.4%) and LoCoMo (89.61%). Separates memory into <strong>four epistemic networks</strong> — world facts, agent experiences, entity observations, and evolving opinions/beliefs — structurally distinguishing evidence from inference rather than treating all memories uniformly. Retrieval runs <strong>four concurrent strategies</strong>: cosine semantic similarity, BM25 keyword matching, graph traversal across a shared memory graph, and temporal reasoning, fused via <strong>cross-encoder reranking</strong>. Stores <strong>dual timestamps</strong> (occurrence time and mention time), enabling both "what happened when" and "what did I learn when" queries. On temporal queries specifically, improved from 31.6% baseline to 91.0% — a nearly 60-point gain (arXiv, VentureBeat, Vectorize, Dec 2025).</p>
+<p><strong>Letta</strong> (formerly MemGPT, UC Berkeley, ICML 2024, Apache 2.0, ~20.9K GitHub stars): the LLM manages its own memory like an OS managing virtual memory — context window is "RAM," external databases are "disk," agent pages data in/out through function calls. Three memory tiers: <strong>core memory</strong> (size-limited read-write text blocks pinned in-context, ~2K chars each — "human" block for user facts, "persona" block for agent self-concept), <strong>recall memory</strong> (complete uncompressed message history as searchable database), and <strong>archival memory</strong> (PostgreSQL + pgvector with HNSW indexing). Agent controls memory via explicit function calls: <code>core_memory_append</code>, <code>core_memory_replace</code>, <code>memory_rethink</code>, <code>archival_memory_search</code>, <code>archival_memory_insert</code>. Memory pressure warnings at ~70% context capacity; forced eviction with recursive summarization at ~100%. <strong>Sleep-time compute</strong> (Apr 2025) addresses user-facing latency: background agents process information during idle periods using stronger/slower models, writing refined "learned context" to shared memory blocks. Demonstrated 74.0% on LoCoMo with a simple filesystem approach (agent + file tools, GPT-4o-mini), outperforming Mem0's 68.5% — evidence that agent capability matters more than specialized memory infrastructure. Uses PostgreSQL with 42+ tables and Alembic migrations; full agent state serializable to open Agent File (.af) format (arXiv, ICML 2024; Letta docs).</p>
+<p><strong>Zep/Graphiti</strong> (Apache 2.0, 24K+ GitHub stars): core engine builds a formally defined graph G = (N, E, phi) in <strong>three hierarchical tiers</strong> — <strong>episode subgraph</strong> (raw conversation turns, non-lossy), <strong>semantic entity subgraph</strong> (extracted entities and relationships as persistent facts), and <strong>community subgraph</strong> (label propagation clusters with high-level summaries) — mirroring the psychological distinction between episodic and semantic memory. The key innovation is a <strong>bi-temporal data model</strong>: every entity edge tracks four timestamps — <code>valid_at</code> (when fact became true), <code>invalid_at</code> (when superseded), <code>created_at</code> (when ingested), <code>expired_at</code> (when logically replaced) — enabling point-in-time queries ("What did we know about X on date Y?"), historical reasoning, and enterprise compliance audit trails. Contradicting facts are invalidated rather than deleted, preserving the complete temporal record. Retrieval pipeline f(alpha) = chi(rho(phi(alpha))) runs three concurrent strategies: cosine similarity, BM25, and breadth-first graph traversal — critically, <strong>no LLM calls during retrieval</strong> (everything pre-computed via vector, BM25, and graph indexes), achieving sub-200ms to sub-second latency (P95 ~300ms in Zep Cloud). Reranking options include reciprocal rank fusion, MMR, cross-encoder scoring, node distance, and episode-mentions frequency. Supports Neo4j (primary), FalkorDB, Kuzu (embedded), and Amazon Neptune backends. Main tradeoff: thorough graph construction is expensive — ingestion for large corpora can take hours due to multiple LLM calls for entity extraction, resolution, and relationship inference (arXiv; Graphiti docs; Zep Cloud).</p>
+<p><strong>Supermemory</strong>: memory-as-a-service layer that decides what to learn, tracks changes via update edges, supports forgetting, and returns memory in prompt-cache-friendly order. Integrated Composio for broad tool access (~45 min PR, merged in ~1 hour). Dual product: consumer "memory wallet" + API for companies. Thesis: models converge; <strong>memory is the differentiating component</strong>.</p>
+<p><strong>Cognee</strong> (Topoteretes, Berlin, $7.5M seed Feb 2026, ~12K GitHub stars): three-store architecture — graph (Kuzu), vector (LanceDB), and relational (SQLite) — all file-based by default for zero-infrastructure local development, swappable to production databases (Neo4j, Qdrant, PostgreSQL). Core abstraction is the <strong>DataPoint</strong> (Pydantic model carrying content + metadata). The <code>cognify()</code> pipeline runs six stages: classify → check permissions → extract chunks → extract graph (via Instructor for structured LLM output) → summarize → embed and persist. Optional <strong>ontology validation</strong> uses RDF/OWL ontologies to canonicalize entities — fuzzy matching via <code>difflib.get_close_matches()</code> resolves "car manufacturer," "automobile maker," and "vehicle producer" to a single canonical node, reducing graph fragmentation. Offers <strong>14 retrieval modes</strong> from basic RAG to graph-completion with chain-of-thought, natural language to Cypher, temporal search, and auto-select. Default GRAPH_COMPLETION mode uses vector search as a hint to find relevant graph triplets, then traverses the graph — fundamentally different from top-k cosine similarity. The <code>memify()</code> post-processing pipeline is inspired by cognitive science: prunes stale nodes, strengthens frequent connections, adds derived facts, optimizes embeddings. Domain-scoped partitioning (billing agents see billing memory, support agents see support memory, supervisor sees all) serves as both security and relevance pattern. On HotPotQA, chain-of-thought graph traversal improved exact match by 1,618% over base configuration. Benchmarks are primarily self-reported; independent third-party validation is limited (Cognee docs; Skills Marketplace; Cognee evaluations, 2026).</p>
+<p><strong>Mem0</strong> (Y Combinator, $24M raised Oct 2025, ~48K GitHub stars): the most pragmatic approach — a two-phase <strong>extraction-update pipeline</strong> converting conversations into discrete natural-language facts in a vector database with optional graph enhancement. Extraction combines three context sources (conversation summary, last 10 messages, new message pair) and uses an LLM to extract candidate facts. Update phase retrieves top 10 similar existing memories and the LLM decides one of four operations: <strong>ADD, UPDATE, DELETE, or NOOP</strong> — conflict resolution is entirely LLM-delegated (flexible but opaque). Optional graph variant (Mem0g) stores entities in directed labeled graph G=(V,E,L) with dual retrieval: entity-centric search (identify entities → traverse neighbors) and semantic triplet search. Supports 24+ vector stores (default: Qdrant), 5+ graph stores (default: Neo4j). Now available as <strong>MCP server</strong> (mem0-mcp, Mar 2026). Achieves excellent latency (1.40s P95 vs 17.12s full-context, 60s LangMem) but scores only ~49% on LongMemEval — revealing that single/dual-strategy semantic retrieval struggles with diverse query types at scale. Graph variant adds ~3 points on temporal reasoning but doesn't close the gap with graph-native systems. Key weaknesses: no bi-temporal modeling, no fact/opinion separation, no BM25/keyword search in base variant, no confidence scores, no built-in forgetting/decay mechanism (Mem0 docs; arXiv; Vectorize benchmark comparison, 2025-2026).</p>
+<p><strong>Honcho</strong> (Plastic Labs): personal identity platform that treats memory as a <strong>trained reasoning task</strong> rather than storage. Specialized models perform deductive, inductive, and abductive inference over user/agent interaction data, producing composable conclusion trees that serve as working identity models. The system derives latent insights from sparse data via formal logic and synthesizes optimal context at inference time from the reasoning tree rather than retrieving pre-stored facts. API-based (Courtland Leer &amp; Vince Trost, Plastic Labs, "Memory as Reasoning," Aug 2025).</p>
+<p><strong>Claude Code agent memory</strong> (v2.1.33, Feb 2026): <code>memory</code> frontmatter field on subagents with three scopes — <code>user</code> (cross-project, ~/.claude/agent-memory/), <code>project</code> (version-controlled, .claude/agent-memory/), <code>local</code> (git-ignored). First 200 lines of MEMORY.md injected into agent system prompt at startup. Agent reads/writes its own memory freely. Skills provide static knowledge at startup; memory provides dynamic knowledge built over time.</p>
+<h2 id="open-source-memory-ecosystem">Open-Source Memory Ecosystem<a class="headerlink" href="#open-source-memory-ecosystem" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Language</th>
+<th>License</th>
+<th>Key Components</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hindsight</strong> (Vectorize)</td>
+<td>—</td>
+<td>MIT</td>
+<td>SOTA 91.4% LongMemEval; 4 epistemic networks; 4 parallel retrieval strategies; dual timestamps; cross-encoder reranking</td>
+</tr>
+<tr>
+<td><strong>Letta</strong> (formerly MemGPT)</td>
+<td>Python</td>
+<td>Apache-2.0</td>
+<td>All-state persistence; memory blocks detached from context; memory tools; compaction/eviction/retrieval; sleep-time compute</td>
+</tr>
+<tr>
+<td><strong>Graphiti</strong> (Zep)</td>
+<td>Python</td>
+<td>Apache-2.0</td>
+<td>Temporal knowledge graph construction and querying; dynamic KG updates; relationship-aware retrieval</td>
+</tr>
+<tr>
+<td><strong>Supermemory</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Update edges; selective forgetting; cache-aware injection; hybrid memory + raw fallback; Composio integration</td>
+</tr>
+<tr>
+<td><strong>Cognee</strong></td>
+<td>Python</td>
+<td>—</td>
+<td>Knowledge graphs over embeddings (Neo4j); domain-scoped agent memory; graph-vector retrieval; write-back feedback loops; per-agent/session persistence; Pydantic-managed structures</td>
+</tr>
+<tr>
+<td><strong>Mem0</strong></td>
+<td>Python</td>
+<td>—</td>
+<td>Long-term memory as a service; MCP server for persistent memory ops (save/search/retrieve/update); local or production deployment; bridges benchmarks to production memory backends</td>
+</tr>
+</tbody>
+</table>
+<h2 id="design-checklist">Design Checklist<a class="headerlink" href="#design-checklist" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Classify memory types</strong> — episodic (events), semantic (facts), procedural (how-to). Each has different retention, retrieval, and update patterns</li>
+<li><strong>Default to compaction</strong> — move raw data to external storage before summarizing. Keep handles retrievable</li>
+<li><strong>Implement update edges</strong> — track fact supersession explicitly rather than overwriting or appending</li>
+<li><strong>Design for forgetting</strong> — define invalidation rules, staleness thresholds, and confidence decay</li>
+<li><strong>Structure for prompt caching</strong> — place stable memory high in the prompt; vary only the dynamic tail</li>
+<li><strong>Handle cold start</strong> — fall back to raw context retrieval when no distilled memory exists</li>
+<li><strong>Evaluate continuously</strong> — measure recall rate, temporal accuracy, multi-session coherence, and preference fidelity</li>
+<li><strong>Separate memory scopes</strong> — user-level (cross-project), project-level (team-shared), local (personal). Mirror the settings hierarchy. In multi-agent systems, also consider <strong>domain-scoped memory</strong> where each agent sees only its domain partition (e.g., billing sees billing, support sees support) — this is both a security pattern (least-privilege) and a relevance pattern (less noise per agent) (Cognee demo, 2026)</li>
+<li><strong>Respect PII</strong> — define consent, expiry, and source-of-truth policies for personal data in memory</li>
+<li><strong>Monitor context rot</strong> — track whether memory injection improves or degrades task completion over time</li>
+<li><strong>Implement write-back feedback loops</strong> — after investigations, agents should record what retrieval strategies worked and what to try differently, so future searches improve over time. Measure whether write-back actually improves downstream task quality (Cognee demo, 2026)</li>
+<li><strong>Fix operational foundations first</strong> — graph memory helps most after the operational backbone (eventing, schemas, source-of-truth) is sane. If upstream data models are broken, memory architecture cannot compensate</li>
+</ol>
+<h2 id="key-links">Key Links<a class="headerlink" href="#key-links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>blog.plasticlabs.ai/blog/Memory-as-Reasoning</code> — Plastic Labs/Honcho: "Memory as Reasoning" (Courtland Leer &amp; Vince Trost, Aug 2025) — memory as trained logical reasoning over identity data</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

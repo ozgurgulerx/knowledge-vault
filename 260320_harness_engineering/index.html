@@ -1,0 +1,2408 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/260320_harness_engineering/">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>The Part of Your AI Agent That Actually Matters Isn't the Model — It's the Harness - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-part-of-your-ai-agent-that-actually-matters-isnt-the-model-its-the-harness" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The Part of Your AI Agent That Actually Matters Isn't the Model — It's the Harness
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#and-on-azure-the-harness-story-is-finally-getting-interesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      And on Azure, the harness story is finally getting interesting.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-six-layers-every-agent-harness-needs" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Six Layers Every Agent Harness Needs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azures-two-speed-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azure's Two-Speed Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapping-azure-services-to-the-six-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mapping Azure Services to the Six Layers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-minimal-reference-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Minimal Reference Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-five-screen-demo-that-sells-harness-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Five-Screen Demo That Sells Harness Engineering
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prompt-caching-the-harness-constraint-nobody-talks-about" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Caching: The Harness Constraint Nobody Talks About
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bounded-autonomy-the-operating-model-that-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bounded Autonomy: The Operating Model That Actually Works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-the-harness-module-everyone-skips" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluation: The Harness Module Everyone Skips
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-rot-and-what-your-harness-should-do-about-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Rot and What Your Harness Should Do About It
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-coming-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's Coming Next
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Resources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="the-part-of-your-ai-agent-that-actually-matters-isnt-the-model-its-the-harness">The Part of Your AI Agent That Actually Matters Isn't the Model — It's the Harness<a class="headerlink" href="#the-part-of-your-ai-agent-that-actually-matters-isnt-the-model-its-the-harness" title="Permanent link">&para;</a></h1>
+<h2 id="and-on-azure-the-harness-story-is-finally-getting-interesting">And on Azure, the harness story is finally getting interesting.<a class="headerlink" href="#and-on-azure-the-harness-story-is-finally-getting-interesting" title="Permanent link">&para;</a></h2>
+<p>I've spent the last few months building agent systems on Azure, and one thing keeps smacking me in the face: we're all obsessing over models when the real engineering happens in the harness.</p>
+<p>Let me back up. An agent harness is every piece of code, config, and execution logic that isn't the model itself. System prompts, tool registries, sandbox infrastructure, orchestration logic, session state, approval gates, tracing — all harness. The cleanest framing I've seen comes from LangChain's anatomy paper: <strong>Agent = Model + Harness. If you're not the model, you're the harness.</strong></p>
+<p>Why does this matter? Because LangChain proved that changing ONLY the harness — same model, same tools, same task set — improved Terminal-Bench 2.0 scores by 13.7 points. That's not a rounding error. That's the difference between a demo and something you'd put in front of a customer.</p>
+<p>Here's how to think about harness engineering on Azure, and why 2026 is the year it becomes a real discipline.</p>
+<hr />
+<h2 id="the-six-layers-every-agent-harness-needs">The Six Layers Every Agent Harness Needs<a class="headerlink" href="#the-six-layers-every-agent-harness-needs" title="Permanent link">&para;</a></h2>
+<p>Before touching Azure services, internalize this mental model. A production harness breaks into six layers:</p>
+<ol>
+<li><strong>Entry/control plane</strong> — API gateway, chat UI, or event trigger</li>
+<li><strong>Router/orchestrator</strong> — what handles each request and how</li>
+<li><strong>Execution layer</strong> — one agent or many, in sequence, parallel, or handoff patterns</li>
+<li><strong>Tool layer</strong> — OpenAPI endpoints, functions, MCP tools, databases, retrieval</li>
+<li><strong>State + policy layer</strong> — session memory, approval gates, retry limits, budgets, content policy</li>
+<li><strong>Evidence layer</strong> — traces, evals, run logs, quality metrics</li>
+</ol>
+<p>Think of this as a diagnostic tool, not a deployment checklist. If your system is missing a layer, you have a gap. But not every layer needs to be elaborate. A thin policy layer with hard timeout caps is often enough. A thin evidence layer with structured logging beats nothing.</p>
+<p>The 15-module inventory that sits underneath these layers includes things like agent loops with doom-loop detection, prompt composers with per-tool instruction injection, tool routers with lazy schema loading, context managers with compaction triggers, sandbox substrates, tracing with OpenTelemetry, and evaluation harnesses. Not every system needs all 15. But if you can't point to where each concern is handled — even if the answer is "we accept the risk" — you have an unexamined gap.</p>
+<hr />
+<h2 id="azures-two-speed-architecture">Azure's Two-Speed Architecture<a class="headerlink" href="#azures-two-speed-architecture" title="Permanent link">&para;</a></h2>
+<p>Here's where Azure gets interesting. Microsoft has quietly set up a two-speed architecture that maps cleanly to the "demo vs. production" divide most teams face.</p>
+<p><strong>Path A — the 30-minute proof.</strong> Foundry Agent Service plus a hosted agent plus the playground. You deploy a containerized agent via <code>azd up</code>, validate in the Foundry playground, and you're done. Managed hosting, built-in tools, good demo optics. This is the path you show a VP to prove the concept works.</p>
+<p><strong>Path B — the real harness.</strong> Agent Framework workflow in code, deployed on Azure Functions Durable or App Service, with Foundry traces and evals wired in. Code-first orchestration. Long-running workflows. Event triggers. Pause and resume. Deterministic flow control. This is the path you take when someone asks "can this be productionised?"</p>
+<p>Microsoft's own documentation frames the tradeoff explicitly: code-first frameworks give you more control and speed locally, while Foundry Agent Service gives you managed integration, playground testing, autoscaling, and built-in guardrails with identity.</p>
+<p>My take: demo Path A, build Path B. Use the playground to validate your agent logic fast, then move the real implementation into Agent Framework workflows where you control every decision point.</p>
+<hr />
+<h2 id="mapping-azure-services-to-the-six-layers">Mapping Azure Services to the Six Layers<a class="headerlink" href="#mapping-azure-services-to-the-six-layers" title="Permanent link">&para;</a></h2>
+<p>Here's how the layers translate to actual Azure services:</p>
+<p><strong>Model + agent runtime</strong> maps to your Foundry project or Foundry Agent Service. This is where your model lives and where agent sessions are managed.</p>
+<p><strong>Workflow and orchestration</strong> maps to Agent Framework workflows for complex cases, or the Foundry workflow UI for simpler ones. Agent Framework is positioning itself as the successor to Semantic Kernel and AutoGen, bringing session state, telemetry, and workflow control under one roof.</p>
+<p><strong>Tools</strong> map to OpenAPI endpoints, Azure Functions, and MCP tools. The MCP integration is worth noting — the <code>app-service-mcp-foundry-agent-python</code> sample shows how to wire MCP servers into a Foundry agent, which means your agent gets access to external tool ecosystems without custom integration code.</p>
+<p><strong>State</strong> maps to Foundry's persistent or service-managed conversation history, or your own custom store if you need finer control over session continuity.</p>
+<p><strong>Observability</strong> maps to Application Insights plus OpenTelemetry plus Foundry traces. This is one of Azure's genuine strengths — the trace pipeline is well-integrated and you get span-level visibility into LLM calls, tool calls, and agent decisions out of the box.</p>
+<p><strong>Evaluation</strong> maps to the Azure AI Evaluation SDK and Foundry evaluators. More on this below, because evaluation is where most teams underinvest.</p>
+<hr />
+<h2 id="a-minimal-reference-architecture">A Minimal Reference Architecture<a class="headerlink" href="#a-minimal-reference-architecture" title="Permanent link">&para;</a></h2>
+<p>Here's the skeleton I start from when building a harness on Azure:</p>
+<div class="highlight"><pre><span></span><code>User / UI / API
+   -&gt; Gateway / FastAPI / Function HTTP trigger
+      -&gt; Harness Controller
+         -&gt; Intent router
+         -&gt; Policy checks
+         -&gt; Budget / timeout / retry manager
+         -&gt; Session state store
+         -&gt; Workflow orchestrator
+              -&gt; Retrieval agent
+              -&gt; Tool-using action agent
+              -&gt; Verifier / checker agent
+         -&gt; Response composer
+      -&gt; Trace + logs + eval events
+</code></pre></div>
+<p>This isn't aspirational architecture. It's the minimum viable harness. The intent router decides which agent handles the request. The policy layer enforces budget and timeout caps. The workflow orchestrator runs agents in the right order, including a verifier that checks the output before it leaves the system. And everything emits trace events so you can debug failures after the fact.</p>
+<p>The verifier agent is the part most teams skip and most teams regret skipping. When an action agent generates an answer, the verifier checks groundedness — did the answer actually come from the retrieved data? — and validates that required fields are present. Without this step, your agent hallucinates confidently and nobody catches it until a customer complains.</p>
+<hr />
+<h2 id="the-five-screen-demo-that-sells-harness-engineering">The Five-Screen Demo That Sells Harness Engineering<a class="headerlink" href="#the-five-screen-demo-that-sells-harness-engineering" title="Permanent link">&para;</a></h2>
+<p>Stop demoing generic assistants. Demo a narrow but complete harness instead. Microsoft's documentation suggests a five-screen sequence that I've found genuinely effective:</p>
+<p><strong>Screen 1: Architecture slide.</strong> One-page diagram showing user, harness controller, agents, tools, checker, logs, and evals. This sets the frame — you're showing a software system, not an AI trick.</p>
+<p><strong>Screen 2: Live run.</strong> Submit a real request that requires at least one tool call. Something like "Customer shipment delayed; explain cause and next action." The audience watches the agent classify the request, retrieve shipment facts from a mock API, recommend an action, and get the recommendation verified by a checker agent.</p>
+<p><strong>Screen 3: Trace view.</strong> Pull up the execution trace in Foundry or Application Insights. Show spans for each LLM call, tool call, and agent decision. This is where technical audiences lean forward.</p>
+<p><strong>Screen 4: Failure injection.</strong> Break one tool on purpose. Kill the shipment API. Show the harness retrying, falling back, and returning a controlled error instead of hallucinating an answer. This is the real harness moment. This is what separates your demo from every other ChatGPT wrapper.</p>
+<p><strong>Screen 5: Eval report.</strong> Show a tiny JSONL test set with metrics — groundedness, relevance, tool-call accuracy, task completion — via the Azure AI Evaluation SDK. This proves the system is measurable, not just impressive.</p>
+<p>Once you show this sequence, the audience stops seeing "AI demo" and starts seeing "software system." That shift in perception is worth more than any benchmark number.</p>
+<hr />
+<h2 id="prompt-caching-the-harness-constraint-nobody-talks-about">Prompt Caching: The Harness Constraint Nobody Talks About<a class="headerlink" href="#prompt-caching-the-harness-constraint-nobody-talks-about" title="Permanent link">&para;</a></h2>
+<p>If you're building long-running agents — and on Azure, most production scenarios involve multi-turn conversations — prompt caching is not an optimization you bolt on later. It's a structural constraint that must inform your harness design from day one.</p>
+<p>The core mechanism is prefix matching. The API caches everything from the start of the request up to each cache breakpoint. Any change anywhere in the prefix invalidates everything after it. This single constraint drives harness design decisions that feel counterintuitive until you understand why.</p>
+<p><strong>Order your prompt: static first, dynamic last.</strong> System prompt and tools go first (cached globally). Project-level context like CLAUDE.md or equivalent goes next (cached per project). Session context follows (cached per session). New conversation messages go last (new per turn).</p>
+<p><strong>Never change tools mid-conversation.</strong> Adding or removing a tool invalidates the cache for the entire session. The intuitive approach — only expose tools the model needs right now — is an anti-pattern. Keep all tools present and use other mechanisms to control behavior. If you have many tools, send lightweight stubs with deferred loading rather than full schemas.</p>
+<p><strong>Never switch models mid-session.</strong> Caches are model-specific. If you're deep into a conversation with one model and want to ask an easy question on a cheaper model, you pay full price to rebuild the entire cache. The right pattern is subagents — hand off a bounded task to a cheaper model with its own fresh cache.</p>
+<p><strong>Use messages for state changes, not prompt mutations.</strong> When information becomes stale (timestamps, changed files, new context), inject updates as conversation messages rather than modifying the system prompt. This preserves the cached prefix.</p>
+<p>Anthropic's Claude Code team monitors cache hit rate like uptime and declares incidents when it drops. That level of discipline around caching is what separates production harnesses from prototypes.</p>
+<hr />
+<h2 id="bounded-autonomy-the-operating-model-that-actually-works">Bounded Autonomy: The Operating Model That Actually Works<a class="headerlink" href="#bounded-autonomy-the-operating-model-that-actually-works" title="Permanent link">&para;</a></h2>
+<p>Full agent autonomy is a trap. The model that works in practice is bounded autonomy — a repeating cycle where humans establish intent and agents accelerate execution within that frame.</p>
+<p>The cycle looks like this:</p>
+<ol>
+<li>Human seeds the work — chooses frameworks, establishes architecture, makes key decisions</li>
+<li>Agent plans and executes within a bounded workspace</li>
+<li>Verification is explicit — a verifier pass checks output before merge</li>
+<li>Scope stays PR-sized — work stops at natural merge points</li>
+<li>Context resets — merge, archive the workspace, start fresh for the next unit</li>
+</ol>
+<p>The natural operating unit is one pull request, not one feature or one session. PR-sized scoping reduces stale context, prevents plan invalidation, and makes verification tractable. When a task is larger than one PR, decompose it into independent chunks that can be parallelized.</p>
+<p>This maps directly to Azure: your Agent Framework workflow orchestrates the bounded task, Foundry traces capture the execution, and the evaluation SDK validates the output. The harness enforces the bounds — budget caps, timeout limits, tool access restrictions — so the agent can't wander off into expensive or dangerous territory.</p>
+<hr />
+<h2 id="evaluation-the-harness-module-everyone-skips">Evaluation: The Harness Module Everyone Skips<a class="headerlink" href="#evaluation-the-harness-module-everyone-skips" title="Permanent link">&para;</a></h2>
+<p>An evaluation harness is distinct from your runtime harness but must be tightly connected to it. It runs agent tasks at scale, records full traces, grades outcomes, and aggregates results. Crucially, when you evaluate an agent, you're evaluating the harness and model together, not the model in isolation.</p>
+<p>On Azure, the evaluation pipeline looks like this:</p>
+<div class="highlight"><pre><span></span><code>change -&gt; build -&gt; eval harness runs -&gt; quality gate -&gt; deploy -&gt;
+production trace mining -&gt; regression suite updates -&gt; re-eval
+</code></pre></div>
+<p>The Azure AI Evaluation SDK gives you evaluators for groundedness, relevance, and custom metrics. Wire these into your CI pipeline so that prompt changes, tool changes, and config changes trigger automated evaluation before deployment. Harbor-style job configs work well here — define your test cases as JSONL, run them in parallel containers, and gate deployment on passing scores.</p>
+<p>A practical tip from the eval literature: design test cases from production data whenever possible. Production logs are the gold standard because they reflect real user behavior. If you don't have production data yet, synthetic generation via LLM is your next best option. Hand-written test cases are a last resort.</p>
+<p>Use deterministic metrics wherever you can — string match, valid JSON checks, regex format validation, precision/recall. These are cheaper, faster, and 100% reliable. Save LLM-as-a-judge grading for dimensions that actually require it, like helpfulness and tone.</p>
+<hr />
+<h2 id="context-rot-and-what-your-harness-should-do-about-it">Context Rot and What Your Harness Should Do About It<a class="headerlink" href="#context-rot-and-what-your-harness-should-do-about-it" title="Permanent link">&para;</a></h2>
+<p>Context rot is how agent performance degrades as the context window fills. Models get worse at reasoning as accumulated tool outputs, stale instructions, and conversation history crowd out useful signal. Your harness is fundamentally a delivery mechanism for good context engineering.</p>
+<p>Three harness-level strategies:</p>
+<p><strong>Compaction.</strong> When context approaches capacity — roughly 85% — the harness summarizes and offloads the existing window so the agent can continue. The trick is making compaction cache-safe: use the exact same system prompt, tools, and context as the parent conversation so you get cache hits on the shared prefix. Only the compaction instruction itself is uncached.</p>
+<p><strong>Tool-call offloading.</strong> Large tool outputs clutter context without adding value. Keep only the head and tail of outputs above a threshold and write the full result to the filesystem for on-demand access.</p>
+<p><strong>Progressive disclosure.</strong> Don't load all tool schemas on agent start. Load metadata only — name and one-line description — and bring in full instructions and tool subsets when the agent activates a skill. The model didn't choose to have hundreds of tool schemas in context. Your harness should protect it.</p>
+<hr />
+<h2 id="whats-coming-next">What's Coming Next<a class="headerlink" href="#whats-coming-next" title="Permanent link">&para;</a></h2>
+<p>Four directions worth watching:</p>
+<p><strong>Automatic harness synthesis.</strong> LLMs iteratively generating the harness code itself — synthesizing policy enforcement, tool routing, and safety constraints as executable code rather than prompt instructions. This moves "harness generation" from a dev-ops task to a performance and safety lever.</p>
+<p><strong>Harness-model co-evolution.</strong> Agent products are being post-trained with their harnesses in the loop. Useful primitives get discovered, added to the harness, and used when training the next model generation. The risk: models become brittle when you change the harness they were trained with. The opportunity: harness optimization remains a huge untapped lever independent of model choice.</p>
+<p><strong>Dynamic tool assembly.</strong> Just-in-time tool and context loading based on current state will replace fixed tool menus. Retrieval-style tool selection with trace-informed pruning of unused tools becomes standard.</p>
+<p><strong>Eval-training convergence.</strong> The same task definitions powering offline evaluation, regression CI, and online training signals. Your evaluation harness doubles as an RL training environment, enabling prompt optimization and fine-tuning of specialized sub-agents on your specific workload.</p>
+<hr />
+<h2 id="reference-resources">Reference Resources<a class="headerlink" href="#reference-resources" title="Permanent link">&para;</a></h2>
+<p><strong>Azure repos and samples</strong></p>
+<ul>
+<li>microsoft/agent-framework — core Agent Framework (GitHub)</li>
+<li>Azure-Samples/ai-foundry-agents-samples — Foundry agent samples</li>
+<li>Azure-Samples/get-started-with-ai-agents — quick bootstrap</li>
+<li>Azure-Samples/app-service-mcp-foundry-agent-python — MCP + Foundry pattern</li>
+<li>Azure-Samples/app-service-agentic-langgraph-foundry-python — managed vs code-first tradeoff</li>
+</ul>
+<p><strong>Microsoft Learn documentation</strong></p>
+<ul>
+<li>Agent Framework Overview: learn.microsoft.com/en-us/agent-framework/overview/</li>
+<li>AI Agent Orchestration Patterns: learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns</li>
+<li>Foundry Quickstart: learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code</li>
+<li>Azure Functions Durable + Agent Framework: learn.microsoft.com/en-us/agent-framework/integrations/azure-functions</li>
+<li>Hosted Agent Quickstart: learn.microsoft.com/en-us/azure/foundry/agents/quickstarts/quickstart-hosted-agent</li>
+<li>Trace and Observe Agents: learn.microsoft.com/en-us/azure/foundry-classic/how-to/develop/trace-agents-sdk</li>
+<li>Azure AI Evaluation SDK: learn.microsoft.com/en-us/azure/foundry-classic/how-to/develop/evaluate-sdk</li>
+</ul>
+<p><strong>Key sources</strong></p>
+<ul>
+<li>LangChain, "Anatomy of an Agent Harness" (Mar 2026) — harness definition, context rot, co-evolution dynamics</li>
+<li>Terminal-Bench 2.0 (Jan 2026) — 89 tasks, 32,155 trials, harness as experimental variable</li>
+<li>Justin Young, Anthropic, "Effective Harnesses for Long-Running Agents" (Nov 2025) — dual-agent pattern, failure modes, session continuity</li>
+<li>Sam Breed, Anthropic (Mar 2026) — bounded autonomy, coordinator/implementer/verifier pattern</li>
+<li>Anthropic Claude Code team (Mar 2026) — prompt caching as structural constraint, cache-safe compaction</li>
+<li>Microsoft Learn (Mar 2026) — six-layer model, two-speed architecture, five-screen demo pattern</li>
+</ul>
+<p><strong>Open-source harness implementations</strong></p>
+<ul>
+<li>haasonsaas/agent-harness — provider-agnostic facade with unified tool registry</li>
+<li>coding-agent-harness (PyPI) — multi-agent coding workspace with git worktree isolation</li>
+<li>eugeneyan/news-agents — multi-agent MCP orchestration with supervisor pattern</li>
+<li>langchain-ai/open-swe — background coding agent with Slack/Linear/GitHub integration</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

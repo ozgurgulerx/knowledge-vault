@@ -1,0 +1,3870 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2013%20-%20Codex/claude_code_expert_guide/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Become an Expert on Claude Code — Capability Map, Benchmarks, and Deployment Playbooks - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#become-an-expert-on-claude-code-capability-map-benchmarks-and-deployment-playbooks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Become an Expert on Claude Code — Capability Map, Benchmarks, and Deployment Playbooks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agentic-engineering-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agentic Engineering Principles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Agentic Engineering Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-five-pillars" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Five Pillars
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tactical-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tactical Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#claudemd-as-a-logical-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLAUDE.md as a Logical Router
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatting-for-signal-strength" class="md-nav__link">
+    <span class="md-ellipsis">
+      Formatting for Signal Strength
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#own-the-outcome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Own the Outcome
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-universal-operator-thesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      The "Universal Operator" Thesis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-anatomy-how-claude-code-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Anatomy (How Claude Code Works)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capability-map-command-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capability Map &amp; Command Catalog
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Capability Map & Command Catalog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-tool-use-patterns-api-level-ga-feb-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Tool Use Patterns (API-Level, GA Feb 2026)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#long-context-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Long-Context Workflows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commands-flags-cheatsheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commands &amp; Flags Cheatsheet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spec-driven-programming-the-repo-constitution-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spec-Driven Programming &amp; the "Repo Constitution" Pattern
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spec-Driven Programming & the "Repo Constitution" Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-spec-driven-beats-ad-hoc-prompting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Spec-Driven Beats Ad-Hoc Prompting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plan-first-chunked-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plan-First, Chunked Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hooks-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hooks &amp; Quality Gates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skills-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skills Ecosystem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skills Ecosystem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#skill-design-patterns-anthropic-internal-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skill Design Patterns (Anthropic Internal Practices)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distribution-and-marketplace-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribution and Marketplace Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluating-testing-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluating &amp; Testing Skills
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallel-worktrees-the-real-multiplier" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parallel Worktrees — The Real Multiplier
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-ops-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup &amp; Ops Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup & Ops Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-config-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model &amp; Config Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enterprise Deployment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#team-policies-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Team Policies &amp; Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on-benchmarks-claude-code-vs-baselines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hands-On Benchmarks (Claude Code vs. Baselines)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ide-playbooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDE Playbooks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IDE Playbooks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs-code-and-cursorwindsurf" class="md-nav__link">
+    <span class="md-ellipsis">
+      VS Code (and Cursor/Windsurf)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jetbrains-intellij-pycharm-etc" class="md-nav__link">
+    <span class="md-ellipsis">
+      JetBrains (IntelliJ, PyCharm, etc.)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github-actions-playbook-claude-as-ci-co-dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      GitHub Actions Playbook (Claude as CI Co-Dev)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GitHub Actions Playbook (Claude as CI Co-Dev)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adversarial-pr-review-with-confidence-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adversarial PR Review with Confidence Filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#human-oversight-non-negotiable" class="md-nav__link">
+    <span class="md-ellipsis">
+      Human Oversight (Non-Negotiable)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security &amp; Governance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security & Governance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threat-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Threat Model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-mode-research-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto Mode (Research Preview)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#governance-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Governance Measures
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-review-in-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      /security-review in SDLC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost-rate-limits-capacity-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost, Rate Limits &amp; Capacity Planning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cost, Rate Limits & Capacity Planning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pricing-as-of-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pricing (as of 2025)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-example-team-of-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Example (Team of 5)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing Costs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-caching-auto-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Caching (Auto-Caching)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rate-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rate Limits
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#failure-modes-mitigations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failure Modes &amp; Mitigations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adoption-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adoption Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adoption Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#team-roles-raci" class="md-nav__link">
+    <span class="md-ellipsis">
+      Team Roles (RACI)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pilot-plan-4-6-weeks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pilot Plan (4-6 Weeks)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Criteria
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learning-path-from-first-task-to-team-grade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning Path (From First Task to Team-Grade)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dont-let-the-agent-drive-unsupervised-heuristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Don't Let the Agent Drive Unsupervised" Heuristics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#claude-code-vs-codex-positioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Claude Code vs Codex Positioning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#influencer-community-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Influencer &amp; Community Resources
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Influencer & Community Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top-influencers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top Influencers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-community-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Community Resources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timeline-of-key-milestones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeline of Key Milestones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-not-to-use-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      When NOT to Use Claude Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codex-usage-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex Usage Patterns
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="become-an-expert-on-claude-code-capability-map-benchmarks-and-deployment-playbooks">Become an Expert on Claude Code — Capability Map, Benchmarks, and Deployment Playbooks<a class="headerlink" href="#become-an-expert-on-claude-code-capability-map-benchmarks-and-deployment-playbooks" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The defining mistake teams make when adopting agentic coding tools is treating them as faster autocomplete — a smarter tab-completion that writes more lines per keystroke. Claude Code is architecturally the opposite: it is a closed-loop executor that reads your codebase, proposes multi-file patches, runs your test suite, interprets failures, and iterates autonomously. That closed loop is the capability discontinuity. It means the bottleneck is no longer how fast the model can generate code, but how well the surrounding harness — repo instructions, permission boundaries, deterministic checks, and context discipline — constrains and verifies the agent's output.</p>
+<p>The evidence converges on a counterintuitive finding: <strong>context reduction outperforms context enrichment</strong>. Top practitioners report that bloating CLAUDE.md with exhaustive documentation degrades agent performance, while treating it as a minimal logical router — a thin if-else directory pointing to narrowly scoped rule and skill files — preserves the agent's reasoning fidelity across long sessions. This maps directly onto the token economics: a single 1M-token Sonnet invocation can cost roughly $20, meaning undisciplined context accumulation is both a quality problem and a budget problem. The practitioners who get 2-10x speedups (3-minute multi-file refactors, 5-minute test suites reaching 95% coverage) are the same ones who enforce strict session scoping, separate research from implementation in distinct context windows, and define exit criteria through passing tests rather than subjective completeness. The February 2026 arXiv findings on AGENTS.md crystallize this: <strong>repo-level instructions help when they remove ambiguity and accelerate verification, but hurt when they add irrelevant constraints</strong> — a result that two independent papers reached from opposite directions.</p>
+<p>The second-order consequence is that agentic coding inverts the traditional skill hierarchy. The scarce capability is no longer writing code but engineering the harness — designing the permission boundaries, hooks, quality gates, and contract files that make autonomous execution reliable. Teams that treat Claude Code as a junior developer who needs mentorship through repo structure rather than through prompting are the ones reporting order-of-magnitude productivity gains with no increase in defect rates.</p>
+<p>This document operates on a single claim: the ROI of agentic coding tools is a direct function of <strong>harness quality</strong>, not prompt sophistication. What follows is the full capability map, deployment architecture, benchmarking data, and failure-mode catalog needed to build that harness correctly — from first install through team-wide adoption.</p>
+<h2 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key:</strong> Claude Code is an <strong>agentic CLI coding assistant</strong> (not an IDE plugin). It lives in your terminal, directly edits files, runs shell commands, and makes git commits. Think of it as a <strong>powerful junior developer at superhuman speed</strong> that still requires mentorship.</p>
+</blockquote>
+<ul>
+<li><strong>What it does:</strong> Whole-codebase reasoning (cross-file insights), <strong>multi-file patches</strong>, targeted bug-fixes, tedious task automation (linting, deps, merge conflicts), <code>/security-review</code> scanning</li>
+<li><strong>Integration surfaces:</strong> VS Code, JetBrains (diff viewers, context sharing), GitHub Actions (<code>@claude</code> on issues/PRs), <strong>Model Context Protocol (MCP)</strong> for external tools (Jira, Notion, DBs, Slack, Figma)</li>
+<li><strong>Limitations:</strong> Works best when <strong>scope is well-defined</strong>; large monorepos can dilute focus; CLI-only (macOS/Linux; Windows needs WSL); permission prompts for risky actions</li>
+<li><strong>ROI:</strong> Anthropic internal teams report <strong>3x faster incident debugging</strong>; complex features done in ~15 min vs hours; order-of-magnitude speedup for test writing and boilerplate</li>
+<li><strong>Models:</strong> <strong>Claude Opus 4.1</strong> (200k context, top reasoning) vs <strong>Claude Sonnet 4</strong> (1M context, cost-effective). Opus for precision; Sonnet for whole-repo analysis</li>
+<li><strong>Privacy:</strong> Anthropic does <strong>not use your code for model training</strong> by default; zero-retention mode available</li>
+</ul>
+<hr />
+<h2 id="agentic-engineering-principles">Agentic Engineering Principles<a class="headerlink" href="#agentic-engineering-principles" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key:</strong> Agentic engineering is the discipline of designing repos, tools, memory, and feedback loops so AI agents can execute useful work repeatedly, safely, and with compounding performance. The future moat is not prompting skill — it is <strong>environment design for agents</strong>.</p>
+</blockquote>
+<p>The shift is from "AI helps me code" to "how do I engineer an environment where agents can reliably operate?" The unit of optimization moves from <strong>developer productivity</strong> to <strong>agent loop quality</strong> — shaping environment, context, and feedback so an agent can keep executing with less human intervention.</p>
+<p>This is distinct from casual prompt-and-copy-paste "vibe coding." Production-grade agentic workflows are closer to a fusion of developer platform engineering, knowledge engineering, eval/validation engineering, workflow automation, and human-in-the-loop systems design.</p>
+<h3 id="the-five-pillars">The Five Pillars<a class="headerlink" href="#the-five-pillars" title="Permanent link">&para;</a></h3>
+<p><strong>1. Context Engineering</strong> — Give agents the <em>right</em> amount of context, not the maximum amount. Large context windows do not remove the need for curation.</p>
+<ul>
+<li><strong>Context bloat</strong> is the #1 performance killer — too many plugins, memory systems, or poorly-named skills overwhelm the agent with irrelevant information. Context is best served <strong>fresh and condensed</strong>.</li>
+<li><strong>After compaction:</strong> Include a rule in CLAUDE.md that the agent reads first — re-read the task plan and relevant files before continuing. Agents are atrocious at "filling in the gaps" post-compaction. Trigger manual <code>/compact</code> at <strong>~50% context fill</strong> — waiting for auto-compaction loses more information.</li>
+<li><strong>High-effort reasoning:</strong> Use the keyword "ultrathink" in prompts to trigger maximum reasoning effort from Claude.</li>
+<li><strong>Separate research from implementation.</strong> Vague prompts ("Build an auth system") force context pollution. Precise prompts ("Implement JWT with bcrypt-12, refresh token rotation, 7-day expiry") focus the agent. When you don't know the details, run a separate research session first.</li>
+</ul>
+<p><strong>2. Agentic Validation</strong> — Agents need engineered self-check loops, not just unit tests.</p>
+<ul>
+<li><strong>Tests as milestones:</strong> "Unless these X tests pass, your task is NOT complete; you are NOT allowed to edit the tests." Deterministic, verifiable exit criteria.</li>
+<li><strong>Screenshots + verification:</strong> After tests pass, get the agent to screenshot and verify design/behaviour — enables iterative refinement toward a target design.</li>
+<li><strong>Task contracts:</strong> Create <code>{TASK}_CONTRACT.md</code> specifying tests, screenshots, and verification required before the agent can terminate the session.</li>
+<li><strong>Validation is the real moat</strong> — anyone can wire a model into a code editor. Fewer teams can build strong self-check loops, domain-specific validators, and recovery logic. This is closer to autonomous systems engineering than traditional app dev.</li>
+</ul>
+<p><strong>3. Tooling to Remove Friction</strong> — Every time an agent gets blocked, that blockage is an opportunity to build a tool, CLI, skill, or interface.</p>
+<ul>
+<li>Search, deep research, multimodality, and task systems are examples at the product layer; CLI wrappers and custom skills are examples at the workflow layer. Humans should stop being the bottleneck for recurring execution steps.</li>
+<li><strong>External dependencies lock you into solutions for problems that may not exist</strong> in the next model generation. Frontier companies absorb the best community patterns into the base product — skills, memory, subagents, planning all started as community solutions. Just update your CLI tool periodically and read what's new.</li>
+</ul>
+<p><strong>4. Agent-Friendly Codebases</strong> — You are no longer writing only for the next engineer; you are writing for the next agent.</p>
+<ul>
+<li>Most brownfield repos are <strong>hostile to agents</strong>: dead code, inconsistent patterns, half-finished migrations, weak structure, undocumented domain decisions. This "poisons" the agent loop.</li>
+<li>File structure, docs, logs, conventions, and domain notes are no longer passive artifacts — they are <strong>active control surfaces for machine workers</strong>. Make repo structure, documentation, logging, and conventions explicitly agent-friendly.</li>
+<li><strong>Externalized tacit knowledge is a competitive advantage.</strong> "If domain knowledge isn't in the codebase, it doesn't exist for the agent." Business rules, product decisions, specs, architecture choices — anything that lives in Slack, meetings, or senior engineers' heads becomes economically damaging in an agentic environment when left undocumented.</li>
+</ul>
+<p><strong>5. Compound Team Workflows</strong> — Once context, validation, tooling, and codebase improvements are shared across a team, each improvement builds on the previous ones.</p>
+<ul>
+<li>A new CLI, MCP server, skill, validation routine, or repo convention becomes reusable infrastructure. Winning teams converge on shared agentic workflows rather than each engineer improvising locally.</li>
+<li>The advantage compounds when the team standardizes — not on prompting techniques, but on environment design.</li>
+</ul>
+<h3 id="tactical-patterns">Tactical Patterns<a class="headerlink" href="#tactical-patterns" title="Permanent link">&para;</a></h3>
+<p><strong>Exploit sycophancy — don't fight it.</strong> Agents are designed to please. If you ask "find me a bug," it will find one — even if it has to invent one.</p>
+<ul>
+<li><strong>Use neutral prompts:</strong> Instead of "Find me a bug in the database," say "Search through the database, follow along with the logic of each component, and report back all findings."</li>
+<li><strong>Adversarial agent pattern for high-fidelity bug hunting:</strong></li>
+<li><strong>Bug-finder agent:</strong> Scored +1/+5/+10 by impact severity — finds everything (superset, including false positives)</li>
+<li><strong>Adversarial agent:</strong> Gets the score of each bug it disproves, but -2x penalty if wrong — aggressively disproves but with caution</li>
+<li><strong>Referee agent:</strong> Told it's being checked against ground truth — scores both agents. Result is near-flawless fidelity.</li>
+</ul>
+<p><strong>One session per contract.</strong> 24-hour sessions cause context bloat by mixing unrelated work. Better: one new session per contract, with an orchestration layer spawning fresh sessions. Stop-hooks can prevent termination until a contract is fulfilled.</p>
+<p><strong>Emerging craft practices from practitioners</strong> (AI Engineering Conference, Mar 2026):</p>
+<ul>
+<li><strong>Voice for spec capture:</strong> Dictate requirements verbally and let the agent structure them into formal specs — faster than typing for initial brainstorms and requirement capture</li>
+<li><strong>Layered memory:</strong> Organize memory across three tiers — session (ephemeral, current task), project (CLAUDE.md / plan files, persists across sessions), and global (~/.claude, personal preferences across all projects). Each layer has different persistence and scope, preventing context pollution while maintaining continuity</li>
+</ul>
+<h3 id="claudemd-as-a-logical-router">CLAUDE.md as a Logical Router<a class="headerlink" href="#claudemd-as-a-logical-router" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key:</strong> Treat CLAUDE.md as a <strong>minimal if-else directory</strong> pointing to context, not as a document dump. It should contain routing logic, not content.</p>
+</blockquote>
+<ul>
+<li><strong>Structure:</strong> "If coding, read <code>coding-rules.md</code>. If writing tests, read <code>coding-test-rules.md</code>. If tests are failing, read <code>coding-test-failing-rules.md</code>."</li>
+<li><strong>Rules</strong> encode preferences (what NOT to do). <strong>Skills</strong> encode recipes (HOW to do something specific).</li>
+<li><strong>Size discipline:</strong> Keep each CLAUDE.md under <strong>200 lines</strong>; <strong>60 lines</strong> is the recommended target for reliable adherence. For larger instruction sets, split into <code>.claude/rules/</code> — modular rule files that are loaded conditionally without bloating the root file (shanraisshan/claude-code-best-practice, 12.2k stars, March 2026).</li>
+<li><strong>Conditional and nested rules</strong> work well — agents follow complex branching logic reliably now.</li>
+<li><strong>Iterative refinement:</strong> Start barebones, add rules when you see the agent doing something you disapprove of. Over time, rules and skills will accumulate and eventually contradict or cause context bloat — periodically consolidate and remove contradictions.</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> The cycle is: start simple -&gt; add rules/skills -&gt; magic -&gt; performance degrades -&gt; consolidate/clean up -&gt; magic again. Repeat.</p>
+</blockquote>
+<h3 id="formatting-for-signal-strength">Formatting for Signal Strength<a class="headerlink" href="#formatting-for-signal-strength" title="Permanent link">&para;</a></h3>
+<p>Size discipline is the ceiling, but <strong>structure is the signal</strong>. A 20-line prose paragraph gets ignored just as easily as a 200-line one — the variable isn't word count but formatting. Structural elements — headers, code fences, bullet lists — create <strong>anchor points</strong> that agents latch onto; prose paragraphs don't. The same instruction reformatted from a prose sentence into a headed, code-fenced bullet reliably flips agent compliance from ignore to follow (Gábor Mészáros, "CLAUDE.md Best Practices: 7 Formatting Rules for the Machine," dev.to, Mar 2026).</p>
+<p><strong>Seven structural rules</strong> that determine whether instructions survive from file to agent behavior:</p>
+<ol>
+<li>
+<p><strong>Include rationale on every prohibition.</strong> "Never force push — rewrites shared history, unrecoverable for collaborators" is an instruction the agent weighs. The bare "never force push" is an instruction it skips. Rationale lets the agent <strong>generalize</strong>: understanding why force push is forbidden, it will also avoid <code>git reset --hard origin/main</code> without being told. Every prohibition should carry its reason — this is the most undervalued formatting choice.</p>
+</li>
+<li>
+<p><strong>Keep heading hierarchy shallow (3 levels max).</strong> <code>h1</code> for file title, <code>h2</code> for sections, <code>h3</code> for subsections. Deep nesting (h4, h5) dilutes attention — the hierarchy creates ambiguity about which level governs. If you need an h4, you probably need a separate file.</p>
+</li>
+<li>
+<p><strong>Name files descriptively.</strong> <code>docs/api-authentication.md</code> tells the agent whether the file is relevant before opening it. <code>docs/guide.md</code> forces a read-then-decide round trip. Descriptive names save the agent a context-consuming file read in projects with dozens of docs.</p>
+</li>
+<li>
+<p><strong>Use headers as attention resets.</strong> One topic per header. The agent navigates to the right section instead of parsing the whole paragraph. Without headers, every instruction competes with every other instruction for attention.</p>
+</li>
+<li>
+<p><strong>Put commands in code blocks.</strong> Commands in prose get read as descriptions. Commands in backticks get treated as executable. This is the single highest-impact change — <code>pytest</code> in a code fence is a command; "run pytest" in a sentence is a suggestion.</p>
+</li>
+<li>
+<p><strong>Use standard section names.</strong> <code>## Testing</code> gets recognized instantly. <code>## Quality Assurance Verification Process</code> doesn't. Agents are trained on millions of READMEs — they know what <code>## Testing</code>, <code>## Commands</code>, <code>## Structure</code>, and <code>## Conventions</code> mean. Familiar names carry built-in context; creative names are noise.</p>
+</li>
+<li>
+<p><strong>Make every instruction immediately actionable.</strong> The test: could the agent execute this instruction right now without asking a clarifying question? "Follow best practices" fails. "Format with <code>ruff format</code> before committing" passes.</p>
+</li>
+</ol>
+<p>The rules are multiplicative: headers create sections, sections hold code blocks, code blocks contain actionable commands, rationale explains why, descriptive file names route attention to the right file, and shallow hierarchy keeps everything findable.</p>
+<blockquote>
+<p><strong>Key:</strong> The framing that connects routing (what to include) and formatting (how to write it) is <strong>attention budget</strong>. The agent has a limited context window. What matters isn't just what's in it — it's how the agent decides what's relevant at each step. Structure is what makes your instructions win that competition. Orientation without compliance means the agent knows your project but ignores your rules. Compliance without orientation means the agent follows instructions but works in the wrong place. You need both.</p>
+</blockquote>
+<h3 id="own-the-outcome">Own the Outcome<a class="headerlink" href="#own-the-outcome" title="Permanent link">&para;</a></h3>
+<p>No agent today is perfect. Hand coding is not dead — it is being pushed up the abstraction stack. Humans will still write critical logic, define invariants, design validation layers, decide architectural boundaries, and repair failures in ambiguous zones. What dies first is <strong>low-leverage manual implementation labor</strong>. Relegate design and implementation to agents, but <strong>you own the outcome</strong> — review, verify, and remain the engineer of record.</p>
+<h3 id="the-universal-operator-thesis">The "Universal Operator" Thesis<a class="headerlink" href="#the-universal-operator-thesis" title="Permanent link">&para;</a></h3>
+<p>A broader framing is emerging: Claude Code is not merely a coding copilot but a <strong>universal operator</strong> that collapses no-code automation, traditional coding, orchestration, and productization into a single builder workflow. Instead of using separate tools for automation (n8n, Zapier), IDEs for code, deployment platforms for shipping, and consultants for sales framing, a single agentic CLI session can wire together all four — from prototype through client-facing artifact (Nate Herk, "Build &amp; Sell with Claude Code," Mar 2026).</p>
+<p>The implication is that <strong>the bottleneck has shifted from coding ability to operational taste</strong> — context control, system decomposition, integration wiring, and packaging output into something a client or end-user will actually buy. The practitioners capturing the most value are not the best model researchers; they are the ones who can reliably turn agentic workflows into deployed, client-visible systems and price them. This reframes the scarce skill from "can you write code?" to "can you design the harness, compose the agent stack, and ship something durable?" — a shift that favours breadth of integration knowledge over depth in any single tool.</p>
+<blockquote>
+<p><strong>Key:</strong> Fast prototype throughput is not durable delivery capability. Browser automation, agent teams, and MCPs often look cleaner in tutorials than in production. Client delivery depends on reliability, security, maintenance, and scope control — not just build speed.</p>
+</blockquote>
+<hr />
+<h2 id="system-anatomy-how-claude-code-works">System Anatomy (How Claude Code Works)<a class="headerlink" href="#system-anatomy-how-claude-code-works" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Local CLI Client</strong></td>
+<td><code>npm install -g @anthropic-ai/claude-code</code>. Scans project, loads CLAUDE.md, presents REPL prompt</td>
+</tr>
+<tr>
+<td><strong>Context Gathering</strong></td>
+<td>Reads project tree, entry points, open IDE files, live diagnostics (compiler/linter errors)</td>
+</tr>
+<tr>
+<td><strong>Claude LLM Backend</strong></td>
+<td>Anthropic API or Bedrock/Vertex. TLS-encrypted. Returns text or <em>Actions</em></td>
+</tr>
+<tr>
+<td><strong>Action Execution</strong></td>
+<td>File editing (diff/patch), shell commands (<code>npm test</code>), git operations, MCP calls</td>
+</tr>
+<tr>
+<td><strong>Long-Term Memory</strong></td>
+<td><code>CLAUDE.md</code> files = <strong>project-specific persistent memory</strong> (style rules, arch notes). <code>/compact</code> condenses session history</td>
+</tr>
+<tr>
+<td><strong>Security &amp; Sandboxing</strong></td>
+<td>Permission system: risky actions default to "ask". Allow/deny lists configurable. Transcripts logged locally 30 days</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Claude Code workflow:</strong> You describe task -&gt; CLI sends prompt+context to Claude -&gt; Claude proposes code/actions -&gt; CLI applies (with your oversight) -&gt; you iterate.</p>
+<p><strong>CLI vs SDK system prompts:</strong> The CLI uses a modular system prompt architecture: ~269 base tokens plus 110+ conditionally-loaded components assembled at runtime. The SDK uses a minimal default prompt — to match CLI behavior, use the <code>claude_code</code> preset combined with <code>settingSources: ["project"]</code>. There is <strong>no determinism guarantee</strong> even with <code>temperature=0</code>, due to MoE routing (±8-14% variance proven), hardware routing, batching, and floating-point arithmetic (ref: shanraisshan/claude-code-best-practice; known issue github.com/anthropics/claude-code/issues/3370).</p>
+<p>For Codex's architecture (Rust, Firecracker microVMs, 5-step ReAct state machine), see <code>codex_expert_guide.md</code>.</p>
+<hr />
+<h2 id="capability-map-command-catalog">Capability Map &amp; Command Catalog<a class="headerlink" href="#capability-map-command-catalog" title="Permanent link">&para;</a></h2>
+<h3 id="core-capabilities">Core Capabilities<a class="headerlink" href="#core-capabilities" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Repo Comprehension:</strong> Semantic understanding of entire codebase. New engineers onboard in minutes, not days</li>
+<li><strong>Code Editing &amp; Patching:</strong> Implement features, refactor (rename across files, split classes), apply small fixes — all via natural language</li>
+<li><strong>Automated Bug Diagnosis:</strong> Closed-loop <strong>detect -&gt; fix -&gt; test -&gt; refine</strong> cycle. Provide stack trace, Claude locates cause, patches, runs tests</li>
+<li><strong>Test Generation:</strong> "Write unit tests for <code>invoice.py</code>" -&gt; ~10 tests in ~5 min, catches real bugs, follows project style from CLAUDE.md</li>
+<li><strong>Code Review &amp; PR Prep:</strong> <code>/review</code> critiques diffs for bugs/style/security; generates PR descriptions; <code>@claude</code> on GitHub reviews PRs automatically</li>
+<li><strong>Security Analysis:</strong> <code>/security-review</code> scans for SQL injection, XSS, path traversal, weak crypto, hardcoded secrets. Found DNS rebinding RCE and SSRF vulns in Anthropic's own code pre-release</li>
+<li><strong>DevOps Automation:</strong> Dependency bumps, release notes from <code>git log</code>, unused import cleanup, DB query optimization</li>
+</ul>
+<h3 id="advanced-tool-use-patterns-api-level-ga-feb-2026">Advanced Tool Use Patterns (API-Level, GA Feb 2026)<a class="headerlink" href="#advanced-tool-use-patterns-api-level-ga-feb-2026" title="Permanent link">&para;</a></h3>
+<p>These are API-level features (GA since February 2026) that affect how Claude Code orchestrates tools internally. Source: shanraisshan/claude-code-best-practice (12.2k stars, March 2026).</p>
+<ul>
+<li><strong>Programmatic Tool Calling (PTC):</strong> Claude writes Python that orchestrates tools in a sandbox. Only stdout enters context — tool results from programmatic calls are NOT added to Claude's context window. 3 tools = 1 inference pass instead of 3, yielding ~<strong>37% token reduction</strong>. Config: <code>allowed_callers: ["code_execution_20250825"]</code>. Container lifetime ~4.5 minutes. Not available on Bedrock/Vertex. Not for MCP tools.</li>
+<li><strong>Dynamic Filtering for Web Search/Fetch:</strong> Claude writes and executes Python to filter web results before they enter context, achieving ~<strong>24% fewer input tokens</strong>. BrowseComp: Opus 4.6 improved from 45.3% to 61.6%. DeepSearchQA F1: Opus 4.6 from 69.8% to 77.3%.</li>
+<li><strong>Tool Search Tool:</strong> Mark infrequently-used tools with <code>defer_loading: true</code> for ~<strong>85% reduction</strong> in tool definition tokens (77K to 8.7K). Claude Code has this built-in as <strong>MCPSearch auto mode</strong> since v2.1.7 — triggers automatically when MCP tool descriptions exceed 10% of context.</li>
+<li><strong>Tool Use Examples:</strong> Add <code>input_examples</code> to tool definitions. Improves accuracy from 72% to <strong>90%</strong> on complex parameter handling.</li>
+</ul>
+<h3 id="integration-capabilities">Integration Capabilities<a class="headerlink" href="#integration-capabilities" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>IDE (VS Code, JetBrains):</strong> Interactive diff viewing, selection context, file reference shortcuts (Cmd+Option+K), live diagnostics feed, quick launch (Ctrl+Esc / Cmd+Esc)</li>
+<li><strong>GitHub Actions &amp; @claude Bot:</strong> <code>@claude implement</code> on issue -&gt; Claude creates branch, codes, tests, opens PR (~15 min). <code>@claude review this</code> on PR -&gt; AI code review comments. <code>@claude fix</code> -&gt; pushes fix commit</li>
+<li><strong>MCP Extensibility:</strong> Connect Jira, Confluence, Notion, PostgreSQL, Sentry, Figma, iOS Simulator. Register via <code>claude mcp add ...</code>. Anthropic calls MCP "USB-C for AI"</li>
+<li><strong>Channels (research preview, Mar 2026):</strong> Claude Code now exposes channels so developers can interact via messaging apps (starting with Slack), enabling persistent developer workflows and <strong>ambient agent access</strong> — the agent is reachable wherever the developer already works, not just in the terminal or IDE. This is part of a broader push beyond "model API" toward continuous, multi-surface developer presence (@anthropic, Latent Space AINews, Mar 2026)</li>
+</ul>
+<h3 id="long-context-workflows">Long-Context Workflows<a class="headerlink" href="#long-context-workflows" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Whole-Repo Analysis:</strong> Sonnet 1M tokens = ~750k lines of code in memory. "Scan entire repo for deprecated library usage"</li>
+<li><strong>Multi-Document Synthesis:</strong> Ingest specs + RFCs + code simultaneously. "Find discrepancies between API design docs and implementation"</li>
+<li><strong>Extended Agentic Sessions:</strong> Multi-day autonomous agents. 1M context unlocks "multi-day sessions on real-world codebases"</li>
+<li><strong>Local Scheduled Tasks:</strong> Claude Code desktop added local scheduled tasks that run while the computer is awake (March 2026), enabling background automation without requiring active user interaction</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> Use 1M context only when you <em>need</em> holistic reasoning or massive input. Default to 100-200k for cost/latency. Sonnet 1M pricing roughly doubles beyond 200k.</p>
+</blockquote>
+<hr />
+<h2 id="commands-flags-cheatsheet">Commands &amp; Flags Cheatsheet<a class="headerlink" href="#commands-flags-cheatsheet" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Session</td>
+<td><code>/help</code>, <code>/model</code>, <code>/clear</code>, <code>/cost</code>, <code>/logout</code></td>
+<td>List commands, switch model, reset context, show token usage, sign out</td>
+</tr>
+<tr>
+<td>Scheduling</td>
+<td><code>/loop 5m make sure this PR passes CI</code></td>
+<td>Scheduled while-loop execution — repeats a task on an interval while the session is active</td>
+</tr>
+<tr>
+<td>Config</td>
+<td><code>/init</code>, <code>/config</code>, <code>/permissions</code>, <code>/add-dir [path]</code></td>
+<td>Create CLAUDE.md, tweak settings, manage allow/deny lists, add directories</td>
+</tr>
+<tr>
+<td>Coding</td>
+<td><code>/review</code>, <code>/pr_comments</code>, <code>/memory</code>, <code>/vim</code></td>
+<td>Code review, fetch GH Action comments, edit CLAUDE.md, vim-like mode</td>
+</tr>
+<tr>
+<td>Usage</td>
+<td><code>/usage</code>, <code>/extra-usage</code></td>
+<td>Check plan limits; enable pay-as-you-go overflow billing</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td><code>/fast</code></td>
+<td>Fast mode — always billed to extra usage from first token, even with remaining plan limits</td>
+</tr>
+<tr>
+<td>Diagnostics</td>
+<td><code>/doctor</code></td>
+<td>Run diagnostics to troubleshoot connection, auth, and config issues</td>
+</tr>
+<tr>
+<td>CLI Flags</td>
+<td><code>--allowedTools "Edit,Bash(npm run test:*)"</code></td>
+<td>Pre-allow tools at launch</td>
+</tr>
+<tr>
+<td>CLI Flags</td>
+<td><code>--model claude-3.5</code>, <code>--noAutoBrowser</code></td>
+<td>Choose model, disable auto-browser in IDE</td>
+</tr>
+<tr>
+<td>CLI Flags</td>
+<td><code>--max-budget-usd N</code>, <code>--max-turns N</code></td>
+<td>Hard budget and turn caps (API key users)</td>
+</tr>
+<tr>
+<td>Custom</td>
+<td><code>.claude/commands/fix-memory-leak.md</code></td>
+<td>Custom slash commands with <code>$ARGUMENTS</code> placeholder</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="spec-driven-programming-the-repo-constitution-pattern">Spec-Driven Programming &amp; the "Repo Constitution" Pattern<a class="headerlink" href="#spec-driven-programming-the-repo-constitution-pattern" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key:</strong> The strongest pattern across top practitioners is the shift from "prompting" to <strong>institutionalizing context inside the repo</strong>. For Claude Code this is <code>CLAUDE.md</code>; for Codex, <code>AGENTS.md</code>. Treat it as the agent's constitution — keep it short, curated, and oriented around what the agent gets wrong.</p>
+</blockquote>
+<h3 id="why-spec-driven-beats-ad-hoc-prompting">Why Spec-Driven Beats Ad-Hoc Prompting<a class="headerlink" href="#why-spec-driven-beats-ad-hoc-prompting" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Shrivu Shankar</strong> frames <code>CLAUDE.md</code> as the agent's constitution — curated guardrails, not a docs dump</li>
+<li><strong>Mukesh Murugan</strong> includes dedicated setup tactics for preventing unwanted refactors</li>
+<li><strong>Sabrina Ramonov</strong> uses project memory files and skill scaffolding</li>
+<li>Creators use these files as an <strong>organizational forcing function</strong> — if running tests or deploys is too verbose, they create wrappers and document them, nudging repos into being more automation-friendly</li>
+</ul>
+<h3 id="plan-first-chunked-execution">Plan-First, Chunked Execution<a class="headerlink" href="#plan-first-chunked-execution" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Planning is not optional</strong> — it prevents expensive agent drift</li>
+<li><strong>Plan files over ephemeral plan mode:</strong> Anthropic's Sid argued that plan mode and plan files are among the most important force multipliers. The recommendation: write persistent markdown plan files rather than relying on ephemeral plan mode alone. Plan files survive across sessions and give agents stable context for multi-step work — whereas plan mode context disappears when the session ends. Let agents critique and revise plans recursively before executing (Sid, Anthropic, AI Engineering Conference, Mar 2026)</li>
+<li><strong>Addy Osmani's</strong> workflow doctrine: specs-before-code, break work into small iterative chunks (clear goal, bounded scope, strong feedback loop)</li>
+<li><strong>Boris Cherny</strong> reinforces: consistent emphasis on experimentation plus structure (parallelism, worktrees, habits) rather than one-shot prompts</li>
+<li><strong>Baseline prompt-run-review loop:</strong> The tightest iteration cycle is (1) describe intent and constraints clearly — inputs, outputs, expected tests; (2) ask for <em>minimal</em> code that passes the tests, run it, paste failures back; (3) iterate until green, then ask for refactors backed by benchmarks. Keeping the first pass minimal avoids over-engineering and keeps context lean; deferring refactors until correctness is established prevents wasted work on code that may not survive the next iteration (see <a href="https://www.youtube.com/watch?v=IS_y40zY-hc">Advanced Context Engineering for Agents</a>)</li>
+</ul>
+<h3 id="hooks-quality-gates">Hooks &amp; Quality Gates<a class="headerlink" href="#hooks-quality-gates" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Agentic coding only becomes reliable when the <strong>environment makes it hard to ship broken states</strong></li>
+<li>Claude Code's <strong>hooks mechanism</strong> (<code>/hooks</code>) runs custom code at lifecycle events — the primary interactive way to set up notifications and automation</li>
+<li><strong>Shrivu's enterprise pattern:</strong> enforce tests at commit time using "block-at-submit" hooks; avoid blocking at write time; treat deterministic checks as the complement to softer guidance in <code>CLAUDE.md</code></li>
+<li>Third-party writeups (GitButler, DataCamp) reinforce hooks as workflow automation primitives</li>
+<li><strong>Emerging hook patterns from practitioners:</strong> use hooks to force lint, tests, and documentation updates automatically on every agent action — removing the human bottleneck for routine quality checks. Build screenshot-based release review workflows where the agent captures visual state and verifies it against design targets before marking a task complete (AI Engineering Conference, Mar 2026)</li>
+</ul>
+<h3 id="skills-ecosystem">Skills Ecosystem<a class="headerlink" href="#skills-ecosystem" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Anthropic skills</strong>: shareable extensions (<code>SKILL.md</code> bundles) invokable when relevant or via slash commands. Skills have become <strong>one of the most used extension points</strong> in Claude Code, with hundreds in active use at Anthropic (Anthropic, "Lessons from Building Claude Code: How We Use Skills", Mar 2026)</li>
+<li><strong>Vercel's skills.sh</strong> targets <em>multiple</em> tools, making skills a portable unit across agent surfaces — suggests "agent capability packaging" may standardize faster than any one vendor's plugin system</li>
+<li><strong>Ooi Yee Fei:</strong> skills as "executable expertise" that impose discipline and checkpoints</li>
+<li><strong>Customization primitives are simpler than expected:</strong> The most powerful customization primitives are surprisingly simple — skills, MCP servers, and personal memory systems — not giant custom harnesses. Lightweight, composable primitives beat monolithic agent frameworks. This explains why the Claude Code ecosystem converges on a small number of extension points (skills, MCP, CLAUDE.md, hooks) rather than requiring teams to build elaborate orchestration layers (Sid, Anthropic, AI Engineering Conference, Mar 2026)</li>
+<li><strong>Scale:</strong> SkillsBench counted <strong>47,000+ unique skills across 6,300+ repositories</strong> as of March 2026. Almost nobody is testing them — most are AI-generated, vibe-checked with a handful of manual runs, then shipped</li>
+</ul>
+<p><strong>Skills discovery in monorepos:</strong> Unlike CLAUDE.md (which walks up the directory tree), skills use <strong>nested discovery</strong> — <code>.claude/skills/</code> directories are discovered on-demand only when working with files in those directories. Skill descriptions are always in context (up to a <strong>15,000 character budget</strong>, configurable via <code>SLASH_COMMAND_TOOL_CHAR_BUDGET</code>); full skill content loads only when invoked. For subagents with preloaded skills, full content IS injected at startup. Priority order: Enterprise &gt; Personal (<code>~/.claude/skills/</code>) &gt; Project (<code>.claude/skills/</code>). Prefer commands over subagents for simple workflows (shanraisshan/claude-code-best-practice, 12.2k stars, March 2026).</p>
+<p><strong>Two skill categories that matter for testing:</strong></p>
+<ul>
+<li><strong>Capability skills</strong> — help the agent do something the base model can't do consistently. These may become unnecessary as models improve; evals tell you when to retire them</li>
+<li><strong>Preference skills</strong> — document specific workflows. Durable, but only as valuable as their fidelity to your actual workflow; evals verify that fidelity</li>
+</ul>
+<h4 id="skill-design-patterns-anthropic-internal-practices">Skill Design Patterns (Anthropic Internal Practices)<a class="headerlink" href="#skill-design-patterns-anthropic-internal-practices" title="Permanent link">&para;</a></h4>
+<p>The following patterns come from Anthropic's internal experience building and operating hundreds of skills (Anthropic, "Lessons from Building Claude Code: How We Use Skills", Mar 2026):</p>
+<p><strong>The description field is for the model, not for humans.</strong> When a session starts, Claude Code builds a listing of every available skill with its description. This listing is what Claude scans to decide "is there a skill for this request?" — meaning the description is a <strong>trigger specification</strong>, not a summary. Write it as a precise description of when the skill should fire, not what it does abstractly.</p>
+<p><strong>Memory and data persistence.</strong> Skills can include a form of memory by storing data — anything from an append-only text log or JSON file to a SQLite database. A standup-post skill might keep a <code>standups.log</code> with every post it has written, so the next invocation reads its own history and reports what changed since yesterday. Data stored in the skill directory may be deleted on upgrade; use <strong><code>${CLAUDE_PLUGIN_DATA}</code></strong> (a stable per-plugin folder) for anything that must persist across upgrades.</p>
+<p><strong>Bundled scripts for composition.</strong> One of the most powerful things you can give Claude is code. Giving Claude helper scripts and libraries lets it spend its turns on <strong>composition</strong> — deciding what to do next — rather than reconstructing boilerplate from scratch. A data science skill might bundle functions to fetch data from an event source; Claude then generates scripts on the fly to compose those functions for prompts like "What happened on Tuesday?" This shifts the agent from a code generator to a code composer.</p>
+<p><strong>On-demand hooks.</strong> Skills can include hooks that activate only when the skill is called, lasting for the duration of the session. This enables opinionated safety or workflow constraints that would be too restrictive to run all the time:</p>
+<ul>
+<li><strong><code>/careful</code></strong> — blocks <code>rm -rf</code>, <code>DROP TABLE</code>, force-push, <code>kubectl delete</code> via <code>PreToolUse</code> matcher on Bash. Only activated when working near production</li>
+<li><strong><code>/freeze</code></strong> — blocks any <code>Edit</code>/<code>Write</code> that is not in a specific directory. Useful when debugging: prevents accidentally "fixing" unrelated files while adding logs</li>
+</ul>
+<p><strong>Structured user interaction.</strong> If a skill needs to collect information from the user, it can instruct Claude to use the <strong><code>AskUserQuestion</code></strong> tool to present structured, multiple-choice questions rather than free-form conversation.</p>
+<p><strong>Composing skills.</strong> Skills can depend on each other — for example, a CSV generation skill that calls a file upload skill. Dependency management is not natively built into marketplaces or skills yet, but you can reference other skills by name and the model will invoke them if installed.</p>
+<p><strong>Measuring skill usage.</strong> Anthropic uses a <strong><code>PreToolUse</code> hook</strong> to log skill usage company-wide. This reveals which skills are popular and which are under-triggering compared to expectations — enabling data-driven curation rather than guesswork.</p>
+<h4 id="distribution-and-marketplace-management">Distribution and Marketplace Management<a class="headerlink" href="#distribution-and-marketplace-management" title="Permanent link">&para;</a></h4>
+<p>Two distribution paths for skills:</p>
+<ul>
+<li><strong>Repo-level</strong> — check skills into <code>.claude/skills/</code> in your repository. Works well for smaller teams across relatively few repos, but every checked-in skill adds to the model's context budget</li>
+<li><strong>Plugin marketplace</strong> — a Claude Code Plugin marketplace where users upload and install plugins. Better for scale, as it lets each team member choose which skills to install rather than loading all skills for everyone</li>
+</ul>
+<p><strong>Organic curation model (Anthropic's approach):</strong> No centralized team decides which skills go into the marketplace. Instead, skills surface organically — authors upload to a <strong>sandbox folder in GitHub</strong> and share via Slack or other forums. Once a skill has gotten traction (determined by the skill owner), they submit a PR to move it into the marketplace. A curation step before release is important because it is easy to create bad or redundant skills (Anthropic, "Lessons from Building Claude Code: How We Use Skills", Mar 2026).</p>
+<blockquote>
+<p><strong>Key:</strong> Most skills at Anthropic began as a few lines addressing a single gotcha, then improved iteratively as Claude hit new edge cases. Start small, ship early, refine based on real usage data from PreToolUse logging.</p>
+</blockquote>
+<h3 id="evaluating-testing-skills">Evaluating &amp; Testing Skills<a class="headerlink" href="#evaluating-testing-skills" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key:</strong> You wouldn't ship code without tests. Don't ship skills without evals. The skill description is the most important piece — if it's vague, the skill won't trigger reliably. A description rewrite alone fixed 5 of 7 failures in one case study (Gemini Interactions API skill, 66.7% → 100% pass rate).</p>
+</blockquote>
+<p><strong>Define success before writing the skill — grade outcomes, not paths:</strong></p>
+<ol>
+<li><strong>Outcome</strong> — Did the skill produce a usable result? Code compiles, API returns valid response, document renders. If the output doesn't work, nothing else matters</li>
+<li><strong>Style &amp; instructions</strong> — Does the output follow your conventions and the skill's directives? Right SDK, correct model IDs, naming conventions, specified formatting</li>
+<li><strong>Efficiency</strong> — How much time, tokens, and effort? No unnecessary retries, reasonable token count, no command thrashing. Two runs can produce identical correct output, but one burned 3x the tokens. This is the most undervalued dimension — regressions here are real costs that compound</li>
+</ol>
+<p><strong>Lightweight eval harness (4 steps):</strong></p>
+<ol>
+<li><strong>Create a prompt set</strong> (10-20 prompts to start). Each prompt tests a specific scenario and declares its own success criteria via <code>expected_checks</code>. Include <strong>negative tests</strong> — prompts where the skill should NOT trigger. A skill with too-broad keywords will fire on every request. Example structure:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;py_basic_generation&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Write a Python script that sends a text prompt to Gemini...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;should_trigger&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;expected_checks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;correct_sdk&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;no_old_sdk&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;current_model&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;interactions_api&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>
+<p><strong>Run the agent and capture output</strong> — test the skill the same way the agent experiences it (through the CLI, not a mock). Capture the full response including stats and exit code</p>
+</li>
+<li>
+<p><strong>Write deterministic checks</strong> — each check is a small function (typically regex against extracted code) returning a boolean. Register all checks in a dispatch registry keyed by <code>check_id</code> from the prompt set. Deterministic checks are fast, cheap, and reproducible</p>
+</li>
+<li>
+<p><strong>Add LLM-as-judge for qualitative checks</strong> (optional) — for skills requiring subjective assessment (design quality, code structure, naming conventions). Use structured output (Pydantic schemas) to constrain the judge's response into parseable, trackable results. Use selectively — LLM grading adds cost and latency</p>
+</li>
+</ol>
+<p><strong>Best practices:</strong></p>
+<ul>
+<li><strong>Start with the skill description</strong> — the name and YAML frontmatter are the trigger mechanism. Vague description = unreliable triggering</li>
+<li><strong>Use directives, not information</strong> — "Always use <code>interactions.create()</code>" works; "The Interactions API is the recommended approach" doesn't. Models follow instructions better than they infer implications</li>
+<li><strong>Isolate each run</strong> — clean environment per test case. Accumulated context bleeds between cases and masks real failures</li>
+<li><strong>Run multiple trials</strong> — agent behavior is nondeterministic. Run 3-5 trials per prompt and look at the distribution, not a single pass/fail</li>
+<li><strong>Test across harnesses</strong> — the same skill behaves differently depending on the agent framework. If your skill is used across tools, eval it in each</li>
+<li><strong>Graduate your evals</strong> — capability evals start at low pass rates and give you a hill to climb. Once they hit ~100%, they graduate into <strong>regression evals</strong> that protect against backsliding</li>
+<li><strong>Detect skill retirement</strong> — run evals with the skill unloaded. If they still pass, the model has absorbed the skill's value. Retire it</li>
+</ul>
+<h3 id="parallel-worktrees-the-real-multiplier">Parallel Worktrees — The Real Multiplier<a class="headerlink" href="#parallel-worktrees-the-real-multiplier" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Power users cite "do more in parallel" using isolated workspaces as the repeated advantage over "better prompts"</li>
+<li>Both Claude Code and Codex emphasize <strong>multi-agent workflows</strong> and worktree/branch isolation</li>
+<li><strong>Zack Proser's workflow:</strong> queue multiple Codex tasks (maintenance/SDLC grunt work), then spend human focus on hard architectural work using other tools</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> The lesson is not that one tool "wins," but that <strong>you batch the cheap work</strong> and reserve expert attention for the parts the agent still struggles with.</p>
+</blockquote>
+<hr />
+<h2 id="setup-ops-guide">Setup &amp; Ops Guide<a class="headerlink" href="#setup-ops-guide" title="Permanent link">&para;</a></h2>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Prerequisites:</strong> Node.js &gt;= 18</li>
+<li><strong>Install:</strong> <code>npm install -g @anthropic-ai/claude-code</code></li>
+<li><strong>Auth:</strong> API key (stored in <code>~/.claude</code>) or Claude.ai Pro/Max account</li>
+<li><strong>First run:</strong> Navigate to project dir, run <code>claude</code>. First run takes ~5-10s</li>
+</ol>
+<h3 id="model-config-selection">Model &amp; Config Selection<a class="headerlink" href="#model-config-selection" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Defaults to <strong>Claude 4 (Opus)</strong> initially, may switch to <strong>Sonnet</strong> after quota. Explicit: <code>/model claude-4-1m</code></li>
+<li><strong>Opus 4.1:</strong> Best precision, complex logic, critical code gen ("code taste")</li>
+<li><strong>Sonnet 4:</strong> 1M context, faster, cheaper. Use for broad analysis, whole-codebase memory</li>
+<li><strong>Haiku:</strong> Fast iterative work where quality isn't paramount</li>
+</ul>
+<h3 id="enterprise-deployment">Enterprise Deployment<a class="headerlink" href="#enterprise-deployment" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Amazon Bedrock</strong> / <strong>Google Vertex AI</strong>: Set <code>CLAUDE_CODE_USE_VERTEX=1</code> + credentials. Code stays in your cloud region</li>
+<li><strong>LLM Gateway:</strong> On-prem/containerized deployments available via Anthropic enterprise support</li>
+<li><strong>Managed settings:</strong> Deploy org-wide <code>.claude/settings.json</code> to enforce deny rules (e.g., block WebSearch, curl)</li>
+</ul>
+<h3 id="team-policies-best-practices">Team Policies &amp; Best Practices<a class="headerlink" href="#team-policies-best-practices" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Privacy:</strong> Code not used for training. Zero-retention mode available. Deny <code>.env</code> / <code>secrets/</code> access</li>
+<li><strong>Permissions Template:</strong> Check <code>.claude/settings.json</code> into version control. Allow Edit + test commands; deny internet + destructive commands</li>
+<li><strong>CLAUDE.md:</strong> Include coding style rules, arch principles, do's/don'ts. "IMPORTANT:" tags improve model adherence</li>
+<li><strong>Training:</strong> 30-min workshop covering invoke, verify, do's/don'ts. Emphasize <strong>developers remain editor-in-chief</strong></li>
+</ul>
+<hr />
+<h2 id="hands-on-benchmarks-claude-code-vs-baselines">Hands-On Benchmarks (Claude Code vs. Baselines)<a class="headerlink" href="#hands-on-benchmarks-claude-code-vs-baselines" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Claude Code</th>
+<th>Baseline (Manual/ChatGPT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repo Comprehension</strong> (50k LOC)</td>
+<td>~3 min, 90% key points covered</td>
+<td>~30-60 min manual/Chat (partial, missed modules)</td>
+</tr>
+<tr>
+<td><strong>Bug Fix</strong> (null ptr)</td>
+<td>~4 min incl. test verify, autonomous debug-fix-verify loop</td>
+<td>~15 min ChatGPT assist (manual apply)</td>
+</tr>
+<tr>
+<td><strong>Multi-file Refactor</strong> (rename API + split class)</td>
+<td>~3 min rename (0 errors), ~10 min class refactor (complete)</td>
+<td>~45+ min manual (risk of misses)</td>
+</tr>
+<tr>
+<td><strong>Test Generation</strong> (invoice.py)</td>
+<td>~5 min, 10 tests, 0-&gt;95% coverage, caught real bug</td>
+<td>~1-2 hrs manual (might miss cases)</td>
+</tr>
+<tr>
+<td><strong>Security Scan</strong> (~100 files)</td>
+<td>~2 min, found 3 real issues (path traversal, XSS, weak hash), 1 false positive</td>
+<td>~30 min+ with SAST tools (more setup)</td>
+</tr>
+<tr>
+<td><strong>Issue-&gt;PR Automation</strong> (via @claude)</td>
+<td>~15 min to PR with tests &amp; docs, addressed review feedback</td>
+<td>~1-2 hrs human dev time</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Industry CI benchmarks:</strong> Factory AI reports each PR runs 40+ CI checks in under 6 minutes, enabling a "merge recklessly" development posture where speed is gated by automated verification rather than human caution. The <strong>SWE-CI benchmark</strong> argues coding agents must be evaluated via continuous integration workflows rather than one-off fixes — measuring real-world iteration loops, not isolated patch success.</p>
+<blockquote>
+<p><strong>Key:</strong> Claude Code delivers <strong>2-10x faster</strong> completion across all categories while maintaining or improving quality. The closed-loop capability (edit -&gt; test -&gt; iterate) is what static suggestions and plain LLMs lack.</p>
+</blockquote>
+<hr />
+<h2 id="ide-playbooks">IDE Playbooks<a class="headerlink" href="#ide-playbooks" title="Permanent link">&para;</a></h2>
+<h3 id="vs-code-and-cursorwindsurf">VS Code (and Cursor/Windsurf)<a class="headerlink" href="#vs-code-and-cursorwindsurf" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Terminal Placement:</strong> Open terminal panel, run <code>claude</code>, keep visible</li>
+<li><strong>Selection for Focus:</strong> Highlight code -&gt; ask Claude about it. Plugin sends selection as context</li>
+<li><strong>Review Diffs in Editor:</strong> <code>/config</code> set diffTool=auto. Scan each change before accepting</li>
+<li><strong>Incorporate Diagnostics:</strong> Red underline -&gt; ask Claude -&gt; instant fix suggestion</li>
+<li><strong>Split Complex Tasks:</strong> Discuss plan first, then implement step-by-step to avoid giant diffs</li>
+<li><strong>Keep CLAUDE.md Updated:</strong> Add context as you discover what Claude needs to know</li>
+</ol>
+<p><strong>Pitfalls:</strong> Don't edit files while Claude is writing. Watch token overrun with large file pastes. VS Code extension conflicts possible (disable other AI extensions if needed).</p>
+<h3 id="jetbrains-intellij-pycharm-etc">JetBrains (IntelliJ, PyCharm, etc.)<a class="headerlink" href="#jetbrains-intellij-pycharm-etc" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Install:</strong> "Claude Code [Beta]" from JetBrains Marketplace. Cmd+Esc or terminal -&gt; <code>claude</code></li>
+<li><strong>Diff Review:</strong> Plugin opens IntelliJ diff viewer per changed file. Accept/block changes individually</li>
+<li><strong>Selection Context:</strong> Select code -&gt; invoke Claude window (Cmd+Esc) -&gt; auto-feeds selection</li>
+<li><strong>File Shortcuts:</strong> Ctrl+Alt+K for @filename references in prompts</li>
+<li><strong>Diagnostics Sharing:</strong> Compiler errors (red squiggles) auto-fed to Claude</li>
+</ol>
+<p><strong>Pitfalls:</strong> Focus stealing when Claude applies diffs. Plugin sync issues (restart terminal). Windows WSL integration fragile. Resource usage with large context.</p>
+<hr />
+<h2 id="github-actions-playbook-claude-as-ci-co-dev">GitHub Actions Playbook (Claude as CI Co-Dev)<a class="headerlink" href="#github-actions-playbook-claude-as-ci-co-dev" title="Permanent link">&para;</a></h2>
+<h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Install Claude GitHub App (read/write code, issues, PR comments)</li>
+<li>Add <code>ANTHROPIC_API_KEY</code> to repo secrets</li>
+<li>Add <code>claude.yml</code> workflow to <code>.github/workflows</code></li>
+</ol>
+<h3 id="usage-patterns">Usage Patterns<a class="headerlink" href="#usage-patterns" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Implementing Issues:</strong> <code>@claude implement</code> on issue -&gt; Claude creates branch, commits code+tests+docs, opens PR</li>
+<li><strong>PR Code Reviews:</strong> <code>@claude review this</code> -&gt; Claude analyzes diff, comments findings</li>
+<li><strong>Security Scans on PRs:</strong> Configure workflow to run <code>/security-review</code> on every PR</li>
+<li><strong>Feature Branch Conversations:</strong> Reviewer comments "@claude unit tests are failing, please fix" -&gt; Claude pushes fix commit</li>
+</ul>
+<h3 id="adversarial-pr-review-with-confidence-filtering">Adversarial PR Review with Confidence Filtering<a class="headerlink" href="#adversarial-pr-review-with-confidence-filtering" title="Permanent link">&para;</a></h3>
+<p>Anthropic uses Claude internally for PR review with adversarial-style review loops and confidence filtering. The pattern: the AI reviewer runs multiple passes, scores its own confidence on each finding, and surfaces only high-confidence issues to the human reviewer. The result is that humans spend more time on taste and product alignment than line-by-line bug hunting — separating signal from noise in code review. This extends the adversarial agent pattern (see Agentic Engineering Principles) into the PR workflow specifically (Sid, Anthropic, AI Engineering Conference, Mar 2026).</p>
+<h3 id="human-oversight-non-negotiable">Human Oversight (Non-Negotiable)<a class="headerlink" href="#human-oversight-non-negotiable" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Never auto-merge</strong> Claude's PRs. Require status checks + at least one human approval</li>
+<li>Create GitHub codeowners rule requiring approval for <code>claude-bot</code> changes</li>
+<li>Limit triggers to trusted users/collaborators</li>
+<li>Monitor Claude's PRs for unexpected changes beyond issue scope</li>
+<li><strong>Rollback plan:</strong> Close faulty PR, deactivate action temporarily</li>
+</ul>
+<hr />
+<h2 id="security-governance">Security &amp; Governance<a class="headerlink" href="#security-governance" title="Permanent link">&para;</a></h2>
+<h3 id="threat-model">Threat Model<a class="headerlink" href="#threat-model" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Threat</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Malicious instructions</strong> (prompt injection in code/MCP)</td>
+<td>Permission system blocks dangerous ops. Deny <code>rm:*</code>, <code>del:*</code>, <code>curl:*</code></td>
+</tr>
+<tr>
+<td><strong>Destructive infrastructure commands</strong> (Terraform, kubectl)</td>
+<td>Deny IaC destructive commands (<code>terraform destroy</code>, <code>terraform apply -auto-approve</code>, <code>kubectl delete</code>). Real incident: Claude Code executed Terraform that deleted a production database + snapshots (DataTalksClub, 2.5 years of data lost)</td>
+</tr>
+<tr>
+<td><strong>Model misbehavior</strong> (hallucinated dangerous commands)</td>
+<td>Conservative permissions by default. All actions logged</td>
+</tr>
+<tr>
+<td><strong>Data exfiltration</strong> (via MCP to Slack etc.)</td>
+<td>Scope MCP permissions read-only. Set <code>enableAllProjectMcpServers</code> to false</td>
+</tr>
+<tr>
+<td><strong>Vulnerability introduction</strong></td>
+<td>Always run tests on AI changes. Use <code>/security-review</code> + SAST/DAST</td>
+</tr>
+<tr>
+<td><strong>Account/token abuse</strong></td>
+<td>Rotate API keys. Use zero-retention mode for sensitive projects</td>
+</tr>
+</tbody>
+</table>
+<h3 id="auto-mode-research-preview">Auto Mode (Research Preview)<a class="headerlink" href="#auto-mode-research-preview" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Claude Code "Auto Mode"</strong> announced March 2026 (research preview expected March 12, 2026): automatically handles permission prompts without manual approval</li>
+<li>Includes safeguards against prompt injection and malicious commands</li>
+<li>Positioned as an alternative to <code>--dangerously-skip-permissions</code></li>
+<li>Recommended for isolated environments (VMs, containers, sandboxes)</li>
+<li>Increases resource usage compared to standard interactive mode</li>
+</ul>
+<h3 id="governance-measures">Governance Measures<a class="headerlink" href="#governance-measures" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Policy:</strong> Define which repos/data classes are allowed for AI use</li>
+<li><strong>Compliance:</strong> Anthropic offers trust &amp; compliance center (SOC 2, DPA). GDPR-friendly with zero-retention</li>
+<li><strong>Secret Handling:</strong> Deny <code>.env</code> files. Use placeholders for credentials</li>
+<li><strong>Audit:</strong> Treat Claude like a new hire — review every change initially. Co-authored commits enable git history tracing</li>
+<li><strong>Incident Response:</strong> Credentials committed -&gt; rotate immediately. Bug in prod -&gt; post-mortem + tighten CLAUDE.md</li>
+<li>Even aggressive users run agents in controlled environments — VMs, containers, scoped credentials, limited permissions</li>
+<li><strong>Simon Willison</strong> repeatedly frames the value of managed container environments and publishes tools (transcript extraction) to improve auditability</li>
+</ul>
+<h3 id="security-review-in-sdlc">/security-review in SDLC<a class="headerlink" href="#security-review-in-sdlc" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Catches:</strong> Injections, XSS, auth bypass, weak crypto, hardcoded secrets, path traversal</li>
+<li><strong>Misses:</strong> Complex crypto weaknesses, concurrency issues, business logic flaws, timing attacks</li>
+<li><strong>Combine with:</strong> SAST (CodeQL, Bandit, ESLint), DAST/fuzzing, dependency scanners (Snyk, <code>npm audit</code>)</li>
+<li><strong>Run:</strong> On every PR (fast ~2 min) + weekly full-branch scan + on-demand before releases</li>
+</ul>
+<hr />
+<h2 id="cost-rate-limits-capacity-planning">Cost, Rate Limits &amp; Capacity Planning<a class="headerlink" href="#cost-rate-limits-capacity-planning" title="Permanent link">&para;</a></h2>
+<h3 id="pricing-as-of-2025">Pricing (as of 2025)<a class="headerlink" href="#pricing-as-of-2025" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Input</th>
+<th>Output</th>
+<th>Context</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Claude Opus 4.1</strong></td>
+<td>~$15/M tokens</td>
+<td>~$75/M tokens</td>
+<td>200k</td>
+</tr>
+<tr>
+<td><strong>Claude Sonnet 4</strong></td>
+<td>~$3/M tokens (up to 200k), $6/M (beyond)</td>
+<td>$15/M (up to 200k), $22.5/M (beyond)</td>
+<td>1M</td>
+</tr>
+<tr>
+<td><strong>Claude Instant (Haiku)</strong></td>
+<td>~$1.63/M tokens</td>
+<td>Much cheaper</td>
+<td>Fastest</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cost-example-team-of-5">Cost Example (Team of 5)<a class="headerlink" href="#cost-example-team-of-5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>~20 sessions/dev/day, ~3k tokens each = 300k tokens/day for team</li>
+<li>Mostly Opus: input 300k<em>$15/M = $4.50, output 300k</em>$75/M = $22.50 -&gt; <strong>~$27/day -&gt; ~$594/month</strong></li>
+<li>Offset by ~10% productivity gain per dev (worth &gt;$600/dev/month)</li>
+<li>Optimize: Use Sonnet by default, escalate to Opus for tricky tasks</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> Budget <strong>a few hundred to a few thousand USD/month/team</strong>. Treat token budget like a performance budget. A 1M-token analysis can cost ~$20 per invocation.</p>
+</blockquote>
+<h3 id="managing-costs">Managing Costs<a class="headerlink" href="#managing-costs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Be specific</strong> in prompts to limit context pulled. Use file selection in IDE</li>
+<li><strong>Model switching:</strong> Sonnet/Haiku for simple Q&amp;A, Opus for complex logic. <code>/model</code> mid-session</li>
+<li><strong>Batch processing:</strong> API batch requests ~50% cheaper for bulk operations</li>
+<li><strong>Memory management:</strong> Use <code>/clear</code> between unrelated tasks. Short sessions = less token bloat</li>
+</ul>
+<h3 id="prompt-caching-auto-caching">Prompt Caching (Auto-Caching)<a class="headerlink" href="#prompt-caching-auto-caching" title="Permanent link">&para;</a></h3>
+<p>Every Claude API call runs two phases: <strong>prefill</strong> (processing the entire prompt — the expensive phase) and <strong>decode</strong> (generating the response token by token). If a request shares an exact prefix with a previous request, the prefill computation is cached, hashed, and reused. Cache hits cost <strong>10% of standard input token pricing</strong> (Joe Njenga, "Anthropic Automatic Prompt Caching," Feb 2026).</p>
+<p><strong>Manual caching</strong> required placing a <code>cache_control: { type: "ephemeral" }</code> breakpoint on specific message blocks and moving it forward each turn as the conversation grew. <strong>Auto-caching</strong> replaces this with a single top-level parameter:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;cache_control&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ephemeral&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The API automatically identifies the longest matching prefix, moves the cache breakpoint to the last cacheable block, and reuses it on every subsequent turn. Manual block-level <code>cache_control</code> still works for granular control (e.g., caching system prompt independently from per-user project context) — auto-caching handles everything else on top.</p>
+<p><strong>Token math example:</strong> A code review agent with 15,000 tokens of static context (system prompt + tools + project context) running 40 turns: without caching, 600,000 input tokens billed at full price; with caching, turn 1 at full price (cache write) + turns 2–40 at 10% = <strong>73,500 total</strong> — an 88% reduction on static token cost alone.</p>
+<p><strong>Five production rules from the Claude Code team</strong> (sourced from Thariq, Anthropic, shared Feb 2026):</p>
+<ol>
+<li>
+<p><strong>Order prompts static-to-dynamic.</strong> Caching uses exact prefix matching via cryptographic hash — one character difference anywhere in the prefix produces a different hash and a full-price bill. The Claude Code harness structures every request: base system instructions → tool definitions → CLAUDE.md/project memory → session state → conversation messages. Timestamps in system prompts, non-deterministic tool loading order, or parameters that change between sessions all silently break the prefix.</p>
+</li>
+<li>
+<p><strong>Never change tools mid-session.</strong> Adding or removing a tool changes the cached prefix and forces a full rebuild. The Claude Code team uses <code>EnterPlanMode</code> and <code>ExitPlanMode</code> as tools themselves rather than swapping tool definitions — the tool list stays identical, and mode changes flow through system messages.</p>
+</li>
+<li>
+<p><strong>Use system messages, not prompt edits.</strong> When state changes mid-session (file updates, time changes, user preferences), editing the system prompt breaks the hash. Instead, pass updated information as a <code>&lt;system-reminder&gt;</code> tag inside the next user message or tool result — the model reads the update while the cached prefix stays intact.</p>
+</li>
+<li>
+<p><strong>Don't switch models mid-conversation.</strong> Prompt caches are per-model. Switching from Opus to Haiku 100,000 tokens deep means paying full price to rebuild Haiku's cache from scratch — the "cheaper" model costs more. Use <strong>subagents</strong> for subtasks requiring a different model: the parent prepares a focused handoff with only relevant context, and the main session cache stays intact.</p>
+</li>
+<li>
+<p><strong>Cache-safe compaction.</strong> When hitting the context window limit, naive compaction (separate API call with different system prompt and no tools) kills the cache. The fix: use the <strong>exact same system prompt, tools, and context</strong> as the parent conversation, prepend the full conversation history, and append the compaction prompt as the final user message. The API sees a request nearly identical to the last turn — cache hits, and only the compaction prompt itself bills at full price.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Key:</strong> The Claude Code team monitors cache hit rate with the same urgency as uptime — alerts fire when it drops. For any agent running more than a handful of turns, prompt caching is the difference between a viable product and a cost spiral. Auto-caching removes the implementation burden, but the five ordering and stability rules above determine whether you actually get cache hits in production.</p>
+</blockquote>
+<h3 id="rate-limits">Rate Limits<a class="headerlink" href="#rate-limits" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>API tiers:</strong> Tier-based requests/min and tokens/min. Request higher quota if hitting limits</li>
+<li><strong>Claude.ai accounts:</strong> ~100 messages/8 hrs on Pro. Max plan has more. Consider API key for heavy use</li>
+<li><strong>Concurrent usage:</strong> Give each dev their own API key for accountability</li>
+</ul>
+<hr />
+<h2 id="failure-modes-mitigations">Failure Modes &amp; Mitigations<a class="headerlink" href="#failure-modes-mitigations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hallucinated edits</strong> (unwanted code changes)</td>
+<td>Vague prompt, model over-generalization</td>
+<td>Constrain prompt: "Only modify <code>parseData()</code>, do not alter other logic." Add ground truth to CLAUDE.md</td>
+</tr>
+<tr>
+<td><strong>Partial refactor</strong> (broken references)</td>
+<td>Context window limits, stopped early</td>
+<td>Break into smaller chunks. Run tests after each step. Use <code>/review</code> to catch misses</td>
+</tr>
+<tr>
+<td><strong>Flaky/incorrect tests</strong></td>
+<td>No runtime knowledge, guessed outputs</td>
+<td>Review &amp; run all generated tests. Seed random generators. Add "All tests must be deterministic" to CLAUDE.md</td>
+</tr>
+<tr>
+<td><strong>Tool-call dead ends</strong> (stuck after test failure)</td>
+<td>Ambiguous output, permission denial</td>
+<td>Intervene: "The test failure indicates a null pointer — fix that in <code>utils.js</code>"</td>
+</tr>
+<tr>
+<td><strong>Stylistic deviations</strong></td>
+<td>Missing CLAUDE.md style rules</td>
+<td>Add explicit style preferences. Run linter/formatter after Claude's changes</td>
+</tr>
+<tr>
+<td><strong>Context poisoning</strong> (confused, irrelevant responses)</td>
+<td>Stale context in long session</td>
+<td>Use <code>/compact</code> or start fresh. "Forget previous discussion, focus only on X now"</td>
+</tr>
+<tr>
+<td><strong>Destructive infra commands</strong> (unintended resource deletion)</td>
+<td>Agent executes Terraform/IaC commands without guardrails</td>
+<td>Deny destructive infra CLIs (<code>terraform destroy</code>, <code>kubectl delete</code>) in permissions. Incident: Claude Code accidentally ran a Terraform command that deleted DataTalksClub's production database and snapshots, wiping 2.5 years of course data</td>
+</tr>
+<tr>
+<td><strong>Performance slowdown</strong></td>
+<td>Large context, rate limiting</td>
+<td>Use <code>/clear</code>, start fresh session. Scope prompts narrowly</td>
+</tr>
+<tr>
+<td><strong>Refusal / non-answer</strong></td>
+<td>Safety filter triggered, unclear prompt</td>
+<td>Rephrase with legitimate intent. Provide more context. Check for sensitive content in project files</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Use <strong>fail-safe prompts</strong>: "Refactor this function, and ensure all references are updated (don't leave broken references)." Articulating pitfalls makes Claude more likely to self-check.</p>
+</blockquote>
+<hr />
+<h2 id="adoption-guide">Adoption Guide<a class="headerlink" href="#adoption-guide" title="Permanent link">&para;</a></h2>
+<h3 id="team-roles-raci">Team Roles (RACI)<a class="headerlink" href="#team-roles-raci" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Executive Sponsor</strong></td>
+<td>Greenlights experiment, budget, accountable for success</td>
+</tr>
+<tr>
+<td><strong>AI Tool Champion</strong></td>
+<td>Leads pilot, configures tool, gathers feedback, first-line expert</td>
+</tr>
+<tr>
+<td><strong>Security/Compliance Officer</strong></td>
+<td>Reviews data/security risks, sets boundaries (consulted early)</td>
+</tr>
+<tr>
+<td><strong>Developers</strong></td>
+<td>Use Claude Code daily, provide feedback, responsible for code quality</td>
+</tr>
+<tr>
+<td><strong>Code Reviewers/Team Leads</strong></td>
+<td>Review AI-generated code, gatekeepers of quality</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pilot-plan-4-6-weeks">Pilot Plan (4-6 Weeks)<a class="headerlink" href="#pilot-plan-4-6-weeks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Activities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Week 0 (Prep)</strong></td>
+<td>Pick non-critical project, 2-3 early adopters, set success criteria, install, populate CLAUDE.md</td>
+</tr>
+<tr>
+<td><strong>Week 1 (Explore)</strong></td>
+<td>Daily use: bug fixes, tests, refactors. Short daily check-ins. Champion pairs with each dev</td>
+</tr>
+<tr>
+<td><strong>Week 2 (Stabilize)</strong></td>
+<td>Fix style/process issues. Expand to slightly more critical tasks. Collect quantitative metrics</td>
+</tr>
+<tr>
+<td><strong>End Week 2 (Review)</strong></td>
+<td>AI Champion + Exec Sponsor evaluate: time reduction? code quality? dev sentiment?</td>
+</tr>
+<tr>
+<td><strong>Week 3-4 (Rollout)</strong></td>
+<td>30-min workshop for all devs. Share cheatsheet + glossary. Designate per-team champions. Slack channel for support</td>
+</tr>
+<tr>
+<td><strong>Graduation</strong></td>
+<td>50%+ active adoption, metrics improving, formalize into standard dev workflow</td>
+</tr>
+</tbody>
+</table>
+<h3 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Productivity:</strong> 20% reduction in time to close bug tickets or 25% less overtime</li>
+<li><strong>Quality:</strong> No increase in bug introduction rate from AI changes</li>
+<li><strong>Adoption:</strong> 80% of devs using 3+ times/week by end of Q2</li>
+<li><strong>Satisfaction:</strong> &gt;=7/10 average developer rating</li>
+<li><strong>Hard ROI:</strong> "$500 API cost saved 50 dev hours (~$5000) — 10x ROI"</li>
+</ul>
+<h3 id="learning-path-from-first-task-to-team-grade">Learning Path (From First Task to Team-Grade)<a class="headerlink" href="#learning-path-from-first-task-to-team-grade" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Focus</th>
+<th>Resources</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Onboarding (hours)</strong></td>
+<td>Smallest loop: ask repo question, one-file change, run tests, produce PR</td>
+<td>Tech With Tim tutorials; Mukesh Murugan beginner guide; OpenAI "Getting started with Codex"</td>
+</tr>
+<tr>
+<td><strong>Working style (days)</strong></td>
+<td>Create CLAUDE.md, plan-first discipline, chunked execution</td>
+<td>Addy Osmani workflow discipline; Simon Willison sharp edges/caveats posts</td>
+</tr>
+<tr>
+<td><strong>Power user (weeks)</strong></td>
+<td>Hooks + skills, parallel worktrees, Slack/Discord integrations</td>
+<td>Shrivu Shankar deep dive; Steve Sewell Slack-to-PR; skills.sh ecosystem</td>
+</tr>
+<tr>
+<td><strong>Operational excellence (ongoing)</strong></td>
+<td>Audit trails, deterministic gates, team scaling</td>
+<td>Transcript tooling; community directories; integration repos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dont-let-the-agent-drive-unsupervised-heuristics">"Don't Let the Agent Drive Unsupervised" Heuristics<a class="headerlink" href="#dont-let-the-agent-drive-unsupervised-heuristics" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Always review diffs. Never commit AI changes you haven't eyeballed</li>
+<li>Run tests on AI changes. Write tests for areas AI touches</li>
+<li>Prefer small Claude commits (easy to undo)</li>
+<li>Watch for "easy outs": if AI suggests commenting out a failing test or disabling security, treat as red flag</li>
+<li>Don't blindly trust architectural/logic answers — verify with quick search</li>
+<li><strong>Treat Claude as a helpful intern: smart, fast, but not accountable. You are the engineer of record.</strong></li>
+</ul>
+<hr />
+<h2 id="claude-code-vs-codex-positioning">Claude Code vs Codex Positioning<a class="headerlink" href="#claude-code-vs-codex-positioning" title="Permanent link">&para;</a></h2>
+<p>For the full Codex capability map, architecture, best practices, and deployment playbook, see <code>codex_expert_guide.md</code>. Summary comparison:</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Claude Code (Anthropic)</th>
+<th>Codex (OpenAI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mental model</strong></td>
+<td>Agentic coding tool — terminal/IDE/desktop/browser integration</td>
+<td>Command centre — multi-agent workflows with parallel workstreams</td>
+</tr>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>Node.js CLI, local action execution</td>
+<td>Rust, 5-step ReAct state machine, Firecracker microVM per agent</td>
+</tr>
+<tr>
+<td><strong>Model</strong></td>
+<td>Claude Opus 4.1 / Sonnet 4 (1M context)</td>
+<td>GPT-5.3-Codex (coding-specialized fine-tune)</td>
+</tr>
+<tr>
+<td><strong>Sandboxing</strong></td>
+<td>Permission system; Auto Mode (Mar 2026)</td>
+<td>Firecracker microVM — ephemeral FS, network allowlist</td>
+</tr>
+<tr>
+<td><strong>Parallelism</strong></td>
+<td>Parallel worktrees; subagents</td>
+<td>4-8 concurrent agents/session in isolated microVMs</td>
+</tr>
+<tr>
+<td><strong>Repo instructions</strong></td>
+<td><code>CLAUDE.md</code></td>
+<td><code>AGENTS.md</code></td>
+</tr>
+<tr>
+<td><strong>Key differentiator</strong></td>
+<td>Hooks/skills, MCP, Slack delegation, Auto Mode</td>
+<td>Multi-agent parallelism, Firecracker, 100+ internal skills</td>
+</tr>
+<tr>
+<td><strong>Shared patterns</strong></td>
+<td>Both: repo constitution, plan-first, worktrees, quality gates, compaction, skills ecosystems</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="influencer-community-resources">Influencer &amp; Community Resources<a class="headerlink" href="#influencer-community-resources" title="Permanent link">&para;</a></h2>
+<h3 id="top-influencers">Top Influencers<a class="headerlink" href="#top-influencers" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Influencer</th>
+<th>Platform</th>
+<th>Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Boris Cherny</strong></td>
+<td>X (~240K), GitHub</td>
+<td>Claude Code core team; parallel sessions/worktrees; threads avg ~944 replies, ~8.2M views</td>
+</tr>
+<tr>
+<td><strong>Simon Willison</strong></td>
+<td>Blog, X (~149K), GitHub (12.9K)</td>
+<td>High cadence on Codex + Claude Code; transcript extraction tools; AI-code quality stance</td>
+</tr>
+<tr>
+<td><strong>Addy Osmani</strong></td>
+<td>X (~373K), LinkedIn (252K), Substack (46K)</td>
+<td>Workflow doctrine: specs-before-code, iterative chunks, strong feedback loops</td>
+</tr>
+<tr>
+<td><strong>Tech With Tim</strong></td>
+<td>YouTube (1.96M subs)</td>
+<td>High-volume Claude Code education and tutorials</td>
+</tr>
+<tr>
+<td><strong>Steve Sewell</strong></td>
+<td>X (~124K), LinkedIn (44K)</td>
+<td>Slack-to-PR workflows; practical integration patterns</td>
+</tr>
+<tr>
+<td><strong>Sabrina Ramonov</strong></td>
+<td>YouTube (126K), Instagram (527K)</td>
+<td>Full courses with skills/hooks/subagents; version comparisons</td>
+</tr>
+<tr>
+<td><strong>Shrivu Shankar</strong></td>
+<td>Substack (3.3K)</td>
+<td>Deep "power user" write-ups; enterprise patterns; feature-by-feature deep dive</td>
+</tr>
+<tr>
+<td><strong>Mukesh Murugan</strong></td>
+<td>Blog, LinkedIn (43K)</td>
+<td>Beginner-friendly guide (58.4K views); practical CLAUDE.md setup</td>
+</tr>
+<tr>
+<td><strong>Zack Proser</strong></td>
+<td>Blog, Newsletter (4K)</td>
+<td>Codex daily-use review; two-tier workflow (Codex for maintenance, Claude Code for depth)</td>
+</tr>
+<tr>
+<td><strong>Nate Herk</strong></td>
+<td>YouTube</td>
+<td>10-hour "Build &amp; Sell with Claude Code" course (Mar 2026) — full-stack commercialization playbook: setup → workflows → agents → client acquisition → pricing → delivery. Distinctive for framing Claude Code as a <strong>business-building interface</strong>, not just a coding tool</td>
+</tr>
+<tr>
+<td><strong>Gergely Orosz</strong></td>
+<td>Pragmatic Engineer</td>
+<td>"Building Claude Code with Boris Cherny" + <strong>"How Codex is Built"</strong> (both Mar 2026) — key source for Codex architecture details (Rust, Firecracker, GPT-5.3-Codex, 1M+ WAU)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-community-resources">Key Community Resources<a class="headerlink" href="#key-community-resources" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Claude Code Docs</strong></td>
+<td><code>https://code.claude.com/docs/en/overview</code></td>
+</tr>
+<tr>
+<td><strong>Claude Code + Slack</strong></td>
+<td><code>https://claude.com/blog/claude-code-and-slack</code></td>
+</tr>
+<tr>
+<td><strong>Codex Product Hub</strong></td>
+<td><code>https://openai.com/codex/</code></td>
+</tr>
+<tr>
+<td><strong>Skills Ecosystem (skills.sh)</strong></td>
+<td><code>https://vercel.com/changelog/introducing-skills-the-open-agent-skills-ecosystem</code></td>
+</tr>
+<tr>
+<td><strong>Awesome Claude Skills</strong></td>
+<td><code>https://github.com/ComposioHQ/awesome-claude-skills</code></td>
+</tr>
+<tr>
+<td><strong>Transcript Extraction</strong></td>
+<td><code>https://github.com/simonw/claude-code-transcripts</code></td>
+</tr>
+<tr>
+<td><strong>Discord Bridge</strong></td>
+<td><code>https://github.com/zebbern/claude-code-discord</code></td>
+</tr>
+<tr>
+<td><strong>Slack Controller</strong></td>
+<td><code>https://github.com/yuya-takeyama/cc-slack</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Hashtags:</strong> <code>#ClaudeCode</code>, <code>#AgenticCoding</code>, <code>#codingagents</code>, <code>#aiengineering</code></p>
+<h3 id="timeline-of-key-milestones">Timeline of Key Milestones<a class="headerlink" href="#timeline-of-key-milestones" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2025-04-16</strong></td>
+<td>Codex CLI practitioners start documenting usage</td>
+</tr>
+<tr>
+<td><strong>2025-10-20</strong></td>
+<td>Claude Code for web framed as async coding agent</td>
+</tr>
+<tr>
+<td><strong>2025-12-08</strong></td>
+<td>Claude Code delegated from Slack announced</td>
+</tr>
+<tr>
+<td><strong>2026-01-20</strong></td>
+<td>Cross-tool skills directory introduced (skills.sh)</td>
+</tr>
+<tr>
+<td><strong>2026-02-02</strong></td>
+<td>Codex app coverage begins</td>
+</tr>
+<tr>
+<td><strong>2026-03-05</strong></td>
+<td>Claude Code desktop adds local scheduled tasks and <code>/loop</code> command for while-loop execution</td>
+</tr>
+<tr>
+<td><strong>2026-03-06</strong></td>
+<td>Claude Code "Auto Mode" announced (research preview expected March 12, 2026)</td>
+</tr>
+<tr>
+<td><strong>2026-03-06</strong></td>
+<td>Cursor Automations announced: persistent always-on AI coding agents</td>
+</tr>
+<tr>
+<td><strong>2026-03-06</strong></td>
+<td>T3 Code (open source, by Theo) released: agent orchestration app atop Codex CLI</td>
+</tr>
+<tr>
+<td><strong>2026-03 (early)</strong></td>
+<td>Pragmatic Engineer publishes "How Codex is Built" — reveals Rust architecture, Firecracker sandboxing, GPT-5.3-Codex model, 1M+ WAU, 90%+ self-generated codebase</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Diffusion pattern:</strong> Official docs -&gt; power-user workflows -&gt; reusable artefacts (skills, hooks, templates) -&gt; team adoption (CI, Slack/Discord, PR review)</p>
+<hr />
+<h2 id="when-not-to-use-claude-code">When NOT to Use Claude Code<a class="headerlink" href="#when-not-to-use-claude-code" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Tight inline autocompletion:</strong> Use IntelliJ AI or inline completion tools instead</li>
+<li><strong>Trivial 5-line scripts:</strong> Faster to write yourself</li>
+<li><strong>Obscure DSLs / niche domain languages:</strong> Claude may hallucinate syntax</li>
+<li><strong>Massive monorepos (millions of lines):</strong> Use code search tools to narrow scope first, then point Claude at subsets</li>
+<li><strong>Performance-critical / memory-constrained code:</strong> AI may introduce suboptimal patterns. Heavy human review needed</li>
+<li><strong>Safety-critical software</strong> (medical, aerospace, crypto): AI output must be expert-validated with formal methods</li>
+<li><strong>Windows-only shops without WSL:</strong> Native Windows support not yet available</li>
+<li><strong>Teams not onboard:</strong> Forced adoption backfires. Encourage, don't mandate</li>
+<li><strong>Competitor CLI agents</strong> (Aider, Cline) may be better for: self-hosting, open-source models, real-time cost display, autonomous "thinking mode"</li>
+<li><strong>When cloud-hosted persistent agents suffice:</strong> Cursor Automations (March 2026) and T3 Code offer always-on agent workflows that may fit teams preferring GUI-first or multi-model orchestration</li>
+</ul>
+<hr />
+<h2 id="codex-usage-patterns">Codex Usage Patterns<a class="headerlink" href="#codex-usage-patterns" title="Permanent link">&para;</a></h2>
+<p>Codex-specific usage patterns, code-quality harnesses, AGENTS.md templates, memory management, skills ecosystem, and the full timeline/changelog have been moved to <code>codex_expert_guide.md</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

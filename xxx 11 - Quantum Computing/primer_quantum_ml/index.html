@@ -1,0 +1,3310 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/">
+      
+      
+        <link rel="prev" href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/">
+      
+      
+        <link rel="next" href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Primer on Quantum ML - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a-primer-on-quantum-machine-learning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Primer on Quantum ML
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i-classical-ml-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Classical ML Foundations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Classical ML Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pac-learning-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAC Learning Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-consider-quantum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Consider Quantum?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-data-embedding-and-feature-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. Data Embedding and Feature Maps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. Data Embedding and Feature Maps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encoding-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Encoding Strategies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantum-kernels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantum Kernels
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-variational-qml-near-term-nisq" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Variational QML (Near-Term / NISQ)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Variational QML (Near-Term / NISQ)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-parameterised-quantum-circuits-pqcs-quantum-neural-networks-qnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture: Parameterised Quantum Circuits (PQCs) / Quantum Neural Networks (QNNs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expressibility-and-universality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expressibility and Universality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equivariant-qnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Equivariant QNNs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-quantum-computational-learning-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      IV. Quantum Computational Learning Theory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. Quantum Computational Learning Theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quantum-pac-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantum PAC Learning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learning-quantum-concepts-quantum-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning Quantum Concepts (Quantum Data)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-qml-from-linear-algebraic-primitives-fault-tolerant-era" class="md-nav__link">
+    <span class="md-ellipsis">
+      V. QML from Linear-Algebraic Primitives (Fault-Tolerant Era)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V. QML from Linear-Algebraic Primitives (Fault-Tolerant Era)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-subroutines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Subroutines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-assumptions-and-caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Assumptions and Caveats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-quantum-recommendation-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application: Quantum Recommendation System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dequantisation-the-critical-caveat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dequantisation -- the Critical Caveat
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-other-forms-of-qml" class="md-nav__link">
+    <span class="md-ellipsis">
+      VI. Other Forms of QML
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VI. Other Forms of QML">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-quantum-generative-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Quantum Generative Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-quantum-unsupervised-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Quantum Unsupervised Learning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-quantum-reinforcement-learning-qrl" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Quantum Reinforcement Learning (QRL)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-the-long-reaching-arm-of-qml" class="md-nav__link">
+    <span class="md-ellipsis">
+      VII. The Long Reaching Arm of QML
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VII. The Long Reaching Arm of QML">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quantum-sensing-metrology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantum Sensing / Metrology
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantum-compiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantum Compiling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii-conclusion-and-research-outlook" class="md-nav__link">
+    <span class="md-ellipsis">
+      VIII. Conclusion and Research Outlook
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VIII. Conclusion and Research Outlook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-advantage-landscape" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Advantage Landscape
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-open-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Open Problems
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-references-selected" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key References (Selected)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i-classical-ml-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Classical ML Foundations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Classical ML Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pac-learning-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAC Learning Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-consider-quantum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Consider Quantum?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-data-embedding-and-feature-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. Data Embedding and Feature Maps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. Data Embedding and Feature Maps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encoding-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Encoding Strategies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantum-kernels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantum Kernels
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-variational-qml-near-term-nisq" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Variational QML (Near-Term / NISQ)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Variational QML (Near-Term / NISQ)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-parameterised-quantum-circuits-pqcs-quantum-neural-networks-qnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture: Parameterised Quantum Circuits (PQCs) / Quantum Neural Networks (QNNs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expressibility-and-universality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expressibility and Universality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equivariant-qnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Equivariant QNNs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-quantum-computational-learning-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      IV. Quantum Computational Learning Theory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. Quantum Computational Learning Theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quantum-pac-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantum PAC Learning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learning-quantum-concepts-quantum-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning Quantum Concepts (Quantum Data)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-qml-from-linear-algebraic-primitives-fault-tolerant-era" class="md-nav__link">
+    <span class="md-ellipsis">
+      V. QML from Linear-Algebraic Primitives (Fault-Tolerant Era)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V. QML from Linear-Algebraic Primitives (Fault-Tolerant Era)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-subroutines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Subroutines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-assumptions-and-caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Assumptions and Caveats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-quantum-recommendation-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application: Quantum Recommendation System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dequantisation-the-critical-caveat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dequantisation -- the Critical Caveat
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-other-forms-of-qml" class="md-nav__link">
+    <span class="md-ellipsis">
+      VI. Other Forms of QML
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VI. Other Forms of QML">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-quantum-generative-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Quantum Generative Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-quantum-unsupervised-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Quantum Unsupervised Learning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-quantum-reinforcement-learning-qrl" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Quantum Reinforcement Learning (QRL)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-the-long-reaching-arm-of-qml" class="md-nav__link">
+    <span class="md-ellipsis">
+      VII. The Long Reaching Arm of QML
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VII. The Long Reaching Arm of QML">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quantum-sensing-metrology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantum Sensing / Metrology
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantum-compiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantum Compiling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii-conclusion-and-research-outlook" class="md-nav__link">
+    <span class="md-ellipsis">
+      VIII. Conclusion and Research Outlook
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VIII. Conclusion and Research Outlook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-advantage-landscape" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Advantage Landscape
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-open-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Open Problems
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-references-selected" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key References (Selected)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="a-primer-on-quantum-machine-learning">A Primer on Quantum Machine Learning<a class="headerlink" href="#a-primer-on-quantum-machine-learning" title="Permanent link">&para;</a></h1>
+<p><strong>Paper:</strong> arXiv:2511.15969v1, Nov 2025
+<strong>Authors:</strong> Su Yeon Chang, M. Cerezo (Los Alamos National Laboratory / Quantum Science Center)</p>
+<hr />
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>Quantum machine learning is not one field with one problem; it is two fields that happen to share a name, and the failure to distinguish them has distorted a decade of expectations. The first strand — linear-algebraic QML built atop HHL, qPCA, and QSVE — promised exponential speedups for classical data problems like recommendation and clustering. The second strand — variational QML using parameterised quantum circuits on NISQ hardware — imported the methodology of deep learning wholesale, substituting rotation gates for weight matrices. Both strands have now run into walls that are not engineering limitations but <strong>mathematical obstructions</strong>, and understanding exactly where each wall stands is the prerequisite for any honest assessment of the field.</p>
+<p>The linear-algebraic programme collapsed in a specific and instructive way. Ewin Tang's 2019 dequantisation of the Kerenidis-Prakash quantum recommendation system demonstrated that the exponential speedup was an artefact of the QRAM data-access assumption: grant a classical algorithm the same L2-norm sampling access that QRAM implicitly provides, and the quantum advantage shrinks to at most polynomial. This dequantisation template has since propagated across quantum PCA, supervised classification, and clustering, deflating exponential claims to polynomial residuals in each case. Meanwhile, the variational programme faces its own fundamental barrier: <strong>barren plateaus</strong>, proven by Cerezo et al. (2021) and extended by Larocca et al. (2025), show that gradients of cost functions vanish exponentially with qubit count for deep random circuits, global observables, high entanglement, and even moderate noise. The parameter-shift rule compounds the problem — without backpropagation, each gradient component demands two full circuit evaluations, making the training cost per step linear in parameter count rather than amortised.</p>
+<p>The implication of these two failures taken together is that quantum advantage for classical data, if it exists at all, must be found in a narrow corridor: structured ansatze with provably trainable landscapes (quantum convolutional networks at O(log n) depth, equivariant circuits exploiting known symmetries) operating on problems whose structure quantum hardware can exploit without relying on QRAM. The one domain where QML delivers unambiguous, already-deployed advantage is <strong>quantum data</strong> — learning properties of quantum states, processes, and channels. Classical shadows, requiring only O(log M) random measurements to predict M observables, represent precisely the kind of result the field needs: provable, practical, and impossible to dequantise because the data is natively quantum.</p>
+<p>This document maps both strands of QML from their classical ML foundations through data embedding, variational architectures, computational learning theory, fault-tolerant primitives, and generative and reinforcement learning extensions, arriving at a frank accounting of where proven advantage exists, where it has been disproven, and where the open problems lie.</p>
+<hr />
+<h2 id="i-classical-ml-foundations">I. Classical ML Foundations<a class="headerlink" href="#i-classical-ml-foundations" title="Permanent link">&para;</a></h2>
+<h3 id="pac-learning-framework">PAC Learning Framework<a class="headerlink" href="#pac-learning-framework" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Probably Approximately Correct (PAC)</strong> learning (Valiant, 1984): a concept class C is efficiently PAC-learnable if a polynomial-time algorithm can, with probability &gt;= 1 - delta, output hypothesis h with error &lt;= epsilon, using poly(n, 1/epsilon, 1/delta) samples</li>
+<li><strong>Sample complexity</strong> and <strong>computational complexity</strong> are distinct concerns</li>
+<li>Classical ML hierarchy: linear models &lt; kernel methods &lt; neural networks (universal approximators per <strong>Cybenko 1989</strong>, <strong>Hornik 1991</strong>)</li>
+</ul>
+<h3 id="why-consider-quantum">Why Consider Quantum?<a class="headerlink" href="#why-consider-quantum" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Classical Limitation</th>
+<th>Quantum Potential</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exponential state spaces</td>
+<td>Quantum superposition encodes exponentially many states in n qubits</td>
+</tr>
+<tr>
+<td>Hard optimisation landscapes</td>
+<td>Quantum interference and entanglement may navigate landscapes differently</td>
+</tr>
+<tr>
+<td>Data access bottlenecks</td>
+<td>Quantum data structures (QRAM) enable polylogarithmic access</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ii-data-embedding-and-feature-maps">II. Data Embedding and Feature Maps<a class="headerlink" href="#ii-data-embedding-and-feature-maps" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key:</strong> The choice of <strong>data encoding</strong> into quantum states fundamentally determines what a quantum model can learn. It is analogous to choosing a kernel in classical ML.</p>
+</blockquote>
+<h3 id="encoding-strategies">Encoding Strategies<a class="headerlink" href="#encoding-strategies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Description</th>
+<th>Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basis encoding</strong></td>
+<td>Map classical bitstring to computational basis state</td>
+<td>Simple but limited</td>
+</tr>
+<tr>
+<td><strong>Amplitude encoding</strong></td>
+<td>Encode N features as amplitudes of log(N) qubits</td>
+<td>Exponential compression but state-prep cost</td>
+</tr>
+<tr>
+<td><strong>Angle encoding</strong></td>
+<td>Encode features as rotation angles on individual qubits</td>
+<td>Common in variational QML</td>
+</tr>
+<tr>
+<td><strong>Kernel-based</strong></td>
+<td>Map data into quantum Hilbert space via feature map circuit U(x)</td>
+<td>Links to quantum kernel methods</td>
+</tr>
+</tbody>
+</table>
+<h3 id="quantum-kernels">Quantum Kernels<a class="headerlink" href="#quantum-kernels" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Quantum kernel:</strong> k(x, x') = |&lt;0| U^dag(x') U(x) |0&gt;|^2</li>
+<li>Computed by preparing states and measuring overlap (swap test or direct measurement)</li>
+<li>Equivalent to running an SVM in the quantum feature space</li>
+<li><strong>Inductive bias</strong> depends entirely on the encoding circuit structure</li>
+<li>Risk of <strong>exponential concentration</strong>: kernel values concentrate around a fixed value as qubit count grows, making the kernel matrix effectively trivial</li>
+</ul>
+<hr />
+<h2 id="iii-variational-qml-near-term-nisq">III. Variational QML (Near-Term / NISQ)<a class="headerlink" href="#iii-variational-qml-near-term-nisq" title="Permanent link">&para;</a></h2>
+<h3 id="architecture-parameterised-quantum-circuits-pqcs-quantum-neural-networks-qnns">Architecture: Parameterised Quantum Circuits (PQCs) / Quantum Neural Networks (QNNs)<a class="headerlink" href="#architecture-parameterised-quantum-circuits-pqcs-quantum-neural-networks-qnns" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>|0&gt; --[Encoding U(x)]--[Trainable V(theta)]--[Measurement]--&gt; classical output
+</code></pre></div>
+<ul>
+<li><strong>PQC/QNN:</strong> alternating layers of parameterised rotation gates and entangling gates</li>
+<li>Output: expectation value of an observable, <psi(x,theta)| O |psi(x,theta)></li>
+<li>Training: classical optimiser updates theta to minimise a loss function</li>
+<li>Viewed as a <strong>quantum feature model</strong> or <strong>quantum kernel method</strong> (Schuld 2021)</li>
+</ul>
+<h3 id="expressibility-and-universality">Expressibility and Universality<a class="headerlink" href="#expressibility-and-universality" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Deep enough PQCs can approximate any unitary (universal)</li>
+<li><strong>Expressiveness != trainability</strong> -- highly expressive circuits are often untrainable</li>
+<li><strong>Overparameterisation</strong> can help avoid local minima (analogous to classical overparameterised nets)</li>
+</ul>
+<h3 id="challenges">Challenges<a class="headerlink" href="#challenges" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Challenge</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Barren plateaus</strong></td>
+<td>Gradients vanish exponentially with qubit count for deep random circuits, global cost functions, high entanglement, or noise. Proven by Cerezo et al. (2021)</td>
+</tr>
+<tr>
+<td><strong>Local minima</strong></td>
+<td>Loss landscape contains many local minima and saddle points</td>
+</tr>
+<tr>
+<td><strong>Shot noise</strong></td>
+<td>Each gradient estimate requires O(1/epsilon^2) measurements</td>
+</tr>
+<tr>
+<td><strong>No backpropagation</strong></td>
+<td>Parameter-shift rule requires 2 circuit evaluations per parameter per gradient component</td>
+</tr>
+<tr>
+<td><strong>Noise</strong></td>
+<td>NISQ hardware noise degrades gradients and expressiveness; noise-induced barren plateaus proven</td>
+</tr>
+<tr>
+<td><strong>Classical simulability</strong></td>
+<td>Many shallow PQC families can be efficiently simulated classically</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Barren plateaus are the <strong>central obstacle</strong> for variational QML at scale. Mitigation strategies include: <strong>local cost functions</strong>, <strong>shallow circuits</strong>, <strong>structured ansatze</strong> (equivariant circuits, convolutional QNNs), <strong>smart initialisation</strong>, and <strong>classical pre-training</strong>.</p>
+</blockquote>
+<h3 id="equivariant-qnns">Equivariant QNNs<a class="headerlink" href="#equivariant-qnns" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Encode known <strong>symmetries</strong> (translation, rotation, permutation) directly into circuit structure</li>
+<li>Constrains hypothesis space, reduces parameters, provably avoids some barren plateaus</li>
+<li><strong>Quantum convolutional neural networks (QCNNs):</strong> O(log n) depth, proven absence of barren plateaus for local cost functions (Pesah et al. 2021)</li>
+<li><strong>Geometric QML:</strong> framework using representation theory to design equivariant circuits for arbitrary symmetry groups</li>
+</ul>
+<hr />
+<h2 id="iv-quantum-computational-learning-theory">IV. Quantum Computational Learning Theory<a class="headerlink" href="#iv-quantum-computational-learning-theory" title="Permanent link">&para;</a></h2>
+<h3 id="quantum-pac-learning">Quantum PAC Learning<a class="headerlink" href="#quantum-pac-learning" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Quantum learner has access to a <strong>quantum example oracle</strong> providing superpositions over labelled examples</li>
+<li><strong>Provable separations</strong> exist:</li>
+<li><strong>Parity functions:</strong> Classically require exponential samples; quantum learner (Bernstein-Vazirani) solves with O(n) queries</li>
+<li><strong>DNF formulas, k-juntas:</strong> Quantum speedups proven for sample complexity</li>
+<li><strong>Discrete log-based concepts:</strong> Exponential separation under cryptographic assumptions (Shor's algorithm)</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> Most quantum-classical separations in learning rely on <strong>oracle or cryptographic hardness assumptions</strong>. Translating these into practical real-world advantages for classical data remains the open problem.</p>
+</blockquote>
+<h3 id="learning-quantum-concepts-quantum-data">Learning Quantum Concepts (Quantum Data)<a class="headerlink" href="#learning-quantum-concepts-quantum-data" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Best Known Method</th>
+<th>Advantage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Quantum state tomography</strong></td>
+<td>Full reconstruction; exponential in n qubits</td>
+<td>No advantage -- fundamental cost</td>
+</tr>
+<tr>
+<td><strong>Classical shadows</strong> (Aaronson, Huang et al.)</td>
+<td>Random measurements + classical post-processing; predict M observables with O(log M) measurements</td>
+<td>Provable, practical, widely used</td>
+</tr>
+<tr>
+<td><strong>PAC learning quantum states</strong></td>
+<td>Predict properties from copies of unknown state</td>
+<td>Proven exponential advantages with quantum memory</td>
+</tr>
+<tr>
+<td><strong>Learning quantum processes/channels</strong></td>
+<td>Shadow tomography, process tomography variants</td>
+<td>Active research area with practical near-term applications</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> <strong>Classical shadows</strong> are a breakthrough: O(log M) measurements suffice to predict M linear functions of an unknown quantum state. This is already practically deployed in labs for characterising quantum devices.</p>
+</blockquote>
+<hr />
+<h2 id="v-qml-from-linear-algebraic-primitives-fault-tolerant-era">V. QML from Linear-Algebraic Primitives (Fault-Tolerant Era)<a class="headerlink" href="#v-qml-from-linear-algebraic-primitives-fault-tolerant-era" title="Permanent link">&para;</a></h2>
+<h3 id="core-subroutines">Core Subroutines<a class="headerlink" href="#core-subroutines" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>What It Does</th>
+<th>Runtime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>QPE</strong> (Quantum Phase Estimation)</td>
+<td>Estimates eigenvalues of a unitary</td>
+<td>O(1/epsilon) applications of U</td>
+</tr>
+<tr>
+<td><strong>HHL</strong> (Harrow-Hassidim-Lloyd, 2009)</td>
+<td>Solves Ax=b, producing</td>
+<td>x&gt; proportional to A^-1 b</td>
+</tr>
+<tr>
+<td><strong>qPCA</strong> (Quantum Principal Component Analysis)</td>
+<td>Extracts principal components of a density matrix</td>
+<td>Exponential speedup for low-rank matrices</td>
+</tr>
+<tr>
+<td><strong>QSVE</strong> (Quantum Singular Value Estimation)</td>
+<td>Estimates singular values of a matrix</td>
+<td>Core building block for many algorithms</td>
+</tr>
+<tr>
+<td><strong>QSVT</strong> (Quantum Singular Value Transformation)</td>
+<td>Applies polynomial transformations to singular values</td>
+<td>Unifying framework; subsumes HHL, QPE, Grover as special cases</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-assumptions-and-caveats">Key Assumptions and Caveats<a class="headerlink" href="#key-assumptions-and-caveats" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>QRAM assumption:</strong> Most speedups require efficient quantum data access via <strong>Quantum Random Access Memory</strong>, which provides superposition queries over classical data in O(polylog N)</li>
+<li><strong>State preparation:</strong> Loading classical data into quantum states is often the bottleneck</li>
+<li><strong>Output extraction:</strong> Quantum states encode answers in amplitudes; extracting full classical information can negate speedups</li>
+</ul>
+<h3 id="application-quantum-recommendation-system">Application: Quantum Recommendation System<a class="headerlink" href="#application-quantum-recommendation-system" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Classical recommendation: O(poly(mnk) + poly(nk)) for m users, n products, rank k</li>
+<li><strong>Quantum recommendation (Kerenidis &amp; Prakash, 2016):</strong> O(poly(k) polylog(mn)) under QRAM assumption</li>
+<li>Uses qPCA/QSVE to perform spectral filtering and project user preference vectors onto dominant singular vectors</li>
+<li><strong>Output:</strong> sample from quantum state to identify most likely preferred product</li>
+</ul>
+<h3 id="dequantisation-the-critical-caveat">Dequantisation -- the Critical Caveat<a class="headerlink" href="#dequantisation-the-critical-caveat" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key:</strong> <strong>Ewin Tang (2019)</strong> proved that the quantum recommendation system speedup is <strong>at most polynomial</strong>, not exponential, by constructing a classical algorithm with similar runtime using L2-norm sampling. This <strong>dequantisation</strong> program has challenged exponential advantage claims across many linear-algebraic QML algorithms.</p>
+</blockquote>
+<ul>
+<li>Dequantisation replaces the QRAM assumption with an <strong>L2-norm sampling/query access</strong> assumption on classical data</li>
+<li>Despite dequantisation, <strong>polynomial</strong> quantum improvements may still remain</li>
+<li>New proposals seek advantages <strong>without QRAM</strong> entirely</li>
+</ul>
+<hr />
+<h2 id="vi-other-forms-of-qml">VI. Other Forms of QML<a class="headerlink" href="#vi-other-forms-of-qml" title="Permanent link">&para;</a></h2>
+<h3 id="a-quantum-generative-models">A. Quantum Generative Models<a class="headerlink" href="#a-quantum-generative-models" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Architecture</th>
+<th>Key Property</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Quantum Boltzmann Machine (QBM)</strong></td>
+<td>Transverse-field Ising Hamiltonian; thermal state sampling</td>
+<td>Extends classical BM to quantum correlations; training is BQP-hard exactly</td>
+</tr>
+<tr>
+<td><strong>Quantum Circuit Born Machine (QCBM)</strong></td>
+<td>Shallow parameterised circuit; Born-rule sampling</td>
+<td>Hardware-efficient; leverages quantum supremacy sampling hardness</td>
+</tr>
+<tr>
+<td><strong>Quantum VAE (qVAE)</strong></td>
+<td>Quantum encoder-decoder with PQC</td>
+<td>Extends classical VAE to quantum latent spaces</td>
+</tr>
+<tr>
+<td><strong>Quantum GAN (qGAN)</strong></td>
+<td>Generator and/or discriminator are quantum circuits</td>
+<td>Adversarial training in quantum setting</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>PAC learnability of distributions:</strong> Under DDH assumption, there exist distribution classes that are efficiently quantum-PAC-learnable but <strong>not</strong> classically PAC-learnable (via Shor's algorithm breaking discrete log)</li>
+<li><strong>Theoretical gap:</strong> Most quantum generative models remain heuristic with limited formal guarantees compared to supervised QML</li>
+</ul>
+<h3 id="b-quantum-unsupervised-learning">B. Quantum Unsupervised Learning<a class="headerlink" href="#b-quantum-unsupervised-learning" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Quantum Advantage Claim</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Quantum Autoencoder (QAE)</strong></td>
+<td>Compress n-qubit states to m &lt; n qubits; useful for state preparation</td>
+</tr>
+<tr>
+<td><strong>Quantum k-means (q-means)</strong></td>
+<td>O(k^2.5 d polylog(N)) vs classical O(kdN); reduces dependence on N</td>
+</tr>
+<tr>
+<td><strong>Quantum Spectral Clustering</strong></td>
+<td>Eigendecomposition of Laplacian: O(N) vs classical O(N^3) via QSVE/QSVT</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Both q-means and spectral clustering advantages <strong>assume QRAM</strong></li>
+<li>Field is early-stage with limited theoretical understanding of quantum-classical gaps</li>
+</ul>
+<h3 id="c-quantum-reinforcement-learning-qrl">C. Quantum Reinforcement Learning (QRL)<a class="headerlink" href="#c-quantum-reinforcement-learning-qrl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Uses <strong>PQCs</strong> to represent Q-functions or policies: Q(s,a;theta) = &lt;0^n| U_theta^dag(s) O_a U_theta(s) |0^n&gt;</li>
+<li>Alternative: <strong>QBM-based</strong> value-function approximation using Ising Hamiltonians</li>
+<li><strong>Provable separations</strong> exist under cryptographic assumptions (discrete log) -- quantum agent can solve environments intractable for classical RL</li>
+<li>Under oracle access: polynomial-to-exponential speedups in sample/query complexity; quadratic improvements in training iterations O(T) -&gt; O(sqrt(T))</li>
+<li><strong>Practical limitation:</strong> Most guarantees assume quantum oracle access to the environment (querying in superposition), which is unrealistic for classical environments</li>
+</ul>
+<hr />
+<h2 id="vii-the-long-reaching-arm-of-qml">VII. The Long Reaching Arm of QML<a class="headerlink" href="#vii-the-long-reaching-arm-of-qml" title="Permanent link">&para;</a></h2>
+<h3 id="quantum-sensing-metrology">Quantum Sensing / Metrology<a class="headerlink" href="#quantum-sensing-metrology" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Probe system accumulates phase under environment Hamiltonian: rho -&gt; e^{-iH(B)t} rho e^{iH(B)t}</li>
+<li><strong>Standard quantum limit:</strong> Fisher info F_B = O(1) per shot with N independent qubits -&gt; error epsilon needs N = Theta(epsilon^-2) samples</li>
+<li><strong>Heisenberg limit:</strong> With entanglement, F_B = O(N^2) -&gt; error epsilon needs N = Theta(epsilon^-1) samples -- <strong>quadratic improvement</strong></li>
+<li>ML tools (Bayesian regression, variational techniques, Gaussian process regression) naturally apply to calibration and characterisation tasks</li>
+<li>Expected that ML+QML will be fundamental for <strong>quantum perception</strong> -- coherent capture, storage, and processing of sensor-generated quantum states</li>
+</ul>
+<h3 id="quantum-compiling">Quantum Compiling<a class="headerlink" href="#quantum-compiling" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Map high-level unitary U to a device-native gate sequence W_C minimising cost(C) subject to a distance metric P(U, W_C)</li>
+<li>Naturally framed as a <strong>learning/optimisation problem</strong></li>
+<li>RL has been used to discover quantum circuits with variable architecture</li>
+<li><strong>QML-specific tools:</strong> Supervised learning from dataset S = {(|psi_i&gt;, U|psi_i&gt;)} to compile time evolutions e^{-iHt}</li>
+<li>Recent advance: train on simple tensor product inputs, <strong>generalise to arbitrary states</strong> via out-of-distribution guarantees derived from QML theory</li>
+</ul>
+<hr />
+<h2 id="viii-conclusion-and-research-outlook">VIII. Conclusion and Research Outlook<a class="headerlink" href="#viii-conclusion-and-research-outlook" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key:</strong> QML's two strands -- linear-algebraic (fault-tolerant) and variational (NISQ) -- both face serious roadblocks for classical data. The <strong>productive path forward</strong> requires: simpler and more interpretable quantum pipelines, explicit and auditable data-access assumptions, rigorous benchmarking against strong classical baselines, and honest reporting of negative results.</p>
+<p><strong>Key:</strong> For <strong>quantum data</strong> (learning states, channels, measurements), QML is already practically successful. Classical shadows, quantum state tomography, and related protocols deliver <strong>provable and practical improvements</strong> over classical post-processing. These quantum-for-quantum successes will endure regardless of classical-data outcomes.</p>
+</blockquote>
+<h3 id="summary-of-advantage-landscape">Summary of Advantage Landscape<a class="headerlink" href="#summary-of-advantage-landscape" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Status of Quantum Advantage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Classical data, linear-algebraic QML</strong></td>
+<td>Largely <strong>dequantized</strong>; polynomial improvements may remain</td>
+</tr>
+<tr>
+<td><strong>Classical data, variational QML</strong></td>
+<td><strong>Barren plateaus</strong> and simulability limit scalability; no proven advantage</td>
+</tr>
+<tr>
+<td><strong>Classical data, learning theory (oracle)</strong></td>
+<td><strong>Exponential separations exist</strong> but rely on cryptographic/oracle assumptions</td>
+</tr>
+<tr>
+<td><strong>Quantum data (states, processes, channels)</strong></td>
+<td><strong>Proven and practical</strong> advantages; widely deployed in labs</td>
+</tr>
+<tr>
+<td><strong>Quantum generative models</strong></td>
+<td>Promising but mostly <strong>heuristic</strong>; formal guarantees limited</td>
+</tr>
+<tr>
+<td><strong>Quantum RL</strong></td>
+<td>Separations exist under oracle/crypto assumptions; <strong>practical applicability limited</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-open-problems">Key Open Problems<a class="headerlink" href="#key-open-problems" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Bridge oracle separations to real-world tasks</strong> for classical data</li>
+<li><strong>Scalable variational training</strong> that provably avoids barren plateaus beyond shallow/local settings</li>
+<li><strong>QRAM-free</strong> approaches to linear-algebraic QML</li>
+<li><strong>Formal performance guarantees</strong> for quantum generative models</li>
+<li><strong>Realistic QRL architectures</strong> that do not require quantum environment access</li>
+<li><strong>Quantum-native generative modelling</strong> leveraging Born-rule sampling for physically motivated distributions</li>
+</ol>
+<hr />
+<h2 id="key-references-selected">Key References (Selected)<a class="headerlink" href="#key-references-selected" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ref</th>
+<th>Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>HHL (2009)</strong> [117]</td>
+<td>Quantum linear systems algorithm; O(log N) for sparse systems</td>
+</tr>
+<tr>
+<td><strong>Kerenidis &amp; Prakash (2016)</strong> [68]</td>
+<td>Quantum recommendation system</td>
+</tr>
+<tr>
+<td><strong>Tang (2019)</strong> [69]</td>
+<td>Dequantization of quantum recommendation; challenged exponential claims</td>
+</tr>
+<tr>
+<td><strong>Cerezo et al. (2021)</strong> [56]</td>
+<td>Variational quantum algorithms review; barren plateaus framework</td>
+</tr>
+<tr>
+<td><strong>Huang et al. (2022)</strong> [99]</td>
+<td>Provably efficient ML for quantum many-body problems</td>
+</tr>
+<tr>
+<td><strong>Aaronson (2019)</strong> [301]</td>
+<td>Shadow tomography</td>
+</tr>
+<tr>
+<td><strong>Huang, Kueng, Preskill (2020)</strong> [53]</td>
+<td>Classical shadows protocol</td>
+</tr>
+<tr>
+<td><strong>Pesah et al. (2021)</strong> [180]</td>
+<td>Absence of barren plateaus in quantum convolutional neural networks</td>
+</tr>
+<tr>
+<td><strong>Abbas et al. (2021)</strong> [204]</td>
+<td>Power of quantum neural networks</td>
+</tr>
+<tr>
+<td><strong>Schuld (2021)</strong> [76]</td>
+<td>Supervised quantum models are kernel methods</td>
+</tr>
+<tr>
+<td><strong>Larocca et al. (2025)</strong> [60]</td>
+<td>Review of barren plateaus in variational quantum computing</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,68 @@
+Create a PowerPoint deck (16:9 widescreen) in a clean, minimalist “warm paper” system-diagram style. Keep everything crisp, high-whitespace, and highly readable. No gradients, shadows, glow, textures, or transparency.
+
+DESIGN TOKENS (use exactly):
+
+* Slide background: #EEEAE3 (warm paper)
+* Panel/card fill: #FAF7F2
+* Panel/card border: #E7E2DA (thin 1–1.5pt)
+* Primary text: #1F1F1F
+* Secondary text: #5F5F5A
+* Neutral strokes/arrows: #6C6B66 (thin 1–1.5pt)
+* Optional dashed boundary stroke: #8C8C82 (dashed 2–3–2)
+
+ACCENT PALETTE (use sparingly; 1–2 accents per slide; rotate across deck):
+
+* Blue: fill #ACCEF2, stroke/text #1F4173
+* Mint: fill #A4E3C9, stroke/text #235F46
+* Orange: fill #F8DAA7, stroke/text #CD5F37
+* Lavender: fill #EBD9F2, stroke/text #4B2F6B
+
+TYPOGRAPHY (Office-safe, consistent hierarchy):
+
+* Title: Aptos Display, 34pt, Bold, #1F1F1F
+* Subtitle / lead-in: Aptos, 18pt, #5F5F5A
+* Body bullets: Aptos, 16–20pt, #1F1F1F, generous line spacing
+* Diagram labels: Aptos, 14–16pt, Bold (use accent stroke/text color)
+* Small tags/pills: Aptos, 12pt, Bold (use accent stroke/text color)
+
+GRID & SPACING (this is what makes it “polished”):
+
+* Outer margins: ~0.7" on all sides (strict)
+* Left-aligned text blocks; avoid center alignment except for diagram labels
+* Use consistent padding inside cards (visually uniform across slides)
+* Prefer 1–3 large cards per slide (max 4); avoid clutter
+* Spacing rhythm should feel uniform (consistent gaps between elements)
+
+COMPONENTS (reusable primitives):
+
+1. Cards/Panels:
+
+   * Rounded rectangle (medium corner radius)
+   * Fill #FAF7F2, border #E7E2DA, thin stroke
+   * Title in Aptos Bold; body in Aptos regular
+2. Diagram Nodes:
+
+   * Rounded rectangles with neutral border (#6C6B66) OR accent fill + accent stroke
+   * Labels bold; keep node sizes consistent within a diagram
+3. Problem/Feature Pills:
+
+   * Small rounded pills; use neutral fill (#FAF7F2) with accent border/text OR full accent fill
+   * Keep pills aligned and evenly spaced
+4. Arrows/Connectors:
+
+   * Thin #6C6B66; small arrowheads; minimal crossings
+   * Use dashed outline only for “optional/outer boundary” concepts
+5. Legend/Mapping Chips:
+
+   * Small accent chips (fill is accent, text is darker accent) placed in a single row/stack
+
+DIAGRAM STYLE RULES:
+
+* Avoid heavy wiring; keep lines short and orthogonal when possible
+* Use whitespace to separate clusters instead of thick borders
+* If multiple layers are shown (Problems → Solutions → Vendor mapping), layer them vertically with clear spacing, not overlapping.
+
+OUTPUT EXPECTATION:
+
+* Slides must look like a cohesive template: same background, same margins, same card style, same font hierarchy, and consistent accent usage.
+* Professional, elegant, readable at a distance.

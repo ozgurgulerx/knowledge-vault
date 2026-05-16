@@ -1,0 +1,2822 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2001-00%20-%20LLMs/phi4_reasoning_vision/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Phi-4-Reasoning-Vision-15B - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#phi-4-reasoning-vision-15b" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Phi-4-Reasoning-Vision-15B
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mid-fusion-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mid-Fusion Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vision-encoder-selection-ablation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vision Encoder Selection (Ablation)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Pipeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Training Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#three-stage-recipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Three-Stage Recipe
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reasoning-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reasoning Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reasoning Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-start-from-a-reasoning-backbone" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Start from a Reasoning Backbone
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mode Tokens
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-curation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Curation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Curation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quality-first-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality-First Philosophy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-augmentation-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Augmentation Techniques
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-2-data-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stage 2 Data Sources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#math-vs-computer-use-data-balance-5b-ablation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Math vs Computer-Use Data Balance (5B Ablation)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benchmark-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmark Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Benchmark Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs-non-thinking-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      vs Non-Thinking Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs-thinking-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      vs Thinking Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forced-mode-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forced-Mode Performance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-benchmark-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Benchmark Suite
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efficiency-claim" class="md-nav__link">
+    <span class="md-ellipsis">
+      Efficiency Claim
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safety-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety &amp; Alignment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Safety & Alignment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rai-training-data-stage-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAI Training Data (Stage 3)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safety-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety Evaluation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Insights
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-research-directions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open Research Directions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Availability
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="phi-4-reasoning-vision-15b">Phi-4-Reasoning-Vision-15B<a class="headerlink" href="#phi-4-reasoning-vision-15b" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>See also:</strong> <a href="../../xxx%2001-01%20-%20LLM%20Landscape%20and%20Trends/llm_landscape_and_trends/">LLM Landscape &amp; Trends</a> | <a href="../xxx 09 - Multimodal &amp; Real-Time/multimodal_and_realtime.md">Multimodal &amp; Real-Time</a> | <a href="../../xxx%2001-04%20-%20LLM%20Post-training/post_training_and_inference_time_techniques/">Post-Training &amp; Inference-Time Techniques</a> | <a href="../../xxx%2013%20-%20Codex/ai_engineering_practices/">AI Engineering Practices</a></p>
+<p><strong>Paper:</strong> <a href="https://arxiv.org/html/2603.03975v1">arxiv.org/html/2603.03975v1</a> | <strong>Release:</strong> March 2026 | <strong>License:</strong> Open-weight (permissive)</p>
+</blockquote>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The conventional assumption in multimodal AI is that competitive vision-language performance requires trillion-token training budgets and 30B+ parameter counts. Phi-4-reasoning-vision-15B dismantles this assumption by achieving frontier-competitive results on mathematical reasoning, chart understanding, and GUI grounding with just 200 billion multimodal tokens — roughly one-fifth of what Qwen3-VL or Gemma-3 consumed — and at 15 billion parameters. The key insight is not architectural novelty but a disciplined application of three compounding principles: start from a reasoning-capable language backbone rather than bolting reasoning onto a vision model after the fact, invest disproportionately in data curation over data volume, and let a single model switch between fast direct answers and chain-of-thought reasoning using explicit mode tokens rather than training separate models for each behavior.</p>
+<p>The data curation pipeline is where the real leverage lives. Microsoft manually classified every training dataset into quality tiers — excellent, fixable, or excludable — then regenerated answers for good-questions-with-wrong-answers using GPT-4o/o4-mini, programmatically repaired formatting errors, and augmented sparse domains with synthetic records. This produced a 62.8M-sample instruction-tuning set where each sample had been touched by human judgment at the classification level. The result: on ScreenSpot-V2 (GUI grounding), Phi-4-reasoning-vision outscores Gemma-3-12B by 85 points (88.2 vs 3.5) and trails Qwen3-VL-32B by only 5.7 points despite being half its size. On ChartQA it matches Qwen3-VL-32B within 0.7 points. The <strong>dynamic-resolution SigLIP-2 vision encoder</strong> capped at 3,600 tokens — roughly 720p native resolution — proved critical: ablations showed it delivered the best uniform performance across mathematical reasoning and high-resolution perception tasks, outperforming multi-crop and S2 alternatives.</p>
+<p>The broader implication is that the Pareto frontier for vision-language models has shifted. A 15B model running on a single H100 with sub-4K output tokens now occupies a practical deployment sweet spot where latency, cost, and accuracy intersect favorably against models requiring 10x more compute. This makes Phi-4-reasoning-vision a reference architecture for teams building multimodal agents — computer-use agents, document processors, scientific assistants — who need reasoning capability without frontier-model pricing. The document below maps the architecture, training recipe, data strategy, and benchmark profile that produced this result.</p>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<h3 id="mid-fusion-design">Mid-Fusion Design<a class="headerlink" href="#mid-fusion-design" title="Permanent link">&para;</a></h3>
+<p>Phi-4-reasoning-vision uses a <strong>mid-fusion architecture</strong> — vision and language are processed by separate encoders, then fused via a learned projection before the language model's transformer layers.</p>
+<p><strong>Pipeline:</strong> Image → SigLIP-2 (dynamic resolution, NaFlex variant) → MLP projector → Phi-4-Reasoning LLM (15B)</p>
+<ul>
+<li><strong>Vision encoder:</strong> SigLIP-2 with dynamic resolution, capped at 3,600 visual tokens (~720p native)</li>
+<li><strong>Cross-modality projector:</strong> MLP layer that maps SigLIP-2 visual embeddings into Phi-4-Reasoning's text embedding space</li>
+<li><strong>Language backbone:</strong> Phi-4-Reasoning (pretrained on 400B unique tokens for Phi-4 base, then 16B tokens of reasoning training)</li>
+<li>All spatial coordinates normalized to [0.0, 1.0] relative to image dimensions</li>
+</ul>
+<h3 id="vision-encoder-selection-ablation">Vision Encoder Selection (Ablation)<a class="headerlink" href="#vision-encoder-selection-ablation" title="Permanent link">&para;</a></h3>
+<p>Dynamic resolution at 3,600 max tokens was selected based on systematic ablation:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Max Tokens</th>
+<th>MathVista</th>
+<th>ScreenSpot</th>
+<th>ScreenSpot-Pro</th>
+<th>V*Bench</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dynamic-S2</td>
+<td>3,096</td>
+<td>42.9</td>
+<td>78.4</td>
+<td>9.4</td>
+<td>52.9</td>
+</tr>
+<tr>
+<td>Multi-crop</td>
+<td>3,096</td>
+<td>43.4</td>
+<td>67.8</td>
+<td>5.4</td>
+<td>51.8</td>
+</tr>
+<tr>
+<td>Multi-crop + S2</td>
+<td>2,048</td>
+<td>43.4</td>
+<td>79.1</td>
+<td>10.6</td>
+<td>57.1</td>
+</tr>
+<tr>
+<td>Dynamic resolution</td>
+<td>2,048</td>
+<td>45.2</td>
+<td>81.5</td>
+<td>9.2</td>
+<td>51.3</td>
+</tr>
+<tr>
+<td><strong>Dynamic resolution</strong></td>
+<td><strong>3,600</strong></td>
+<td><strong>44.9</strong></td>
+<td><strong>79.7</strong></td>
+<td><strong>17.5</strong></td>
+<td><strong>56.0</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Dynamic resolution with more visual tokens (3,600) nearly doubled ScreenSpot-Pro accuracy vs the 2,048-token variant (17.5 vs 9.2). High-resolution perception is a prerequisite for high-quality reasoning — the model cannot reason about what it cannot see.</p>
+</blockquote>
+<h2 id="training-pipeline">Training Pipeline<a class="headerlink" href="#training-pipeline" title="Permanent link">&para;</a></h2>
+<h3 id="three-stage-recipe">Three-Stage Recipe<a class="headerlink" href="#three-stage-recipe" title="Permanent link">&para;</a></h3>
+<p><strong>Stage 1 — MLP Pretraining (alignment)</strong>
+- <strong>What trains:</strong> MLP projector only (vision encoder + LLM frozen)
+- <strong>Data:</strong> 2.0M samples, 1.4B tokens
+- <strong>Purpose:</strong> Align SigLIP-2 visual space with Phi-4-Reasoning text embeddings
+- <strong>Config:</strong> LR 1×10⁻³ cosine, batch 1024, max seq 2,048, AdamW (β₂=0.999), no weight decay</p>
+<p><strong>Stage 2 — Instruction Tuning (full unfreeze)</strong>
+- <strong>What trains:</strong> All components (MLP + vision encoder + LLM)
+- <strong>Data:</strong> 62.8M samples, 188.5B tokens
+- <strong>Purpose:</strong> Multimodal instruction-following with mixed reasoning/non-reasoning
+- <strong>Config:</strong> LR 2×10⁻⁵ cosine (0.1 min ratio), batch 1,920, max seq 8,192, AdamW (β₂=0.95), weight decay 10⁻⁴
+- <strong>Reasoning mix:</strong> ~20% reasoning data (with <code>&lt;think&gt;...&lt;/think&gt;</code> CoT traces), ~80% non-reasoning (with <code>&lt;nothink&gt;</code> token for direct responses)</p>
+<p><strong>Stage 3 — Long Context, Multi-Image &amp; Safety</strong>
+- <strong>What trains:</strong> All components
+- <strong>Data:</strong> 3.2M samples, 12B tokens
+- <strong>Purpose:</strong> Extend to 16K context, multi-image reasoning, sequential screenshots, safety alignment
+- <strong>Config:</strong> LR 7×10⁻⁷ cosine, batch 1,920, max seq 16,384</p>
+<p><strong>Total multimodal training:</strong> ~200B tokens (vs 1T+ for Qwen3-VL, Kimi-VL, Gemma-3)</p>
+<p>All stages use bf16 mixed precision, DeepSpeed ZeRO-1, gradient clipping at 1.0, warmup 3% (Stage 1) or 500 steps (Stages 2-3).</p>
+<h2 id="reasoning-strategy">Reasoning Strategy<a class="headerlink" href="#reasoning-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="why-start-from-a-reasoning-backbone">Why Start from a Reasoning Backbone<a class="headerlink" href="#why-start-from-a-reasoning-backbone" title="Permanent link">&para;</a></h3>
+<p>Microsoft evaluated four training approaches:</p>
+<ol>
+<li>Non-reasoning LLM → reasoning multimodal training</li>
+<li>Non-reasoning LLM → non-reasoning multimodal → reasoning multimodal</li>
+<li>Reasoning LLM → all-reasoning multimodal (100% CoT traces)</li>
+<li><strong>Reasoning LLM → mixed reasoning/non-reasoning multimodal</strong> ← selected</li>
+</ol>
+<p>Starting from a reasoning-capable LLM backbone means the multimodal training grounds existing reasoning ability in visual contexts rather than trying to teach reasoning and vision simultaneously. The mixed approach (20% reasoning, 80% direct) lets the model deliver fast answers for simple tasks and chain-of-thought for complex ones.</p>
+<h3 id="mode-tokens">Mode Tokens<a class="headerlink" href="#mode-tokens" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>&lt;think&gt;...&lt;/think&gt;</code> — wraps chain-of-thought reasoning steps (used for ~20% of training data)</li>
+<li><code>&lt;nothink&gt;</code> — signals direct response without reasoning trace (used for ~80%)</li>
+<li>At inference, the model learns to switch between modes based on query complexity</li>
+<li><strong>Limitation:</strong> the learned switching is not always optimal — forcing thinking mode improves some benchmarks (MathVerse: 53.1 vs 44.9 default; MMMU: 55.0 vs 54.3)</li>
+</ul>
+<h2 id="data-curation">Data Curation<a class="headerlink" href="#data-curation" title="Permanent link">&para;</a></h2>
+<h3 id="quality-first-philosophy">Quality-First Philosophy<a class="headerlink" href="#quality-first-philosophy" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key:</strong> "The most substantial improvements come from systematic filtering, error correction, and synthetic augmentation — reinforcing that data quality remains the primary lever for model performance."</p>
+</blockquote>
+<p>Every dataset was manually classified into tiers:
+- <strong>Excellent quality</strong> — kept unchanged
+- <strong>Good questions, wrong answers</strong> — answers regenerated using GPT-4o / o4-mini
+- <strong>Low-quality questions</strong> — excluded or fully regenerated
+- <strong>Low-quality images</strong> — excluded
+- <strong>Good quality, formatting errors</strong> — fixed programmatically</p>
+<h3 id="data-augmentation-techniques">Data Augmentation Techniques<a class="headerlink" href="#data-augmentation-techniques" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Detailed image descriptions</strong> generated for math/science datasets (multiple records per image)</li>
+<li><strong>Double-duty data</strong> — QA pairs reformatted for instruction-following in specific output formats</li>
+<li><strong>Multi-image training</strong> — scrambled caption matching and caption-to-image matching from grouped images</li>
+<li><strong>"What's changed?" data</strong> — sequential screenshots for navigation/computer-use tasks</li>
+<li><strong>Prompt variation</strong> — varied human prompt phrasing to teach robustness</li>
+</ul>
+<h3 id="stage-2-data-sources">Stage 2 Data Sources<a class="headerlink" href="#stage-2-data-sources" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Datasets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Captions</td>
+<td>Bunny (Recaptioned), Pixmo, LLaVA-OneVision</td>
+</tr>
+<tr>
+<td>Diagram &amp; Chart QA</td>
+<td>LLaVA-OneVision, CoSyn</td>
+</tr>
+<tr>
+<td>Document QA</td>
+<td>Docmatix, LLaVA-OneVision</td>
+</tr>
+<tr>
+<td>Object Detection</td>
+<td>Open Images</td>
+</tr>
+<tr>
+<td>OCR</td>
+<td>LLaVA-OneVision, IAM</td>
+</tr>
+<tr>
+<td>Perception</td>
+<td>LLaVA-OneVision, VisOnlyQA</td>
+</tr>
+<tr>
+<td>Text/Math</td>
+<td>NuminaMath, OpenThoughts</td>
+</tr>
+<tr>
+<td>VQA</td>
+<td>Bunny, LLaVA-OneVision, LLaVA-NeXT, ShareGPT4V, Pixmo</td>
+</tr>
+<tr>
+<td>Math Problems</td>
+<td>LLaVA-OneVision, NuminaMath, MMR1, Eedi</td>
+</tr>
+<tr>
+<td>CUA General</td>
+<td>AGUVis, MultiUI, Pixmo, CoSyn, BigDocs</td>
+</tr>
+<tr>
+<td>CUA Grounding</td>
+<td>PhiGround, SeeClick</td>
+</tr>
+<tr>
+<td>CUA HTML</td>
+<td>WebSight</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Stage 3 additions:</strong> M4-Instruct (VQA), VisualWebInstruct (Math &amp; Science), AGUVis (CUA)</p>
+<h3 id="math-vs-computer-use-data-balance-5b-ablation">Math vs Computer-Use Data Balance (5B Ablation)<a class="headerlink" href="#math-vs-computer-use-data-balance-5b-ablation" title="Permanent link">&para;</a></h3>
+<p>Experiments with a 5B variant tested data ratios:
+- General baseline: 1M pairs
+- Math data: 150K–450K (with 3× duplication tested)
+- Computer-use: 150K–850K + Phi-Ground dataset (400K)</p>
+<p><strong>Finding:</strong> A single model can achieve uniformly superior performance across math reasoning and computer-use domains simultaneously — no catastrophic forgetting trade-off. The Phi-Ground grounding dataset yielded the most impressive improvements on ScreenSpot-V2.</p>
+<h2 id="benchmark-results">Benchmark Results<a class="headerlink" href="#benchmark-results" title="Permanent link">&para;</a></h2>
+<h3 id="vs-non-thinking-models">vs Non-Thinking Models<a class="headerlink" href="#vs-non-thinking-models" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th style="text-align: center;">Phi-4-vision-15B</th>
+<th style="text-align: center;">Qwen3-VL-8B (4K)</th>
+<th style="text-align: center;">Qwen3-VL-32B (32K)</th>
+<th style="text-align: center;">Gemma-3-12B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI2D TEST</td>
+<td style="text-align: center;">84.8</td>
+<td style="text-align: center;">82.7</td>
+<td style="text-align: center;">85.0</td>
+<td style="text-align: center;">80.4</td>
+</tr>
+<tr>
+<td>ChartQA TEST</td>
+<td style="text-align: center;"><strong>83.3</strong></td>
+<td style="text-align: center;">83.1</td>
+<td style="text-align: center;">84.0</td>
+<td style="text-align: center;">39.0</td>
+</tr>
+<tr>
+<td>MathVista MINI</td>
+<td style="text-align: center;">75.2</td>
+<td style="text-align: center;">77.1</td>
+<td style="text-align: center;">81.8</td>
+<td style="text-align: center;">57.4</td>
+</tr>
+<tr>
+<td>MMMU VAL</td>
+<td style="text-align: center;">54.3</td>
+<td style="text-align: center;">60.7</td>
+<td style="text-align: center;">70.6</td>
+<td style="text-align: center;">50.0</td>
+</tr>
+<tr>
+<td>ScreenSpot V2</td>
+<td style="text-align: center;"><strong>88.2</strong></td>
+<td style="text-align: center;">91.5</td>
+<td style="text-align: center;">93.9</td>
+<td style="text-align: center;">3.5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vs-thinking-models">vs Thinking Models<a class="headerlink" href="#vs-thinking-models" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th style="text-align: center;">Phi-4-vision-15B</th>
+<th style="text-align: center;">Qwen3-VL-8B Thinking (40K)</th>
+<th style="text-align: center;">Qwen3-VL-32B Thinking (40K)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MathVerse MINI</td>
+<td style="text-align: center;">44.9</td>
+<td style="text-align: center;">73.3</td>
+<td style="text-align: center;">78.2</td>
+</tr>
+<tr>
+<td>MMMU VAL</td>
+<td style="text-align: center;">54.3</td>
+<td style="text-align: center;">65.3</td>
+<td style="text-align: center;">72.2</td>
+</tr>
+<tr>
+<td>ScreenSpot V2</td>
+<td style="text-align: center;"><strong>88.2</strong></td>
+<td style="text-align: center;">92.7</td>
+<td style="text-align: center;">83.1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="forced-mode-performance">Forced-Mode Performance<a class="headerlink" href="#forced-mode-performance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th style="text-align: center;">Default (mixed)</th>
+<th style="text-align: center;">Forced thinking</th>
+<th style="text-align: center;">Forced non-thinking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MathVerse MINI</td>
+<td style="text-align: center;">44.9</td>
+<td style="text-align: center;"><strong>53.1</strong></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td>MMMU VAL</td>
+<td style="text-align: center;">54.3</td>
+<td style="text-align: center;"><strong>55.0</strong></td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="full-benchmark-suite">Full Benchmark Suite<a class="headerlink" href="#full-benchmark-suite" title="Permanent link">&para;</a></h3>
+<p>AI2D, ChartQA, HallusionBench, MathVerse, MathVision, MathVista, MMMU, MMStar, OCRBench, ScreenSpot V2</p>
+<h3 id="efficiency-claim">Efficiency Claim<a class="headerlink" href="#efficiency-claim" title="Permanent link">&para;</a></h3>
+<p>"Phi-4-reasoning-vision-15B pushes the Pareto frontier of the trade-off between accuracy and compute costs. We achieve competitive performance with much slower models that require ten times or more compute time and tokens, and better accuracy than similarly fast models."</p>
+<ul>
+<li>Tested on NVIDIA H100, single-thread, batch size 1</li>
+<li>Max output tokens: 4,096</li>
+<li>Positioned as the practical sweet spot for interactive multimodal agents</li>
+</ul>
+<h2 id="safety-alignment">Safety &amp; Alignment<a class="headerlink" href="#safety-alignment" title="Permanent link">&para;</a></h2>
+<h3 id="rai-training-data-stage-3">RAI Training Data (Stage 3)<a class="headerlink" href="#rai-training-data-stage-3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Hateful Memes</strong> — detecting hateful image+text combinations</li>
+<li><strong>VLGuard</strong> — visual safety guardrails</li>
+<li><strong>Think-in-Safety</strong> — reasoning about safety in visual contexts</li>
+<li><strong>WildGuard</strong> — adversarial safety testing</li>
+</ul>
+<h3 id="safety-evaluation">Safety Evaluation<a class="headerlink" href="#safety-evaluation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Modality</th>
+<th style="text-align: center;">Defect Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text-to-text</td>
+<td style="text-align: center;">1.4%</td>
+</tr>
+<tr>
+<td>Image-to-text</td>
+<td style="text-align: center;">4.5%</td>
+</tr>
+</tbody>
+</table>
+<p>Evaluation included automated red teaming on Azure across categories: disallowed content (sexual, violent, hateful, self-harm), copyright/IP, jailbreak susceptibility, groundedness, and fabrication.</p>
+<h2 id="key-insights">Key Insights<a class="headerlink" href="#key-insights" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Data quality &gt; data quantity</strong> — 200B curated tokens competitive with 1T+ uncurated tokens. Manual dataset classification + synthetic answer regeneration + programmatic formatting repair collectively matter more than scale.</p>
+</li>
+<li>
+<p><strong>Reasoning backbone first, vision second</strong> — Starting from a reasoning-capable LLM and grounding it in visual contexts outperforms trying to teach reasoning and vision simultaneously.</p>
+</li>
+<li>
+<p><strong>Mixed mode &gt; forced mode</strong> — A single model with explicit <code>&lt;think&gt;</code>/<code>&lt;nothink&gt;</code> mode tokens handles both simple and complex queries better than separate specialized models, though the learned switching is imperfect.</p>
+</li>
+<li>
+<p><strong>High-resolution perception enables reasoning</strong> — The model cannot reason about what it cannot accurately perceive. Dynamic resolution at 3,600 tokens (~720p) was the minimum for reliable high-resolution grounding (ScreenSpot-Pro jumped from 9.2 to 17.5).</p>
+</li>
+<li>
+<p><strong>Multi-domain without forgetting</strong> — Math reasoning and computer-use grounding can coexist in a single 15B model without catastrophic interference, if data proportions are balanced.</p>
+</li>
+<li>
+<p><strong>Grounding data is high-leverage</strong> — The Phi-Ground dataset produced the largest single improvement on GUI grounding benchmarks, suggesting that spatial grounding is a learnable skill that transfers across screen types.</p>
+</li>
+</ol>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Larger proprietary models outperform on broad, unconstrained vision-language benchmarks</li>
+<li>Learned reasoning/non-reasoning mode switching is not always optimal</li>
+<li>Limited on extremely detailed or nuanced image understanding</li>
+<li>Optimal 20/80 reasoning/non-reasoning ratio may not suit all domains</li>
+<li>Ideal data balance remains an open research problem</li>
+<li>Text-conditioned image tokenization (for efficiency) not yet explored</li>
+</ul>
+<h2 id="open-research-directions">Open Research Directions<a class="headerlink" href="#open-research-directions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Text-conditioned image tokenization for token efficiency</li>
+<li>Data proportion effects at saturation scale</li>
+<li>Extreme data imbalance effects (1% or less ratios)</li>
+<li>Q-Former and attention-based cross-modal approaches for token reduction</li>
+<li>Optimal reasoning mode switching (learned vs prompted)</li>
+</ul>
+<h2 id="availability">Availability<a class="headerlink" href="#availability" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Platforms:</strong> Microsoft Foundry, HuggingFace, GitHub</li>
+<li><strong>Includes:</strong> Model weights, fine-tuning code, benchmark logs</li>
+<li><strong>Planned:</strong> Training data release "in the coming months"</li>
+<li><strong>Model card:</strong> Available for deployment and safety guidance</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

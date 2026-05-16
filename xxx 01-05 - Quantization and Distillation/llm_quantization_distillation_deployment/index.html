@@ -1,0 +1,2840 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2001-05%20-%20Quantization%20and%20Distillation/llm_quantization_distillation_deployment/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>LLM Quantization, Distillation & Deployment - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#llm-quantization-distillation-deployment" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LLM Quantization, Distillation &amp; Deployment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quantization-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization Fundamentals
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quantization Fundamentals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#precision-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Precision Formats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quantization-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quantization Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-training-quantization-ptq" class="md-nav__link">
+    <span class="md-ellipsis">
+      Post-Training Quantization (PTQ)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantization-aware-training-qat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization-Aware Training (QAT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imatrix-calibration" class="md-nav__link">
+    <span class="md-ellipsis">
+      iMatrix Calibration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gguf-local-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      GGUF &amp; Local Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GGUF & Local Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unsloth-gguf-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unsloth GGUF Variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kld-as-a-quality-metric" class="md-nav__link">
+    <span class="md-ellipsis">
+      KLD as a Quality Metric
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qwen35-9b-quantization-provider-matters-as-much-as-quant-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qwen3.5-9B: Quantization Provider Matters as Much as Quant Level
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsloth-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unsloth Studio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practical-guidance-for-local-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Practical Guidance for Local Deployment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gemma-4-a-case-study-in-day-0-ecosystem-readiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gemma 4: A Case Study in Day-0 Ecosystem Readiness
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-side-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Server-Side Quantization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server-Side Quantization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fp8-for-datacenter-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      FP8 for Datacenter GPUs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mxfp4-for-large-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      MXFP4 for Large Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inference-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inference Frameworks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knowledge-distillation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge Distillation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Knowledge Distillation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-distillation-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Distillation Works
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-distillation-beats-direct-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      When Distillation Beats Direct Training
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relationship-to-post-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relationship to Post-Training
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speculative-decoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Speculative Decoding
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Speculative Decoding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#draft-verify-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Draft-Verify Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Characteristics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extensions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moe-specific-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      MoE-Specific Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MoE-Specific Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moe-offloading-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      MoE Offloading Strategies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expert-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expert Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantization-interactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization Interactions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notable-moe-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notable MoE Releases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-decision-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Decision Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Decision Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-selection-by-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      Format Selection by Target
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="llm-quantization-distillation-deployment">LLM Quantization, Distillation &amp; Deployment<a class="headerlink" href="#llm-quantization-distillation-deployment" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>See also:</strong> <a href="../../xxx%2001-01%20-%20LLM%20Landscape%20and%20Trends/llm_landscape_and_trends/">LLM Landscape &amp; Trends</a> | <a href="../../xxx%2001-02%20-%20LLM%20Architectures/llm_architectures/">LLM Architectures</a> | <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/">Inference Engineering</a> | <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/high_perf_llm_serving_gpu_tpu/">High-Performance LLM Serving</a> | <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/">GPU &amp; Datacenter Infrastructure</a></p>
+</blockquote>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The industry spent years treating quantization as a concession — a quality tax you paid to squeeze a model onto cheaper hardware. That framing is now obsolete. The gap between FP16 and INT4 quality has collapsed to less than two percent on most benchmarks while cutting memory consumption by four times, and purpose-built formats like MXFP4 can fit a 120-billion-parameter model on a single 80GB GPU. Quantization is not a quality compromise; it is an <strong>architectural decision</strong> that determines which hardware can run which models, how many users a single node can serve, and whether a model ships at all.</p>
+<p>Three developments have driven this shift. First, quantization-aware training and calibration-based methods such as imatrix have closed the accuracy gap that once made post-training quantization risky. Unsloth's UD-Q4_K_XL format, for example, achieves a 51% reduction in Maximum KLD compared to naive round-to-nearest at only 8% larger file size — a trade-off that would have seemed implausible two years ago. Second, hardware vendors have baked low-precision arithmetic directly into silicon: NVIDIA's Hopper and Blackwell architectures include native FP8 tensor cores, and the MXFP4 microscaling format extends this to four-bit operations with per-block scaling factors that preserve dynamic range. Third, the rise of Mixture-of-Experts architectures has made quantization not merely helpful but mandatory for practical deployment, since MoE models carry enormous total parameter counts even though only a fraction activate per token.</p>
+<p>The second-order effect is subtler and more consequential. When quantization formats become reliable enough to treat as first-class deployment targets, the entire model development pipeline reorganizes around them. Teams now train at BF16 and ship at FP8 or INT4 as a default workflow, not a special case. Llama 4 ships its Scout variant with on-the-fly INT4 quantization and its Maverick variant with FP8 weights — the precision format is a design parameter, not an afterthought. Distillation, speculative decoding, and MoE offloading strategies feed into the same optimization surface, turning deployment into a multi-dimensional search over quality, latency, throughput, and hardware cost.</p>
+<p>The thesis of this document is that <strong>quantization, distillation, and deployment are a unified engineering discipline</strong>, not three separate topics. The real question practitioners face is no longer "should I quantize" but "which format for which deployment target, validated against which task distribution." The sections that follow map that decision space — from precision fundamentals through server-side and local deployment patterns to the speculative decoding and MoE offloading techniques that complete the modern inference stack.</p>
+<h2 id="quantization-fundamentals">Quantization Fundamentals<a class="headerlink" href="#quantization-fundamentals" title="Permanent link">&para;</a></h2>
+<p>Quantization reduces the numerical precision of model weights (and optionally activations) from their training format — typically FP32 or BF16 — to lower-bit representations. The technique works because neural network weight distributions are approximately Gaussian with low effective rank: most values cluster near zero, and the information content per parameter is far less than 16 or 32 bits.</p>
+<h3 id="precision-formats">Precision Formats<a class="headerlink" href="#precision-formats" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Bits</th>
+<th>Range / Properties</th>
+<th>Typical Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FP32</td>
+<td>32</td>
+<td>8-bit exponent, 23-bit mantissa; full IEEE 754</td>
+<td>Training reference, legacy inference</td>
+</tr>
+<tr>
+<td>FP16</td>
+<td>16</td>
+<td>5-bit exponent, 10-bit mantissa; limited dynamic range</td>
+<td>Training (with loss scaling), inference</td>
+</tr>
+<tr>
+<td>BF16</td>
+<td>16</td>
+<td>8-bit exponent, 7-bit mantissa; same range as FP32</td>
+<td>Modern training default, inference baseline</td>
+</tr>
+<tr>
+<td>FP8 (E4M3)</td>
+<td>8</td>
+<td>4-bit exponent, 3-bit mantissa</td>
+<td>Datacenter inference (Hopper/Blackwell)</td>
+</tr>
+<tr>
+<td>FP8 (E5M2)</td>
+<td>8</td>
+<td>5-bit exponent, 2-bit mantissa; wider range, less precision</td>
+<td>Gradient communication, some inference</td>
+</tr>
+<tr>
+<td>INT8</td>
+<td>8</td>
+<td>256 discrete levels, symmetric or asymmetric</td>
+<td>Server inference, activation quantization</td>
+</tr>
+<tr>
+<td>INT4</td>
+<td>4</td>
+<td>16 discrete levels, typically group-quantized</td>
+<td>Single-GPU inference, local deployment</td>
+</tr>
+<tr>
+<td>MXFP4</td>
+<td>4</td>
+<td>Microscaling: per-block shared exponent + 4-bit elements</td>
+<td>Very large model fitting (e.g., 120B on 80GB)</td>
+</tr>
+<tr>
+<td>NF4</td>
+<td>4</td>
+<td>Normal Float: 4-bit quantile quantization (QLoRA)</td>
+<td>Fine-tuning, edge/mobile deployment</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Dynamic range</strong> matters as much as bit width. BF16 preserves FP32's exponent range while halving mantissa bits — a trade-off that works well for neural networks where relative magnitude matters more than absolute precision.</li>
+<li><strong>Group quantization</strong> divides weight tensors into small groups (typically 32-128 elements), each with its own scale factor. This captures local statistics and dramatically improves INT4/NF4 quality.</li>
+<li><strong>Per-block scaling</strong> (as in MXFP4) extends this idea to hardware-native formats, allowing 4-bit arithmetic without catastrophic outlier clipping.</li>
+<li><strong>Activation quantization</strong> is harder than weight quantization because activation distributions change with input data. Most practical systems quantize weights statically and leave activations at higher precision or quantize them dynamically.</li>
+</ul>
+<h2 id="quantization-methods">Quantization Methods<a class="headerlink" href="#quantization-methods" title="Permanent link">&para;</a></h2>
+<h3 id="post-training-quantization-ptq">Post-Training Quantization (PTQ)<a class="headerlink" href="#post-training-quantization-ptq" title="Permanent link">&para;</a></h3>
+<p>PTQ applies quantization after training is complete. The model is trained normally at full precision, then weights are converted to a lower-bit format. PTQ methods range from simple to sophisticated:</p>
+<ul>
+<li><strong>Round-to-Nearest (RTN):</strong> The simplest approach — round each weight to its nearest quantized value. Works acceptably for INT8 but degrades significantly at INT4.</li>
+<li><strong>GPTQ (Generative Pre-Trained Transformer Quantization):</strong> A one-shot, layer-wise method based on Optimal Brain Quantization. Uses a small calibration dataset (typically 128-256 samples) to minimize the layer-wise reconstruction error. Produces high-quality INT4 models and remains widely used.</li>
+<li><strong>AWQ (Activation-Aware Weight Quantization):</strong> Identifies salient weight channels by analyzing activation magnitudes rather than weight magnitudes alone. Protects important channels with higher effective precision through per-channel scaling. Often outperforms GPTQ on instruction-following tasks.</li>
+<li><strong>Calibration-based methods:</strong> Use representative data to compute optimal scale factors, zero points, and group boundaries. Quality depends heavily on calibration data matching deployment distribution.</li>
+</ul>
+<h3 id="quantization-aware-training-qat">Quantization-Aware Training (QAT)<a class="headerlink" href="#quantization-aware-training-qat" title="Permanent link">&para;</a></h3>
+<p>QAT simulates quantization during training through straight-through estimators, allowing the model to learn weight distributions that are robust to low-precision representation. QAT consistently outperforms PTQ — EmbeddingGemma, for instance, uses QAT to keep RAM under 200MB while preserving embedding quality. The cost is a more complex training pipeline and the need to commit to a target precision format before training completes.</p>
+<h3 id="imatrix-calibration">iMatrix Calibration<a class="headerlink" href="#imatrix-calibration" title="Permanent link">&para;</a></h3>
+<p>Importance matrix (imatrix) calibration measures the sensitivity of model outputs to perturbations in each weight group, then allocates quantization precision accordingly. Unsloth's imatrix calibration dataset is purpose-built for chat, coding, long-context, and tool-calling distributions, producing GGUF files that preserve quality on these tasks specifically. This represents a shift from generic calibration toward task-aware quantization.</p>
+<h2 id="gguf-local-deployment">GGUF &amp; Local Deployment<a class="headerlink" href="#gguf-local-deployment" title="Permanent link">&para;</a></h2>
+<p>GGUF (GPT-Generated Unified Format) is the standard file format for the llama.cpp ecosystem and the dominant format for local model deployment via tools like LM Studio, Ollama, and koboldcpp.</p>
+<h3 id="unsloth-gguf-variants">Unsloth GGUF Variants<a class="headerlink" href="#unsloth-gguf-variants" title="Permanent link">&para;</a></h3>
+<p>Unsloth has extended the standard GGUF quantization types with optimized variants:</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Description</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q4_K_M</td>
+<td>4-bit with medium group size</td>
+<td>Good balance of size and quality; community default</td>
+</tr>
+<tr>
+<td>Q4_K_XL</td>
+<td>4-bit with extra-large calibration</td>
+<td>8% larger than Q4_K_M but 51% lower Maximum KLD</td>
+</tr>
+<tr>
+<td>Q5_K_M</td>
+<td>5-bit with medium group size</td>
+<td>Noticeably better quality; ~25% larger than Q4_K_M</td>
+</tr>
+<tr>
+<td>Q6_K</td>
+<td>6-bit</td>
+<td>Near-FP16 quality; useful when VRAM allows</td>
+</tr>
+<tr>
+<td>Q8_0</td>
+<td>8-bit</td>
+<td>Baseline quality reference for GGUF</td>
+</tr>
+<tr>
+<td>UD variants</td>
+<td>Unsloth Dynamic</td>
+<td>Variable bit allocation across layers based on sensitivity</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kld-as-a-quality-metric">KLD as a Quality Metric<a class="headerlink" href="#kld-as-a-quality-metric" title="Permanent link">&para;</a></h3>
+<p>Kullback-Leibler Divergence (KLD) between the quantized model's output distribution and the full-precision reference measures how much information quantization destroys. <strong>Maximum KLD</strong> captures worst-case divergence — the tokens where quantization most distorts predictions. This is a more meaningful metric than average perplexity for detecting catastrophic quantization failures on specific input patterns.</p>
+<h3 id="qwen35-9b-quantization-provider-matters-as-much-as-quant-level">Qwen3.5-9B: Quantization Provider Matters as Much as Quant Level<a class="headerlink" href="#qwen35-9b-quantization-provider-matters-as-much-as-quant-level" title="Permanent link">&para;</a></h3>
+<p>A detailed GGUF quantization comparison of Qwen3.5-9B using KLD and perplexity as metrics revealed that at the 4-bit level, <strong>the quantization provider matters as much as the quant level itself</strong> (r/LocalLlama, Mar 2026):</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Quant</th>
+<th>KLD</th>
+<th>Relative Quality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bartowski</td>
+<td>Q4_K_M</td>
+<td>0.0087</td>
+<td>Baseline</td>
+</tr>
+<tr>
+<td>unsloth</td>
+<td>Q4_K_M</td>
+<td>0.0222</td>
+<td>2.5x worse</td>
+</tr>
+<tr>
+<td>lmstudio</td>
+<td>Q4_K_M</td>
+<td>0.0353</td>
+<td>4x worse</td>
+</tr>
+</tbody>
+</table>
+<p>For VRAM-limited scenarios where dropping below Q4 is unacceptable, bartowski's IQ4_XS (4.93 GiB, KLD 0.0127) was identified as the optimal trade-off. The community consensus reinforced that KLD is more informative than perplexity for evaluating quantization quality — perplexity captures average performance, but KLD reveals "catastrophic failure" cases where the model remains fluent but makes systematically wrong decisions. The core implication is that <strong>calibration data choice is more critical than the quantization engine itself</strong> at the 4-bit level (r/LocalLlama, Mar 2026).</p>
+<h3 id="unsloth-studio">Unsloth Studio<a class="headerlink" href="#unsloth-studio" title="Permanent link">&para;</a></h3>
+<p><strong>Unsloth Studio</strong> is an open-source web UI for training and running LLMs locally across Mac, Windows, and Linux. It claims <strong>2x training speed with 70% less VRAM</strong> across 500+ supported models, lowering the hardware bar for fine-tuning significantly. The tool supports GGUF, vision, audio, and embedding models, and can <strong>auto-create datasets from PDF, CSV, and DOCX files</strong> — removing a major friction point for users who have domain data but lack the expertise to format it for training. Additional features include code execution, side-by-side model comparison, and export to GGUF and Safetensors formats. Unsloth Studio represents a broader trend toward making fine-tuning accessible to practitioners who are not ML engineers, consolidating what previously required multiple CLI tools and scripts into a single local interface (AINews / r/LocalLlama, Mar 2026).</p>
+<h3 id="practical-guidance-for-local-deployment">Practical Guidance for Local Deployment<a class="headerlink" href="#practical-guidance-for-local-deployment" title="Permanent link">&para;</a></h3>
+<ul>
+<li>For models under 14B parameters: Q5_K_M or Q6_K if VRAM allows; Q4_K_M as the floor.</li>
+<li>For models 14B-70B: Q4_K_M or Q4_K_XL is typically the practical choice on consumer GPUs.</li>
+<li>For models over 70B: Q4_K_M with partial CPU offloading, or MXFP4 on datacenter GPUs.</li>
+<li>Always validate on your specific tasks. Generic benchmark preservation does not guarantee preservation on your workload.</li>
+</ul>
+<h3 id="gemma-4-a-case-study-in-day-0-ecosystem-readiness">Gemma 4: A Case Study in Day-0 Ecosystem Readiness<a class="headerlink" href="#gemma-4-a-case-study-in-day-0-ecosystem-readiness" title="Permanent link">&para;</a></h3>
+<p>Gemma 4 received day-0 local inference support across every major framework — a milestone illustrating how mature the local deployment ecosystem has become. llama.cpp shipped support on release day, with ggerganov demonstrating Gemma 4 26B A4B Q8_0 on an M2 Ultra at <strong>300 t/s</strong> (with the caveat that prompt-recitation and speculative decoding inflated the number) and promoting <code>brew install + llama-server</code> as the canonical one-liner. <strong>Ollama</strong> (0.20+), <strong>vLLM</strong> (GPU and TPU), and <strong>LM Studio</strong> all had working support on launch day. Browser-local inference was demonstrated via <strong>transformers.js</strong> running Gemma 4 on WebGPU (xenovacom, ClementDelangue). Modular/MAX announced production inference support "in days" (clattner_llvm), and RTX 4090 long-context throughput benchmarks with TurboQuant KV quantization appeared almost immediately (basecampbernie).</p>
+<p>The broader point: as recently as a year ago, new model architectures routinely took weeks to gain support across llama.cpp, Ollama, vLLM, and LM Studio. Gemma 4 — a new architecture, not a Llama variant — receiving same-day coverage across all frameworks signals that the local inference ecosystem has crossed a <strong>maturity threshold</strong>. New model families can now be evaluated locally on release day rather than waiting for community ports (AINews, ggerganov, Apr 2026).</p>
+<h2 id="server-side-quantization">Server-Side Quantization<a class="headerlink" href="#server-side-quantization" title="Permanent link">&para;</a></h2>
+<p>Datacenter deployment has different constraints from local deployment: throughput and cost-per-token matter more than fitting on a single card, and multi-GPU setups are the norm.</p>
+<h3 id="fp8-for-datacenter-gpus">FP8 for Datacenter GPUs<a class="headerlink" href="#fp8-for-datacenter-gpus" title="Permanent link">&para;</a></h3>
+<p>FP8 is the emerging standard for datacenter inference on NVIDIA Hopper (H100) and Blackwell (B200) GPUs:</p>
+<ul>
+<li>Native FP8 tensor core support means no software overhead for dequantization.</li>
+<li>2x throughput improvement over BF16 with minimal quality loss (typically &lt;0.5% on benchmarks).</li>
+<li>Llama 4 Maverick ships with FP8 weights as the intended deployment format.</li>
+<li>FP8 works well for both weights and activations, simplifying the quantization pipeline.</li>
+</ul>
+<h3 id="mxfp4-for-large-models">MXFP4 for Large Models<a class="headerlink" href="#mxfp4-for-large-models" title="Permanent link">&para;</a></h3>
+<p>The MXFP4 (Microscaling FP4) format uses per-block shared exponents to maintain dynamic range at 4-bit precision:</p>
+<ul>
+<li>Enables fitting models like gpt-oss-120B on a single 80GB GPU.</li>
+<li>Block size (typically 32 elements) determines the granularity of the shared exponent.</li>
+<li>Quality is better than naive INT4 because the floating-point format preserves relative magnitude within each block.</li>
+<li>Requires hardware or library support for efficient inference (emerging in TensorRT-LLM and vLLM).</li>
+</ul>
+<h3 id="inference-frameworks">Inference Frameworks<a class="headerlink" href="#inference-frameworks" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>vLLM:</strong> Supports FP8, INT8, INT4, AWQ, GPTQ, and Marlin kernels. PagedAttention reduces KV-cache memory waste. Active development on MXFP4 and speculative decoding integration.</li>
+<li><strong>TensorRT-LLM:</strong> NVIDIA's optimized inference library with deep integration of FP8 and INT4 quantization, custom kernels for each GPU generation, and support for in-flight batching.</li>
+<li><strong>SGLang:</strong> Emerging framework with strong quantization support and RadixAttention for prefix caching.</li>
+<li><strong>llama.cpp (serving platform expansion):</strong> Beyond GGUF inference, llama.cpp has expanded into a complete local serving platform. The built-in <strong>WebUI</strong> and <strong>MCP</strong> (Model Context Protocol) server integration mean that <code>llama-server</code> now provides a self-contained local inference endpoint with a browser interface and tool-calling support — capabilities that previously required separate frontends or proxy layers (ggerganov, Apr 2026).</li>
+<li><strong>Krasis LLM Runtime:</strong> A new runtime designed to run very large models on a single GPU by <strong>streaming expert weights through the GPU</strong> rather than holding them all in VRAM simultaneously. Krasis optimizes separately for prefill and decode phases, managing the flow of data between system RAM and VRAM to keep the GPU fed without requiring the full model to be resident. It has demonstrated running <strong>Qwen3-235B at usable speeds on consumer-grade GPUs</strong> such as the RTX 5080, making hundred-billion-parameter MoE models accessible outside datacenter environments (AINews / r/LocalLlama, Mar 2026).</li>
+</ul>
+<h2 id="knowledge-distillation">Knowledge Distillation<a class="headerlink" href="#knowledge-distillation" title="Permanent link">&para;</a></h2>
+<p>Knowledge distillation transfers capabilities from a large "teacher" model to a smaller "student" model by training the student to match the teacher's output distribution rather than just the hard labels.</p>
+<h3 id="how-distillation-works">How Distillation Works<a class="headerlink" href="#how-distillation-works" title="Permanent link">&para;</a></h3>
+<ol>
+<li>The teacher model generates soft probability distributions (logits) over the vocabulary for each token.</li>
+<li>The student model is trained to minimize a combination of the standard cross-entropy loss (against ground truth) and a KL divergence loss (against the teacher's soft distribution).</li>
+<li>The temperature parameter controls the softness of the distributions — higher temperatures reveal more of the teacher's uncertainty structure.</li>
+</ol>
+<h3 id="when-distillation-beats-direct-training">When Distillation Beats Direct Training<a class="headerlink" href="#when-distillation-beats-direct-training" title="Permanent link">&para;</a></h3>
+<ul>
+<li>When the student architecture is too small to learn certain capabilities from raw data alone but can learn them from the teacher's structured output distribution.</li>
+<li>When labeled data is limited but the teacher can generate high-quality synthetic training data.</li>
+<li>When the goal is to transfer a specific capability (e.g., reasoning, instruction following) rather than general language modeling.</li>
+<li>DeepSeek-R1-Distill models demonstrated that reasoning capabilities can transfer effectively from a large reasoning-trained teacher to much smaller students.</li>
+</ul>
+<h3 id="relationship-to-post-training">Relationship to Post-Training<a class="headerlink" href="#relationship-to-post-training" title="Permanent link">&para;</a></h3>
+<p>Distillation is increasingly integrated with post-training pipelines. The boundary between "distillation" and "training on synthetic data generated by a stronger model" is blurred — in practice, much of RLHF and instruction tuning involves forms of implicit distillation where a stronger model's outputs shape the training signal.</p>
+<h2 id="speculative-decoding">Speculative Decoding<a class="headerlink" href="#speculative-decoding" title="Permanent link">&para;</a></h2>
+<p>Speculative decoding accelerates autoregressive generation by using a small, fast "draft" model to propose multiple tokens, then verifying them in parallel with the full target model.</p>
+<h3 id="draft-verify-mechanism">Draft-Verify Mechanism<a class="headerlink" href="#draft-verify-mechanism" title="Permanent link">&para;</a></h3>
+<ol>
+<li>The draft model generates K candidate tokens autoregressively (K is typically 3-8).</li>
+<li>The target model processes all K tokens in a single forward pass (which is nearly as fast as processing one token due to GPU parallelism).</li>
+<li>Tokens are accepted or rejected based on a modified rejection sampling scheme that guarantees the output distribution matches the target model exactly.</li>
+<li>On rejection, the target model's distribution is used to sample the correct token, and the process restarts from that point.</li>
+</ol>
+<h3 id="performance-characteristics">Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Typical speedup:</strong> 1.5-2.5x depending on the acceptance rate, which depends on how well the draft model approximates the target model.</li>
+<li><strong>No quality loss:</strong> The rejection sampling scheme is mathematically exact — the output distribution is identical to the target model's.</li>
+<li><strong>Best for:</strong> High-latency scenarios where time-to-first-token is less important than tokens-per-second for long generations.</li>
+<li><strong>Draft model selection:</strong> The draft model should share the tokenizer and approximate the target model's distribution. Smaller models from the same family work well.</li>
+</ul>
+<h3 id="extensions">Extensions<a class="headerlink" href="#extensions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Medusa:</strong> Adds multiple prediction heads to the target model itself, eliminating the need for a separate draft model. Each head predicts a different future token position, and a tree-based verification scheme checks multiple candidate continuations simultaneously.</li>
+<li><strong>vLLM Speculators:</strong> A library pushing speculative decoding toward production readiness with optimized draft model integration, dynamic speculation length, and batch-aware scheduling.</li>
+<li><strong>Self-speculative decoding:</strong> Uses early exit from the target model's own layers as the draft, avoiding the need to maintain a separate model entirely.</li>
+</ul>
+<h2 id="moe-specific-deployment">MoE-Specific Deployment<a class="headerlink" href="#moe-specific-deployment" title="Permanent link">&para;</a></h2>
+<p>Mixture-of-Experts models present unique deployment challenges because their total parameter count far exceeds their active parameter count. A model with 400B total parameters but 17B active parameters per token needs enough memory to hold all experts but only enough compute for the active subset.</p>
+<h3 id="moe-offloading-strategies">MoE Offloading Strategies<a class="headerlink" href="#moe-offloading-strategies" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>CPU offloading:</strong> Keep inactive experts in CPU RAM and load them to GPU on demand. Effective when the token routing pattern is predictable enough to prefetch experts.</li>
+<li><strong>Disk offloading:</strong> For models that exceed CPU RAM, experts can be paged from SSD. NVMe SSDs make this viable for interactive use at reduced throughput.</li>
+<li><strong>LM Studio MoE offload parameter:</strong> Enables running large MoE models on consumer GPUs by configuring which layers to offload. For example, Qwen-3.5-35B at Q4_K_M with 262K context runs on a 4070Ti with appropriate offload settings.</li>
+</ul>
+<h3 id="expert-parallelism">Expert Parallelism<a class="headerlink" href="#expert-parallelism" title="Permanent link">&para;</a></h3>
+<p>In multi-GPU deployments, expert parallelism distributes different experts across different GPUs. Each GPU holds a subset of experts, and an all-to-all communication step routes tokens to the appropriate GPU. This is distinct from tensor parallelism (which splits individual layers) and pipeline parallelism (which assigns different layers to different GPUs).</p>
+<h3 id="quantization-interactions">Quantization Interactions<a class="headerlink" href="#quantization-interactions" title="Permanent link">&para;</a></h3>
+<p>MoE models benefit disproportionately from quantization because the total parameter count — not the active count — determines memory requirements. INT4 quantization of a 400B-total MoE model reduces memory from ~800GB (BF16) to ~200GB, making it feasible on a single 8xH100 node rather than requiring multiple nodes.</p>
+<h3 id="notable-moe-releases">Notable MoE Releases<a class="headerlink" href="#notable-moe-releases" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>NVIDIA Nemotron 3 Super:</strong> A 120B-parameter MoE model with 12B active parameters, designed for agentic reasoning. Fully open-source — weights, datasets, and recipes are all published. The data pipeline spans 10 trillion curated tokens for pretraining and 40 million samples for post-training, with RL training across 21 environments generating 1.2 million rollouts. Nemotron 3 Super supports Quantization Aware Training (QAT) with NVFP4 precision, making it a reference case for hardware-vendor-aligned quantization. GGUFs require 64GB+ memory; initial benchmarks show it scoring below Qwen3.5 in LM Arena with style-control off, suggesting that raw scale does not automatically translate to user-preference wins (Latent.Space / r/LocalLlama, Mar 2026).</li>
+</ul>
+<h2 id="deployment-decision-guide">Deployment Decision Guide<a class="headerlink" href="#deployment-decision-guide" title="Permanent link">&para;</a></h2>
+<h3 id="format-selection-by-target">Format Selection by Target<a class="headerlink" href="#format-selection-by-target" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Deployment Target</th>
+<th>Recommended Format</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Datacenter GPU (H100/B200)</td>
+<td>FP8</td>
+<td>Native tensor core support, minimal quality loss, 2x BF16 throughput</td>
+</tr>
+<tr>
+<td>Single server GPU (A100/4090)</td>
+<td>INT4 (AWQ or GPTQ)</td>
+<td>Fits larger models on one card; AWQ preferred for instruction tasks</td>
+</tr>
+<tr>
+<td>Consumer GPU (local)</td>
+<td>GGUF Q4_K_M / Q4_K_XL</td>
+<td>llama.cpp ecosystem, CPU+GPU split, broad hardware support</td>
+</tr>
+<tr>
+<td>Edge / Mobile</td>
+<td>INT4 / NF4</td>
+<td>Minimum memory footprint; QAT recommended for quality</td>
+</tr>
+<tr>
+<td>Very large MoE (100B+)</td>
+<td>MXFP4 or FP8 + expert offload</td>
+<td>Balance between fitting in memory and maintaining quality</td>
+</tr>
+<tr>
+<td>Fine-tuning on consumer HW</td>
+<td>NF4 (QLoRA)</td>
+<td>4-bit base model with LoRA adapters in BF16</td>
+</tr>
+</tbody>
+</table>
+<h3 id="validation-practices">Validation Practices<a class="headerlink" href="#validation-practices" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Benchmark on your tasks, not generic leaderboards.</strong> A model that preserves MMLU scores under quantization may still degrade on your specific code generation or domain QA tasks.</li>
+<li><strong>Measure Maximum KLD, not just average perplexity.</strong> Worst-case divergence reveals failure modes that averages hide.</li>
+<li><strong>Test edge cases explicitly.</strong> Long-context performance, structured output generation, and tool calling are often the first capabilities to degrade under aggressive quantization.</li>
+<li><strong>Compare against the full-precision model on a held-out set</strong> from your actual deployment distribution before committing to a quantization format.</li>
+<li><strong>Re-validate when updating models.</strong> A quantization format that worked well for one model version may not work for the next — architecture changes affect quantization robustness.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

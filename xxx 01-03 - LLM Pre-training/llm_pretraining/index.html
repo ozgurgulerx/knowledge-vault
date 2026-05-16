@@ -1,0 +1,2843 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2001-03%20-%20LLM%20Pre-training/llm_pretraining/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>LLM Pretraining - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#llm-pretraining" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LLM Pretraining
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scaling-laws-compute-optimal-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scaling Laws &amp; Compute-Optimal Training
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scaling Laws & Compute-Optimal Training">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-chinchilla-inflection" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Chinchilla Inflection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beyond-chinchilla-optimal-over-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beyond Chinchilla-Optimal: Over-Training
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-budgets-as-currency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute Budgets as Currency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emergent-capabilities-and-scaling-predictability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Emergent Capabilities and Scaling Predictability
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-curation-mixture-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Curation &amp; Mixture Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Curation & Mixture Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-the-internet-to-proprietary-blends" class="md-nav__link">
+    <span class="md-ellipsis">
+      From "The Internet" to Proprietary Blends
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-upsampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain Upsampling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sft-data-mixing-during-pretraining" class="md-nav__link">
+    <span class="md-ellipsis">
+      SFT Data Mixing During Pretraining
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synthetic-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synthetic Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#staged-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Staged Training
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Staged Training">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-staged-beats-monolithic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Staged Beats Monolithic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qwen3s-three-stage-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qwen3's Three-Stage Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curriculum-learning-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Curriculum Learning Principles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continual-pretraining" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continual Pretraining
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tokenization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tokenization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#byte-pair-encoding-and-its-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Byte-Pair Encoding and Its Variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vocabulary-size-trends" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vocabulary Size Trends
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multilingual-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multilingual Tokenization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#byte-level-and-token-free-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Byte-Level and Token-Free Approaches
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Infrastructure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Training Infrastructure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#distributed-training-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distributed Training Strategies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixed-precision-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixed Precision Training
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Stability
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#long-context-pretraining" class="md-nav__link">
+    <span class="md-ellipsis">
+      Long-Context Pretraining
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Long-Context Pretraining">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-context-length-frontier" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Context Length Frontier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progressive-context-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progressive Context Extension
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rope-scaling-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoPE Scaling Techniques
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#challenges-at-extreme-lengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges at Extreme Lengths
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Open Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-contamination-and-benchmark-validity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Contamination and Benchmark Validity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memorization-vs-generalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memorization vs. Generalization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaling-law-saturation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scaling Law Saturation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synthetic-data-circularity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synthetic Data Circularity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#energy-and-environmental-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      Energy and Environmental Cost
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="llm-pretraining">LLM Pretraining<a class="headerlink" href="#llm-pretraining" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>See also:</strong> <a href="../../xxx%2001-01%20-%20LLM%20Landscape%20and%20Trends/llm_landscape_and_trends/">LLM Landscape &amp; Trends</a> | <a href="../../xxx%2001-02%20-%20LLM%20Architectures/llm_architectures/">LLM Architectures</a> | <a href="../../xxx%2001-04%20-%20LLM%20Post-training/post_training_and_inference_time_techniques/">Post-Training &amp; Inference-Time Techniques</a> | <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/">GPU &amp; Datacenter Infrastructure</a></p>
+</blockquote>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The popular narrative around pretraining — scrape the internet, stack more GPUs, watch the loss curve fall — was never quite right, and by 2025 it is actively misleading. Pretraining a frontier language model is now a <strong>multi-stage curriculum design problem</strong> in which data mixture, sequence length scheduling, and compute allocation interact non-linearly. The teams producing the strongest models are not the ones with the most data or the most parameters; they are the ones who have learned to orchestrate all three variables across training phases that each serve a distinct pedagogical purpose.</p>
+<p>Consider the numbers. Meta's Llama 4 consumed 7.38 million H100-hours across its Scout and Maverick variants, processing roughly 40 trillion and 22 trillion tokens respectively. The gpt-oss effort required 2.1 million H100-hours for a 120-billion-parameter model. Qwen3 disclosed a three-stage pipeline — general pretraining (S1), reasoning-focused training (S2), and long-context extension (S3) — each with explicit token budgets and sequence length changes. These are not brute-force scaling exercises. They reflect careful decisions about when to feed the model web text versus code versus math, when to lengthen the context window, and when to shift the loss objective toward reasoning chains. The unit of competitive advantage has moved from "how big is your cluster" to "how intelligently do you schedule work across that cluster."</p>
+<p>The second-order implication is that <strong>pretraining is becoming less reproducible and more craft-like</strong>. Chinchilla demonstrated that a 70-billion-parameter model trained on 1.4 trillion tokens could match a 280-billion-parameter model trained on fewer tokens, establishing compute-optimal ratios. But the frontier has moved well past Chinchilla-optimal into what practitioners call "over-training" — deliberately pushing token counts far beyond the Chinchilla ratio because inference cost scales with parameters, not with training tokens. This means the classical scaling laws are necessary but insufficient; they tell you the efficient frontier for a single-stage run but say nothing about how to partition your budget across stages, how to handle domain-specific upsampling, or when to introduce synthetic data. The real scaling law is a multi-dimensional surface that no one has fully characterized.</p>
+<p>What emerges is a picture of pretraining as the foundation layer that determines everything downstream. Post-training — RLHF, DPO, distillation — can refine a model's behavior, but it cannot compensate for a poorly designed pretraining curriculum. The teams that win the next generation of frontier models will be the ones who treat pretraining not as a single massive GPU job but as a <strong>carefully sequenced series of learning phases</strong>, each with its own data diet, optimization schedule, and evaluation criteria. The rest of this document unpacks how that works in practice.</p>
+<h2 id="scaling-laws-compute-optimal-training">Scaling Laws &amp; Compute-Optimal Training<a class="headerlink" href="#scaling-laws-compute-optimal-training" title="Permanent link">&para;</a></h2>
+<h3 id="the-chinchilla-inflection">The Chinchilla Inflection<a class="headerlink" href="#the-chinchilla-inflection" title="Permanent link">&para;</a></h3>
+<p>The modern understanding of pretraining efficiency traces back to DeepMind's Chinchilla paper (Hoffmann et al., 2022), which upended the prevailing "bigger is better" paradigm. Prior to Chinchilla, the field followed Kaplan et al.'s scaling laws (2020), which suggested that for a fixed compute budget, most resources should go toward increasing parameter count rather than training tokens. Chinchilla showed the opposite: the compute-optimal ratio is roughly 20 tokens per parameter. A 70B-parameter model trained on 1.4T tokens outperformed the 280B-parameter Gopher trained on 300B tokens — using the same compute budget.</p>
+<h3 id="beyond-chinchilla-optimal-over-training">Beyond Chinchilla-Optimal: Over-Training<a class="headerlink" href="#beyond-chinchilla-optimal-over-training" title="Permanent link">&para;</a></h3>
+<p>In practice, almost no production model today is trained at the Chinchilla-optimal ratio. The reason is economic: inference cost is dominated by parameter count (memory bandwidth, KV-cache size), while training is a one-time cost. This creates a strong incentive to train smaller models on far more tokens than Chinchilla would prescribe:</p>
+<ul>
+<li><strong>Llama 3 (8B):</strong> Trained on 15T tokens — roughly 1,875 tokens per parameter, nearly 100x the Chinchilla ratio</li>
+<li><strong>Llama 4 Scout/Maverick:</strong> 40T and 22T tokens respectively, with mixture-of-experts architectures to keep active parameters low</li>
+<li><strong>Mistral 7B:</strong> Trained on an undisclosed but reportedly very large token budget relative to its size</li>
+<li><strong>gpt-oss (120B):</strong> 2.1M H100-hours, implying a substantial over-training factor</li>
+</ul>
+<p>The key insight: <strong>training compute is amortized across all future inference calls</strong>. A model that costs 2x more to train but is half the size will break even after a modest amount of deployment usage.</p>
+<h3 id="compute-budgets-as-currency">Compute Budgets as Currency<a class="headerlink" href="#compute-budgets-as-currency" title="Permanent link">&para;</a></h3>
+<p>H100-hours have become the de facto unit for comparing pretraining runs, much as FLOPs were used in earlier literature. This shift reflects the practical reality that GPU utilization (MFU — model FLOPs utilization) varies significantly across training setups:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Compute Budget</th>
+<th>Parameters</th>
+<th>Tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Llama 4 (Scout + Maverick)</td>
+<td>7.38M H100-hrs</td>
+<td>MoE variants</td>
+<td>~40T / ~22T</td>
+</tr>
+<tr>
+<td>gpt-oss</td>
+<td>2.1M H100-hrs</td>
+<td>120B</td>
+<td>Undisclosed</td>
+</tr>
+<tr>
+<td>Llama 3.1 405B</td>
+<td>~30M H100-hrs (est.)</td>
+<td>405B</td>
+<td>15T+</td>
+</tr>
+<tr>
+<td>Qwen3</td>
+<td>Undisclosed</td>
+<td>Multiple sizes</td>
+<td>Multi-stage</td>
+</tr>
+</tbody>
+</table>
+<p>Achieving high MFU (typically 40-55% for large runs) requires careful overlapping of computation, communication, and memory operations — a systems engineering challenge as much as an ML one.</p>
+<h3 id="emergent-capabilities-and-scaling-predictability">Emergent Capabilities and Scaling Predictability<a class="headerlink" href="#emergent-capabilities-and-scaling-predictability" title="Permanent link">&para;</a></h3>
+<p>One of the more debated aspects of scaling laws is whether model capabilities emerge smoothly or in discontinuous jumps. Schaeffer et al. (2023) argued that many apparent "emergent abilities" are artifacts of evaluation metrics rather than true phase transitions. Regardless of where one lands on this debate, the practical takeaway is that loss curves are remarkably predictable — teams routinely extrapolate final loss from early training checkpoints — but downstream task performance is not. This gap between predictable loss and unpredictable capability is one of the central tensions in pretraining today.</p>
+<h2 id="data-curation-mixture-design">Data Curation &amp; Mixture Design<a class="headerlink" href="#data-curation-mixture-design" title="Permanent link">&para;</a></h2>
+<h3 id="from-the-internet-to-proprietary-blends">From "The Internet" to Proprietary Blends<a class="headerlink" href="#from-the-internet-to-proprietary-blends" title="Permanent link">&para;</a></h3>
+<p>Early language models were trained on straightforward web crawls — Common Crawl, WebText, The Pile. Modern pretraining data pipelines are unrecognizably more sophisticated. Frontier labs now describe their data as "mixtures" or "proprietary blends" combining:</p>
+<ul>
+<li><strong>Public web crawl data</strong> — heavily filtered and deduplicated (often &lt;5% of raw Common Crawl survives quality filtering)</li>
+<li><strong>Licensed corpora</strong> — books, academic papers, news archives, obtained through data licensing agreements</li>
+<li><strong>Code repositories</strong> — GitHub, GitLab, with license-aware filtering</li>
+<li><strong>Product and interaction data</strong> — anonymized logs, user-generated content from the lab's own products</li>
+<li><strong>Multilingual data</strong> — with explicit language ratios tuned to desired model capabilities</li>
+<li><strong>Synthetic data</strong> — model-generated text, particularly for math, code, and reasoning</li>
+</ul>
+<h3 id="quality-filtering">Quality Filtering<a class="headerlink" href="#quality-filtering" title="Permanent link">&para;</a></h3>
+<p>The shift from "more data" to "better data" is perhaps the single most impactful trend in pretraining. Key filtering techniques include:</p>
+<ul>
+<li><strong>Heuristic filters:</strong> Remove pages with too many special characters, excessive boilerplate, low word count, or abnormal compression ratios</li>
+<li><strong>Classifier-based filtering:</strong> Train a quality classifier (often a small BERT or fastText model) on high-quality reference data (e.g., Wikipedia, curated textbooks) and score all candidate documents. Llama used a fastText classifier trained on data referenced by Wikipedia</li>
+<li><strong>Deduplication:</strong> Both exact dedup (hash-based) and near-dedup (MinHash/LSH). Training on duplicate data degrades performance and increases memorization risk. The Llama 3 team reported that aggressive deduplication was one of their most important data processing steps</li>
+<li><strong>Harmful content filtering:</strong> Explicit removal of toxic, CSAM, PII-containing, and otherwise problematic content. This is both an ethical requirement and a practical one — models trained on cleaner data exhibit fewer problematic behaviors before any RLHF</li>
+</ul>
+<h3 id="domain-upsampling">Domain Upsampling<a class="headerlink" href="#domain-upsampling" title="Permanent link">&para;</a></h3>
+<p>Not all tokens are created equal. Training a model on a uniform sample of web text produces a generalist that is mediocre at everything. Modern pipelines upsample high-value domains:</p>
+<ul>
+<li><strong>Code:</strong> Typically 15-25% of the training mix, despite being a small fraction of web crawl. Code improves reasoning capabilities even on non-code tasks</li>
+<li><strong>Math and science:</strong> Upsampled 3-10x relative to natural occurrence, using sources like arXiv, textbooks, and competition problems</li>
+<li><strong>Instruction-like data:</strong> Some teams include naturally occurring instructional content (how-to articles, Q&amp;A forums) in pretraining, blurring the line with post-training</li>
+<li><strong>Books and long-form writing:</strong> Upsampled to improve coherence over long contexts</li>
+</ul>
+<p>The exact mixture ratios are among the most closely guarded secrets at frontier labs. Ablation studies on data mixture are expensive — each experiment requires a meaningful training run — so the optimal blend is discovered through a combination of small-scale experiments and hard-won intuition.</p>
+<h3 id="sft-data-mixing-during-pretraining">SFT Data Mixing During Pretraining<a class="headerlink" href="#sft-data-mixing-during-pretraining" title="Permanent link">&para;</a></h3>
+<p>A growing body of work challenges the clean separation between pretraining and post-training by <strong>mixing supervised fine-tuning (SFT) data directly into the pretraining corpus</strong>. New results show that this approach can outperform the standard pretrain-then-finetune pipeline, with a <strong>scaling law for the optimal SFT-to-pretrain data ratio</strong> under a fixed token budget (rosinality, AINews, Mar 2026). The intuition is that exposing the model to instruction-response structure early — rather than retrofitting it after pretraining — produces representations that are natively more aligned with downstream tasks.</p>
+<p>Related findings reinforce the broader principle that <strong>early data mixing during pretraining often outperforms naive finetuning alone</strong>. Work from arimorcos and pratyushmaini demonstrates that domain adaptation benefits more from introducing high-quality domain data during pretraining than from post-hoc finetuning on the same data. Christina Baek's research further shows that <strong>repeating small high-quality datasets 10-50x during pretraining</strong> can be surprisingly effective — the model extracts more from repeated exposure in the pretraining context than it would from a single pass through the same data during finetuning. Together, these results suggest that the rigid two-phase pipeline is leaving performance on the table, and that the optimal boundary between "pretraining data" and "post-training data" is fuzzier than the field has assumed.</p>
+<h3 id="synthetic-data">Synthetic Data<a class="headerlink" href="#synthetic-data" title="Permanent link">&para;</a></h3>
+<p>Synthetic data has become a critical component of pretraining mixtures, particularly for domains where natural data is scarce or low quality. Common patterns include:</p>
+<ul>
+<li><strong>Code generation and verification:</strong> Generate solutions to programming problems, verify with test suites, keep correct solutions</li>
+<li><strong>Math chain-of-thought:</strong> Generate step-by-step solutions to mathematical problems, verify final answers</li>
+<li><strong>Rephrasing and augmentation:</strong> Use a stronger model to rephrase or expand existing high-quality content</li>
+<li><strong>Textbook-style generation:</strong> The "Textbooks Are All You Need" approach (Phi series) showed that training on synthetic textbook-quality data could produce surprisingly strong small models</li>
+</ul>
+<p>The risk of synthetic data is circularity — training on model-generated text can amplify biases and degrade diversity. This is sometimes called "model collapse" and is an active area of research.</p>
+<h2 id="staged-training">Staged Training<a class="headerlink" href="#staged-training" title="Permanent link">&para;</a></h2>
+<h3 id="why-staged-beats-monolithic">Why Staged Beats Monolithic<a class="headerlink" href="#why-staged-beats-monolithic" title="Permanent link">&para;</a></h3>
+<p>Traditional pretraining treated the entire process as a single phase: one data mixture, one sequence length, one learning rate schedule from start to finish. Modern pretraining has moved decisively toward multi-stage approaches, for several reasons:</p>
+<ol>
+<li><strong>Context length is expensive:</strong> Self-attention scales quadratically with sequence length (or near-linearly with efficient attention, but with higher constants). Training at long context lengths from the start wastes compute on learning basic language patterns that can be acquired at shorter lengths.</li>
+<li><strong>Data requirements change:</strong> Early training benefits from broad, diverse web data. Later stages benefit from higher-quality, domain-specific data. Final stages benefit from instruction-adjacent and reasoning-heavy data.</li>
+<li><strong>Optimization dynamics differ:</strong> The learning rate, batch size, and optimizer settings that work well for early training are not optimal for later stages.</li>
+</ol>
+<h3 id="qwen3s-three-stage-pipeline">Qwen3's Three-Stage Pipeline<a class="headerlink" href="#qwen3s-three-stage-pipeline" title="Permanent link">&para;</a></h3>
+<p>Qwen3 provides one of the most explicit descriptions of staged pretraining:</p>
+<ul>
+<li><strong>Stage 1 (General, S1):</strong> Broad pretraining on diverse web data at moderate sequence lengths. This phase builds the model's general language understanding, world knowledge, and basic capabilities. The bulk of total tokens are consumed here.</li>
+<li><strong>Stage 2 (Reasoning, S2):</strong> The data mixture shifts toward code, mathematics, and scientific text. The learning rate is reduced. This phase sharpens the model's ability to follow multi-step logical chains.</li>
+<li><strong>Stage 3 (Long-Context, S3):</strong> Sequence lengths are progressively extended. The data is filtered for documents that are naturally long and coherent (books, papers, long code files). This phase teaches the model to maintain coherence and utilize information across extended contexts.</li>
+</ul>
+<p>Each stage has explicit token counts and sequence length specifications, and the transition points are determined by monitoring both loss curves and downstream evaluation metrics.</p>
+<h3 id="curriculum-learning-principles">Curriculum Learning Principles<a class="headerlink" href="#curriculum-learning-principles" title="Permanent link">&para;</a></h3>
+<p>Staged training is a form of curriculum learning — presenting easier or more general examples first, then progressing to harder or more specialized ones. The theoretical motivation comes from optimization theory: starting with a simpler distribution produces a smoother loss landscape, enabling the optimizer to find better basins of attraction before introducing complexity.</p>
+<p>In practice, the curriculum is determined empirically:</p>
+<ul>
+<li><strong>Learning rate rewarming:</strong> At each stage transition, the learning rate is often briefly increased ("rewarmed") before resuming decay, to help the model adapt to the new data distribution</li>
+<li><strong>Batch size changes:</strong> Later stages may use larger batch sizes to reduce gradient noise and stabilize training on more complex data</li>
+<li><strong>Objective mixing:</strong> Some stages introduce auxiliary objectives (e.g., fill-in-the-middle for code, or next-sentence prediction for long-context) alongside standard next-token prediction</li>
+</ul>
+<h3 id="continual-pretraining">Continual Pretraining<a class="headerlink" href="#continual-pretraining" title="Permanent link">&para;</a></h3>
+<p>A related pattern is continual pretraining, where a base model is further pretrained on domain-specific data to produce a specialized variant. This is common in:</p>
+<ul>
+<li><strong>Medical LLMs:</strong> Base model + PubMed + clinical notes</li>
+<li><strong>Legal LLMs:</strong> Base model + case law + statutes</li>
+<li><strong>Finance LLMs:</strong> Base model + SEC filings + financial reports</li>
+</ul>
+<p>The challenge is catastrophic forgetting — the model may lose general capabilities as it specializes. Mitigations include mixing domain data with a small proportion of general data, and using lower learning rates.</p>
+<h2 id="tokenization">Tokenization<a class="headerlink" href="#tokenization" title="Permanent link">&para;</a></h2>
+<h3 id="byte-pair-encoding-and-its-variants">Byte-Pair Encoding and Its Variants<a class="headerlink" href="#byte-pair-encoding-and-its-variants" title="Permanent link">&para;</a></h3>
+<p>Virtually all modern LLMs use some variant of Byte-Pair Encoding (BPE) for tokenization. BPE works by iteratively merging the most frequent pairs of characters (or bytes) in the training corpus until a target vocabulary size is reached. Key variants include:</p>
+<ul>
+<li><strong>Character-level BPE:</strong> The original formulation, operating on Unicode characters. Used by GPT-2's tokenizer.</li>
+<li><strong>Byte-level BPE:</strong> Operates on raw bytes rather than characters, ensuring that any input can be tokenized without unknown tokens. Used by GPT-3, GPT-4, Llama, and most modern models.</li>
+<li><strong>SentencePiece:</strong> Google's implementation that treats the input as a raw byte stream and applies either BPE or unigram language model tokenization. Used by T5, Llama (original), and many multilingual models.</li>
+<li><strong>Unigram:</strong> An alternative to BPE that starts with a large vocabulary and prunes it to a target size based on a unigram language model. Can produce more linguistically meaningful subwords.</li>
+</ul>
+<h3 id="vocabulary-size-trends">Vocabulary Size Trends<a class="headerlink" href="#vocabulary-size-trends" title="Permanent link">&para;</a></h3>
+<p>Vocabulary size has been increasing over model generations:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Vocabulary Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-2</td>
+<td>50,257</td>
+</tr>
+<tr>
+<td>GPT-3</td>
+<td>50,257</td>
+</tr>
+<tr>
+<td>Llama 1</td>
+<td>32,000</td>
+</tr>
+<tr>
+<td>Llama 2</td>
+<td>32,000</td>
+</tr>
+<tr>
+<td>Llama 3</td>
+<td>128,256</td>
+</tr>
+<tr>
+<td>GPT-4 (cl100k)</td>
+<td>100,256</td>
+</tr>
+<tr>
+<td>Qwen2/3</td>
+<td>151,646</td>
+</tr>
+<tr>
+<td>Gemma</td>
+<td>256,000</td>
+</tr>
+</tbody>
+</table>
+<p>Larger vocabularies improve tokenization efficiency (fewer tokens per word, especially for non-English languages), reduce sequence lengths, and can improve downstream performance. The tradeoff is a larger embedding matrix and softmax layer, which adds parameters and compute. For very large models, this overhead is negligible; for small models, it can be significant.</p>
+<h3 id="multilingual-tokenization">Multilingual Tokenization<a class="headerlink" href="#multilingual-tokenization" title="Permanent link">&para;</a></h3>
+<p>One of the persistent challenges in tokenization is fairness across languages. A tokenizer trained primarily on English text will fragment non-English text into many more tokens, making the model both slower and less capable for those languages. Modern approaches address this by:</p>
+<ul>
+<li><strong>Balanced training corpora for the tokenizer:</strong> Ensuring the BPE merge operations see sufficient non-English text</li>
+<li><strong>Larger vocabularies:</strong> More merges means more multilingual subwords can be represented efficiently</li>
+<li><strong>Language-specific token budgets:</strong> Explicitly allocating vocabulary capacity to target languages</li>
+</ul>
+<p>Despite these efforts, tokenization efficiency can vary by 2-5x across languages, which directly impacts the effective context length and inference cost for non-English users.</p>
+<h3 id="byte-level-and-token-free-approaches">Byte-Level and Token-Free Approaches<a class="headerlink" href="#byte-level-and-token-free-approaches" title="Permanent link">&para;</a></h3>
+<p>A growing line of research explores removing the fixed-vocabulary tokenizer entirely:</p>
+<ul>
+<li><strong>Byte-level models (ByT5, MegaByte):</strong> Operate directly on bytes, eliminating the tokenizer entirely. Theoretically elegant but historically slower due to much longer sequences.</li>
+<li><strong>Patch-based approaches:</strong> Group bytes into fixed-size patches, reducing sequence length while maintaining byte-level generality.</li>
+</ul>
+<p>These approaches are not yet competitive with BPE at frontier scale, but they solve important problems around robustness to typos, novel words, and multilingual coverage.</p>
+<h2 id="training-infrastructure">Training Infrastructure<a class="headerlink" href="#training-infrastructure" title="Permanent link">&para;</a></h2>
+<h3 id="distributed-training-strategies">Distributed Training Strategies<a class="headerlink" href="#distributed-training-strategies" title="Permanent link">&para;</a></h3>
+<p>Pretraining a frontier model requires distributing computation across thousands of GPUs. The key parallelism strategies are:</p>
+<ul>
+<li><strong>Data Parallelism (DP):</strong> Each GPU holds a full model copy and processes different data batches. Gradients are synchronized via all-reduce. Simple but requires each GPU to hold the full model in memory.</li>
+<li><strong>Fully Sharded Data Parallelism (FSDP):</strong> Shards model parameters, gradients, and optimizer states across GPUs, reconstructing them on demand. Dramatically reduces per-GPU memory. PyTorch's native FSDP and DeepSpeed ZeRO (Stages 1-3) implement this pattern.</li>
+<li><strong>Tensor Parallelism (TP):</strong> Splits individual layers across GPUs, enabling models too large for a single GPU's memory. Requires high-bandwidth interconnect (NVLink/NVSwitch) between GPUs due to frequent communication within each layer.</li>
+<li><strong>Pipeline Parallelism (PP):</strong> Assigns different layers to different GPUs, forming a pipeline. Micro-batching mitigates the "bubble" problem where GPUs sit idle. Used in Megatron-LM and GPipe.</li>
+<li><strong>Expert Parallelism (EP):</strong> For mixture-of-experts models, different experts reside on different GPUs. Token routing determines which GPU processes each token.</li>
+</ul>
+<p>In practice, frontier training runs combine all of these. A typical configuration might use TP=8 within a node (8 GPUs connected by NVLink), PP=8 across nodes in a rack, and FSDP across racks — forming a 3D parallelism grid.</p>
+<h3 id="mixed-precision-training">Mixed Precision Training<a class="headerlink" href="#mixed-precision-training" title="Permanent link">&para;</a></h3>
+<p>Modern pretraining universally uses reduced-precision arithmetic to improve throughput and reduce memory:</p>
+<ul>
+<li><strong>bf16 (Brain Float16):</strong> 1 sign bit, 8 exponent bits, 7 mantissa bits. Same dynamic range as fp32 but lower precision. The default for most training runs since 2022.</li>
+<li><strong>fp8 (8-bit floating point):</strong> Supported on H100 and later GPUs. Two formats: E4M3 (higher precision) for forward pass and E5M2 (higher dynamic range) for backward pass. Can nearly double throughput over bf16 but requires careful loss scaling.</li>
+<li><strong>Mixed precision:</strong> Master weights are kept in fp32 for optimizer state updates, while forward and backward passes use bf16 or fp8. This prevents the slow accumulation of rounding errors that would degrade training if everything were low-precision.</li>
+</ul>
+<h3 id="training-stability">Training Stability<a class="headerlink" href="#training-stability" title="Permanent link">&para;</a></h3>
+<p>Long training runs are vulnerable to loss spikes — sudden increases in training loss that can destabilize or ruin a run. Common causes and mitigations include:</p>
+<ul>
+<li><strong>Learning rate sensitivity:</strong> Aggressive learning rates can cause divergence, especially in later training stages. Cosine or WSD (warmup-stable-decay) schedules are standard.</li>
+<li><strong>Gradient clipping:</strong> Clipping gradient norms (typically to 1.0) prevents any single batch from causing an outsized parameter update.</li>
+<li><strong>Data anomalies:</strong> Corrupted or adversarial data can cause loss spikes. Some teams implement online data quality monitoring.</li>
+<li><strong>Hardware failures:</strong> GPU errors, network issues, or storage failures can corrupt gradient computations. Checkpointing every few hundred steps is essential, as is automatic health monitoring and job restart logic.</li>
+</ul>
+<p>A single loss spike in a multi-month training run can waste weeks of compute if not caught and handled quickly. This is why training infrastructure teams are as important as research teams at frontier labs.</p>
+<h2 id="long-context-pretraining">Long-Context Pretraining<a class="headerlink" href="#long-context-pretraining" title="Permanent link">&para;</a></h2>
+<h3 id="the-context-length-frontier">The Context Length Frontier<a class="headerlink" href="#the-context-length-frontier" title="Permanent link">&para;</a></h3>
+<p>Models have progressed rapidly from 2K-4K context lengths to 128K, 1M, and beyond:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Max Context Length</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-3 (2020)</td>
+<td>2,048</td>
+</tr>
+<tr>
+<td>GPT-4 (2023)</td>
+<td>8K / 32K</td>
+</tr>
+<tr>
+<td>Claude 2 (2023)</td>
+<td>100K</td>
+</tr>
+<tr>
+<td>Llama 3.1 (2024)</td>
+<td>128K</td>
+</tr>
+<tr>
+<td>Gemini 1.5 Pro (2024)</td>
+<td>1M → 2M</td>
+</tr>
+<tr>
+<td>Claude 3.5 (2024)</td>
+<td>200K</td>
+</tr>
+</tbody>
+</table>
+<p>This expansion has been enabled not by architectural breakthroughs alone but by training methodology — specifically, progressive context extension during pretraining.</p>
+<h3 id="progressive-context-extension">Progressive Context Extension<a class="headerlink" href="#progressive-context-extension" title="Permanent link">&para;</a></h3>
+<p>The dominant approach to long-context training is staged:</p>
+<ol>
+<li><strong>Base pretraining at moderate length (4K-8K):</strong> The model learns language patterns efficiently without the overhead of long sequences.</li>
+<li><strong>Context extension phase (32K-128K):</strong> Sequence lengths are gradually increased. The data is filtered for long, coherent documents. The position encoding is adjusted (see below).</li>
+<li><strong>Final long-context phase (128K+):</strong> For models targeting very long contexts, a final phase trains on curated long-document data — books, codebases, long conversations, multi-document collections.</li>
+</ol>
+<p>This staged approach is far more compute-efficient than training at the target context length from the start, because the quadratic (or near-quadratic) cost of attention means that long-context training is many times more expensive per token.</p>
+<h3 id="rope-scaling-techniques">RoPE Scaling Techniques<a class="headerlink" href="#rope-scaling-techniques" title="Permanent link">&para;</a></h3>
+<p>Rotary Position Embeddings (RoPE) have become the standard positional encoding for decoder-only transformers. When extending context beyond the training length, several techniques modify RoPE's behavior:</p>
+<ul>
+<li><strong>Position Interpolation (PI):</strong> Linearly scales position indices so that the extended context maps to the original position range. Simple but can lose resolution at long positions.</li>
+<li><strong>NTK-aware interpolation:</strong> Adjusts the base frequency of RoPE's rotation, effectively changing the "wavelength" of positional signals. Preserves local resolution while extending global reach.</li>
+<li><strong>YaRN (Yet another RoPE extensioN):</strong> Combines NTK-aware scaling with attention scaling and a temperature factor. Achieves strong long-context performance with minimal additional training.</li>
+<li><strong>Dynamic NTK:</strong> Adjusts the scaling factor based on the actual sequence length at inference time, rather than using a fixed scale.</li>
+</ul>
+<p>These techniques allow a model pretrained at 8K context to be extended to 128K or beyond with relatively little additional training — typically a few percent of the original pretraining compute.</p>
+<h3 id="challenges-at-extreme-lengths">Challenges at Extreme Lengths<a class="headerlink" href="#challenges-at-extreme-lengths" title="Permanent link">&para;</a></h3>
+<p>Even with these techniques, several challenges remain at very long contexts:</p>
+<ul>
+<li><strong>Lost in the middle:</strong> Models tend to attend more strongly to the beginning and end of their context, with weaker retrieval from middle positions. This is partly a training data artifact (documents naturally front-load important information) and partly an attention pattern artifact.</li>
+<li><strong>Evaluation difficulty:</strong> Needle-in-a-haystack tests measure simple retrieval, but real-world long-context tasks (multi-document reasoning, codebase understanding) are harder to evaluate and benchmark.</li>
+<li><strong>KV-cache memory:</strong> At 128K+ context, the key-value cache can consume tens of gigabytes per request, limiting throughput and requiring techniques like quantized KV-cache or paged attention.</li>
+</ul>
+<h2 id="open-questions">Open Questions<a class="headerlink" href="#open-questions" title="Permanent link">&para;</a></h2>
+<h3 id="data-contamination-and-benchmark-validity">Data Contamination and Benchmark Validity<a class="headerlink" href="#data-contamination-and-benchmark-validity" title="Permanent link">&para;</a></h3>
+<p>As pretraining corpora grow to tens of trillions of tokens of web text, the probability that benchmark test sets appear somewhere in the training data approaches certainty. Decontamination efforts (n-gram overlap filtering against known benchmarks) help but cannot catch all paraphrases, translations, or derivative content. This raises persistent questions about whether benchmark improvements reflect genuine capability gains or memorization.</p>
+<h3 id="memorization-vs-generalization">Memorization vs. Generalization<a class="headerlink" href="#memorization-vs-generalization" title="Permanent link">&para;</a></h3>
+<p>Language models memorize a non-trivial fraction of their training data — studies have shown that models can reproduce verbatim passages, especially for content that appears multiple times. The boundary between memorization and generalization is poorly understood, with implications for:</p>
+<ul>
+<li><strong>Privacy:</strong> Models may leak PII or proprietary content from training data</li>
+<li><strong>Copyright:</strong> Verbatim reproduction of copyrighted text raises legal questions</li>
+<li><strong>Robustness:</strong> Memorized patterns may not transfer to genuinely novel inputs</li>
+</ul>
+<h3 id="scaling-law-saturation">Scaling Law Saturation<a class="headerlink" href="#scaling-law-saturation" title="Permanent link">&para;</a></h3>
+<p>Whether current scaling laws will continue to hold across many more orders of magnitude of compute is unknown. Several potential saturation mechanisms exist:</p>
+<ul>
+<li><strong>Data wall:</strong> The amount of high-quality natural text is finite. Estimates suggest the internet contains roughly 50-100T tokens of deduplicated, quality-filtered text. Models are already training on significant fractions of this.</li>
+<li><strong>Diminishing returns:</strong> Each doubling of compute yields a progressively smaller improvement in loss. At some point, the marginal gains may not justify the cost.</li>
+<li><strong>Capability ceilings:</strong> Some tasks may require reasoning architectures rather than more scale.</li>
+</ul>
+<h3 id="synthetic-data-circularity">Synthetic Data Circularity<a class="headerlink" href="#synthetic-data-circularity" title="Permanent link">&para;</a></h3>
+<p>As models are increasingly trained on synthetic data generated by other models, a "closed loop" emerges where the training distribution is shaped by the biases and limitations of previous model generations. Early research on model collapse suggests that iteratively training on model-generated data degrades quality and diversity over generations. How to mix synthetic and natural data without this degradation — and how to detect when it is occurring — remains an open problem.</p>
+<h3 id="energy-and-environmental-cost">Energy and Environmental Cost<a class="headerlink" href="#energy-and-environmental-cost" title="Permanent link">&para;</a></h3>
+<p>Frontier pretraining runs now consume tens of millions of GPU-hours, with corresponding energy costs in the tens of megawatt-hours range. As models and datasets grow, the environmental sustainability of the current trajectory is an increasingly pressing question. Efficiency techniques (sparsity, better data curation, staged training) help, but the overall compute budget continues to grow faster than efficiency gains.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

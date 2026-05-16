@@ -1,0 +1,2695 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2002-01%20-%20Hardware/sambanova_rdu/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>SambaNova Systems: RDU Architecture and Inference Platform - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sambanova-systems-rdu-architecture-and-inference-platform" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SambaNova Systems: RDU Architecture and Inference Platform
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sn40l-architecture-4th-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      SN40L Architecture (4th Generation)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SN40L Architecture (4th Generation)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fabrication-and-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fabrication and Packaging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-tile-based-cgra" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute: Tile-Based CGRA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-tier-memory-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Three-Tier Memory Hierarchy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#programming-model-dataflow-execution-and-deep-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Programming Model: Dataflow Execution and Deep Fusion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-up-and-interconnects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scale-Up and Interconnects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sn50-5th-generation-what-is-known" class="md-nav__link">
+    <span class="md-ellipsis">
+      SN50 (5th Generation) — What Is Known
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composition-of-experts-coe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Composition of Experts (CoE)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#competitive-positioning-rdu-vs-gpu-vs-groq-lpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Competitive Positioning: RDU vs GPU vs Groq LPU
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Competitive Positioning: RDU vs GPU vs Groq LPU">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-core-distinction-sambanova-vs-groq" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Core Distinction: SambaNova vs Groq
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparison Table
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#independent-benchmarks-and-performance-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Independent Benchmarks and Performance Evidence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Independent Benchmarks and Performance Evidence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#artificial-analysis-hardware-benchmarking-deepseek-r1-0528-jan-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      Artificial Analysis Hardware Benchmarking (DeepSeek R1 0528, Jan 2026)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provider-benchmarking-api-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provider Benchmarking (API-level)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparison Points
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gaps
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pricing-and-tco" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pricing and TCO
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observability-and-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observability and Operations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customer-and-partner-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customer and Partner Ecosystem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeline
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="sambanova-systems-rdu-architecture-and-inference-platform">SambaNova Systems: RDU Architecture and Inference Platform<a class="headerlink" href="#sambanova-systems-rdu-architecture-and-inference-platform" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>SambaNova Systems (founded 2017) builds <strong>Reconfigurable Dataflow Units (RDUs)</strong> — CGRA-style accelerators purpose-built for LLM inference rather than training. Their architectural thesis: inference's dominant bottleneck is <strong>data movement and memory hierarchy management</strong>, not raw peak FLOPs — especially when workloads require frequent switching among multiple models (routing, tool-use, expert selection, agent loops). The current production chip is <strong>SN40L</strong> (4th gen, 2023); the upcoming <strong>SN50</strong> (5th gen, shipping 2H 2026) is positioned as "purpose-built for agentic inference." SambaNova raised a <strong>$350M Series E</strong> in Feb 2026 alongside the SN50 announcement and Intel collaboration (SambaNova press release, Feb 2026).</p>
+<hr />
+<h2 id="sn40l-architecture-4th-generation">SN40L Architecture (4th Generation)<a class="headerlink" href="#sn40l-architecture-4th-generation" title="Permanent link">&para;</a></h2>
+<p>The SN40L is the most technically disclosed RDU, with an academic-style architecture paper (arXiv 2405.07518, May 2024) and Hot Chips 2024 presentation.</p>
+<h3 id="fabrication-and-packaging">Fabrication and Packaging<a class="headerlink" href="#fabrication-and-packaging" title="Permanent link">&para;</a></h3>
+<p><strong>TSMC 5nm</strong>, packaged as a <strong>2.5D CoWoS</strong> chiplet design with two reconfigurable dataflow dies ("RDDs") plus HBM on the same interposer. A die-to-die interface allows streaming between dies without going through off-chip memory.</p>
+<h3 id="compute-tile-based-cgra">Compute: Tile-Based CGRA<a class="headerlink" href="#compute-tile-based-cgra" title="Permanent link">&para;</a></h3>
+<p>The chip is a <strong>coarse-grained reconfigurable array (CGRA)</strong> of tiles:</p>
+<ul>
+<li><strong>Pattern Compute Units (PCUs)</strong> — configurable between an output-stationary systolic array and a pipelined SIMD-style core. Support BF16/FP32/INT32/INT8 compute datatypes (Hot Chips 2024). <strong>1,040 PCUs per socket</strong>, yielding <strong>638 BF16 TFLOPS peak</strong>.</li>
+<li><strong>Pattern Memory Units (PMUs)</strong> — large on-chip SRAM scratchpads with flexible addressing, scalar ALU pipelines for address generation, programmable banking/predication, and data alignment units supporting transpose/layout conversions at high bandwidth.</li>
+<li><strong>Address Generation and Coalescing Units (AGCUs)</strong> — portals to off-chip memory (HBM, DDR, remote).</li>
+<li><strong>Reconfigurable Dataflow Network (RDN)</strong> — three physical fabrics (vector, scalar, control) implemented as a mesh of non-blocking switches with <strong>compiler-configured routing tables</strong> via a place-and-route compilation step.</li>
+</ul>
+<h3 id="three-tier-memory-hierarchy">Three-Tier Memory Hierarchy<a class="headerlink" href="#three-tier-memory-hierarchy" title="Permanent link">&para;</a></h3>
+<p>The defining architectural feature — designed for multi-model residency and fast switching:</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Capacity</th>
+<th>Bandwidth</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>On-chip SRAM</strong></td>
+<td>520 MiB</td>
+<td>"hundreds of TB/s" (on-chip)</td>
+<td>Active compute operands, intermediate activations</td>
+</tr>
+<tr>
+<td><strong>HBM</strong></td>
+<td>64 GiB</td>
+<td>~2 TB/s per socket</td>
+<td>Hot model weights, KV-cache</td>
+</tr>
+<tr>
+<td><strong>DDR</strong></td>
+<td>Up to 1.5 TiB per socket</td>
+<td>&gt;200 GB/s per socket</td>
+<td>Multi-model residency; warm model storage</td>
+</tr>
+</tbody>
+</table>
+<p>The DDR tier is <strong>directly attached</strong> (not accessed through a host CPU), and aggregate DDR-to-HBM load bandwidth exceeds <strong>&gt;1 TB/s per node</strong> — enabling model-switch times claimed at "microseconds" rather than the seconds typical of GPU-based model reloading.</p>
+<h3 id="programming-model-dataflow-execution-and-deep-fusion">Programming Model: Dataflow Execution and Deep Fusion<a class="headerlink" href="#programming-model-dataflow-execution-and-deep-fusion" title="Permanent link">&para;</a></h3>
+<p>LLM inference is a <strong>huge graph of tensor operations</strong> (normalization, projections, attention, MLP, residual adds) executed repeatedly. On conventional hardware, each operation is typically a <strong>kernel</strong> launched on the accelerator, and between kernels, <strong>intermediate tensors</strong> often get <strong>materialized</strong> — written to HBM so the next kernel can read them back. This write-read cycle is the dominant cost because modern accelerators are compute-rich but memory-bandwidth-limited (the <strong>memory wall</strong>). The bottleneck is not arithmetic throughput but keeping compute units fed with data.</p>
+<p><strong>Fusion</strong> combines multiple operations into one execution unit so intermediates stay in fast on-chip storage rather than bouncing through HBM. <strong>Shallow fusion</strong> combines a few adjacent ops (e.g., <code>bias + gelu</code>). <strong>Deep fusion</strong> takes a much larger chain and makes it behave like a continuous streaming assembly line — data enters stage A, partial results flow to B, then C, then D, without full HBM writeout between stages. The deeper the fusion, the higher the <strong>operational intensity</strong> (useful arithmetic per byte moved).</p>
+<p>The RDU is a <strong>dataflow machine</strong> designed for deep fusion: execution is organized around how data moves through a graph of operations, not around a "launch op A, then op B" sequence. The SN40L <strong>compiler</strong> performs <strong>place-and-route</strong> on the model graph — mapping operators to PCUs/PMUs, configuring RDN routing tables, deciding which buffers stay on-chip, how tensors stream between stages, and where to apply data/tensor/pipeline parallelism. This is closer to hardware synthesis than traditional kernel programming. SambaNova claims an entire <strong>Llama 3.1 8B decoder</strong> can be fused into a single dataflow kernel and called repeatedly without launch overhead (SambaNova, "Why SN40L Is the Best for Inference", sambanova.ai).</p>
+<p><strong>Why this differs from GPU execution:</strong> On NVIDIA GPUs, work is distributed across Streaming Multiprocessors (SMs), each with limited local resources (registers, shared memory, cache). A typical execution for <code>x → layernorm → linear → gelu → linear</code> launches separate kernels with each intermediate tensor materialized to HBM between stages. Good GPU stacks reduce this with fusion, custom kernels, persistent kernels, and FlashAttention — so the right view is not "GPUs are dumb" but that the default execution style tends toward many kernels and significant memory traffic unless the compiler/runtime works very hard to avoid it. SambaNova's architecture avoids more materialization by keeping intermediates in distributed SRAM and streaming them between fused stages on-chip, producing <strong>long fused pipelines</strong> (e.g., <code>RMSNorm → QKV projection → attention → output projection → MLP → residual add</code> as one persistent streaming graph) with pipeline parallelism across tokens (stage A on token <em>t+1</em>, stage B on token <em>t</em>, stage C on token <em>t-1</em>) (SN40L architecture paper, arXiv 2405.07518).</p>
+<h3 id="scale-up-and-interconnects">Scale-Up and Interconnects<a class="headerlink" href="#scale-up-and-interconnects" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>8-socket SN40L node</strong>: used for Composition of Experts (CoE) deployment comparisons against DGX A100/H100</li>
+<li><strong>SambaRack</strong>: 16 RDUs per node as 8 dual-RDU modules ("SN40L-2 / XRDUs"), each with BMC for power control/telemetry, plus x86 host module running RHEL</li>
+<li><strong>Network</strong>: <strong>Ethernet-based</strong> (Juniper QFX5130 data switch, Juniper EX-series management switch) — notably not a proprietary interconnect. Independently confirmed at Argonne ALCF AI testbed ("Metis" deployment).</li>
+<li><strong>Power</strong>: air-cooled, <strong>~10 kW per rack</strong> class (vendor claim, confirmed in partner announcements)</li>
+</ul>
+<hr />
+<h2 id="sn50-5th-generation-what-is-known">SN50 (5th Generation) — What Is Known<a class="headerlink" href="#sn50-5th-generation-what-is-known" title="Permanent link">&para;</a></h2>
+<p>SN50 is positioned as "purpose-built for agentic inference" with stated deltas vs SN40L:</p>
+<ul>
+<li><strong>5x more compute</strong> per accelerator</li>
+<li><strong>4x more network bandwidth</strong></li>
+<li><strong>"Agentic caching"</strong> — prompt/input token caching in memory to reduce prefill time and TTFT</li>
+<li><strong>20 kW/rack class</strong>, air-cooled</li>
+<li>Scale-out to <strong>256 accelerators</strong> across racks over "multi-TB/s interconnect"</li>
+<li>Claims: <strong>10T+ parameter models</strong>, <strong>10M+ context lengths</strong> (vendor claim; no independent validation)</li>
+<li>FP8 performance claims appear in vendor footnotes, but chip-level datatype support not fully disclosed</li>
+<li><strong>SoftBank</strong> announced as first customer (Japan deployment); <strong>Intel</strong> as multi-year collaboration partner</li>
+</ul>
+<p><strong>Gap</strong>: low-level SN50 specs (process node, exact SRAM/HBM/DDR sizes, per-chip bandwidth, TDP, instruction-level numeric formats) not published. Shipping 2H 2026 (SambaNova press release, Feb 2026).</p>
+<hr />
+<h2 id="composition-of-experts-coe">Composition of Experts (CoE)<a class="headerlink" href="#composition-of-experts-coe" title="Permanent link">&para;</a></h2>
+<p>SambaNova's distinctive framing: future workloads are <strong>compositions of multiple specialized models</strong> rather than a single monolith. "Composition of Experts" describes sequences where many small expert models are selected and run, with <strong>switching overhead becoming first-order cost</strong>. This is distinct from MoE (weight sparsity within one model) — CoE is <strong>system-level sparsity</strong> across multiple independently-trained models orchestrated in agent-style call chains.</p>
+<p>The thesis is strongest in this regime because two things compound: smaller expert workloads have <strong>lower operational intensity</strong> (GPU utilization drops), and switching among many models is slow/expensive on conventional hardware. The three-tier memory hierarchy addresses both — many models stay resident in DDR, hot models in HBM, active layers in SRAM. Switching means promoting from DDR to HBM rather than reloading from storage. High fusion depth keeps operational intensity up even for small experts. This is the deeper reason SambaNova frames <strong>inference as a data-movement problem</strong>: the claim applies not just to one dense forward pass but to production serving where systems are agentic, multi-step, and multi-model (SN40L architecture paper, arXiv 2405.07518).</p>
+<hr />
+<h2 id="competitive-positioning-rdu-vs-gpu-vs-groq-lpu">Competitive Positioning: RDU vs GPU vs Groq LPU<a class="headerlink" href="#competitive-positioning-rdu-vs-gpu-vs-groq-lpu" title="Permanent link">&para;</a></h2>
+<h3 id="the-core-distinction-sambanova-vs-groq">The Core Distinction: SambaNova vs Groq<a class="headerlink" href="#the-core-distinction-sambanova-vs-groq" title="Permanent link">&para;</a></h3>
+<p>SambaNova is not "novel because it uses dataflow" while Groq does not. Both are <strong>compiler-first, inference-native, stream/dataflow-oriented</strong> departures from GPU-style SIMT execution. Groq's Tensor Streaming Processor (TSP/LPU) uses functionally sliced execution, interleaved memory and compute, producer-consumer streams, static scheduling, and deterministic execution (Groq, "Think Fast: A Tensor Streaming Processor", ISCA 2020). SambaNova's RDU maps the model graph onto a programmable grid of compute and memory units with streaming pipelines. Same anti-GPU instinct, <strong>different optimization axis</strong>:</p>
+<ul>
+<li><strong>Groq = deterministic tensor streaming machine.</strong> Center of gravity is <strong>determinism</strong>: a single-core software-defined machine, static scheduling, no reactive elements (caches, arbiters), and direct chip-to-chip coordination so many chips behave like one precisely timed execution fabric. The compiler schedules everything ahead of time; the rack is meant to behave like one logical core. On-chip SRAM (230 MB) serves as <strong>primary weight storage</strong>, not cache. Novelty: "time is fully choreographed" (Groq, "LPU Architecture", groq.com).</li>
+<li><strong>SambaNova = reconfigurable graph-and-memory machine.</strong> Center of gravity is <strong>graph mapping + memory hierarchy</strong>: a reconfigurable grid of PCUs/PMUs, fused streaming across operators, and a three-tier memory system (SRAM/HBM/DDR) designed to reduce off-chip movement and keep models resident. Novelty: "the graph is laid out spatially, and memory movement is architected as a first-class problem."</li>
+</ul>
+<p>The most defensible contrast: <strong>Groq mainly makes time deterministic; SambaNova mainly makes graph execution and model residency flexible.</strong> This produces materially different product theses — Groq's "single fast deterministic stream processor" story vs SambaNova's "large models, long context, multiple models in parallel, hot-swapping for agentic workloads" story. One further historical difference: SambaNova has framed its architecture as serving both training and inference (the SN40L paper explicitly describes the RDU as co-designed for enterprise inference and training), whereas Groq frames itself as inference-only from inception — though SambaNova's SN50 messaging is now clearly inference-first (SN40L paper, arXiv 2405.07518; Groq architecture pages).</p>
+<h3 id="comparison-table">Comparison Table<a class="headerlink" href="#comparison-table" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>SambaNova RDU</th>
+<th>NVIDIA GPU</th>
+<th>Groq LPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>Compiler-mapped dataflow CGRA</td>
+<td>SIMT (warps, CUDA)</td>
+<td>Deterministic, compiler-scheduled single-core</td>
+</tr>
+<tr>
+<td><strong>Primary lever</strong></td>
+<td>Operator fusion + streaming + three-tier memory for multi-model</td>
+<td>Low-precision (FP8/FP4) + inference compilers (TensorRT) + batch scaling</td>
+<td>Large on-chip SRAM + high on-die bandwidth + deterministic latency</td>
+</tr>
+<tr>
+<td><strong>Optimization axis</strong></td>
+<td>Graph execution flexibility + model residency</td>
+<td>Ecosystem breadth + precision scaling</td>
+<td>Time determinism + single-core choreography</td>
+</tr>
+<tr>
+<td><strong>Multi-model story</strong></td>
+<td>Multi-model residency in DDR, microsecond switching</td>
+<td>Model reloading or large-batch multiplexing</td>
+<td>Not a primary emphasis</td>
+</tr>
+<tr>
+<td><strong>On-chip SRAM</strong></td>
+<td>520 MiB (SN40L)</td>
+<td>~50 MB L2 (H100)</td>
+<td>230 MB (primary weight storage)</td>
+</tr>
+<tr>
+<td><strong>Interconnect</strong></td>
+<td>Ethernet-based</td>
+<td>NVLink/NVSwitch (proprietary, high-BW)</td>
+<td>RealScale (proprietary, chip-to-chip coordination)</td>
+</tr>
+<tr>
+<td><strong>Software ecosystem</strong></td>
+<td>Compiler P&amp;R + SambaStack (Kubernetes)</td>
+<td>CUDA + TensorRT + Triton (massive ecosystem)</td>
+<td>GroqWare SDK + ONNX</td>
+</tr>
+<tr>
+<td><strong>Training support</strong></td>
+<td>Yes (SN40L paper describes training + inference)</td>
+<td>Yes (primary training platform)</td>
+<td>No (inference-only from inception)</td>
+</tr>
+</tbody>
+</table>
+<p>All three expose <strong>OpenAI-compatible endpoints</strong>: SambaNova (SambaCloud), Groq (GroqCloud), NVIDIA (via cloud providers/Triton). SambaNova offers a three-tier deployment model: SambaCloud API → SambaStack hosted (managed K8s + hardware) → SambaStack on-prem.</p>
+<hr />
+<h2 id="independent-benchmarks-and-performance-evidence">Independent Benchmarks and Performance Evidence<a class="headerlink" href="#independent-benchmarks-and-performance-evidence" title="Permanent link">&para;</a></h2>
+<h3 id="artificial-analysis-hardware-benchmarking-deepseek-r1-0528-jan-2026">Artificial Analysis Hardware Benchmarking (DeepSeek R1 0528, Jan 2026)<a class="headerlink" href="#artificial-analysis-hardware-benchmarking-deepseek-r1-0528-jan-2026" title="Permanent link">&para;</a></h3>
+<p>SN40L-16 system benchmarked independently:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>SambaNova SN40L-16</th>
+<th>Context</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Single-user peak output speed</strong></td>
+<td>269 tokens/s</td>
+<td>&gt;3x the peak output speed of NVIDIA B200 with TensorRT-LLM in same benchmark</td>
+</tr>
+<tr>
+<td><strong>System throughput at &gt;=256 concurrent</strong></td>
+<td>~4,700 tokens/s</td>
+<td>Exceeds measured NVIDIA systems across most tested concurrency levels</td>
+</tr>
+</tbody>
+</table>
+<h3 id="provider-benchmarking-api-level">Provider Benchmarking (API-level)<a class="headerlink" href="#provider-benchmarking-api-level" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Llama 3.1 Instruct 8B</strong>: SambaNova ~631 t/s; Groq ~676 t/s (Artificial Analysis snapshot)</li>
+<li><strong>Llama 3.1 Instruct 405B</strong>: SambaNova 114 t/s, citing Artificial Analysis — framed as fastest among benchmarked providers at the time</li>
+</ul>
+<h3 id="comparison-points">Comparison Points<a class="headerlink" href="#comparison-points" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>NVIDIA Blackwell</strong>: single DGX (8 GPUs) claims &gt;250 tokens/s per user or &gt;30,000 tokens/s max throughput on DeepSeek-R1 671B — different test harness, not directly comparable (NVIDIA developer blog)</li>
+<li><strong>Groq</strong>: Llama 3 8B at 877 t/s, Llama 3 70B at 284 t/s, Llama 3.3 70B at 276 t/s (Groq blogs citing Artificial Analysis, 2024)</li>
+</ul>
+<h3 id="gaps">Gaps<a class="headerlink" href="#gaps" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>No MLPerf submissions</strong>: SambaNova not among MLPerf Inference v5.0 submitters (MLCommons, Apr 2025)</li>
+<li><strong>No SN50 independent benchmarks</strong>: hardware not yet shipping</li>
+<li><strong>Hourly pricing not comparable</strong>: SambaNova accelerators not offered as standard on-demand endpoints (noted by Artificial Analysis)</li>
+</ul>
+<hr />
+<h2 id="pricing-and-tco">Pricing and TCO<a class="headerlink" href="#pricing-and-tco" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Model</th>
+<th>Input ($/M tokens)</th>
+<th>Output ($/M tokens)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SambaNova</td>
+<td>DeepSeek V3-0324</td>
+<td>$1.00</td>
+<td>$1.50</td>
+</tr>
+<tr>
+<td>Groq</td>
+<td>Llama 3.3 70B</td>
+<td>$0.59</td>
+<td>$0.79</td>
+</tr>
+</tbody>
+</table>
+<p>Inference cost decomposes to: <code>(hardware $/hr + power + ops) / (useful tokens/hr at target SLO)</code>. Each vendor targets different terms: SambaNova reduces the numerator via <strong>air-cooled low-power racks (10-20 kW)</strong> and the denominator via <strong>multi-model residency</strong> and <strong>streaming fusion</strong>. NVIDIA targets via <strong>lower precision</strong> (FP8/FP4 Transformer Engine) and <strong>inference compilers</strong> (TensorRT-LLM + Triton/vLLM). Groq targets via <strong>deterministic scheduling</strong> and <strong>batch-independent per-request behavior</strong>.</p>
+<hr />
+<h2 id="observability-and-operations">Observability and Operations<a class="headerlink" href="#observability-and-operations" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>SambaStudio</strong>: Grafana-based endpoint monitoring; Prometheus exporter references in legacy docs</li>
+<li><strong>SambaRack</strong>: BMC per module for power control and telemetry</li>
+<li><strong>Fault management</strong>: Patent (US20240264896A1) describes monitoring tiles, switches, PCIe links with centralized health management</li>
+<li><strong>SambaStack</strong>: Kubernetes-operated inference platform (hosted or on-prem) for model lifecycle, user/access management, checkpoint deployment, speculative decoding options</li>
+</ul>
+<hr />
+<h2 id="model-support">Model Support<a class="headerlink" href="#model-support" title="Permanent link">&para;</a></h2>
+<p>SambaCloud supports dense transformers, MoE, reasoning-tuned, and multimodal models with context lengths at <strong>128k-160k</strong>. Current model list includes DeepSeek variants, Meta Llama family, Qwen variants, "OpenAI gpt-oss-120b", Whisper-Large-v3, and Llama 4 Maverick preview (multimodal image). SambaNova advertises inference <strong>"without quantization"</strong> (BF16/FP16-class) for quality retention (SambaCloud docs; SambaNova blog).</p>
+<hr />
+<h2 id="customer-and-partner-ecosystem">Customer and Partner Ecosystem<a class="headerlink" href="#customer-and-partner-ecosystem" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Entity</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>First SN50 customer</strong></td>
+<td>SoftBank Corp.</td>
+<td>Japan deployment; already hosts SambaCloud in-region</td>
+</tr>
+<tr>
+<td><strong>Strategic compute</strong></td>
+<td>Intel</td>
+<td>Multi-year collaboration for cloud-scale inference; Xeon-based infrastructure</td>
+</tr>
+<tr>
+<td><strong>Sovereign AI providers</strong></td>
+<td>SCX (Australia), Infercom (EU), Argyll (UK)</td>
+<td>Compliance-driven, onshore deployment with energy/power emphasis</td>
+</tr>
+<tr>
+<td><strong>Research testbed</strong></td>
+<td>Argonne ALCF</td>
+<td>SN40L "Metis" deployment; independent system characterization</td>
+</tr>
+<tr>
+<td><strong>Rack components</strong></td>
+<td>Juniper Networks (switches), Lantronix (console)</td>
+<td>Named in SambaRack documentation</td>
+</tr>
+</tbody>
+</table>
+<p>Partner/customer announcements cluster around <strong>sovereign AI and regional inference providers</strong> (compliance, energy constraints, onshore deployment) and <strong>telecom/datacenter operators</strong> — meaningfully different from NVIDIA's broad accelerator + CUDA lock-in GTM and Groq's "fastest tokens" GroqCloud-first positioning.</p>
+<hr />
+<h2 id="timeline">Timeline<a class="headerlink" href="#timeline" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017</td>
+<td>SambaNova founded</td>
+</tr>
+<tr>
+<td>Sep 2022</td>
+<td>DataScale SN30-era datasheets</td>
+</tr>
+<tr>
+<td>Mar 2023</td>
+<td>"SambaNova Suite" launched</td>
+</tr>
+<tr>
+<td>Sep 2023</td>
+<td>SN40L announced (5T parameter / 256k+ claims)</td>
+</tr>
+<tr>
+<td>May 2024</td>
+<td>SN40L architecture paper (arXiv)</td>
+</tr>
+<tr>
+<td>Aug 2024</td>
+<td>SN40L Hot Chips disclosure</td>
+</tr>
+<tr>
+<td>Sep 2024</td>
+<td>SambaNova Cloud launched</td>
+</tr>
+<tr>
+<td>Oct 2025</td>
+<td>Sovereign AI provider agreements (AU/EU/UK)</td>
+</tr>
+<tr>
+<td>Feb 2026</td>
+<td>SN50 announced + Intel collaboration + $350M Series E; SoftBank first SN50 customer</td>
+</tr>
+<tr>
+<td>2H 2026</td>
+<td>SN50 shipping to customers</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>Key:</strong> SambaNova's architectural bet is that inference TCO will be dominated by multi-model switching costs as agentic workflows proliferate. The three-tier memory hierarchy (SRAM/HBM/DDR with direct DDR attachment) is the core differentiator — enabling many models to stay resident and switch in microseconds rather than seconds. Independent benchmarks (Artificial Analysis) show competitive single-user and concurrency throughput on SN40L. The main risks: NVIDIA's ecosystem breadth and low-precision toolchain may outpace architectural advantages, SN50 claims lack independent validation, and the CUDA software moat remains the industry's strongest lock-in. The main opportunity: if agentic inference workloads grow as projected, multi-model residency and fast-switching become load-bearing infrastructure rather than a niche optimization.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

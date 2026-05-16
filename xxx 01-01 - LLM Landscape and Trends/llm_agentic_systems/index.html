@@ -1,0 +1,2461 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2001-01%20-%20LLM%20Landscape%20and%20Trends/llm_agentic_systems/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>LLM Agentic Systems & Multi-Agent Coordination - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#llm-agentic-systems-multi-agent-coordination" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LLM Agentic Systems &amp; Multi-Agent Coordination
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-llm-as-coordinator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The LLM as Coordinator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tool-use-function-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tool Use &amp; Function Calling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-works-what-breaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Works &amp; What Breaks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-agent-coordination" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Agent Coordination
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decision Protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-edge-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local &amp; Edge Agents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Patterns
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#harness-engineering-context-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Harness Engineering &amp; Context Engineering
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="llm-agentic-systems-multi-agent-coordination">LLM Agentic Systems &amp; Multi-Agent Coordination<a class="headerlink" href="#llm-agentic-systems-multi-agent-coordination" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>See also:</strong> <a href="../llm_landscape_and_trends/">LLM Landscape &amp; Trends</a> | <a href="../../xxx%2003a%20-%20Agents%20%26%20Copilot%20Systems/agent_harness_engineering/">Agent Harness Engineering</a> | <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/ai_ux_and_agent_design/">AI UX &amp; Agent Design</a> | <a href="../../xxx%2013%20-%20Codex/ai_engineering_practices/">AI Engineering Practices</a> | <a href="../../xxx%2013%20-%20Codex/claude_code_expert_guide/">Claude Code Expert Guide</a></p>
+</blockquote>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>"Multi-agent" may be the most oversold and underspecified term in contemporary AI. Strip away the marketing and most multi-agent systems are just the same model talking to itself with different system prompts, producing the illusion of deliberation while sharing every blind spot, every calibration error, and every mode of failure. When five instances of GPT-4o debate each other, you do not get a committee — you get an echo chamber with extra latency. The distinction matters because real coordination requires <strong>structural diversity and independent verification</strong>, and most deployed architectures have neither.</p>
+<p>The empirical picture is more nuanced than the hype cycle suggests. Agentic coding benchmarks show that tool-augmented models outperform raw next-token prediction by 15-40% on multi-step tasks, but error propagation across long trajectories still degrades end-to-end success rates below 50% for chains longer than roughly eight steps. OpenAI's Responses API launch in March 2025 — with explicit production pricing for file search, tool use, and observability — marked an inflection point: the major labs now treat agentic capabilities as a billing surface, not a research demo. Anthropic's system cards evaluate prompt injection and agentic safety as first-class concerns. Industry surveys consistently show a majority of enterprise respondents running agents in production, with adoption growing year-over-year. The capability is real; the question is where the coordination overhead pays for itself.</p>
+<p>The second-order implication is less obvious. As base model performance converges across providers, the differentiating value shifts from the model itself to the <strong>task-specific capability layer</strong> wrapped around it: custom tools, tightly scoped workflows, structured action spaces, and verification pipelines. A small purpose-built agent with three well-designed tools and a verifier will outperform a frontier model given unconstrained autonomy, because constrained action spaces reduce the surface area for hallucinated intermediate state and compounding errors. The model's role is coordinator, not executor.</p>
+<p>This document covers LLM-native agentic capabilities and multi-agent coordination from the model and capability perspective — what the models can do, how tool use works, when coordination helps, and when it is theater. The complementary design and UX perspective — how to build agent interfaces, manage user trust, and handle human-in-the-loop patterns — lives in the AI UX &amp; Agent Design document. Two interlocking theses drive the document: <strong>the value of agentic AI is the model as orchestrator of external capabilities</strong>, not as a monolithic autonomous reasoner; and <strong>the frontier has moved from model prompting to harness engineering</strong> — the environment, control primitives, and verification loops around the model determine whether you get a demo or a product.</p>
+<h2 id="the-llm-as-coordinator">The LLM as Coordinator<a class="headerlink" href="#the-llm-as-coordinator" title="Permanent link">&para;</a></h2>
+<p>The fundamental architectural insight behind agentic systems is role separation: the LLM serves as planner, router, and synthesizer, while external tools provide the execution substrate. The model decides what to do and interprets results; tools actually do it.</p>
+<p>This matters because LLMs are unreliable executors but strong coordinators. They hallucinate file contents, miscalculate arithmetic, and confabulate API responses — but they excel at decomposing tasks, selecting appropriate tools, interpreting heterogeneous outputs, and adjusting plans based on feedback. The agentic pattern exploits this asymmetry.</p>
+<p><strong>Three coordinator roles:</strong></p>
+<ul>
+<li><strong>Planner</strong> — Decomposes a high-level goal into a sequence or DAG of subtasks. Effective planning requires the model to reason about dependencies, estimate which tools are needed, and anticipate failure modes. Chain-of-thought and extended thinking improve planning quality significantly.</li>
+<li><strong>Router</strong> — Selects the right tool, API, or sub-agent for each step. Routing decisions include choosing between retrieval strategies, selecting specialist models, and deciding when to ask the user for clarification vs. proceeding autonomously.</li>
+<li><strong>Synthesizer</strong> — Aggregates outputs from multiple tool calls or sub-agents into a coherent response. This is where the model's language capabilities shine: reconciling conflicting evidence, summarizing structured data, and explaining its reasoning.</li>
+</ul>
+<p><strong>Why monolithic autonomy fails:</strong></p>
+<p>Giving a model unconstrained agency over a broad action space leads to predictable failure modes. The model cannot reliably self-correct over long horizons because it lacks ground-truth feedback loops. Each step compounds uncertainty. Without external verification (tests, validators, human review), confidence and correctness diverge. The solution is not "smarter models" but tighter loops: constrained action spaces, frequent verification checkpoints, and explicit rollback mechanisms.</p>
+<h2 id="tool-use-function-calling">Tool Use &amp; Function Calling<a class="headerlink" href="#tool-use-function-calling" title="Permanent link">&para;</a></h2>
+<p>Tool use is the capability that transforms a language model from a text generator into an agent. Without it, "agentic" is just prompting with extra steps.</p>
+<p><strong>How models learn tool use:</strong></p>
+<p>Modern tool-use capabilities emerge from a combination of supervised fine-tuning on tool-call traces and reinforcement learning with chain-of-thought. The model learns to emit structured function calls (typically JSON) as part of its generation, pause for execution results, and incorporate those results into subsequent reasoning. This is not prompt engineering — it is a trained capability baked into the model weights.</p>
+<p><strong>Structured action spaces:</strong></p>
+<p>The most effective agent architectures constrain the model to a well-defined set of tools with typed parameters and clear descriptions. This serves multiple purposes:</p>
+<ul>
+<li>Reduces hallucinated tool calls (the model cannot invoke tools that do not exist in its schema)</li>
+<li>Enables static validation of arguments before execution</li>
+<li>Makes the system auditable — every action is a structured record</li>
+<li>Allows permissioning: which tools are available in which contexts</li>
+</ul>
+<p><strong>Tool permissioning and safety:</strong></p>
+<p>Not all tools should be available at all times. Production systems gate tool access by context, user role, and task phase. A planning phase might have read-only tools; an execution phase adds write capabilities; a review phase strips write access and adds approval tools. This is not just safety theater — it materially reduces error propagation by limiting the blast radius of any single bad decision.</p>
+<p><strong>The OpenClaw direction — custom tool pipelines:</strong></p>
+<p>Value increasingly concentrates in task-specific capability layers rather than general-purpose tool sets. Small purpose-built agents with custom tools and tightly scoped workflows outperform general agents given broad tool access. The pattern: identify the 3-5 operations that matter for a task, build robust tools for those operations, and let the model coordinate them.</p>
+<p><strong>MCP (Model Context Protocol) — the device driver layer for LLMs:</strong></p>
+<p>The separation of model logic from system integration is being standardized through MCP, which provides a uniform interface for how an agent touches the world — accessing tools, data, and external systems (filesystems, repos, databases, APIs) without baking integration details into the agent itself (A2A vs MCP architecture overview, 2026). The architecture is a clean client-server split: an MCP host (the agent or application) communicates with MCP servers (adapters to underlying systems). Three primitives define the protocol: <strong>Tools</strong> (callable functions the model can invoke), <strong>Resources</strong> (readable things — files, records, state), and <strong>Prompts</strong> (reusable templates for common interactions). Transport runs locally via stdin/stdout or remotely via HTTP+streaming. MCP is less a protocol and more an abstraction boundary — it decouples what the model wants to do from how the underlying system exposes its capabilities, the same way device drivers decouple operating systems from hardware (A2A vs MCP architecture overview, 2026). This directly reinforces the structured action space principle above: MCP provides the standardized layer through which constrained, well-typed tool interfaces are exposed to the model, making tool permissioning, auditing, and static validation architecturally natural rather than ad hoc.</p>
+<h2 id="what-works-what-breaks">What Works &amp; What Breaks<a class="headerlink" href="#what-works-what-breaks" title="Permanent link">&para;</a></h2>
+<p><strong>Where agents help:</strong></p>
+<ul>
+<li>Tool chaining across APIs and data sources</li>
+<li>Multi-step research with retrieval, filtering, and synthesis</li>
+<li>Coding workflows: edit, test, debug, iterate</li>
+<li>Semi-structured automation where rigid scripts are too brittle but full autonomy is unnecessary</li>
+<li>Planning + execution loops with verification checkpoints</li>
+</ul>
+<p><strong>What still breaks:</strong></p>
+<ul>
+<li><strong>Error propagation</strong> — A wrong intermediate result corrupts everything downstream. Unlike human workflows, most agent architectures lack the equivalent of "wait, that doesn't look right" intuition at each step.</li>
+<li><strong>Tool misuse</strong> — Models call tools with subtly wrong parameters, misinterpret return values, or invoke the wrong tool entirely. This is especially dangerous with write operations.</li>
+<li><strong>Trajectory brittleness</strong> — Success rates degrade sharply with chain length. An agent that succeeds 90% of the time on each step has only a 35% end-to-end success rate over 10 steps.</li>
+<li><strong>Hallucinated intermediate state</strong> — The model "remembers" a tool result that never happened or confuses results from different calls. This is particularly insidious because the model's confidence remains high.</li>
+<li><strong>Poor observability</strong> — Most agent frameworks provide inadequate logging of the model's internal reasoning, tool call parameters, and decision points. When something fails at step 7 of 12, debugging is archaeology.</li>
+<li><strong>Latency and cost</strong> — Multi-step agents are slow and expensive. Each tool call adds network latency, and each reasoning step consumes tokens. Production systems must budget for 10-50x the cost of a single completion.</li>
+</ul>
+<p><strong>Infrastructure failures as a distinct failure class:</strong>
+Production agent failures are not exclusively semantic. Teams obsess over tool-calling correctness and hallucination, but a significant fraction of production failures happen at the infrastructure layer: OOMs, preempted spot instances, network issues, botched retries, state loss, and re-execution waste (Union, AI Engineering Conference, Mar 2026). The answer is durable orchestration built around <strong>replay logs, cross-run caching, intermediate state persistence, infra-aware recovery, and self-healing sandboxes</strong>. The key insight: <strong>context engineering is useless if infrastructure failures erase state</strong>. If a 200-step agent loses all intermediate state on a spot-instance preemption, no amount of prompt work recovers the lost trajectory. Durable replay, resumability, and cheap failure recovery are not "ops garnish" — they are part of the intelligence stack itself. This reframes the reliability problem: semantic correctness and infrastructure durability are co-equal requirements, and production agent architectures must solve both (Union, AI Engineering Conference, Mar 2026).</p>
+<p><strong>The key mitigation:</strong> Frequent verification checkpoints with ground-truth feedback (test execution, schema validation, human review) rather than longer chains with deferred checking.</p>
+<p><strong>Unsolved hard problems beyond plumbing:</strong></p>
+<p>Standardized protocols like MCP and A2A solve the plumbing — how agents access tools and coordinate with each other — but they do not solve agentic reliability (A2A vs MCP architecture overview, 2026). The harder problems remain: trust between agents (how does one agent verify another's outputs?), auth and permissions across organizational boundaries, delegation policies (what is an agent allowed to delegate, and to whom?), memory and state continuity across sessions and agent boundaries, evals for multi-agent workflows (how do you measure end-to-end quality when the pipeline spans multiple agents?), failure recovery and rollback in distributed agent systems, and cost explosion from over-decomposition (splitting a task across too many agents multiplies latency, token spend, and failure surface). Among these, <strong>agent identity</strong> is emerging as a particularly thorny systems problem that goes well beyond "give the agent a service account." When an agent operates across <strong>overlapping human permission zones</strong> — touching files, records, and systems that belong to different people with different access levels — the creator of the agent should not necessarily see everything the agent touches on their behalf. This creates brand-new problems around <strong>partial access</strong>, <strong>creator liability</strong>, <strong>collaborative boundaries</strong>, and <strong>prompt-injection-driven data leaks</strong> where an adversarial input could cause the agent to exfiltrate information across permission boundaries (Aaron Levie, Box, Mar 2026). Agent identity is, in effect, a collaborative file-system problem: not a single principal acting on a single resource, but a synthetic actor navigating a lattice of human permissions that were never designed to accommodate non-human participants. Once the plumbing stabilizes — and MCP is on a trajectory to become baseline infrastructure — the competitive frontier shifts to: orchestration quality, memory and state management, planning and decomposition strategy, verification and evals, and domain-specific agent design (A2A vs MCP architecture overview, 2026). These are the problems where engineering judgment matters more than protocol compliance.</p>
+<h2 id="multi-agent-coordination">Multi-Agent Coordination<a class="headerlink" href="#multi-agent-coordination" title="Permanent link">&para;</a></h2>
+<p>Multi-agent coordination is only useful when structured coordination patterns improve outcomes over a single agent with the same tools. This bar is higher than most implementations acknowledge.</p>
+<p><strong>When it helps:</strong></p>
+<ul>
+<li>Tasks are cleanly decomposable into independent subtasks</li>
+<li>Roles require genuinely different capabilities, tools, or knowledge</li>
+<li>Independent perspectives exist (different models, different evidence, different methodologies)</li>
+<li>Strong aggregation or verification mechanisms are in place</li>
+</ul>
+<p><strong>When it is theater:</strong></p>
+<ul>
+<li>All agents use the same model</li>
+<li>All agents see the same evidence</li>
+<li>All agents use the same prompt structure</li>
+<li>Agents fail in correlated ways</li>
+</ul>
+<p>When these conditions hold, "multi-agent" adds latency and cost without improving correctness. Five copies of the same model will converge on the same wrong answer with high confidence. This is not deliberation — it is redundancy without diversity.</p>
+<p><strong>The correlated failure problem:</strong></p>
+<p>The deepest issue with naive multi-agent architectures is that agents built from the same model share systematic biases. They over-index on the same spurious patterns, miss the same edge cases, and are vulnerable to the same adversarial inputs. Genuine multi-agent value requires at least one of: different base models, different tool sets, different evidence sources, or structurally different verification strategies.</p>
+<p><strong>Productive roles in multi-agent systems:</strong></p>
+<ul>
+<li><strong>Planner</strong> — Decomposes goals, sequences subtasks, manages dependencies</li>
+<li><strong>Retriever</strong> — Searches, filters, and ranks evidence from external sources</li>
+<li><strong>Executor</strong> — Performs actions (code execution, API calls, file operations)</li>
+<li><strong>Critic</strong> — Reviews outputs for logical errors, constraint violations, or hallucinations</li>
+<li><strong>Verifier</strong> — Runs tests, checks invariants, validates against ground truth</li>
+<li><strong>Aggregator / Judge</strong> — Synthesizes outputs from multiple agents, resolves conflicts</li>
+<li><strong>Memory / State Manager</strong> — Maintains shared context, tracks completed steps, manages rollback</li>
+</ul>
+<p><strong>A2A (Agent-to-Agent) — how agents form a society:</strong></p>
+<p>Where MCP standardizes how an agent accesses tools and data, A2A standardizes how agents coordinate with each other across vendors, frameworks, and organizational boundaries (A2A vs MCP architecture overview, 2026). These are complementary protocol layers, not rivals — they solve different parts of the agent stack. A2A uses HTTP transport with JSON-RPC 2.0, supports streaming via server-sent events for long-running workflows, and is modality-agnostic (text, images, files, structured data). The most strategically interesting A2A construct is the <strong>agent card</strong>: a standardized description of what an agent can do, enabling dynamic discovery and delegation (A2A vs MCP architecture overview, 2026). Agent cards are effectively capability advertisement + discovery metadata + loose coupling — they open the door to agent registries, marketplaces, internal service catalogs, and dynamic routing. This is a service-discovery layer for agents, analogous to what DNS and service meshes did for microservices.</p>
+<p><strong>The practical engineering rule for protocol choice:</strong></p>
+<p>Use MCP almost everywhere. Use A2A only when there is genuine specialization, organizational separation, or independent ownership boundaries (A2A vs MCP architecture overview, 2026). This maps directly to the "when it helps vs. when it is theater" distinction above: many "multi-agent" systems today are fake modularity — one weak planner chopped into many weak sub-agents. In those cases A2A adds overhead, latency, and failure surface without improving outcomes. A2A earns its complexity only where the structural diversity requirement is genuinely satisfied — different teams, different capabilities, different ownership.</p>
+<h2 id="decision-protocols">Decision Protocols<a class="headerlink" href="#decision-protocols" title="Permanent link">&para;</a></h2>
+<p>When multiple agents or multiple generations must be reconciled, the choice of decision protocol matters more than the choice of model.</p>
+<p><strong>Best-of-N + Verifier:</strong>
+Generate N candidate solutions, then score each with tests, rules, or validators. The verifier need not be an LLM — executable test suites, schema validators, and constraint checkers are more reliable. This is the workhorse pattern for coding agents.</p>
+<p><strong>Planner + Independent Critics:</strong>
+One agent proposes a plan. Others independently check logic, constraints, evidence quality, and risk. Critics should not see each other's assessments before submitting their own (to avoid anchoring). Disagreements are surfaced explicitly rather than averaged away.</p>
+<p><strong>Specialist Committee + Weighted Quorum:</strong>
+Retrieval agent, execution agent, compliance agent, and a judge. Each specialist contributes from its domain; the judge resolves conflicts with explicit reasoning. Weights can reflect track record or domain relevance.</p>
+<p><strong>Evidence-Based Voting:</strong>
+Votes count only when accompanied by cited evidence, tool outputs, or execution traces. Unsupported assertions are discarded. This eliminates the failure mode where agents vote confidently based on vibes.</p>
+<p><strong>Preference hierarchy (most to least reliable):</strong></p>
+<ol>
+<li>Direct verification (test passes, schema validates, output matches spec)</li>
+<li>Verifier model or executable rubric</li>
+<li>Weighted specialist voting with cited evidence</li>
+<li>Naive majority voting</li>
+<li>Unconstrained debate</li>
+</ol>
+<p>The guiding principle: <strong>consensus is not correctness.</strong> A shared blind spot produces shared delusion. Always prefer verification mechanisms that are structurally independent of the generation process.</p>
+<h2 id="local-edge-agents">Local &amp; Edge Agents<a class="headerlink" href="#local-edge-agents" title="Permanent link">&para;</a></h2>
+<p>Agentic capabilities are no longer exclusive to cloud-hosted frontier models. Recent dense architectures run meaningful agent workloads on consumer hardware.</p>
+<p><strong>Qwen3.5 series:</strong></p>
+<ul>
+<li><strong>Qwen3.5-27B</strong> — Dense architecture that matches the 122B MoE variant on coding performance and scores +2 points on agentic benchmarks. Runs on a single GPU with 24GB+ VRAM (e.g., RTX 3090/4090).</li>
+<li><strong>Qwen3.5-9B</strong> — Capable as a local agent on M1 Pro / 16GB via Ollama. Sufficient for tool-calling workflows with moderate context windows. The cost is zero marginal tokens, making iterative agent loops economically viable for development and testing.</li>
+</ul>
+<p><strong>llama.cpp autoparser:</strong>
+Automatic parser generator that extracts parsing logic from Jinja templates, enabling structured output and tool-call formatting without server-side post-processing. This closes a key gap for local agent deployment: reliable structured generation at the inference engine level.</p>
+<p><strong>Practical implications:</strong></p>
+<ul>
+<li>Development and testing of agentic workflows can happen entirely locally, reducing iteration time and cost</li>
+<li>Privacy-sensitive agent tasks (document processing, code review) can stay on-device</li>
+<li>Hybrid architectures become viable: local model for planning and routing, cloud model for high-stakes generation or verification</li>
+<li>The "agent tax" (latency and cost of multi-step execution) drops dramatically when inference is local</li>
+</ul>
+<h2 id="production-patterns">Production Patterns<a class="headerlink" href="#production-patterns" title="Permanent link">&para;</a></h2>
+<p><strong>OpenAI Responses API (March 2025):</strong>
+Explicit production-grade agentic infrastructure with file search, web search, and computer use as built-in tools. The Agents SDK provides orchestration primitives (handoffs, guardrails, tracing). Observability is a first-class feature — traces capture every tool call, model decision, and intermediate result. The pricing model treats agentic tool use as a billable surface, signaling that this is a revenue product, not a research preview.</p>
+<p><strong>Anthropic agentic safety:</strong>
+System cards now evaluate prompt injection resistance and agentic safety as primary metrics. This reflects the reality that agents with tool access have a fundamentally different risk profile than chat completions — a prompt injection that triggers a tool call can have real-world side effects.</p>
+<p><strong>OpenAI Codex (March 2026):</strong>
+The most mature production agentic coding system to date, with 1M+ weekly active users and 5x growth since January 2026. Codex validates several principles discussed earlier in this document by implementing them at scale. The core agent loop is a 5-step state machine written in Rust — (1) gather context, (2) call model, (3) parse for tool calls, (4) execute in sandbox, (5) loop or return — which is the production-hardened version of the ReAct pattern and the planner-executor loop described in the coordinator section above. Every code execution runs inside a Firecracker microVM with restricted network, ephemeral filesystem, and per-agent resource limits; this is the architectural answer to the "blast radius" concern from the tool permissioning discussion — safety enforced by infrastructure rather than prompt-level guardrails. Codex runs 4-8 concurrent agents per session, each in isolated microVMs operating on independent subtasks. This is genuine multi-agent parallelism that clears the bar set out in the coordination section: agents bring independent execution environments and independent subtasks, not the "same model debating itself" pattern that produces correlated failures. When conversations exceed context limits, a compaction step summarizes prior context while preserving task state, file changes, and test results — the practical implementation of treating context as a scarce resource. Perhaps the strongest empirical signal: OpenAI reports that &gt;90% of Codex's own codebase was written by Codex itself, suggesting agentic coding has crossed a self-hosting threshold where the tool is productive enough to build and maintain itself.</p>
+<p><strong>Custom tool pipelines (the OpenClaw direction):</strong>
+The emerging production pattern is not "give the model all the tools" but "build task-specific capability layers":</p>
+<ul>
+<li>Small purpose-built agents with 3-5 custom tools</li>
+<li>Tightly scoped workflows with explicit state machines</li>
+<li>Structured action spaces that constrain the model to valid operations</li>
+<li>Verification at every state transition, not just at the end</li>
+</ul>
+<p>OpenClaw works where AutoGPT (2023) failed despite sharing the same broad architecture — an LLM in a loop calling tools. The difference is not the pattern but the harness: stronger base models (a step change starting around summer 2024 made models good enough to run reliably in loops), smarter context handling, better execution environments (sandboxes, file systems), and better control primitives around the model. The harness now gives the model a better operating environment rather than over-constraining it. The field has accordingly shifted away from hand-crafted chains and graphs toward longer-running autonomous loops where the model manages its own execution.</p>
+<p><strong>What production deployments share:</strong></p>
+<ul>
+<li>Explicit tool permissioning (not all tools available at all times)</li>
+<li>Structured logging of every agent decision and tool call</li>
+<li>Cost and latency budgets per task (with circuit breakers)</li>
+<li>Human-in-the-loop checkpoints for high-stakes operations</li>
+<li>Graceful degradation when the agent fails (fallback to simpler workflows or human handoff)</li>
+<li><strong>Observability as product, not DevOps</strong> — traces, evals, debugging, failure clustering, LLM-as-judge, and trace-driven improvement loops are part of the agent product itself, not a post-launch operational concern</li>
+</ul>
+<p><strong>The enterprise pattern — controlled agent self-management:</strong>
+The winning enterprise deployment pattern is not full-open OpenClaw autonomy but <strong>OpenClaw-shaped behavior inside a constrained box</strong>: code sandbox, scoped tools, event-driven execution, aggressive tracing, procedural memory, explicit approval checkpoints, identity boundaries, rollback mechanisms, latency/cost ceilings, and selective autonomy. Not "agent freedom" but controlled self-management — the harness determines whether you get a demo or a product.</p>
+<p><strong>Azure AI agent harness (March 2026):</strong>
+Microsoft's agent stack has matured enough to support full harness builds. The clean mental model: <strong>Foundry/Agent Framework gives agent primitives; the harness is the engineered wrapper that makes those primitives deterministic, inspectable, and safe for business workflows</strong>. Microsoft Agent Framework positions itself as the successor to Semantic Kernel and AutoGen, with session state, telemetry, and workflow control; Foundry Agent Service is the managed runtime for building and operating agents across dev, deployment, and production (Microsoft Learn, Mar 2026).</p>
+<p>The pragmatic approach is <strong>two-speed architecture</strong> — demo both paths, but build only one real harness:</p>
+<ul>
+<li><strong>Path A (30-minute proof):</strong> Foundry Agent Service + hosted agent + playground. Managed hosting, built-in tools, playground testing. The hosted-agent quickstart deploys a containerized agent via <code>azd up</code> and validates in the Foundry playground. Good demo optics, fast time-to-value (Microsoft Learn, Mar 2026).</li>
+<li><strong>Path B (real harness):</strong> Agent Framework workflow in code, deployed on Azure Functions Durable or App Service, with Foundry traces/evals wired in. Code-first orchestration, long-running workflows, event triggers, pause/resume, deterministic flow control. This is the answer to "can this be productionized?" (Microsoft Learn, Mar 2026).</li>
+</ul>
+<p>Foundry's own App Service tutorial frames the trade-off explicitly: code-first frameworks (LangGraph, Agent Framework) give more control and speed locally, while Foundry Agent Service gives managed integration, playground testing, autoscaling, and built-in guardrails/identity (Microsoft Learn, Mar 2026). The Azure mapping to the six-layer harness model (defined in the Harness Engineering section below): model + agent runtime via Foundry project/Agent Service; workflow/orchestration via Agent Framework workflows or Foundry workflow UI; tools via OpenAPI endpoints, Azure Functions, or MCP; state via Foundry persistent history or custom store; observability via Application Insights + OpenTelemetry + Foundry traces; evaluation via Azure AI Evaluation SDK and Foundry evaluators (Microsoft Learn, Mar 2026).</p>
+<p><strong>Proving a harness demo — the five-screen sequence:</strong>
+The mistake is demoing a chat answer. The proof is <strong>evidence</strong>. Show five screens in order: (1) <strong>architecture slide</strong> — one-page diagram of user → harness controller → agents/tools → checker → logs/evals; (2) <strong>live run</strong> — submit a request requiring at least one tool call; (3) <strong>trace view</strong> — execution trace with spans for LLM calls, tool calls, and agent decisions via Foundry/OpenTelemetry; (4) <strong>failure injection</strong> — break one tool, show the harness retries/falls back/returns a controlled error instead of hallucinating — <em>this is the real harness moment</em>; (5) <strong>eval report</strong> — tiny JSONL test set with metrics (groundedness, relevance, tool-call accuracy, task completion) via Azure Evaluation SDK (Microsoft Learn, Mar 2026). Once you show this sequence, the audience stops seeing "AI demo" and starts seeing "software system."</p>
+<p>A concrete harness demo that works: <strong>"Ops Resolution Harness"</strong> — input: "Customer shipment delayed; explain cause and next action." Agent 1 classifies request, Agent 2 retrieves shipment facts from mock API, Agent 3 recommends action, checker agent validates groundedness and required fields, final answer is structured response with confidence and cited tool outputs. This demonstrates routing, tool use, multi-step orchestration, verification, and traceability while avoiding the impossible promise of full autonomy. Microsoft explicitly warns against complex nondeterministic patterns where deterministic routing suffices; for demos, deterministic wins (Microsoft Learn, Mar 2026).</p>
+<p><strong>Azure harness reference repos:</strong></p>
+<ul>
+<li><strong>microsoft/agent-framework</strong> — core framework (GitHub, Mar 2026)</li>
+<li><strong>Azure-Samples/ai-foundry-agents-samples</strong> — Foundry agent samples (GitHub, Mar 2026)</li>
+<li><strong>Azure-Samples/get-started-with-ai-agents</strong> — quick bootstrap (GitHub, Mar 2026)</li>
+<li><strong>Azure-Samples/app-service-mcp-foundry-agent-python</strong> — MCP + Foundry pattern (GitHub, Mar 2026)</li>
+<li><strong>Azure-Samples/app-service-agentic-langgraph-foundry-python</strong> — managed vs code-first tradeoff (GitHub, Mar 2026)</li>
+</ul>
+<h2 id="harness-engineering-context-engineering">Harness Engineering &amp; Context Engineering<a class="headerlink" href="#harness-engineering-context-engineering" title="Permanent link">&para;</a></h2>
+<p>The frontier has moved from model prompting to <strong>environment design</strong>. Not just "which model," but what permissions it has, what files it can write, how it compacts context, how it plans, how it gets interrupted, how it is observed, and how it recovers. Harness engineering — designing the environment, control primitives, and verification loops around the model — has emerged as its own discipline, distinct from prompt engineering and distinct from model development.</p>
+<p><strong>The core thesis:</strong> Agent failures are usually <strong>context failures</strong>, not pure reasoning failures. The model had the wrong information, in the wrong format, at the wrong time. Context engineering — ensuring the right information reaches the model in the right format at the right moment — is a first-class systems problem, not a prompt-tuning exercise.</p>
+<p><strong>The six-layer harness model:</strong>
+A production harness decomposes into six distinct layers (Microsoft Learn, Mar 2026):</p>
+<ol>
+<li><strong>Entry/control plane</strong> — API gateway, chat UI, or event trigger that initiates the workflow</li>
+<li><strong>Router/orchestrator</strong> — decides which agent, tool, or pattern handles each request</li>
+<li><strong>Execution layer</strong> — one agent or multiple agents in sequential, concurrent, handoff, or maker-checker patterns</li>
+<li><strong>Tool layer</strong> — OpenAPI endpoints, functions, MCP tools, databases, retrieval systems</li>
+<li><strong>State + policy layer</strong> — session memory, approval gates, retry limits, budget/timeouts, content policy</li>
+<li><strong>Evidence layer</strong> — traces, evals, run logs, quality metrics</li>
+</ol>
+<p>This layering clarifies a common source of confusion: most people who say "agent harness" really mean one of three things — a chat assistant with tools, a workflow engine with LLM steps, or a multi-agent orchestration pattern. A real harness is the <strong>engineering envelope</strong> around all three. The clean one-sentence version: <strong>"An agent harness is the runtime control and verification layer that turns an LLM-based agent from a prompt-driven demo into an observable, tool-governed, testable workflow."</strong> The distinction is between reasoning (the agent's job) and control (the harness's job).</p>
+<p><strong>Context empathy — "think like the model":</strong>
+The most practically useful reframing of context engineering is empathy: mentally simulate the model's situation before blaming its output (OpenClaw founder interview, 2026). Engineers routinely complain that agents are weak, but the conditions they provide are often terrible — minimal context, ambiguous task descriptions, no mechanism for the agent to ask clarifying questions, and an enormous unknown codebase dumped into a single prompt. The recommendation is to treat context design as an engineering primitive: before running the agent, ask what it would be like to receive this task with this information in this environment. A large share of current agent failures are not model failures but <strong>specification failures</strong> — bad task framing, absent state management, poor decomposition, and weak environment design (OpenClaw founder interview, 2026). This connects directly to the core thesis above: if agent failures are context failures, then the engineer's job is to build environments where the model has a reasonable chance of succeeding, not to expect the model to compensate for an impoverished operating context.</p>
+<p><strong>Adapting work to agents, not agents to work:</strong>
+Context empathy has an organizational corollary that most AI discourse gets backwards. The default assumption is that better models will eventually absorb the messiness of existing knowledge work, but the harsher and probably more correct position is that <strong>enterprises will need to restructure their workflows around agent affordances</strong> rather than waiting for agents to perfectly fit existing processes (Aaron Levie, Box, Mar 2026). The reason coding changed first is instructive: engineers already had ideal conditions — broad access to code, <strong>text-in/text-out workflows</strong>, technical users with strong documentation habits, and <strong>tight feedback loops</strong> that let agents iterate productively. The rest of knowledge work does not have those properties. Sales, legal, finance, and operations run on fragmented data, implicit process knowledge, and permission-tangled collaboration patterns that no model improvement alone will untangle. The implication is that the enterprise adoption bottleneck is not model capability but <strong>workflow re-engineering</strong> — organizations must redesign their processes to expose the structured inputs, clean feedback signals, and scoped action spaces that agents require to function reliably (Aaron Levie, Box, Mar 2026). This directly reinforces the context empathy thesis above: if agent failures are specification failures, the fix is not a smarter model but a better-specified environment, and at the organizational level that means changing how work is structured.</p>
+<blockquote>
+<p><strong>Key:</strong> "We adapt work to agents" — not "agents adapt to our work" — is the strongest framing of the enterprise adoption challenge. The organizations that restructure fastest will capture agent value first; the ones that wait for models to absorb messy reality will wait indefinitely (Aaron Levie, Box, Mar 2026).</p>
+</blockquote>
+<p><strong>Workflow capture as the emerging moat:</strong>
+Context engineering has a strategic corollary that goes beyond session-level correctness. As Dylan Patel argues, the real value of coding agents is not code generation — it is <strong>workflow capture</strong>. As agents handle more of the development lifecycle (planning, coding, testing, deploying, monitoring), they accumulate understanding of the organization's codebase, conventions, deployment patterns, and business logic. This captured workflow knowledge becomes a switching-cost moat: migrating to a different agent means losing institutional knowledge that took months to accrue. The implication for agent builders is that optimizing for workflow capture — persistent memory of project conventions, learned deployment sequences, internalized code review standards — matters more than optimizing for raw code quality on benchmarks. The agent that understands <em>how your team ships</em> is harder to replace than the agent that writes marginally better functions. This connects directly to the skills and file-system primitives described below: they are the mechanisms through which workflow knowledge gets encoded and persisted across sessions.</p>
+<p><strong>Deep Agents architecture (Harrison Chase / LangChain, March 2026):</strong>
+Harrison Chase frames production-grade agents as having six core primitives, the first four established and the last two emerging:</p>
+<ol>
+<li><strong>Planning via to-do list</strong> — The agent maintains an explicit task decomposition that it updates as work progresses, providing structure to long-running execution</li>
+<li><strong>Subagents for focused work</strong> — Delegate subtasks to specialized workers with scoped context, preventing a single agent from accumulating irrelevant state</li>
+<li><strong>File system for context control</strong> — The most novel primitive. The file system is treated as a first-class agent affordance: the model dumps long outputs to files, reads them back selectively, keeps notes, and avoids polluting the active prompt window. This turns context management into an environmental capability the model actively controls, rather than a passive window it fills up</li>
+<li><strong>Heavy prompting / system instructions</strong> — Repo-level instruction files (AGENTS.md, CLAUDE.md) that encode constraints, conventions, and verification contracts</li>
+<li><strong>Code execution / sandboxes</strong> (emerging) — Sandboxed environments where the agent can run code, test hypotheses, and observe results without risk to the host system</li>
+<li><strong>Skills</strong> (emerging) — A distinct primitive from tools and subagents: not preloaded APIs, not separate workers, but <strong>lazily-loaded knowledge and instructions</strong>. Skills reduce prompt bloat by staying out of the active context until invoked, while keeping behavior modular and composable</li>
+</ol>
+<p><strong>Coding agents as general-purpose agents — and labor compression:</strong>
+A contrarian but well-supported thesis: coding agents are the first general-purpose agent architecture. Code execution, file systems, and sandboxes create a flexible substrate for many non-coding tasks — data analysis, document processing, system administration, research. The agent writes code to accomplish goals rather than relying on pre-built tool APIs, making the action space effectively unbounded while remaining verifiable (code either runs or it doesn't).</p>
+<p>A related effect is what might be called <strong>learning-tax collapse</strong>: agents pull engineers into "side quests" outside their native discipline. A frontend person can push into recommender systems; an ML engineer can ship React. The difficulty has not disappeared, but the learning tax has collapsed enough that every engineer becomes a "mini R&amp;D department," capable of productive excursions into adjacent domains that would previously have required specialist hiring or weeks of ramp-up (AI Engineering Conference, Mar 2026).</p>
+<p>The economic implication is sharper than the "copilot" framing suggests. Dylan Patel's thesis: coding agents are the first AI application that genuinely <strong>compresses labor</strong> — not augments, compresses. A single developer with a coding agent can do what previously required 3-5 developers. The distinction matters. "Copilot" implies assistance — the human does the same work, faster. "Compression" implies fewer humans for the same output. This has profound downstream effects: startups can ship products with 2-3 engineers that previously required 10, burn rates drop, iteration speed increases, and the economics of software development shift structurally. Combined with the Codex self-hosting signal (&gt;90% of its own codebase written by itself), the evidence points toward coding agents not merely accelerating existing workflows but collapsing the labor input required to produce and maintain software.</p>
+<p><strong>Infrastructure layers (LangGraph framing):</strong>
+The agent stack separates into three layers: (1) <strong>infrastructure/runtime</strong> (durable execution, persistence, HITL, streaming — LangGraph's positioning), (2) <strong>agent abstraction</strong> (relatively unopinionated model-tool coordination — LangChain's layer), and (3) <strong>opinionated harness</strong> (batteries-included context engineering with built-in planning, subagents, skills, memory — the "Deep Agents" pattern). The infrastructure layer is table stakes; the harness layer is where differentiation lives. Cutting across all three layers are two protocol-level concerns that are now stabilizing: <strong>MCP as the standard interface between agents and the world</strong> (tools, data, systems) and <strong>A2A as the standard interface between agents</strong> (coordination, delegation, discovery) (A2A vs MCP architecture overview, 2026). The mental model: MCP = how an agent touches the world; A2A = how agents form a society. MCP will likely become baseline infrastructure — the expected way any agent accesses any external capability. A2A may become important only where agent specialization is real rather than theater, which maps to the structural diversity requirement discussed in the coordination section above.</p>
+<p><strong>The operating system for agentic work:</strong>
+Dylan Patel frames the next platform shift as the <strong>operating system for agentic work</strong>: an environment where multiple agents collaborate, share context, and coordinate across tasks. Today's agents are fundamentally single-player — one agent, one task, one context window. The future is multi-agent orchestration where a "manager" agent delegates to specialized agents (frontend, backend, testing, deployment), each with persistent memory and independent tool access. This reframes the multi-agent coordination question from "does it help on a single task?" (often no, per the correlated failure analysis above) to "can it orchestrate an entire workflow across roles?" — a setting where the structural diversity requirement is naturally satisfied because each agent operates in a genuinely different domain with different tools. The company that builds this OS — the runtime, the shared memory layer, the inter-agent protocol, the permission model — captures the entire software development workflow. This is the logical extension of the infrastructure-layer thesis: if the harness is where differentiation lives today, the multi-agent OS is where platform lock-in lives tomorrow.</p>
+<p>This thesis is now materializing in concrete products. <strong>LangChain launched LangSmith Fleet</strong> (Mar 2026), an enterprise workspace for creating and managing a <strong>fleet of agents</strong> with agent identity, credential management, sharing controls, Slack exposure, permissioning, and auditability — treating agent management as infrastructure, not a feature. <strong>Cognition added teams of Devins</strong>, where Devin decomposes work and delegates to parallel Devins running in separate VMs. <strong>AgentUI</strong> (@lvwerra) coordinates code, search, and multimodal specialist agents through a multi-agent interface. The recurring discourse is that "agent" is no longer a useful abstraction by itself — the right metaphor is an <strong>AI operating system</strong> that allocates work, resources, and execution contexts (@YuvalinTheDeep, Latent Space AINews, Mar 2026). Complementing this, @hrishioa argues that long-horizon agentic work now requires a <strong>dedicated runtime</strong> with checkpointing, rollback, provider-specific harness switching, and execution repair — moving agent infrastructure closer to application server design than chatbot wrapper design. A key throughline: production agent deployment is now bottlenecked less by "can the model do it?" and more by <strong>permissions, blast radius control, and observability</strong> (@swyx, Latent Space AINews, Mar 2026).</p>
+<p><strong>Agents as compute substrate — beyond the laptop:</strong>
+Once engineers run many agents in parallel, the laptop becomes the wrong place for serious agent work. The shift is from agents as terminal-side assistants to agents as a <strong>new compute substrate</strong>: orchestration moves agent execution into managed cloud environments with visibility, handoff, hosting, environment definitions, and APIs (Warp, AI Engineering Conference, Mar 2026). In this framing, agents become <strong>programmable building blocks</strong> for automations and applications — not IDE features but infrastructure primitives that are composed, deployed, and monitored like any other compute workload. This is the logical next step of the operating-system thesis above: if the future is multi-agent orchestration across roles, then the execution environment must be a hosted, observable, API-accessible platform, not a developer's local machine (Warp, AI Engineering Conference, Mar 2026).</p>
+<p><strong>Interface collapse — the post-app thesis:</strong>
+The agentic OS thesis has a sharper corollary: the application interface itself is collapsing. The transition is from the old model (human uses application) to a new model (human delegates intent to agent, agent uses applications). Apps do not disappear — they become backend capabilities. The agent becomes the foreground. The strategic layer accordingly shifts from screen flows, menus, and SaaS features to a new set of primitives: tool access, context design, identity and personality, permissioning, memory, and orchestration (OpenClaw founder interview, 2026). Many existing applications are effectively "slow APIs with UI," and agents will absorb that interface layer. The concrete picture: a user no longer opens email, calendar, and contacts as separate applications but interacts with an agent that orchestrates all three in the background. This is post-app software — not the elimination of applications but the demotion of their interfaces from foreground to substrate (OpenClaw founder interview, 2026). The implication for builders is that defensibility migrates away from UI polish and feature breadth toward the orchestration layer: how well your agent coordinates backend capabilities, maintains context across them, and presents a unified interaction surface. This interface collapse also opens <strong>agent-focused new markets</strong> that do not exist in the pre-agentic stack. As agents become the primary consumers of APIs and services, those services need to be discoverable not just to humans but to agents — which makes <strong>technical marketing and DevRel strategically central</strong> in a way it never was when the audience was purely human developers (Aaron Levie, Box, Mar 2026). Beyond DevRel, large openings are emerging for <strong>agent-focused professional services</strong> (helping enterprises re-engineer workflows for agent consumption), <strong>eval tooling</strong> (measuring agent performance across multi-step workflows), and <strong>observability platforms</strong> purpose-built for agentic execution traces. The post-app world does not merely redistribute existing software value — it creates new categories of work centered on making the agent-mediated substrate legible, reliable, and commercially navigable (Aaron Levie, Box, Mar 2026).</p>
+<p><strong>UX shift for long-running agents:</strong>
+When agents run for 30 minutes or 2 hours, chat becomes the wrong interface. The UX must shift from <strong>synchronous chat to asynchronous inbox/event-driven patterns</strong>: background execution with progress notifications, event streams, approval gates that surface only when human input is needed, and summary reports on completion. This is a fundamental design constraint for enterprise agent products.</p>
+<p><strong>Market acceptance may outpace engineering confidence:</strong>
+A recurring signal from early deployments is that non-technical users, when shown an agent proposing concrete workflows, immediately want the system — even when reliability is visibly imperfect. The characteristic response is: "Yes, [agents are unreliable]. So are humans. Give me this." (OpenClaw founder interview, 2026). This suggests the market may accept imperfect agentic systems much earlier than most engineers expect, provided <strong>value density</strong> is high enough — that is, the agent demonstrably handles enough of a real workflow to justify tolerating its failure rate. The implication for product strategy is that waiting for near-perfect reliability before shipping may be the wrong optimization target; shipping with transparent failure modes and high-value coverage of actual tasks may capture adoption faster than polishing edge-case accuracy. This also reinforces the UX shift above: if users accept imperfection, the design challenge is not hiding failures but making them legible, recoverable, and cheap.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

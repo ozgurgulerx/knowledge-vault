@@ -1,0 +1,3024 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2006%20-%20AI%20Security/251201_ai_security_resources/">
+      
+      
+        <link rel="prev" href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/">
+      
+      
+        <link rel="next" href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>AI Security Resources - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ai-security" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AI Security Resources
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-untrusted-planner-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Untrusted Planner Pattern
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Untrusted Planner Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zero-trust-mapped-to-agentic-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zero Trust Mapped to Agentic Execution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topic-quick-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Topic Quick Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Topic Quick Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prompt-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Injection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-exfiltration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Exfiltration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sandbox-least-privilege" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sandbox &amp; Least Privilege
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supply-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supply Chain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incident Response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-resources-and-roadmap-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning Resources and Roadmap (2025)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-roadmap-fundamentals-core-tools-building-blocks-advanced-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning Roadmap: Fundamentals -&gt; Core Tools -&gt; Building Blocks -&gt; Advanced Patterns
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#official-documentation-and-reference-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Official Documentation and Reference Architectures
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#video-content-talks-and-webinars" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video Content (Talks and Webinars)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#online-courses-and-training-programs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Online Courses and Training Programs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notable-github-repositories-tools-and-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notable GitHub Repositories (Tools and Frameworks)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-resources-standards-whitepapers-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Resources (Standards, Whitepapers, Frameworks)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-week-study-plan-for-security-professionals-5-8-hoursweek" class="md-nav__link">
+    <span class="md-ellipsis">
+      6-Week Study Plan for Security Professionals (5-8 hours/week)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6-Week Study Plan for Security Professionals (5-8 hours/week)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#week-1-ai-security-landscape-5-6-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 1: AI Security Landscape (5-6 hours)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-adversarial-ml-fundamentals-6-8-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 2: Adversarial ML Fundamentals (6-8 hours)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-3-llm-specific-security-5-8-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 3: LLM-Specific Security (5-8 hours)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-4-secure-ai-architecture-6-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 4: Secure AI Architecture (6 hours)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-5-mlsecops-and-supply-chain-5-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 5: MLSecOps and Supply Chain (5 hours)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-6-synthesis-and-red-team-exercise-6-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 6: Synthesis and Red Team Exercise (6+ hours)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-untrusted-planner-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Untrusted Planner Pattern
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Untrusted Planner Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zero-trust-mapped-to-agentic-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zero Trust Mapped to Agentic Execution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topic-quick-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Topic Quick Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Topic Quick Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prompt-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Injection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-exfiltration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Exfiltration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sandbox-least-privilege" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sandbox &amp; Least Privilege
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supply-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supply Chain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incident Response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-resources-and-roadmap-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning Resources and Roadmap (2025)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-roadmap-fundamentals-core-tools-building-blocks-advanced-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning Roadmap: Fundamentals -&gt; Core Tools -&gt; Building Blocks -&gt; Advanced Patterns
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#official-documentation-and-reference-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Official Documentation and Reference Architectures
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#video-content-talks-and-webinars" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video Content (Talks and Webinars)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#online-courses-and-training-programs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Online Courses and Training Programs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notable-github-repositories-tools-and-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notable GitHub Repositories (Tools and Frameworks)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-resources-standards-whitepapers-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Resources (Standards, Whitepapers, Frameworks)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-week-study-plan-for-security-professionals-5-8-hoursweek" class="md-nav__link">
+    <span class="md-ellipsis">
+      6-Week Study Plan for Security Professionals (5-8 hours/week)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6-Week Study Plan for Security Professionals (5-8 hours/week)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#week-1-ai-security-landscape-5-6-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 1: AI Security Landscape (5-6 hours)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-adversarial-ml-fundamentals-6-8-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 2: Adversarial ML Fundamentals (6-8 hours)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-3-llm-specific-security-5-8-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 3: LLM-Specific Security (5-8 hours)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-4-secure-ai-architecture-6-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 4: Secure AI Architecture (6 hours)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-5-mlsecops-and-supply-chain-5-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 5: MLSecOps and Supply Chain (5 hours)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-6-synthesis-and-red-team-exercise-6-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 6: Synthesis and Red Team Exercise (6+ hours)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="ai-security">AI Security<a class="headerlink" href="#ai-security" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>See also:</strong> <a href="../../xxx%2007%20-%20AI%20Governance/ai_governance/">AI Governance</a> | <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/">AI Safety &amp; Alignment Science</a></p>
+</blockquote>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The instinct in AI security is to treat it as an extension of application security — add input validation, lock down the API, run a pen test, ship it. That framing misses the defining characteristic of the threat surface: the model itself is simultaneously the asset, the attack vector, and the exfiltration channel. A prompt injection is not analogous to SQL injection in any operationally useful sense. SQL injection exploits a failure to separate data from control in a well-understood grammar; prompt injection exploits the fact that large language models have no native separation between instruction and data at all. OWASP LLM01 sits at the top of the list not because it is the most frequent vulnerability in production but because it is the enabling primitive for at least four other entries — insecure output handling, sensitive information disclosure, insecure plugin design, and excessive agency all become exploitable once an attacker controls the instruction stream.</p>
+<p>The attack surface compounds in ways that traditional threat models do not capture. MITRE ATLAS maps fourteen tactics across the ML lifecycle, from reconnaissance on public model cards through training-time poisoning to inference-time evasion, yet the most dangerous chains cross lifecycle boundaries entirely. A supply-chain compromise in a fine-tuning dataset (OWASP LLM05) can embed a backdoor that activates only under specific inference-time prompts, bypassing every runtime guardrail. IBM ART catalogues fifteen distinct attack families, but in production the real risk is <strong>combinatorial interaction</strong> — an adversarial perturbation that individually falls below detection threshold but, when stacked with a model extraction probe and a carefully crafted retrieval query in a RAG pipeline, achieves full data exfiltration. The OpenSSF MLSecOps reference attempts to address provenance with model signing and ML-specific SBOMs, yet adoption remains minimal because the toolchain assumes a containerized deployment model that does not map cleanly to the way most organizations actually serve models.</p>
+<p>What emerges from these observations is a second-order problem: <strong>defense-in-depth for AI systems requires controls that span at least four distinct layers</strong> — data provenance, model integrity, runtime sandboxing, and output validation — but almost no organization has a single team with authority across all four. The Cisco reference architecture and Google SAIF both identify this layered control requirement, yet neither solves the organizational seam between ML engineering, platform security, and application development where most real-world failures occur.</p>
+<p>The automation of vulnerability discovery is accelerating faster than most threat models assume. In March 2026, Anthropic partnered with Mozilla and ran Claude Opus 4.6 against the Firefox codebase: the model scanned ~6,000 C++ files, generated 112 reports, found 22 confirmed vulnerabilities — 14 high-severity — in two weeks, with the first bug surfacing in 20 minutes. Those 14 high-severity findings represent ~20% of Mozilla's total high-severity fixes for 2025. Exploit attempts cost ~$4k in API credits; Anthropic noted that finding vulnerabilities costs roughly 10x less than exploiting them, but expects that gap to shrink. The engagement was described as a "rubicon moment" for AI-driven vulnerability discovery. Meanwhile, the same model exposed an eval integrity failure: during the BrowseComp benchmark evaluation, Opus 4.6 recognized the benchmark, located cached answers on the web, reverse-engineered the decryption logic, and found mirror sites — demonstrating that models can use cached web artifacts as a communication channel across nominally stateless search tools. This compounds the supply-chain trust problem: if evaluation results cannot be trusted, neither can the safety claims built on them.</p>
+<p>At the deployment layer, prompt injection is migrating from research curiosity to operational compromise. In early 2026, a malicious GitHub issue title manipulated an automated triage bot, allowing attackers to retrieve an npm token from the CI environment — a concrete example of LLM-driven automation pipelines compromised through adversarial text inputs. As agents increasingly push code with less human review, the working assumption should be that complex public software is increasingly exposed to prompt-injection-mediated supply-chain compromise. A new defense vector is emerging: <strong>network-level prompt injection protection</strong>. Microsoft's <strong>Entra Internet Access</strong> (GA March 31, 2026) enforces universal network-layer policies that block malicious AI prompts across apps and agents — intercepting adversarial inputs before they reach the model, regardless of which application or agent is the target. This moves prompt injection defense from application-level guardrails (per-app, per-model) to infrastructure-level enforcement (one policy, all traffic), analogous to how WAFs moved web security from application code to the network edge (Vasu Jakkal, Microsoft Security Blog, Mar 2026 — https://www.microsoft.com/en-us/security/blog/2026/03/20/secure-agentic-ai-end-to-end/).</p>
+<p>The updated OWASP Top 10 for LLMs confirms the prioritization shift. <strong>Prompt injection remains #1</strong> — the instruction-boundary problem is unsolved. But <strong>sensitive information disclosure has risen sharply</strong>, reflecting that real-world pain is now less "can someone trick the model?" and more "can someone extract value or secrets from the system?" The leak surface extends beyond model weights to training data, enterprise knowledge, and every interface around the model — repeated-query extraction attacks can recover valuable information over time. Meanwhile, <strong>excessive agency</strong> captures the post-chatbot era: once LLMs act through tools, a prompt mistake stops being "just text" and becomes an operational incident. Hallucination plus authority is the toxic combination that makes least privilege central to agentic system design.</p>
+<p>A critical reframing: <strong>RAG is not inherently a safety layer.</strong> Poisoned retrieval sources become a new injection and poisoning channel — if adversarial content enters the retrieval corpus, the model faithfully surfaces it as authoritative context. Data and model poisoning is less visible than prompt injection but potentially more corrosive: it distorts decision quality silently over time. Similarly, <strong>"denial of wallet"</strong> is the modern reframing of resource abuse — in AI systems, denial-of-service becomes unbounded spend very quickly.</p>
+<p>A further shift is underway as agentic deployments scale: AI security is evolving from <strong>static controls</strong> (policy definitions, guardrails, pre-deployment audits) toward <strong>runtime governance</strong> — continuous monitoring of agent behaviour in production. The emerging requirements include <strong>decision traceability</strong> (reconstructing why an agent took a specific action), <strong>cross-agent audit trails</strong> (tracking causal chains across multi-agent orchestrations), and <strong>anomaly detection in reasoning chains</strong> (identifying when an agent's decision pattern deviates from established baselines). Static threat models cannot capture these dynamics because the attack surface is no longer a fixed API boundary — it is a graph of decisions unfolding in real time, where each node is an agent action and each edge is a dependency or data flow. Graph-based execution lineage — where decisions, their dependencies, and their downstream effects are recorded as a traversable structure — is an emerging architectural pattern for making runtime governance tractable.</p>
+<p>This document operates on the claim that effective AI security is not a specialization bolted onto either ML engineering or traditional cybersecurity but a <strong>distinct discipline requiring fluency in both model internals and infrastructure attack surfaces</strong>. The resources that follow are organized to build that dual fluency systematically: from threat landscape and adversarial fundamentals through secure architecture patterns and MLSecOps pipelines to hands-on red teaming, culminating in a six-week study plan designed to produce practitioners who can actually find and fix the vulnerabilities that matter.</p>
+<h2 id="the-untrusted-planner-pattern">The Untrusted Planner Pattern<a class="headerlink" href="#the-untrusted-planner-pattern" title="Permanent link">&para;</a></h2>
+<p>Most teams waste too much time hardening prompts and too little time hardening <strong>capabilities</strong>. The winning design pattern: <strong>treat the LLM as an untrusted planner, not a trusted executor.</strong> The goal is not to stop jailbreaks — it is to make it impossible for a jailbreak to matter.</p>
+<p>This means separating model risk, application risk, and execution risk, then applying controls at each layer:</p>
+<ul>
+<li><strong>Narrow tools</strong> with typed inputs/outputs — no open-ended shell access or unconstrained API calls</li>
+<li><strong>Policy checks before execution</strong> — deterministic tool wrappers that validate actions against allowlists and structured action policies before any side effect</li>
+<li><strong>Output sanitization</strong> — model output is untrusted input to the next system; treat it as such (XSS, SQLi, RCE all become possible if raw output flows downstream)</li>
+<li><strong>Retrieval source trust tiers</strong> — not all RAG sources are equal; classify by authority and apply different validation thresholds</li>
+<li><strong>Per-tool auth scopes</strong> — identity-aware gateways that enforce least privilege per tool, per user, per session</li>
+<li><strong>Budget and rate caps</strong> — hard limits on tokens, API calls, and spend per request/session/user to prevent denial-of-wallet</li>
+<li><strong>Full tracing and replay</strong> — every model decision, tool call, and output must be auditable and reproducible</li>
+<li><strong>Sandboxing</strong> — execution isolation per tenant, per task, with capability-based access control</li>
+<li><strong>Red-team evals in CI/CD</strong> — continuous adversarial evaluation as part of the delivery pipeline, not a periodic exercise</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> LLM security is mostly a <strong>systems security problem disguised as a model problem</strong>. The architecture that wins is one where the model can propose anything but execute nothing without passing through deterministic, auditable control gates.</p>
+</blockquote>
+<h3 id="zero-trust-mapped-to-agentic-execution">Zero Trust Mapped to Agentic Execution<a class="headerlink" href="#zero-trust-mapped-to-agentic-execution" title="Permanent link">&para;</a></h3>
+<p>The untrusted planner pattern above is the single-agent version. When agents spawn sub-agents, invoke tools across services, and manage credentials autonomously, standard zero trust principles must be <strong>remapped onto agentic execution paths</strong>. The key shifts from traditional zero trust:</p>
+<ul>
+<li><strong>Identities now include swarms of software actors</strong> — not just people and devices but agents, sub-agents, service identities, and API credentials (non-human identities / NHIs). These need visibility and lifecycle management at least as strong as human IAM, arguably stronger because they proliferate faster and are harder to audit</li>
+<li><strong>Least privilege becomes ephemeral, per-agent, per-tool, per-action</strong> — static role-based access breaks down when an agent's required permissions change with every step of a multi-step plan. Dynamic credentials from a vault with just-in-time access and automatic revocation are the minimum viable pattern</li>
+<li><strong>Enforcement shifts to the reasoning-action loop</strong> — AI gateways / AI firewalls inspect agent actions at the boundary between reasoning and execution, not just at network ingress. This is where vetted tool registries, action-level policy checks, and structured output validation converge</li>
+<li><strong>Observability must capture "why" an agent acted, not only what API call it made</strong> — immutable logging of the reasoning trace, the retrieved context, and the policy state at decision time. Without this, post-incident investigation of agentic systems is impossible</li>
+<li><strong>Safety controls become first-class architecture</strong> — kill switches, rate throttles, and canary deployments are not operational afterthoughts but structural components of the agent runtime, equivalent to circuit breakers in microservice architectures</li>
+</ul>
+<p>The most important zero-trust principle for agentic systems is <strong>"assume breach"</strong>: the design baseline should be that the attacker is already inside — may already have stolen credentials, may already be sitting in the app, network, or data plane. This mental model shift drives every other design decision toward defense-in-depth rather than perimeter hardening.</p>
+<h2 id="topic-quick-reference">Topic Quick Reference<a class="headerlink" href="#topic-quick-reference" title="Permanent link">&para;</a></h2>
+<h3 id="prompt-injection">Prompt Injection<a class="headerlink" href="#prompt-injection" title="Permanent link">&para;</a></h3>
+<p>Direct/indirect injection, instruction hierarchy, retrieval sanitization, tool hijacking prevention. See <strong>OWASP LLM01</strong> (Week 3 study plan). Real-world incident (early 2026): malicious GitHub issue title injected into an automated triage bot, exfiltrating an npm token — demonstrates that LLM-driven CI/CD pipelines are now live prompt injection targets.</p>
+<h3 id="data-exfiltration">Data Exfiltration<a class="headerlink" href="#data-exfiltration" title="Permanent link">&para;</a></h3>
+<p>Secrets handling, PII leakage paths (prompt injection -&gt; exfil, tool output -&gt; logs), logging redaction, embedding leakage, training data extraction attacks. See <strong>OWASP LLM06</strong>, AWS re:Inforce talk. A practical defensive control is the <strong>Presidio + SLM hybrid pattern</strong>: Microsoft Presidio supplies deterministic, explainable PII detection while a small CPU-only language model (e.g., Qwen 2.5) catches fuzzy or implicit PII; packaged in containers with no GPU requirement, the filter slots in as a pre-ingest, pre-prompt, or guardrail-loop step, forwarding only clean text to downstream LLMs and emitting auditable spans, entity types, and confidence scores — delivering compliance-by-construction and reducing exfiltration risk before the model ever sees sensitive data. See <strong>Presidio</strong> entry in Notable GitHub Repositories below.</p>
+<blockquote>
+<p><strong>Boundary:</strong> This covers PII/secrets as an <strong>attack surface</strong>. For legal PII obligations (consent, retention, data subject rights), see Privacy &amp; Compliance resources.</p>
+</blockquote>
+<h3 id="sandbox-least-privilege">Sandbox &amp; Least Privilege<a class="headerlink" href="#sandbox-least-privilege" title="Permanent link">&para;</a></h3>
+<p>Capability-based tools, allowlists, isolation per tenant/user, permissions-aware retrieval/tooling. See <strong>OWASP LLM07/LLM08</strong>, <strong>Google SAIF</strong>, Cisco reference architecture. In practice, organizations will be <strong>mixed-agent</strong> for a long time — engineers using Cursor, Claude Code, Windsurf, or other tools side by side — which means security checks must be centralized and work regardless of which agent generated the code. Three principles apply: (1) log what agents do, (2) make checks deterministic, and (3) stop pretending manual review scales. The Semgrep approach exemplifies this: centralized security scanning that catches issues regardless of which agent or human authored the code, treating all code as equally untrusted input to the CI pipeline (AI Engineering Conference, Mar 2026). Local-first agent architecture -- where data, memory, and tool access remain on the user's own machine -- is strong for privacy but does not solve the full security model. Once agents touch files, browser state, messages, home devices, and accounts, the attack surface is not academic. Local-first helps privacy, but it does not address <strong>permissioning, misuse, or unsafe composition</strong>. The classic builder mistake is designing for personal/local use while the internet stress-tests it for hostile/public deployment; the privacy story is strong, but the security model is narrower than users assume (OpenClaw founder interview, 2026).</p>
+<h3 id="supply-chain">Supply Chain<a class="headerlink" href="#supply-chain" title="Permanent link">&para;</a></h3>
+<p>Dependency risks, model provenance, prompt/config drift, eval leakage as security bug. See <strong>OpenSSF MLSecOps</strong>, <strong>OWASP LLM05</strong>, Week 5 study plan. Eval integrity risk confirmed (March 2026): Opus 4.6 recognized the BrowseComp benchmark during evaluation, found and decrypted cached answers, and located mirror sites — models can exploit cached web artifacts as a covert channel across stateless search tools, undermining benchmark trustworthiness.</p>
+<h3 id="incident-response">Incident Response<a class="headerlink" href="#incident-response" title="Permanent link">&para;</a></h3>
+<p>Red-team playbooks, severity classification, containment/rollback, monitoring for abuse. See <strong>MITRE ATLAS</strong>, Week 6 study plan. AISI (UK AI Safety Institute) is hiring red teamers (as of March 2026) for misuse, control, and alignment red teaming.</p>
+<hr />
+<h2 id="learning-resources-and-roadmap-2025">Learning Resources and Roadmap (2025)<a class="headerlink" href="#learning-resources-and-roadmap-2025" title="Permanent link">&para;</a></h2>
+<h2 id="learning-roadmap-fundamentals-core-tools-building-blocks-advanced-patterns">Learning Roadmap: Fundamentals -&gt; Core Tools -&gt; Building Blocks -&gt; Advanced Patterns<a class="headerlink" href="#learning-roadmap-fundamentals-core-tools-building-blocks-advanced-patterns" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Focus</th>
+<th>Key Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Fundamentals</strong></td>
+<td>Threat landscape &amp; frameworks</td>
+<td>Understand <strong>adversarial ML</strong> taxonomy (evasion, poisoning, model extraction, inference attacks); study <strong>MITRE ATLAS</strong> attack framework; learn <strong>OWASP Top 10 for LLM Applications</strong>; review NIST AI RMF security dimensions</td>
+</tr>
+<tr>
+<td><strong>2. Core Tools</strong></td>
+<td>Hands-on attack/defense</td>
+<td>Practice with <strong>IBM ART</strong> (adversarial robustness), <strong>TextAttack</strong> (NLP adversarial); build intuition for attack surfaces</td>
+</tr>
+<tr>
+<td><strong>3. Building Blocks</strong></td>
+<td>Secure AI architecture</td>
+<td><strong>MLSecOps</strong> pipelines (secure training, deployment, monitoring); <strong>model supply chain security</strong>; <strong>privacy-preserving ML</strong> (differential privacy, federated learning, secure enclaves); content safety filtering; prompt injection defenses</td>
+</tr>
+<tr>
+<td><strong>4. Advanced Patterns</strong></td>
+<td>Enterprise-scale AI security</td>
+<td><strong>AI red teaming</strong> programs; <strong>threat modeling for AI systems</strong>; incident response for AI-specific attacks; regulatory compliance (EU AI Act security requirements); continuous adversarial monitoring in production</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> AI security sits at the intersection of traditional cybersecurity and ML engineering. Effective practitioners need both domains -- understanding model internals AND infrastructure attack surfaces.</p>
+</blockquote>
+<hr />
+<h2 id="official-documentation-and-reference-architectures">Official Documentation and Reference Architectures<a class="headerlink" href="#official-documentation-and-reference-architectures" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Provider</th>
+<th>Level</th>
+<th>Year</th>
+<th>Key Topics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cisco AI Security Reference Architecture</strong></td>
+<td>Cisco</td>
+<td>Intermediate</td>
+<td>2024</td>
+<td>End-to-end <strong>AI security architecture</strong> (data layer, model layer, application layer, infrastructure layer); threat vectors per layer; security controls mapping; <strong>zero trust for AI workloads</strong>; monitoring and observability patterns</td>
+</tr>
+<tr>
+<td><strong>AWS AI/ML Security Best Practices</strong></td>
+<td>Amazon AWS</td>
+<td>Intermediate</td>
+<td>2023</td>
+<td><strong>SageMaker security features</strong> (VPC isolation, encryption, IAM roles); <strong>model artifact protection</strong>; <strong>data pipeline security</strong>; network isolation for training; <strong>model monitoring</strong> for adversarial drift; AWS-native guardrails</td>
+</tr>
+<tr>
+<td><strong>NCSC (UK) Principles for AI Security</strong></td>
+<td>UK National Cyber Security Centre</td>
+<td>Introductory</td>
+<td>2024</td>
+<td><strong>Secure design</strong> (threat modeling AI systems, supply chain risks); <strong>Secure development</strong> (data integrity, model validation); <strong>Secure deployment</strong> (access controls, monitoring); <strong>Secure maintenance</strong> (patching, drift detection); aligns with existing NCSC security guidance</td>
+</tr>
+<tr>
+<td><strong>Google Secure AI Framework (SAIF)</strong></td>
+<td>Google</td>
+<td>Intermediate</td>
+<td>2023</td>
+<td><strong>Six core elements</strong>: expand security foundations to AI, extend detection/response to AI threats, automate defenses, harmonize platform-level controls, adapt controls for AI pace, contextualize AI system risks; <strong>AI-specific threat model</strong>; secure-by-default AI platform design</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="video-content-talks-and-webinars">Video Content (Talks and Webinars)<a class="headerlink" href="#video-content-talks-and-webinars" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Provider</th>
+<th>Level</th>
+<th>Year</th>
+<th>Key Topics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>"Practical Attacks on Machine Learning Systems"</strong></td>
+<td>Black Hat USA 2023</td>
+<td>Advanced</td>
+<td>2023</td>
+<td><strong>Live demos</strong> of model evasion, data poisoning, model stealing attacks; <strong>real-world case studies</strong> (autonomous vehicles, malware classifiers); defensive countermeasures; attack tooling walkthrough</td>
+</tr>
+<tr>
+<td><strong>"Securing Generative AI"</strong></td>
+<td>AWS re:Inforce 2024</td>
+<td>Intermediate</td>
+<td>2024</td>
+<td><strong>LLM-specific threats</strong> (prompt injection, jailbreaking, data exfiltration via prompts); <strong>AWS Bedrock security controls</strong> (guardrails, content filtering, model access policies); <strong>secure RAG architectures</strong>; monitoring generative AI outputs</td>
+</tr>
+<tr>
+<td><strong>"The AI Attack Surface"</strong></td>
+<td>NDC Security 2024</td>
+<td>Intermediate</td>
+<td>2024</td>
+<td><strong>Comprehensive attack surface mapping</strong> for ML systems; supply chain attacks (model repositories, training data); <strong>inference-time attacks</strong>; API security for model endpoints; practical defense prioritization</td>
+</tr>
+<tr>
+<td><strong>"Machine Learning Security Evasion &amp; Poisoning"</strong></td>
+<td>SANS Institute</td>
+<td>Advanced</td>
+<td>2023</td>
+<td><strong>Deep technical dive</strong> into evasion techniques (gradient-based, decision-based, transfer attacks); <strong>data poisoning</strong> (backdoor attacks, label flipping); <strong>detection methods</strong>; hands-on defensive strategies</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="online-courses-and-training-programs">Online Courses and Training Programs<a class="headerlink" href="#online-courses-and-training-programs" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Provider</th>
+<th>Duration</th>
+<th>Level</th>
+<th>Year</th>
+<th>Key Topics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AI/ML Security Fundamentals</strong></td>
+<td>Edureka / Coursera</td>
+<td>~20 hours</td>
+<td>Beginner</td>
+<td>2024</td>
+<td><strong>Adversarial ML basics</strong> (attack types, threat models); <strong>common vulnerabilities</strong> in ML pipelines; <strong>secure model development</strong> practices; introductory labs with attack/defense tools</td>
+</tr>
+<tr>
+<td><strong>Adversarial Machine Learning</strong></td>
+<td>NVIDIA Deep Learning Institute</td>
+<td>8 hours</td>
+<td>Intermediate</td>
+<td>2024</td>
+<td><strong>Hands-on adversarial attacks</strong> (FGSM, PGD, C&amp;W); <strong>robustness evaluation</strong>; <strong>adversarial training</strong> techniques; defense distillation; certified defenses; GPU-accelerated labs</td>
+</tr>
+<tr>
+<td><strong>SEC545: Cloud Security Architecture and Operations</strong></td>
+<td>SANS Institute</td>
+<td>5 days</td>
+<td>Advanced</td>
+<td>2024</td>
+<td><strong>Cloud-native AI security</strong> (securing ML workloads in AWS/GCP); <strong>identity and access for AI services</strong>; <strong>network segmentation</strong> for training clusters; <strong>logging and monitoring</strong> ML pipelines; incident response for cloud AI</td>
+</tr>
+<tr>
+<td><strong>SEC535: Offensive AI -- Attack Tools and Techniques</strong></td>
+<td>SANS Institute</td>
+<td>3 days</td>
+<td>Advanced</td>
+<td>2025</td>
+<td><strong>Offensive AI techniques</strong> (using AI for attacks AND attacking AI systems); <strong>prompt injection deep dive</strong>; <strong>model extraction and inversion</strong>; <strong>AI-powered social engineering</strong>; <strong>building AI attack tools</strong>; red team exercises</td>
+</tr>
+<tr>
+<td><strong>AI Security</strong></td>
+<td>Udacity (free nanodegree)</td>
+<td>~40 hours</td>
+<td>Intermediate</td>
+<td>2024</td>
+<td><strong>End-to-end AI security</strong> (threat modeling, secure development, deployment hardening); <strong>privacy attacks</strong> (membership inference, model inversion); <strong>fairness-security intersection</strong>; capstone project building secure ML pipeline</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="notable-github-repositories-tools-and-frameworks">Notable GitHub Repositories (Tools and Frameworks)<a class="headerlink" href="#notable-github-repositories-tools-and-frameworks" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Provider</th>
+<th>Key Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Adversarial Robustness Toolbox (ART)</strong></td>
+<td>IBM (Trusted AI)</td>
+<td><strong>15+ attack families</strong> (evasion, poisoning, extraction, inference); <strong>10+ defense methods</strong> (adversarial training, input preprocessing, certified defenses); supports TensorFlow, PyTorch, scikit-learn, Keras; <strong>evaluation metrics</strong> for robustness; most comprehensive adversarial ML library</td>
+</tr>
+<tr>
+<td><strong>TextAttack</strong></td>
+<td>QData (UVA)</td>
+<td><strong>NLP-specific adversarial framework</strong>; <strong>50+ pre-built attack recipes</strong> (TextFooler, BERT-Attack, DeepWordBug); <strong>augmentation</strong> for adversarial training data; <strong>attack evaluation metrics</strong> (success rate, perturbation size, semantic similarity); model-agnostic</td>
+</tr>
+<tr>
+<td><strong>OpenAI Codex Security</strong></td>
+<td>OpenAI</td>
+<td>Application security agent (March 2026, research preview) that finds and validates vulnerabilities, then proposes fixes; available to ChatGPT Enterprise, Business, Edu, and Pro users; free usage for one month at launch</td>
+</tr>
+<tr>
+<td><strong>OpenAI Codex for Open Source</strong></td>
+<td>OpenAI</td>
+<td>Eligible open-source maintainers receive ChatGPT Pro, Codex, API credits, and access to Codex Security — aimed at reducing maintainer security burden and improving coverage across public repositories</td>
+</tr>
+<tr>
+<td><strong>Microsoft Presidio</strong></td>
+<td>Microsoft</td>
+<td><strong>PII detection and anonymization</strong> framework combining deterministic recognizers (regex, deny-lists, NER) with pluggable ML/SLM backends; pairing Presidio with a small CPU-only SLM such as <strong>Qwen 2.5</strong> catches fuzzy and implicit PII that rules miss; <strong>container-packaged</strong> for laptops or servers with no GPU; fits as <strong>pre-ingest, pre-prompt, or guardrail-loop</strong> step; emits <strong>auditable spans, entity types, and confidence scores</strong> for compliance-by-construction; live demo at <a href="https://pii-checker.com">pii-checker.com</a>. <a href="https://github.com/microsoft/presidio">GitHub</a> &#124; <a href="https://microsoft.github.io/presidio/">Docs</a></td>
+</tr>
+<tr>
+<td><strong>Awesome AI Security</strong></td>
+<td>Community-curated</td>
+<td><strong>Curated list</strong> of AI security resources, papers, tools, and datasets; organized by attack type and defense type; includes <strong>links to key papers</strong> (Carlini &amp; Wagner, Goodfellow adversarial examples); regularly updated; good starting point for literature review</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Combine multiple tools for comprehensive coverage -- automated attack libraries for systematic probing, integrated into CI/CD pipelines for continuous security validation.</p>
+</blockquote>
+<hr />
+<h2 id="other-resources-standards-whitepapers-frameworks">Other Resources (Standards, Whitepapers, Frameworks)<a class="headerlink" href="#other-resources-standards-whitepapers-frameworks" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Provider</th>
+<th>Key Takeaways</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NIST AI RMF -- Security &amp; Resilience</strong></td>
+<td>NIST</td>
+<td>AI-specific security mapped to <strong>trustworthiness characteristics</strong> (security, resilience, robustness); guidance on <strong>secure AI lifecycle</strong> (data collection through decommissioning); crosswalks to NIST CSF and SP 800-53 security controls</td>
+</tr>
+<tr>
+<td><strong>ISO/IEC 42001:2023 -- AI Management System</strong></td>
+<td>ISO/IEC</td>
+<td>First international standard for <strong>AI management systems</strong>; requires organizations to establish <strong>AI risk management processes</strong> including security; Annex B maps AI-specific controls; certifiable standard for demonstrating AI governance maturity</td>
+</tr>
+<tr>
+<td><strong>OWASP Top 10 for LLM Applications</strong></td>
+<td>OWASP</td>
+<td><strong>Updated Top 10</strong>: 1) Prompt Injection, 2) Sensitive Information Disclosure (↑ rose sharply), 3) Supply Chain Vulnerabilities, 4) Data &amp; Model Poisoning, 5) Improper Output Handling, 6) Excessive Agency (↑ critical for agentic systems), 7) System Prompt Leakage, 8) Vector &amp; Embedding Weaknesses, 9) Misinformation, 10) Unbounded Consumption ("denial of wallet"). Each with <strong>attack scenarios, prevention, and detection</strong> guidance</td>
+</tr>
+<tr>
+<td><strong>OpenSSF MLSecOps Reference</strong></td>
+<td>Open Source Security Foundation</td>
+<td><strong>Secure ML supply chain</strong> practices; <strong>model signing and verification</strong> (Sigstore for models); <strong>SBOM for ML</strong> (tracking model dependencies, training data provenance); <strong>CI/CD security</strong> for ML pipelines; vulnerability scanning for ML frameworks</td>
+</tr>
+<tr>
+<td><strong>MITRE ATLAS (Adversarial Threat Landscape for AI Systems)</strong></td>
+<td>MITRE</td>
+<td><strong>Adversarial ML attack knowledge base</strong> modeled after ATT&CK; <strong>tactics and techniques</strong> specific to AI systems (reconnaissance, resource development, initial access to ML, model evasion, exfiltration); <strong>case studies</strong> of real-world AI attacks; enables structured threat modeling for AI</td>
+</tr>
+<tr>
+<td><strong>NCSC New Zealand -- AI Security Guidance</strong></td>
+<td>NCSC (New Zealand)</td>
+<td>Practical, <strong>accessible guide</strong> for non-specialists; covers <strong>AI supply chain risks</strong>, <strong>data security for training</strong>, <strong>model deployment hardening</strong>, <strong>ongoing monitoring</strong>; risk-based approach aligned with Five Eyes intelligence community guidance</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-week-study-plan-for-security-professionals-5-8-hoursweek">6-Week Study Plan for Security Professionals (5-8 hours/week)<a class="headerlink" href="#6-week-study-plan-for-security-professionals-5-8-hoursweek" title="Permanent link">&para;</a></h2>
+<h3 id="week-1-ai-security-landscape-5-6-hours">Week 1: AI Security Landscape (5-6 hours)<a class="headerlink" href="#week-1-ai-security-landscape-5-6-hours" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Study:</strong> OWASP Top 10 for LLM Applications + MITRE ATLAS overview</li>
+<li><strong>Watch:</strong> NDC Security "The AI Attack Surface"</li>
+<li><strong>Activity:</strong> Map your organization's AI systems against MITRE ATLAS tactics; identify top 3 threat vectors</li>
+<li><strong>Outcome:</strong> Threat landscape understanding and personal risk assessment</li>
+</ul>
+<h3 id="week-2-adversarial-ml-fundamentals-6-8-hours">Week 2: Adversarial ML Fundamentals (6-8 hours)<a class="headerlink" href="#week-2-adversarial-ml-fundamentals-6-8-hours" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Study:</strong> Adversarial ML basics (evasion, poisoning, extraction, inference attacks)</li>
+<li><strong>Watch:</strong> Black Hat "Practical Attacks on Machine Learning Systems"</li>
+<li><strong>Lab:</strong> Install <strong>IBM ART</strong> and run basic evasion attack on sample classifier</li>
+<li><strong>Outcome:</strong> Hands-on understanding of adversarial attacks and defenses</li>
+</ul>
+<h3 id="week-3-llm-specific-security-5-8-hours">Week 3: LLM-Specific Security (5-8 hours)<a class="headerlink" href="#week-3-llm-specific-security-5-8-hours" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Study:</strong> Prompt injection techniques, jailbreaking taxonomy, output manipulation</li>
+<li><strong>Watch:</strong> OWASP LLM security talks and red team walkthroughs</li>
+<li><strong>Lab:</strong> Probe a test LLM endpoint for failure modes using open-source red teaming tools</li>
+<li><strong>Outcome:</strong> Practical LLM red teaming skills</li>
+</ul>
+<h3 id="week-4-secure-ai-architecture-6-hours">Week 4: Secure AI Architecture (6 hours)<a class="headerlink" href="#week-4-secure-ai-architecture-6-hours" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Study:</strong> Google SAIF + NCSC UK AI Security Principles</li>
+<li><strong>Watch:</strong> AWS re:Inforce "Securing Generative AI"</li>
+<li><strong>Activity:</strong> Draft a <strong>secure AI architecture</strong> for one of your organization's AI workloads (network, identity, data, model layers)</li>
+<li><strong>Outcome:</strong> Reference architecture document for secure AI deployment</li>
+</ul>
+<h3 id="week-5-mlsecops-and-supply-chain-5-hours">Week 5: MLSecOps and Supply Chain (5 hours)<a class="headerlink" href="#week-5-mlsecops-and-supply-chain-5-hours" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Study:</strong> OpenSSF MLSecOps Reference + ISO/IEC 42001 overview</li>
+<li><strong>Lab:</strong> Implement <strong>model signing</strong> or <strong>SBOM generation</strong> for an ML pipeline; add security scanning to CI/CD</li>
+<li><strong>Activity:</strong> Review your ML supply chain (model sources, training data provenance, framework dependencies)</li>
+<li><strong>Outcome:</strong> Secure ML pipeline checklist</li>
+</ul>
+<h3 id="week-6-synthesis-and-red-team-exercise-6-hours">Week 6: Synthesis and Red Team Exercise (6+ hours)<a class="headerlink" href="#week-6-synthesis-and-red-team-exercise-6-hours" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Project:</strong> Conduct a mini <strong>AI red team exercise</strong> against an internal AI system (with permission)</li>
+<li><strong>Use:</strong> IBM ART + TextAttack for systematic probing</li>
+<li><strong>Deliverable:</strong> AI Security Assessment Report (findings, risk ratings, remediation recommendations)</li>
+<li><strong>Final:</strong> Present findings to team; propose AI security roadmap for your organization</li>
+<li><strong>Outcome:</strong> Tangible security assessment artifact and organizational improvement plan</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> By end of 6 weeks (~35-45 hours), you will have practical skills in adversarial ML, LLM red teaming, secure AI architecture, and MLSecOps -- enabling you to assess and harden AI systems against real-world threats.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

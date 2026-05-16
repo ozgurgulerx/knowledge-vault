@@ -1,0 +1,4003 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/">
+      
+      
+        <link rel="prev" href="../gpu_and_datacenter_infrastructure/">
+      
+      
+        <link rel="next" href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Multi-user B2C Architecture - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#multi-user-b2c-app-architectural-guidance" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Multi-user B2C Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Architecture Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-decisions-trade-offs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Decisions &amp; Trade-Offs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Decisions & Trade-Offs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monolith-vs-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monolith vs Microservices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend Language
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Style
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Identity &amp; Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorization-multi-tenancy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization &amp; Multi-Tenancy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primary-database-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primary Database (PostgreSQL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-search-ai-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Search &amp; AI Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caching-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-vendor-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLM Vendor &amp; Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generative-ai-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generative AI Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generative AI Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guardrails-for-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guardrails for LLM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evals-monitoring-ai-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evals &amp; Monitoring AI Quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latency-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latency Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-privacy-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security, Privacy &amp; Compliance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security, Privacy & Compliance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#application-security-owasp-top-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Security (OWASP Top 10)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-specific-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLM-Specific Safety
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#threat-modeling-stride" class="md-nav__link">
+    <span class="md-ellipsis">
+      Threat Modeling (STRIDE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-privacy-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Privacy &amp; Compliance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secrets-key-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secrets &amp; Key Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observability-operational-excellence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observability &amp; Operational Excellence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Observability & Operational Excellence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distributed-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distributed Tracing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alerting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slos-error-budgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLOs &amp; Error Budgets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-response-runbooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incident Response &amp; Runbooks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment &amp; Ops
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-mobile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend &amp; Mobile
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend & Mobile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#web-nextjs-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web (Next.js 13+)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mobile-react-native-expo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mobile (React Native + Expo)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-cost-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance &amp; Cost Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance & Cost Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capacity-assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capacity Assumptions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend Throughput
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-budgeting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Budgeting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monthly-cost-breakdown-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monthly Cost Breakdown (MVP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caching-efficacy-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching Efficacy Targets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graceful-degradation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graceful Degradation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delivery-roadmap-306090-day-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delivery Roadmap (30/60/90 Day Plan)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Delivery Roadmap (30/60/90 Day Plan)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#day-0-30-mvp-vertical-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day 0-30: MVP Vertical Slice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day-31-60-hardening-feature-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day 31-60: Hardening &amp; Feature Completion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day-61-90-scale-optimize-iterate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day 61-90: Scale, Optimize, Iterate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checklists
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklists">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-launch-security-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-Launch Security Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-launch-performance-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-Launch Performance Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day-2-operations-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day-2 Operations Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Risk Assessment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-database-schema-erd" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Database Schema (ERD)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-redis-cache-key-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Redis Cache Key Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-openapi-snippet" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. OpenAPI Snippet
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Architecture Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-decisions-trade-offs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Decisions &amp; Trade-Offs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Decisions & Trade-Offs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monolith-vs-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monolith vs Microservices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend Language
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Style
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Identity &amp; Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorization-multi-tenancy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization &amp; Multi-Tenancy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primary-database-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primary Database (PostgreSQL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-search-ai-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Search &amp; AI Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caching-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-vendor-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLM Vendor &amp; Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generative-ai-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generative AI Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generative AI Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guardrails-for-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guardrails for LLM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evals-monitoring-ai-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evals &amp; Monitoring AI Quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latency-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latency Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-privacy-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security, Privacy &amp; Compliance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security, Privacy & Compliance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#application-security-owasp-top-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Security (OWASP Top 10)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-specific-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLM-Specific Safety
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#threat-modeling-stride" class="md-nav__link">
+    <span class="md-ellipsis">
+      Threat Modeling (STRIDE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-privacy-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Privacy &amp; Compliance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secrets-key-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secrets &amp; Key Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observability-operational-excellence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observability &amp; Operational Excellence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Observability & Operational Excellence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distributed-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distributed Tracing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alerting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slos-error-budgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLOs &amp; Error Budgets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-response-runbooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incident Response &amp; Runbooks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment &amp; Ops
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-mobile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend &amp; Mobile
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend & Mobile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#web-nextjs-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web (Next.js 13+)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mobile-react-native-expo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mobile (React Native + Expo)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-cost-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance &amp; Cost Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance & Cost Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capacity-assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capacity Assumptions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend Throughput
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-budgeting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Budgeting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monthly-cost-breakdown-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monthly Cost Breakdown (MVP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caching-efficacy-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching Efficacy Targets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graceful-degradation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graceful Degradation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delivery-roadmap-306090-day-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delivery Roadmap (30/60/90 Day Plan)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Delivery Roadmap (30/60/90 Day Plan)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#day-0-30-mvp-vertical-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day 0-30: MVP Vertical Slice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day-31-60-hardening-feature-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day 31-60: Hardening &amp; Feature Completion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day-61-90-scale-optimize-iterate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day 61-90: Scale, Optimize, Iterate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checklists
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklists">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-launch-security-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-Launch Security Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-launch-performance-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-Launch Performance Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day-2-operations-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day-2 Operations Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Risk Assessment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-database-schema-erd" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Database Schema (ERD)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-redis-cache-key-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Redis Cache Key Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-openapi-snippet" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. OpenAPI Snippet
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="multi-user-b2c-app-architectural-guidance">Multi-User B2C App Architectural Guidance<a class="headerlink" href="#multi-user-b2c-app-architectural-guidance" title="Permanent link">&para;</a></h1>
+<p>Full-stack reference architecture for a multi-user B2C generative-AI application. Balances rapid delivery, security/compliance, and cost-efficiency.</p>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The defining architectural tension in multi-user generative-AI applications is not microservices versus monolith, nor is it which LLM provider to call. It is that every interesting design decision is downstream of a single economic reality: unmanaged token consumption at B2C scale will bankrupt the product before it finds market fit. A naive deployment serving 50,000 daily active users at 1,500 tokens per request reaches 750 million tokens per day, which at GPT-3.5 pricing alone translates to roughly $45,000 per month. The entire system architecture — caching layers, model routing, prompt engineering, even the authorization model — must be understood as a <strong>token-cost containment system</strong> that happens to also serve users.</p>
+<p>This constraint produces a specific technical shape. Semantic caching with normalized prompt hashing (incorporating prompt version and model ID into the key) targets 10-20% LLM hit rates, while request coalescing via Redis locks ensures concurrent identical queries share a single upstream call. Policy-based model routing splits traffic between GPT-3.5 for free-tier users and GPT-4 for paid subscribers, making the billing tier an architectural boundary rather than merely a product decision. The modular monolith pattern is not a compromise but a deliberate choice: at fewer than ten engineers, in-process function calls and domain events eliminate the network overhead and operational complexity that would otherwise consume the same team bandwidth needed to tune prompt templates, manage embedding lifecycles, and build the evaluation harness that keeps hallucination rates in check.</p>
+<p>The second structural insight is that <strong>PostgreSQL Row-Level Security operates as the trust boundary</strong>, not just a data-access convenience. Setting <code>app.current_tenant</code> per connection and forcing RLS on a non-superuser role means tenant isolation is enforced at the database engine level, surviving any application-layer bug. This decision cascades: it dictates pooled tenancy with a <code>tenant_id</code> column, constrains connection pooling to tenant-aware session variables, and makes the path from shared-schema to schema-per-tenant a migration rather than a rewrite. Combined with the STRIDE-informed principle of treating the LLM itself as an untrusted actor — where tool-call outputs are validated, prompt injection inputs are structurally separated from system instructions, and a remote kill-switch can disable generative features entirely — the architecture establishes defense in depth across both the data plane and the inference plane.</p>
+<p>What follows is the full reference design: component selection with explicit trade-offs, the generative-AI pattern catalog from batching through guardrails, security and compliance posture mapped to OWASP and STRIDE, observability with <strong>LLM-specific telemetry</strong> (tokens per span, cost per day, prompt hash attribution), and a 30/60/90-day delivery roadmap that sequences the vertical slice, hardening, and scale phases against concrete milestones.</p>
+<hr />
+<h2 id="reference-architecture-overview">Reference Architecture Overview<a class="headerlink" href="#reference-architecture-overview" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key:</strong> Start with a <strong>modular monolith</strong> fronted by a <strong>Backend-for-Frontend (BFF)</strong>. Core AI logic lives server-side, <strong>never directly exposed to clients</strong>. Ship a vertical slice fast, extract microservices later via the <strong>Strangler Fig pattern</strong>.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Technology</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Web client</strong></td>
+<td>Next.js (React) PWA</td>
+<td>UI/UX, calls backend over HTTPS</td>
+</tr>
+<tr>
+<td><strong>Mobile client</strong></td>
+<td>React Native / Flutter</td>
+<td>Same API surface as web</td>
+</tr>
+<tr>
+<td><strong>API Gateway / BFF</strong></td>
+<td>Node.js Express / Fastify</td>
+<td>Auth, rate limiting, SSR, routing</td>
+</tr>
+<tr>
+<td><strong>Backend monolith</strong></td>
+<td>NestJS / Fastify (TypeScript)</td>
+<td>Auth, business logic, AI orchestration</td>
+</tr>
+<tr>
+<td><strong>Primary DB</strong></td>
+<td>PostgreSQL (RDS / Cloud SQL)</td>
+<td>User data, content, metadata; <strong>RLS</strong> for tenant isolation</td>
+</tr>
+<tr>
+<td><strong>Vector DB</strong></td>
+<td><strong>PGVector</strong> (start) or Qdrant/Weaviate/Pinecone</td>
+<td>Semantic search, <strong>hybrid search</strong> (dense + BM25)</td>
+</tr>
+<tr>
+<td><strong>Cache</strong></td>
+<td>Redis</td>
+<td>Session tokens, config flags, <strong>semantic LLM response cache</strong></td>
+</tr>
+<tr>
+<td><strong>Object storage</strong></td>
+<td>S3 + CDN (CloudFront)</td>
+<td>User uploads via <strong>pre-signed URLs</strong></td>
+</tr>
+<tr>
+<td><strong>Queue</strong></td>
+<td>AWS SQS / RabbitMQ</td>
+<td>Async jobs, event bus, <strong>Transactional Outbox Pattern</strong></td>
+</tr>
+<tr>
+<td><strong>LLM</strong></td>
+<td>OpenAI GPT-4/3.5 (primary), Anthropic (fallback)</td>
+<td>Generative responses</td>
+</tr>
+<tr>
+<td><strong>Auth provider</strong></td>
+<td>Auth0 / Cognito / Firebase Auth</td>
+<td>OIDC, social login, passkeys</td>
+</tr>
+<tr>
+<td><strong>Payments</strong></td>
+<td>Stripe</td>
+<td>Subscriptions, webhooks</td>
+</tr>
+<tr>
+<td><strong>Observability</strong></td>
+<td>OpenTelemetry -&gt; Prometheus/Grafana or Datadog</td>
+<td>Logs, metrics, distributed traces</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Data flow:</strong> Clients -&gt; BFF -&gt; Monolith -&gt; {Postgres, VectorDB, Redis, S3, LLM API, Queue}. No direct DB or LLM access from clients.</p>
+<hr />
+<h2 id="core-decisions-trade-offs">Core Decisions &amp; Trade-Offs<a class="headerlink" href="#core-decisions-trade-offs" title="Permanent link">&para;</a></h2>
+<h3 id="monolith-vs-microservices">Monolith vs Microservices<a class="headerlink" href="#monolith-vs-microservices" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Modular monolith</strong> for &lt;10 devs. High cohesion, clear module boundaries (auth, payments, AI, content).</li>
+<li>Internal comms via function calls + <strong>domain events</strong> (in-memory). Strangler Fig to extract services later.</li>
+<li>Defer microservices until specific scaling bottlenecks appear.</li>
+</ul>
+<h3 id="backend-language">Backend Language<a class="headerlink" href="#backend-language" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>TypeScript + Node.js</strong> (NestJS or Fastify) recommended for full-stack JS teams. Shared types with frontend, huge ecosystem.</li>
+<li><strong>Go (Fiber, chi)</strong> for max performance. <strong>Python (FastAPI)</strong> for ML integration.</li>
+<li><strong>Async, non-blocking I/O</strong> required.</li>
+</ul>
+<h3 id="api-style">API Style<a class="headerlink" href="#api-style" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>RESTful JSON API</strong> with <code>/api/v1/...</code> versioning as primary interface.</li>
+<li>REST with OpenAPI spec; add GraphQL/tRPC only if needed for complex client querying.</li>
+<li>All writes <strong>idempotent</strong> via <code>Idempotency-Key</code> header. <strong>Cursor-based pagination</strong>.</li>
+<li><strong>Rate limiting</strong> per IP/user token (e.g., 100 req/min; adaptive quotas for AI endpoints).</li>
+</ul>
+<h3 id="identity-authentication">Identity &amp; Authentication<a class="headerlink" href="#identity-authentication" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>OAuth 2.0 / OIDC</strong> with external IdP (Auth0, Cognito, Firebase Auth).</li>
+<li><strong>Authorization Code flow with PKCE</strong> for web/mobile.</li>
+<li><strong>Refresh token rotation</strong>: each refresh invalidates the previous token.</li>
+<li>Short-lived <strong>JWTs</strong> (access tokens), <strong>HttpOnly</strong> cookies, secure storage on mobile.</li>
+<li><strong>WebAuthn passkeys</strong> for phishing-resistant passwordless login. Amazon: 175M passkeys created; industry data shows 98% login success vs 32% for passwords.</li>
+<li><strong>Magic link</strong> login as alternative.</li>
+</ul>
+<h3 id="authorization-multi-tenancy">Authorization &amp; Multi-Tenancy<a class="headerlink" href="#authorization-multi-tenancy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Layered <strong>RBAC + ABAC</strong> model.</li>
+<li><strong>PostgreSQL Row Level Security (RLS)</strong> for tenant data isolation: <code>SET app.current_tenant = '&lt;tenant-uuid&gt;'</code> on each connection.</li>
+<li><strong>Pooled tenancy</strong> (shared schema, <code>tenant_id</code> column) to start. Migrate to <strong>schema-per-tenant</strong> or <strong>separate DB</strong> for enterprise customers later.</li>
+<li>Connect as <strong>non-superuser</strong> to avoid bypassing RLS. <code>FORCE ROW LEVEL SECURITY</code> on tables.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="n">ENABLE</span><span class="w"> </span><span class="k">ROW</span><span class="w"> </span><span class="k">LEVEL</span><span class="w"> </span><span class="k">SECURITY</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">POLICY</span><span class="w"> </span><span class="n">tenant_isolation</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">items</span>
+<span class="w">  </span><span class="k">USING</span><span class="w"> </span><span class="p">(</span><span class="n">tenant_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;app.current_tenant&#39;</span><span class="p">));</span>
+</code></pre></div>
+<h3 id="primary-database-postgresql">Primary Database (PostgreSQL)<a class="headerlink" href="#primary-database-postgresql" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ACID, JSONB, full-text search, CTEs, window functions.</li>
+<li><strong>Cloud-native deployment</strong> (RDS/Cloud SQL), <strong>automatic backups, PITR</strong>, multi-AZ.</li>
+<li><strong>Partitioning</strong> time-series tables (events, logs) by month.</li>
+<li><strong>Connection pool</strong> mandatory (PgBouncer / RDS Proxy, pool size 5-10 per instance).</li>
+<li><strong>Read replicas</strong> for scaling reads. Eventual consistency &lt;1s lag acceptable.</li>
+<li><strong>Indexes</strong>: monitor via <code>pg_stat_statements</code>. <strong>VACUUM and auto-analyze</strong>.</li>
+<li><strong>Logical Decoding / CDC</strong> via Debezium for syncing to analytics/search.</li>
+</ul>
+<h3 id="vector-search-ai-data">Vector Search &amp; AI Data<a class="headerlink" href="#vector-search-ai-data" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Start with <strong>pgvector</strong> in Postgres; graduate to <strong>Qdrant/Weaviate/Pinecone</strong> at scale.</li>
+<li><strong>Hybrid search</strong>: dense embeddings + BM25 keyword scoring. Merge via <strong>RRF (Reciprocal Rank Fusion)</strong> or weighted score. Optional <strong>cross-encoder reranking</strong>.</li>
+<li><strong>OpenAI text-embedding-ada-002</strong> (1536-dim). Chunk text to ~500 tokens, store sparse vector (BM25) alongside.</li>
+<li><strong>Embedding lifecycle</strong>: background job re-embeds on doc update; TTL for stale embeddings.</li>
+<li>HNSW or IVFFlat index on embeddings.</li>
+</ul>
+<h3 id="caching-strategy">Caching Strategy<a class="headerlink" href="#caching-strategy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Redis</strong> as cache tier: application-level caching, session caching, <strong>AI response caching</strong>.</li>
+<li><strong>Semantic cache</strong>: hash normalized prompt (lowercase, strip whitespace, include prompt version + model ID) -&gt; cached answer. Keys like <code>chat:answer:{promptHash}</code>.</li>
+<li>Cache TTL: DB query results ~5 min, AI answers ~1 hour.</li>
+<li><strong>Request coalescing</strong>: lock on key (e.g., <code>explain:42</code>) so concurrent identical requests share one LLM call.</li>
+<li><strong>CDN edge caching</strong> for public GET endpoints and static content.</li>
+</ul>
+<h3 id="llm-vendor-integration">LLM Vendor &amp; Integration<a class="headerlink" href="#llm-vendor-integration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Abstract LLM service module for <strong>multi-vendor support</strong>. Primary: OpenAI. Fallback: Anthropic.</li>
+<li><strong>Policy-based routing</strong>: cheaper model for trivial queries, premium model for complex.</li>
+<li><strong>Retry with exponential backoff</strong> on transient errors. <strong>Circuit breaker</strong> (5 failures -&gt; stop calling, queue or return graceful error).</li>
+</ul>
+<hr />
+<h2 id="generative-ai-patterns">Generative AI Patterns<a class="headerlink" href="#generative-ai-patterns" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Batching</strong></td>
+<td>Batch embedding calls (100 texts per API call)</td>
+</tr>
+<tr>
+<td><strong>Streaming</strong></td>
+<td>SSE / <code>text/event-stream</code> for token-by-token output, first token &lt;500ms</td>
+</tr>
+<tr>
+<td><strong>Prompt Templates</strong></td>
+<td>Version-controlled templates with placeholders; version ID in prompt for A/B eval</td>
+</tr>
+<tr>
+<td><strong>RAG</strong></td>
+<td>Top-N chunks from vector DB injected into system prompt. <strong>Guardrail instructions</strong> in system prompt. User input in data fields to prevent <strong>prompt injection</strong></td>
+</tr>
+<tr>
+<td><strong>Session Memory</strong></td>
+<td>Sliding window (last N turns) + rolling <strong>summary</strong> of older messages. <strong>Token budget ~2000 tokens</strong> per session context</td>
+</tr>
+<tr>
+<td><strong>Tool Use / Function Calling</strong></td>
+<td>JSON schema interfaces, sandboxed execution, <strong>idempotent</strong> tool calls, security layer validates LLM tool requests</td>
+</tr>
+<tr>
+<td><strong>Context Length Guard</strong></td>
+<td>Truncate/summarize if input + retrieved context nears model limit</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Compute a <strong>cache key</strong> from normalized prompt to avoid redundant LLM calls. Include prompt version + model ID in key so stale answers are never reused after model/prompt changes.</p>
+</blockquote>
+<h3 id="guardrails-for-llm">Guardrails for LLM<a class="headerlink" href="#guardrails-for-llm" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>OpenAI function calling</strong> to constrain model actions (e.g., <code>Calculator</code> function for math).</li>
+<li><strong>Timeout</strong>: 10s for normal queries; abort and queue for background if hanging.</li>
+<li><strong>Cost control</strong>: estimate tokens per request (e.g., ~2600 total for GPT-3.5 = ~$0.005). Track usage per user in DB, enforce <strong>free tier quota</strong> (e.g., 50 queries/day).</li>
+</ul>
+<h3 id="memory-management">Memory Management<a class="headerlink" href="#memory-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Store full conversation in DB. Send last 4 messages + summary to model.</li>
+<li>Generate summaries via separate LLM call after every ~10 messages.</li>
+<li>Vector-store old turns for retrieval if user references earlier context.</li>
+</ul>
+<h3 id="evals-monitoring-ai-quality">Evals &amp; Monitoring AI Quality<a class="headerlink" href="#evals-monitoring-ai-quality" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Offline test prompts</strong> (golden dataset) run periodically or in CI.</li>
+<li><strong>User feedback loop</strong>: thumbs up/down on answers; inspect high-downvote prompts.</li>
+<li><strong>A/B testing</strong> new models/prompts on small % of traffic.</li>
+<li><strong>Hallucination / toxicity checks</strong>: secondary classifier or moderation endpoint.</li>
+<li><strong>Model change log</strong> for prompt template and model version changes.</li>
+</ul>
+<h3 id="latency-optimization">Latency Optimization<a class="headerlink" href="#latency-optimization" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Target: end-to-end &lt;2s for normal answers. First token &lt;500ms via <strong>streaming</strong>.</li>
+<li><strong>Speculative decoding</strong>: simultaneously call faster model; use if slower model's output isn't better.</li>
+<li><strong>Parallel operations</strong>: call external APIs concurrently after gathering context.</li>
+<li>Minimize payload to LLM: omit irrelevant context, use IDs instead of long names.</li>
+</ul>
+<h3 id="cost-management">Cost Management<a class="headerlink" href="#cost-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Log input/output tokens per request with model type. Alert if daily spend exceeds threshold.</li>
+<li><strong>Graceful degradation</strong>: if budget near exhaustion, switch to cheaper model or enforce stricter rate limits.</li>
+<li><strong>Per-tenant isolation</strong> of LLM concurrency limits.</li>
+</ul>
+<hr />
+<h2 id="security-privacy-compliance">Security, Privacy &amp; Compliance<a class="headerlink" href="#security-privacy-compliance" title="Permanent link">&para;</a></h2>
+<h3 id="application-security-owasp-top-10">Application Security (OWASP Top 10)<a class="headerlink" href="#application-security-owasp-top-10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Injection</strong>: parameterized queries / ORM. No shell commands with user input. LLM prompt injection: user content kept separate from system instructions, allow-list for tool commands.</li>
+<li><strong>Broken Auth/Session</strong>: robust OAuth, refresh token rotation, strong hashing (Argon2/bcrypt).</li>
+<li><strong>Sensitive Data Exposure</strong>: TLS everywhere, encryption at rest (RDS, S3), least-privilege module access, never log secrets/PII.</li>
+<li><strong>XSS</strong>: React auto-escapes; CSP (<code>default-src 'self'; script-src only our domains</code>). DOMPurify for any LLM/user HTML.</li>
+<li><strong>CSRF</strong>: SameSite cookies (<code>Lax</code> or <code>Strict</code>); Bearer token for API.</li>
+<li><strong>Supply Chain</strong>: pin versions, Sigstore/cosign for container images, <code>npm audit</code> in CI, SBOM.</li>
+</ul>
+<h3 id="llm-specific-safety">LLM-Specific Safety<a class="headerlink" href="#llm-specific-safety" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Input filtering</strong>: catch <code>"&lt;ignore all instructions&gt;"</code>, base64-encoded variants before LLM.</li>
+<li><strong>Output filtering</strong>: block/redact disallowed content (hate speech, etc.) via moderation endpoint.</li>
+<li><strong>Kill-switch</strong>: feature flag to remotely disable AI response feature.</li>
+<li>For minors (&lt;13): disable unsafe prompts, possibly route to more censored model.</li>
+</ul>
+<h3 id="threat-modeling-stride">Threat Modeling (STRIDE)<a class="headerlink" href="#threat-modeling-stride" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Threat</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Spoofing</strong></td>
+<td>Signed JWTs, mTLS between services</td>
+</tr>
+<tr>
+<td><strong>Tampering</strong></td>
+<td>Encrypted transit + rest, append-only audit logs, DB checksums</td>
+</tr>
+<tr>
+<td><strong>Repudiation</strong></td>
+<td>Audit logs with timestamps for all user/admin actions</td>
+</tr>
+<tr>
+<td><strong>Information Disclosure</strong></td>
+<td>Least privilege, scrub stack traces, no PII in error responses</td>
+</tr>
+<tr>
+<td><strong>Denial of Service</strong></td>
+<td>Rate limiting, auto-scaling, per-user LLM quota, Cloudflare/AWS Shield</td>
+</tr>
+<tr>
+<td><strong>Elevation of Privilege</strong></td>
+<td>Auth checks on every admin route, hide admin UI for non-admins, treat LLM as untrusted</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-privacy-compliance">Data Privacy &amp; Compliance<a class="headerlink" href="#data-privacy-compliance" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>GDPR/CCPA</strong>: Right to Access (export), Right to Erasure (cascade delete + scramble logs). Data residency (EU servers for EU users).</li>
+<li><strong>COPPA</strong>: disallow &lt;13 or require parental consent. Minimal data on young users.</li>
+<li><strong>SOC2 readiness</strong>: role-based access, logging, annual security training. Target Type I around month 6.</li>
+<li><strong>DPIA</strong> template for new features involving personal data. STRIDE threat modeling.</li>
+<li><strong>Audit logging</strong>: append-only table (<code>audit_log</code>), log all admin + system data access.</li>
+</ul>
+<h3 id="secrets-key-management">Secrets &amp; Key Management<a class="headerlink" href="#secrets-key-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li>All secrets in <strong>cloud secrets manager</strong> (AWS Secrets Manager / Vault). Never in code.</li>
+<li><strong>Envelope encryption</strong> via KMS for sensitive DB columns.</li>
+<li><strong>Key rotation schedule</strong>: JWT signing keys yearly, DB credentials per best practice, KMS CMK auto-rotation.</li>
+<li><strong>Short-lived credentials</strong>: IAM auth for RDS where feasible; STS tokens for AWS resources.</li>
+</ul>
+<hr />
+<h2 id="observability-operational-excellence">Observability &amp; Operational Excellence<a class="headerlink" href="#observability-operational-excellence" title="Permanent link">&para;</a></h2>
+<h3 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Structured <strong>JSON logs</strong>: timestamp, severity, request/trace ID, user ID, event details.</li>
+<li>Centralized store (CloudWatch Logs / ELK / Datadog). Never log credit cards, passwords.</li>
+</ul>
+<h3 id="distributed-tracing">Distributed Tracing<a class="headerlink" href="#distributed-tracing" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>OpenTelemetry</strong> spans from request through DB, vector search, LLM call.</li>
+<li>Custom attributes on LLM span: <code>prompt_tokens</code>, <code>response_tokens</code>, model name, prompt hash.</li>
+</ul>
+<h3 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RED</strong> (per endpoint)</td>
+<td>Rate (req/s), Errors (count/%), Duration (p50/p90/p99)</td>
+</tr>
+<tr>
+<td><strong>USE</strong> (system)</td>
+<td>CPU, memory, DB connections, cache hit/miss, queue depth</td>
+</tr>
+<tr>
+<td><strong>LLM</strong></td>
+<td>Tokens/s, cost/day, success vs error rate</td>
+</tr>
+<tr>
+<td><strong>Business</strong></td>
+<td>AI chats/day, DAU, conversion funnel</td>
+</tr>
+</tbody>
+</table>
+<h3 id="alerting">Alerting<a class="headerlink" href="#alerting" title="Permanent link">&para;</a></h3>
+<ul>
+<li>High error rate (&gt;5% in 5 min) -&gt; page on-call.</li>
+<li>LLM cost spike -&gt; alert to investigate.</li>
+<li>p95 latency &gt;5s -&gt; alert (vector DB or LLM issue).</li>
+<li>DB CPU &gt;80% for 10 min -&gt; scale alert.</li>
+<li>Multiple failed logins -&gt; security alert.</li>
+</ul>
+<h3 id="slos-error-budgets">SLOs &amp; Error Budgets<a class="headerlink" href="#slos-error-budgets" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Chat response SLO</strong>: 99% success, 95% delivered &lt;4s. Error budget: 1% failure, 5% slow.</li>
+<li><strong>Auth SLO</strong>: 99.9% login success &lt;1s.</li>
+<li>Review monthly; if budget nearly exhausted, freeze features and harden.</li>
+</ul>
+<h3 id="incident-response-runbooks">Incident Response &amp; Runbooks<a class="headerlink" href="#incident-response-runbooks" title="Permanent link">&para;</a></h3>
+<ul>
+<li>"LLM API down": switch to backup model, serve cached answers, banner to users.</li>
+<li>"DB connection issues": failover to replica (auto with multi-AZ RDS).</li>
+<li>"Memory leak": roll restart, then profile.</li>
+<li>"Security incident (leaked key)": revoke immediately, replace, redeploy, assess impact.</li>
+<li>Severity levels: Sev1 = major outage (notify all), Sev3 = minor (fix next business day).</li>
+</ul>
+<h3 id="deployment-ops">Deployment &amp; Ops<a class="headerlink" href="#deployment-ops" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Canary releases</strong>: route small % to new version, watch error/latency metrics.</li>
+<li><strong>Blue-green deploy</strong> for instant rollback.</li>
+<li><strong>Feature flags</strong> (LaunchDarkly or config JSON) for risky features.</li>
+<li><strong>IaC</strong> (Terraform/Pulumi) for all infrastructure. CI/CD via GitHub Actions.</li>
+<li><strong>Chaos engineering</strong> in staging: shut down Redis, simulate LLM high latency, verify graceful degradation.</li>
+</ul>
+<hr />
+<h2 id="frontend-mobile">Frontend &amp; Mobile<a class="headerlink" href="#frontend-mobile" title="Permanent link">&para;</a></h2>
+<h3 id="web-nextjs-13">Web (Next.js 13+)<a class="headerlink" href="#web-nextjs-13" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>App Router</strong> with <strong>Server Components</strong> and <strong>SSR</strong> for SEO-critical pages.</li>
+<li><strong>SSG/ISR</strong> for marketing/landing pages. <strong>CSR</strong> for interactive dashboard.</li>
+<li><strong>React Query (TanStack Query)</strong> for data fetching, caching, stale-while-revalidate.</li>
+<li><strong>Core Web Vitals</strong>: TTFB p95 &lt;200ms, automatic code-splitting, lazy image loading (<code>&lt;Image&gt;</code>), prefetching linked pages.</li>
+</ul>
+<h3 id="mobile-react-native-expo">Mobile (React Native + Expo)<a class="headerlink" href="#mobile-react-native-expo" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Offline-first</strong> for certain features (local SQLite via WatermelonDB/Expo SQLite).</li>
+<li>Conflict resolution: last-write-wins for MVP.</li>
+<li><strong>Certificate Pinning</strong> for API calls. Sensitive data in secure keychain. Device auth for PII screens.</li>
+<li>Push notifications: APNS (iOS), FCM (Android) via Expo.</li>
+</ul>
+<h3 id="real-time">Real-Time<a class="headerlink" href="#real-time" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>WebSockets or SSE</strong> for streaming chat responses. Web: EventSource/fetch streaming. RN: fetch stream or socket.</li>
+</ul>
+<hr />
+<h2 id="performance-cost-management">Performance &amp; Cost Management<a class="headerlink" href="#performance-cost-management" title="Permanent link">&para;</a></h2>
+<h3 id="capacity-assumptions">Capacity Assumptions<a class="headerlink" href="#capacity-assumptions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Target: <strong>50,000 DAU</strong> year 1, peak 200 concurrent requests.</li>
+<li>~500k LLM requests/day, ~6 req/s steady, ~25 req/s peak.</li>
+<li><strong>Latency goals</strong>: web page &lt;1s initial, full load &lt;2s; AI first token 1-2s, full answer &lt;5s (p95).</li>
+</ul>
+<h3 id="backend-throughput">Backend Throughput<a class="headerlink" href="#backend-throughput" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Node.js instance handles ~50 req/s. 2-4 instances for peak.</li>
+<li>Auto-scale: CPU &gt;70% or queue latency increase -&gt; scale up.</li>
+<li><strong>Load testing</strong> with k6/JMeter: simulate 100 concurrent chat users, stress test to find bottlenecks.</li>
+</ul>
+<h3 id="token-budgeting">Token Budgeting<a class="headerlink" href="#token-budgeting" title="Permanent link">&para;</a></h3>
+<ul>
+<li>500k LLM req/day x 1500 tokens avg = 750M tokens/day.</li>
+<li>At $0.002/1K tokens (GPT-3.5): <strong>~$1500/day or ~$45k/month</strong>.</li>
+<li>Target: <strong>&lt;$10k/month</strong> at initial scale via caching, shorter prompts, cheaper models for low-tier users.</li>
+<li><strong>GPT-3.5 for free tier, GPT-4 for paid</strong>. Batch embeddings (100 per call).</li>
+</ul>
+<h3 id="monthly-cost-breakdown-mvp">Monthly Cost Breakdown (MVP)<a class="headerlink" href="#monthly-cost-breakdown-mvp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM</td>
+<td>$5k</td>
+</tr>
+<tr>
+<td>Infra (servers, DB, cache)</td>
+<td>$1.5k</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>$500</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>~$7k/month</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="caching-efficacy-targets">Caching Efficacy Targets<a class="headerlink" href="#caching-efficacy-targets" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Redis DB cache: high hit rate on common queries (5 min TTL).</li>
+<li>LLM result cache: 10-20% hit rate target.</li>
+<li>CDN: &gt;90% hit for static assets.</li>
+</ul>
+<h3 id="graceful-degradation">Graceful Degradation<a class="headerlink" href="#graceful-degradation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>LLM down: show message, disable input, serve cached Q&amp;As.</li>
+<li>Budget exhausted: switch to cheaper model, enforce stricter rate limits.</li>
+<li>Set <strong>monthly cap</strong> on API usage; if hit, system stops calling LLM and notifies users.</li>
+</ul>
+<hr />
+<h2 id="delivery-roadmap-306090-day-plan">Delivery Roadmap (30/60/90 Day Plan)<a class="headerlink" href="#delivery-roadmap-306090-day-plan" title="Permanent link">&para;</a></h2>
+<h3 id="day-0-30-mvp-vertical-slice">Day 0-30: MVP Vertical Slice<a class="headerlink" href="#day-0-30-mvp-vertical-slice" title="Permanent link">&para;</a></h3>
+<p><strong>Week 1-2:</strong> Repo setup, CI/CD, cloud infra (VPC, RDS Postgres, Redis, EC2/container), baseline Auth0 integration, Next.js frontend skeleton, NestJS backend skeleton, basic <code>GET /api/hello</code> protected endpoint.</p>
+<p><strong>Week 3-4:</strong> Core AI feature (<code>POST /api/v1/chat/completions</code> -&gt; OpenAI), vector search (pgvector or Qdrant) with retrieval, Redis caching for AI responses, request coalescing, streaming chat UI, conversation history, security tasks (rate limiting, CORS, SameSite cookies), compliance basics (privacy policy, account deletion), OpenTelemetry traces, unit tests, basic load test.</p>
+<p><strong>Optionally:</strong> Stripe Checkout for subscription (or flag everyone as "paid user" initially).</p>
+<blockquote>
+<p><strong>Key:</strong> End of Day 30 = <strong>MVP v1.0</strong>: deployed on production URL, user can sign up, log in, chat with AI using retrieval. Basic security in place, minimal observability.</p>
+</blockquote>
+<h3 id="day-31-60-hardening-feature-completion">Day 31-60: Hardening &amp; Feature Completion<a class="headerlink" href="#day-31-60-hardening-feature-completion" title="Permanent link">&para;</a></h3>
+<p><strong>Week 5-6:</strong> Load testing (k6, 100 concurrent chats), CDN, OpenTelemetry Collector + Jaeger/APM, content moderation (input/output filtering), feature flags, UI/UX polish (loading states, error messages, mobile app parity), multi-turn conversation context with summarization.</p>
+<p><strong>Week 7-8:</strong> Security audit (OWASP ASVS checklist, CSP, HSTS, X-Frame-Options), secrets rotation, data deletion (GDPR compliance), Stripe full integration (webhooks, upgrade/downgrade, usage limits), FAQ/help in vector DB, E2E tests (Playwright/Cypress), chaos test (disable Redis/vector DB in staging).</p>
+<blockquote>
+<p><strong>Key:</strong> End of Day 60 = <strong>Beta Launch v1.5</strong>: all critical features, compliance checks passed, observability in place, ready for real users.</p>
+</blockquote>
+<h3 id="day-61-90-scale-optimize-iterate">Day 61-90: Scale, Optimize, Iterate<a class="headerlink" href="#day-61-90-scale-optimize-iterate" title="Permanent link">&para;</a></h3>
+<p><strong>Week 9-10:</strong> Integrate beta feedback, performance/cost optimization (more caching, smaller models, read replicas), automate ops (backup/restore scripts, IaC for all manual infra), chaos testing in staging.</p>
+<p><strong>Week 11-12:</strong> Third-party security test / pentest-lite, cross-region DB replication, final load test (2x expected), launch prep (on-call schedule, status page, monitoring dashboards).</p>
+<blockquote>
+<p><strong>Key:</strong> End of Day 90 = <strong>Version 2.0 ready for general launch</strong>: stable, tested with real users, scalable architecture, monitoring and on-call in place.</p>
+</blockquote>
+<p><strong>Post-90 Days:</strong> Growth features, mobile offline mode, SOC2 Type I (~month 6), modularize into microservices if bottlenecks appear, fine-tune/self-host models if cost-justified.</p>
+<hr />
+<h2 id="checklists">Checklists<a class="headerlink" href="#checklists" title="Permanent link">&para;</a></h2>
+<h3 id="pre-launch-security-checklist">Pre-Launch Security Checklist<a class="headerlink" href="#pre-launch-security-checklist" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> OAuth flow with PKCE, state param verified; refresh tokens HttpOnly</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> RLS policies verified (query as one tenant, can't see others)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> All APIs validate inputs (schema validation library)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Output encoding: tested XSS with <code>&lt;script&gt;alert()&lt;/script&gt;</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> No critical vulns in <code>npm audit</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Secrets not in repo, loaded from secure storage</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> TLS + HSTS header, no mixed content</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> CSP set, <code>&lt;img src=javascript:...&gt;</code> blocked</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Security headers: X-Frame-Options SAMEORIGIN, X-Content-Type-Options nosniff</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Rate limiting tested (HTTP 429 on burst)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> No debug endpoints in prod, admin panel behind auth</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> LLM prompt injection tested ("Ignore all instructions" blocked/detected)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> DB encryption + S3 encryption enabled</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Backups scheduled and tested restore</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Privacy policy, terms accessible; COPPA if minors; GDPR DSR tested</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Incident response plan documented</li>
+</ul>
+<h3 id="pre-launch-performance-checklist">Pre-Launch Performance Checklist<a class="headerlink" href="#pre-launch-performance-checklist" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Load tested at 2x expected volume, no crashes</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> p95 latency under targets (5s for chat)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Stress test: identified bottleneck and scaling plan</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cache working (hits increase under load)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Queue: DLQ captures poison messages, backlog monitored</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Failure injection: LLM offline -&gt; graceful error message</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cold start / deploy impact &lt; X seconds downtime (blue-green or canary)</li>
+</ul>
+<h3 id="day-2-operations-checklist">Day-2 Operations Checklist<a class="headerlink" href="#day-2-operations-checklist" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Dashboards live (latency, errors, traffic, costs)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Alerts tested (force 500, verify alert received)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> On-call schedule defined</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Runbooks stored and recently verified</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Scaling procedures documented (AWS ASG / push button)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Weekly cost review cadence set</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Feature flag kill-switch tested in prod</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Support channel (email/Discord) for bug reports</li>
+</ul>
+<h3 id="risk-assessment">Risk Assessment<a class="headerlink" href="#risk-assessment" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM API outage (e.g., OpenAI down for a day)</td>
+<td>Backup model / provider; degrade to cached Q&amp;As</td>
+</tr>
+<tr>
+<td>Viral growth overloads system</td>
+<td>Rate limiting + queuing; quickly scale via IaC</td>
+</tr>
+<tr>
+<td>Prompt injection -&gt; offensive public output</td>
+<td>Content moderation on outputs, user feedback channel, curated prompt allow-list</td>
+</tr>
+<tr>
+<td>Data leak (cross-tenant)</td>
+<td>RLS thoroughly tested; testing phase attempts cross-access</td>
+</tr>
+<tr>
+<td>High latency / cost from inefficient prompts</td>
+<td>Monitor token usage; trim context; optimize prompts</td>
+</tr>
+<tr>
+<td>Team burnout</td>
+<td>Enforce rest after launch; rotate on-call; rely on automation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="appendices">Appendices<a class="headerlink" href="#appendices" title="Permanent link">&para;</a></h2>
+<h3 id="a-database-schema-erd">A. Database Schema (ERD)<a class="headerlink" href="#a-database-schema-erd" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tenants</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">tenant_id</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">tenants</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">  </span><span class="n">email</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="k">role</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="k">role</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="s1">&#39;admin&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">auth_provider_id</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">last_login</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">conversations</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">tenant_id</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">user_id</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">  </span><span class="n">title</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">messages</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">conversation_id</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">conversations</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">  </span><span class="k">role</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="k">role</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span><span class="s1">&#39;system&#39;</span><span class="p">)),</span>
+<span class="w">  </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">doc_embeddings</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">BIGSERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="n">tenant_id</span><span class="w"> </span><span class="n">UUID</span><span class="p">,</span>
+<span class="w">  </span><span class="n">doc_id</span><span class="w"> </span><span class="n">UUID</span><span class="p">,</span>
+<span class="w">  </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">embedding</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">1536</span><span class="p">),</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">ivfflat_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">doc_embeddings</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">ivfflat</span><span class="w"> </span><span class="p">(</span><span class="n">embedding</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">)</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">lists</span><span class="o">=</span><span class="mi">100</span><span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">audit_log</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">BIGSERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="k">timestamp</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">actor_id</span><span class="w"> </span><span class="n">UUID</span><span class="p">,</span>
+<span class="w">  </span><span class="n">action</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">details</span><span class="w"> </span><span class="n">JSONB</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>RLS policies on conversations, messages, and doc_embeddings enforce tenant/owner isolation.</p>
+<h3 id="b-redis-cache-key-strategy">B. Redis Cache Key Strategy<a class="headerlink" href="#b-redis-cache-key-strategy" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Key Pattern</th>
+<th>Purpose</th>
+<th>TTL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session:{sessionId}</code></td>
+<td>User session/token mapping</td>
+<td>Session duration</td>
+</tr>
+<tr>
+<td><code>ai:completion:{promptHash}</code> -&gt; <code>{answer, timestamp}</code></td>
+<td>AI response cache</td>
+<td>~1 hour</td>
+</tr>
+<tr>
+<td><code>tenant:{tid}:recent_docs</code></td>
+<td>Cached doc list per tenant</td>
+<td>~1 day</td>
+</tr>
+<tr>
+<td><code>myapp:ai_answer:{hash}</code></td>
+<td>Global AI answer cache</td>
+<td>~1 hour</td>
+</tr>
+<tr>
+<td><code>myapp:user:{userID}:conversation:{convID}:last_n</code></td>
+<td>Recent messages cache</td>
+<td>Short</td>
+</tr>
+</tbody>
+</table>
+<p>Cache invalidation: short TTLs (simpler), or version tags per doc. Admin API/command to clear all caches on model upgrade or deployment.</p>
+<h3 id="c-openapi-snippet">C. OpenAPI Snippet<a class="headerlink" href="#c-openapi-snippet" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">paths</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">/api/v1/chat/completions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">post</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Get</span><span class="nv"> </span><span class="s">AI</span><span class="nv"> </span><span class="s">chat</span><span class="nv"> </span><span class="s">completion</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">user</span><span class="nv"> </span><span class="s">prompt&quot;</span>
+<span class="w">      </span><span class="nt">security</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">bearerAuth</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">      </span><span class="nt">requestBody</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">content</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">application/json</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">schema</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">                </span><span class="nt">conversation_id</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">responses</span><span class="p">:</span>
+<span class="w">        </span><span class="s">&quot;200&quot;</span><span class="p p-Indicator">:</span>
+<span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Successful</span><span class="nv"> </span><span class="s">completion&quot;</span>
+<span class="w">          </span><span class="nt">content</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">application/json</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">schema</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">answer</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">                  </span><span class="nt">conversation_id</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">                  </span><span class="nt">usage</span><span class="p">:</span>
+<span class="w">                    </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">                      </span><span class="nt">prompt_tokens</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">integer</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">                      </span><span class="nt">completion_tokens</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">integer</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">                      </span><span class="nt">total_tokens</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">integer</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">        </span><span class="s">&quot;400&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Bad</span><span class="nv"> </span><span class="s">input&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">        </span><span class="s">&quot;401&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Not</span><span class="nv"> </span><span class="s">authenticated</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">token</span><span class="nv"> </span><span class="s">expired&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">        </span><span class="s">&quot;429&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Rate</span><span class="nv"> </span><span class="s">limit</span><span class="nv"> </span><span class="s">exceeded&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">/api/v1/auth/login</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">get</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;OIDC</span><span class="nv"> </span><span class="s">login</span><span class="nv"> </span><span class="s">redirect&quot;</span>
+<span class="w">    </span><span class="nt">post</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Exchange</span><span class="nv"> </span><span class="s">auth</span><span class="nv"> </span><span class="s">code</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">tokens&quot;</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

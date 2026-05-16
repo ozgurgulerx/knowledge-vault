@@ -1,0 +1,3603 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2003a%20-%20Agents%20%26%20Copilot%20Systems/MCP/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Model Context Protocol (MCP) - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#model-context-protocol-mcp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Model Context Protocol (MCP)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adoption-landscape" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adoption Landscape
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adoption Landscape">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#milestones-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Milestones Timeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantitative-adoption-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantitative Adoption Signals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-first-party-mcp-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vendor First-Party MCP Servers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-clientserver-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture: Client–Server Model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture: Client–Server Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transports
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-three-primitives" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Three Primitives
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Three Primitives">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connection-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connection Lifecycle
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connection Lifecycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Initialization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Operation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Shutdown
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Capabilities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Capabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sampling-server-initiated-llm-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sampling (Server-Initiated LLM Calls)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elicitation-server-initiated-user-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elicitation (Server-Initiated User Input)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roots-filesystem-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roots (Filesystem Boundaries)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks-long-running-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks (Long-Running Operations)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mcp-apps-interactive-ui-in-chat" class="md-nav__link">
+    <span class="md-ellipsis">
+      MCP Apps (Interactive UI in Chat)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logging
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-toolchain-augmentation-ide-centric" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Toolchain Augmentation (IDE-Centric)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-mcp-servers-as-shareable-apps-consumer-enterprise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remote MCP Servers as Shareable Apps (Consumer + Enterprise)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managed-remote-servers-by-cloud-vendors-enterprise-ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managed Remote Servers by Cloud Vendors (Enterprise Ops)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-brokering-and-filtering-scale-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tool Brokering and Filtering (Scale Control)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#developer-experience-and-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Developer Experience and Tooling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Developer Experience and Tooling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tooling-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tooling Ecosystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operational-friction-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operational Friction Points
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token-economics-and-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Economics and Performance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Token Economics and Performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-core-token-reality" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Core Token Reality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-consumption-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Consumption Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mitigation-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mitigation Strategies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-bottlenecks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Bottlenecks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-execution-pattern-mcp-servers-as-code-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Execution Pattern: MCP Servers as Code APIs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-privacy-and-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security, Privacy, and Governance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security, Privacy, and Governance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threat-model-what-mcp-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Threat Model: What MCP Changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete-threats-and-mitigations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concrete Threats and Mitigations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-model-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Model Layers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#privacy-and-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Privacy and Governance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcp-vs-direct-function-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      MCP vs. Direct Function Calling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ecosystem-and-adoption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ecosystem and Adoption
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-mcp-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building MCP Servers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building MCP Servers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typescript-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeScript SDK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python SDK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-patterns-and-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Patterns and Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Patterns and Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#server-design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Server Design Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adoption-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adoption Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mcp-maturity-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      MCP Maturity Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-efficient-mcp-operational-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token-Efficient MCP: Operational Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocol-versioning-and-outlook" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protocol Versioning and Outlook
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protocol Versioning and Outlook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versioning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extensions-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extensions System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outlook" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outlook
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key References
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spec-and-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spec and Docs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#engineering-and-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Engineering and Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdks-and-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDKs and Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="model-context-protocol-mcp">Model Context Protocol (MCP)<a class="headerlink" href="#model-context-protocol-mcp" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>See also:</strong> <a href="../agent_harness_engineering/">Agent Harness Engineering</a> | <a href="../../xxx%2001-01%20-%20LLM%20Landscape%20and%20Trends/llm_agentic_systems/">LLM Agentic Systems</a> | <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/">AI Security</a></p>
+</blockquote>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The <strong>Model Context Protocol (MCP)</strong> is an open protocol, originally created by Anthropic (Nov 2024), that standardizes how AI applications provide context, tools, and data sources to LLMs. The analogy everyone uses: <strong>MCP is the USB-C port for AI applications</strong> — a single, universal connector that replaces the N-times-M problem of custom integrations between every AI client and every external service. Before MCP, every agent framework had its own way of wiring tools; MCP replaces that with one protocol spec that any client or server can implement.</p>
+<p>Since December 2025, MCP is governed under the <strong>Linux Foundation's Agentic AI Foundation (AAIF)</strong>, with founding contributions from Anthropic, OpenAI, and Block. This governance shift signals that MCP is being treated as <strong>plumbing for agents</strong> rather than a single-vendor experiment. Official sources cite <strong>10,000+ active public servers</strong> and 97M+ monthly SDK downloads (Python + TypeScript combined) as of early 2026 (Anthropic, AAIF, Dec 2025). The ecosystem is no longer just "clients + servers" — it is accumulating <strong>supporting institutions</strong>: a Registry, reverse-DNS naming with verification, packaging/bundling formats, standardized remote auth, security guidance, and managed server offerings from major cloud providers.</p>
+<p>MCP matters for agent harness engineering because it defines the <strong>tool layer</strong> (Layer 4 in the six-layer harness model) as a first-class protocol concern rather than leaving it to ad-hoc function-calling implementations. The biggest trade-off: MCP standardizes tool/data wiring but does <strong>not</strong> automatically solve context-window inflation, latency, or trust. It can increase token burn when tool catalogues are large; conversely, it improves context efficiency when servers keep large data out of the prompt and return compact, structured results.</p>
+<hr />
+<h2 id="adoption-landscape">Adoption Landscape<a class="headerlink" href="#adoption-landscape" title="Permanent link">&para;</a></h2>
+<h3 id="milestones-timeline">Milestones Timeline<a class="headerlink" href="#milestones-timeline" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2024-11-25</strong></td>
+<td>MCP introduced publicly: spec + SDKs, local desktop support, open-source server repository</td>
+</tr>
+<tr>
+<td><strong>2025-03-25</strong></td>
+<td>Remote MCP server deployment patterns promoted by Cloudflare</td>
+</tr>
+<tr>
+<td><strong>2025-04-07</strong></td>
+<td>VS Code agent mode highlights contributed MCP server tools</td>
+</tr>
+<tr>
+<td><strong>2025-09-08</strong></td>
+<td>Official MCP Registry launches in preview (metadata + API, federated model)</td>
+</tr>
+<tr>
+<td><strong>2025-11-25</strong></td>
+<td>Spec revision 2025-11-25: Streamable HTTP, auth updates, tool-enabled sampling, tasks (experimental)</td>
+</tr>
+<tr>
+<td><strong>2025-12-09</strong></td>
+<td>MCP donated to Linux Foundation AAIF; multi-vendor backing (Anthropic, OpenAI, Block)</td>
+</tr>
+<tr>
+<td><strong>2025-12-11</strong></td>
+<td>Google Cloud announces managed remote MCP servers for Google services + Apigee governance</td>
+</tr>
+<tr>
+<td><strong>2026-02-04</strong></td>
+<td>Google Developer Knowledge API + MCP server public preview (doc freshness "within 24 hours")</td>
+</tr>
+<tr>
+<td><strong>2026-02-24</strong></td>
+<td>Azure MCP Server improves Python distribution (PyPI/uvx), highlights 40+ integrations</td>
+</tr>
+<tr>
+<td><strong>2026-03-19</strong></td>
+<td><strong>Google Colab open-source MCP server</strong> released — enables local agents to drive Colab GPU runtimes; coincides with Gemini API update allowing built-in tools plus custom functions in a single call (AINews / Latent Space, Mar 2026)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="quantitative-adoption-signals">Quantitative Adoption Signals<a class="headerlink" href="#quantitative-adoption-signals" title="Permanent link">&para;</a></h3>
+<p>These metrics are imperfect (downloads can be inflated by CI, mirroring, dependency chains), but together they indicate "mainstream developer plumbing" status:</p>
+<table>
+<thead>
+<tr>
+<th>Metric (early 2026)</th>
+<th>Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10,000+ active public MCP servers</td>
+<td>Ecosystem scale and long tail of integrations (Anthropic, AAIF, Dec 2025)</td>
+</tr>
+<tr>
+<td>Python SDK <code>mcp</code> — 108.8M downloads/month (PyPI), ~22.1k GitHub stars</td>
+<td>Very high Python ecosystem usage</td>
+</tr>
+<tr>
+<td>TypeScript SDK <code>@modelcontextprotocol/sdk</code> — ~19.8M weekly npm downloads, ~11.8k GitHub stars</td>
+<td>Heavy JS/TS ecosystem usage; v2 "pre-alpha", stable v2 anticipated Q1 2026</td>
+</tr>
+<tr>
+<td>MCP Inspector — ~9k GitHub stars</td>
+<td>Tooling maturity + widespread debugging needs</td>
+</tr>
+<tr>
+<td>MCP Registry in preview since Sep 2025</td>
+<td>Distribution/discovery being standardized, but still evolving (warns about breaking changes pre-GA)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vendor-first-party-mcp-servers">Vendor First-Party MCP Servers<a class="headerlink" href="#vendor-first-party-mcp-servers" title="Permanent link">&para;</a></h3>
+<p>A notable trend: vendors shipping MCP servers as <strong>official gateways</strong> to their own ecosystems — turning docs, APIs, and operations surfaces into agent-consumable tools. These are not toy servers; they are <strong>authoritative, continuously-updated context sources</strong> that compete with brittle scraping and out-of-date training priors.</p>
+<ul>
+<li><strong>OpenAI</strong> hosts a public MCP server for its developer documentation (read-only search + page content), with instructions for integrating into multiple agent/IDE workflows</li>
+<li><strong>Google</strong> announced a Developer Knowledge API + MCP server, positioned as a canonical machine-readable documentation gateway with re-indexing "within 24 hours" during preview (Google Cloud, Feb 2026)</li>
+<li><strong>Cloudflare</strong> documents a managed remote MCP server catalogue (OAuth-enabled), supporting Streamable HTTP and legacy SSE</li>
+<li><strong>Microsoft</strong> ships an Azure MCP Server with 40+ service integrations and IDE documentation for server management</li>
+<li><strong>GitHub</strong> describes MCP servers to enhance Copilot agent mode for repository inspection, issue/PR operations, and branch management</li>
+</ul>
+<hr />
+<h2 id="architecture-clientserver-model">Architecture: Client–Server Model<a class="headerlink" href="#architecture-clientserver-model" title="Permanent link">&para;</a></h2>
+<p>MCP follows a <strong>client–server architecture</strong> built on JSON-RPC 2.0.</p>
+<h3 id="roles">Roles<a class="headerlink" href="#roles" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>What it is</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Host</strong></td>
+<td>The container/coordinator that manages clients, user consent, security policy, and model integration</td>
+<td>Claude Desktop, VS Code + Copilot, Claude Code CLI</td>
+</tr>
+<tr>
+<td><strong>Client</strong></td>
+<td>A protocol-level connector inside the host; maintains an isolated stateful session per server; handles negotiation and message routing</td>
+<td>The SDK's <code>Client</code> class</td>
+</tr>
+<tr>
+<td><strong>Server</strong></td>
+<td>A lightweight process or service that exposes capabilities (tools, resources, prompts) to clients; can request sampling through client interfaces</td>
+<td>A filesystem server, a database server, a weather API wrapper</td>
+</tr>
+</tbody>
+</table>
+<p>The key constraint: <strong>one client connects to one server</strong>. A host that needs multiple servers spins up multiple clients internally — the host is the fan-out point, not the protocol itself.</p>
+<blockquote>
+<p><strong>Key:</strong> A design principle frequently overlooked in casual implementations is <strong>server isolation</strong>: servers should not read the entire conversation nor "see into" other servers. The host enforces boundaries and chooses what to share. This is a deliberate security constraint, not an accidental limitation.</p>
+</blockquote>
+<h3 id="transports">Transports<a class="headerlink" href="#transports" title="Permanent link">&para;</a></h3>
+<p>MCP is transport-agnostic but the specification defines two standard transports:</p>
+<ul>
+<li><strong>Stdio</strong> — client launches the server as a subprocess; JSON-RPC messages are newline-delimited on stdin/stdout; stderr is for logging; stdout must be protocol-only. Best for local tools. No network overhead, no auth needed.</li>
+<li><strong>Streamable HTTP</strong> — a single MCP endpoint supports POST/GET; servers can optionally use SSE for streaming; includes explicit guidance on reconnect, resumability, session IDs (<code>Mcp-Session-Id</code> header), and a required <code>MCP-Protocol-Version</code> header. Required for remote/cloud-hosted servers. Supports the MCP authorization framework (OAuth 2.1-based).</li>
+</ul>
+<blockquote>
+<p><strong>Legacy note:</strong> The 2024-11-05 spec defined a separate "HTTP+SSE" transport with two endpoints. The 2025-03-26+ spec replaced it with <strong>Streamable HTTP</strong> using a single endpoint. OpenAI's Agents SDK labels SSE as deprecated and recommends Streamable HTTP or stdio for new integrations. Prefer Streamable HTTP for new remote deployments; keep SSE only for legacy compatibility.</p>
+</blockquote>
+<hr />
+<h2 id="the-three-primitives">The Three Primitives<a class="headerlink" href="#the-three-primitives" title="Permanent link">&para;</a></h2>
+<p>MCP servers expose capabilities through three core primitives. Each primitive has a distinct control model:</p>
+<table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>Purpose</th>
+<th>Control</th>
+<th>Analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tools</strong></td>
+<td>Actions the model can invoke</td>
+<td>Model-controlled (the LLM decides when to call)</td>
+<td>POST endpoints / function calls</td>
+</tr>
+<tr>
+<td><strong>Resources</strong></td>
+<td>Data the application can read</td>
+<td>Application-controlled (the host/client decides what to attach)</td>
+<td>GET endpoints / file reads</td>
+</tr>
+<tr>
+<td><strong>Prompts</strong></td>
+<td>Templated interaction patterns</td>
+<td>User-controlled (the user selects which prompt to use)</td>
+<td>Slash commands / prompt templates</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h3>
+<p>Tools are the most commonly used primitive. A tool is a function with a name, description, and JSON Schema input definition (plus optional output schema) that the LLM can call during a conversation. The server declares available tools; the model decides when and how to call them.</p>
+<p>Key properties:</p>
+<ul>
+<li>Discovered via <code>tools/list</code>, invoked via <code>tools/call</code></li>
+<li>Can represent anything: API calls, database queries, computations, file operations, shell commands</li>
+<li>Support <code>listChanged</code> notifications so the client knows when the tool set updates dynamically</li>
+<li><strong>Annotations</strong> (added in 2025-03-26): tools can declare metadata like <code>readOnlyHint</code>, <code>destructiveHint</code>, <code>idempotentHint</code>, and <code>openWorldHint</code> to help clients/users make trust decisions without inspecting implementation</li>
+</ul>
+<h3 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h3>
+<p>Resources expose data that the host application can retrieve and inject into the LLM context. Unlike tools, resources are not model-invoked — the application decides which resources to include.</p>
+<p>Key properties:</p>
+<ul>
+<li>Discovered via <code>resources/list</code>, read via <code>resources/read</code></li>
+<li>Identified by URI (e.g., <code>file:///path/to/doc.md</code>, <code>postgres://db/table</code>, <code>screen://screenshot</code>)</li>
+<li>Support <strong>subscriptions</strong>: the client can subscribe to a resource URI and receive notifications when the content changes</li>
+<li>Support <strong>templates</strong>: URI templates (RFC 6570) that let the server expose parameterized resources (e.g., <code>users://{user_id}/profile</code>)</li>
+</ul>
+<h3 id="prompts">Prompts<a class="headerlink" href="#prompts" title="Permanent link">&para;</a></h3>
+<p>Prompts are server-defined templates that produce structured message sequences. They are selected by the user (not the model), making them ideal for codified workflows.</p>
+<p>Key properties:</p>
+<ul>
+<li>Discovered via <code>prompts/list</code>, retrieved via <code>prompts/get</code></li>
+<li>Can accept arguments (required or optional) to customize the generated messages</li>
+<li>Return a list of messages with role and content — the client injects these into the conversation</li>
+<li>Use case: a "code_review" prompt that takes a <code>language</code> argument and produces a specialized system message</li>
+</ul>
+<hr />
+<h2 id="connection-lifecycle">Connection Lifecycle<a class="headerlink" href="#connection-lifecycle" title="Permanent link">&para;</a></h2>
+<p>Every MCP session follows a three-phase lifecycle:</p>
+<h3 id="1-initialization">1. Initialization<a class="headerlink" href="#1-initialization" title="Permanent link">&para;</a></h3>
+<p>The client sends an <code>initialize</code> request containing:</p>
+<ul>
+<li><strong><code>protocolVersion</code></strong> — the latest version the client supports (e.g., <code>"2025-11-25"</code>)</li>
+<li><strong><code>capabilities</code></strong> — what the client can do (roots, sampling, elicitation)</li>
+<li><strong><code>clientInfo</code></strong> — name, version, description</li>
+</ul>
+<p>The server responds with:</p>
+<ul>
+<li><strong><code>protocolVersion</code></strong> — the negotiated version (must match the client's or be the server's latest)</li>
+<li><strong><code>capabilities</code></strong> — what the server offers (tools, resources, prompts, logging, tasks)</li>
+<li><strong><code>serverInfo</code></strong> — name, version</li>
+<li><strong><code>instructions</code></strong> — optional natural-language instructions for the LLM on how to use this server</li>
+</ul>
+<p>After receiving the response, the client sends an <code>initialized</code> notification to signal readiness.</p>
+<blockquote>
+<p><strong>Version negotiation rule:</strong> If the server responds with a version the client doesn't support, the client should disconnect. If using HTTP, the client must include <code>MCP-Protocol-Version</code> header on all subsequent requests.</p>
+</blockquote>
+<h3 id="2-operation">2. Operation<a class="headerlink" href="#2-operation" title="Permanent link">&para;</a></h3>
+<p>Normal message exchange. The client can:</p>
+<ul>
+<li>List and call tools</li>
+<li>List and read resources (and subscribe to changes)</li>
+<li>List and get prompts</li>
+<li>Send completion requests, logging, and progress notifications</li>
+</ul>
+<p>The server can (if the client declared the capability):</p>
+<ul>
+<li><strong>Sampling</strong>: ask the client to perform an LLM generation (model-in-the-loop for nested agent patterns). Tool-enabled sampling is now supported; <code>includeContext</code> modes that automatically leak broader context are soft-deprecated.</li>
+<li><strong>Elicitation</strong>: ask the client to collect information from the user (forms, URLs)</li>
+<li><strong>Roots</strong>: request the list of filesystem roots the client has exposed</li>
+</ul>
+<h3 id="3-shutdown">3. Shutdown<a class="headerlink" href="#3-shutdown" title="Permanent link">&para;</a></h3>
+<p>Either side can terminate. The client calls <code>close()</code>, or the transport disconnects. Servers should handle abrupt disconnections gracefully.</p>
+<hr />
+<h2 id="advanced-capabilities">Advanced Capabilities<a class="headerlink" href="#advanced-capabilities" title="Permanent link">&para;</a></h2>
+<h3 id="sampling-server-initiated-llm-calls">Sampling (Server-Initiated LLM Calls)<a class="headerlink" href="#sampling-server-initiated-llm-calls" title="Permanent link">&para;</a></h3>
+<p>Sampling lets a <strong>server</strong> request that the <strong>client</strong> perform an LLM completion. This enables agentic behaviors where a tool-providing server can itself reason about intermediate results without needing its own LLM API key. The client maintains full control — it can modify the request, apply safety policies, or require user approval before sending to the model.</p>
+<p>Use case: a code analysis server calls sampling to ask the LLM to summarize findings before returning the final tool result.</p>
+<h3 id="elicitation-server-initiated-user-input">Elicitation (Server-Initiated User Input)<a class="headerlink" href="#elicitation-server-initiated-user-input" title="Permanent link">&para;</a></h3>
+<p>Elicitation lets a server request structured input from the user via the client. Two modes:</p>
+<ul>
+<li><strong>Form mode</strong>: server defines a JSON Schema form, the client renders it and returns the user's answers</li>
+<li><strong>URL mode</strong>: server provides a URL for the user to visit (e.g., an OAuth consent page), and the client notifies the server when the interaction is complete</li>
+</ul>
+<h3 id="roots-filesystem-boundaries">Roots (Filesystem Boundaries)<a class="headerlink" href="#roots-filesystem-boundaries" title="Permanent link">&para;</a></h3>
+<p>Clients can expose <strong>roots</strong> — filesystem URIs that define the boundaries where a server may operate. Servers use <code>roots/list</code> to discover which directories they have access to. Includes path traversal considerations. This is how MCP enforces the principle of least privilege for filesystem-aware tools.</p>
+<h3 id="tasks-long-running-operations">Tasks (Long-Running Operations)<a class="headerlink" href="#tasks-long-running-operations" title="Permanent link">&para;</a></h3>
+<p>Tasks (added in 2025-11-25) support long-running, asynchronous operations. Servers can report progress, clients can list and cancel tasks. This enables patterns like background code generation, multi-step data pipelines, or deployment workflows that run beyond a single request-response cycle.</p>
+<h3 id="mcp-apps-interactive-ui-in-chat">MCP Apps (Interactive UI in Chat)<a class="headerlink" href="#mcp-apps-interactive-ui-in-chat" title="Permanent link">&para;</a></h3>
+<p>A major 2025–2026 evolution: <strong>UI in chat</strong>. MCP Apps is a negotiated extension (<code>io.modelcontextprotocol/ui</code>) enabling servers to deliver interactive UIs via <code>ui://</code> resources and standard MCP JSON-RPC messaging, with mandatory iframe sandboxing and auditable communication. Multiple hosts already support this extension: Claude, Claude Desktop, VS Code GitHub Copilot, Goose, Postman, MCPJam.</p>
+<p>This pushes MCP beyond tool calling into a standard for <strong>interactive human-agent workflows</strong> — forms, dashboards, mediated approvals — which may become the primary UX pattern for high-risk enterprise actions.</p>
+<h3 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h3>
+<p>Servers can emit structured log messages at standard severity levels (debug, info, warning, error, critical, alert, emergency). The client can set the minimum log level via <code>logging/setLevel</code>. Log messages are sent as notifications and can include arbitrary JSON data.</p>
+<hr />
+<h2 id="integration-patterns">Integration Patterns<a class="headerlink" href="#integration-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="local-toolchain-augmentation-ide-centric">Local Toolchain Augmentation (IDE-Centric)<a class="headerlink" href="#local-toolchain-augmentation-ide-centric" title="Permanent link">&para;</a></h3>
+<p>The most common pattern: <strong>local stdio servers installed by configuration</strong> (or via one-click install flows). IDEs manage starting/stopping servers, discovering tools, and optionally prompting for per-tool approvals. VS Code explicitly warns that local servers can run arbitrary code and adds trust prompts, tool toggles, and optional sandboxing.</p>
+<h3 id="remote-mcp-servers-as-shareable-apps-consumer-enterprise">Remote MCP Servers as Shareable Apps (Consumer + Enterprise)<a class="headerlink" href="#remote-mcp-servers-as-shareable-apps-consumer-enterprise" title="Permanent link">&para;</a></h3>
+<p>OpenAI documents building remote MCP servers that surface private knowledge sources (e.g., a vector store) into ChatGPT as "data-only apps" (formerly connectors), including for deep research and company knowledge workflows. This pattern turns MCP servers into <strong>shareable, authenticated connectors</strong> rather than local dev tools.</p>
+<h3 id="managed-remote-servers-by-cloud-vendors-enterprise-ops">Managed Remote Servers by Cloud Vendors (Enterprise Ops)<a class="headerlink" href="#managed-remote-servers-by-cloud-vendors-enterprise-ops" title="Permanent link">&para;</a></h3>
+<p>Google Cloud emphasizes managed remote MCP servers, claiming reduced developer burden vs community-built local servers and extending the concept via <strong>Apigee for governed enterprise API exposure</strong>. Cloudflare provides "stateless" vs "stateful per-session" reference architectures via Durable Objects per session. Microsoft is productizing Azure integration with 40+ service connectors.</p>
+<h3 id="tool-brokering-and-filtering-scale-control">Tool Brokering and Filtering (Scale Control)<a class="headerlink" href="#tool-brokering-and-filtering-scale-control" title="Permanent link">&para;</a></h3>
+<p>Without tool filtering/search/indexing, "thousands of tools" becomes unmanageable for both latency and context-window reasons. OpenAI's Agents SDK treats MCP servers as tool providers with built-in patterns for caching <code>list_tools()</code>, filtering tool exposure (static allow/block lists or dynamic logic per run), and capturing MCP activity in traces. Anthropic's AAIF donation post explicitly references tool search and programmatic tool calling to optimize production-scale deployments.</p>
+<hr />
+<h2 id="developer-experience-and-tooling">Developer Experience and Tooling<a class="headerlink" href="#developer-experience-and-tooling" title="Permanent link">&para;</a></h2>
+<h3 id="tooling-ecosystem">Tooling Ecosystem<a class="headerlink" href="#tooling-ecosystem" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>MCP Inspector</strong>: a visual testing tool with a browser UI plus a proxy bridging multiple transports (stdio, SSE, Streamable HTTP), with helpers for exporting configuration snippets (~9k GitHub stars)</li>
+<li><strong>MCP Bundles</strong> (<code>.mcpb</code>): package a local server + manifest for one-click installation in desktop apps; targets portability, end-user installation UX (auto-updates, variable configuration, curated directory)</li>
+<li><strong>MCP Registry</strong>: the official registry provides unopinionated metadata (<code>server.json</code>) pointing to code/binaries hosted on package registries; supports namespace management via DNS verification; intended as upstream "source of truth" feeding downstream marketplaces/aggregators. In preview since Sep 2025; warns about breaking changes/data resets pre-GA.</li>
+</ul>
+<h3 id="operational-friction-points">Operational Friction Points<a class="headerlink" href="#operational-friction-points" title="Permanent link">&para;</a></h3>
+<p><strong>Versioning and transport churn.</strong> The 2025-11-25 transport update (Streamable HTTP replacing HTTP+SSE) introduces real-world compatibility burdens. The spec includes backward-compat guidance and a required <code>MCP-Protocol-Version</code> header; servers may assume a fallback version if no header is provided. SDKs are adapting — e.g., OpenAI's Agents SDK labels SSE as legacy.</p>
+<p><strong>Session management, state, and scaling.</strong> Streamable HTTP supports session IDs and resumable streaming. Stateful workflows reduce repeated setup costs but introduce session-hijack risk and operational complexity. Frameworks differ: LangChain's <code>MultiServerMCPClient</code> is stateless by default (fresh session per invocation), which simplifies lifecycle but can amplify latency and repeated discovery unless cached. Cloudflare explicitly separates stateless vs stateful patterns (including per-session Durable Objects).</p>
+<p><strong>Observability and traceability.</strong> Production MCP use is distributed tool execution — you need visibility across host decisions, tool calls, tool outputs, and network calls. OpenAI's Agents SDK captures MCP activity in traces and calls out caching and tool-list latency as a first-order issue. VS Code offers server logs, restart controls, and trust resets — practical UX reflecting that MCP servers fail, hang, or misbehave in the wild.</p>
+<p><strong>Empty outputs and null handling.</strong> The Python MCP layer in Microsoft's agent-framework now <strong>normalizes empty tool outputs to explicit JSON <code>null</code></strong> instead of allowing blank placeholders to propagate into responses — a fix that prevents "no tool output found" errors from corrupting agent runs (GitHub issue #4677, Microsoft agent-framework, Mar 2026). This is a class of subtle failure: the tool executes successfully but returns nothing, and the absence of an explicit null causes downstream Azure 400 errors. Related validation now <strong>protects against duplicate tool names between clients and MCP servers</strong>, preventing silent tool override when composing tool sets across repositories.</p>
+<p><strong>Lifecycle deadlocks in long-running workflows.</strong> Task ownership and lifecycle tweaks in the MCP core <strong>reduce deadlocks and timeouts</strong> that previously surfaced as provisioning or streaming hangs in long-running agent workflows. On the hosted side, sample builds for hosted agents now include Docker build fixes addressing experimental API warnings, improving CI reliability for isolated Docker sample builds (Microsoft agent-framework, Mar 2026).</p>
+<blockquote>
+<p><strong>Key:</strong> After upgrading to post-Mar 14 SHAs, verify that empty tool outputs appear as <code>null</code> in handlers and that tool registries contain no name collisions. If <strong>HostedFileContent corruption</strong> persists, continue using REST file uploads as the fallback (issue #4646 remains active).</p>
+</blockquote>
+<hr />
+<h2 id="token-economics-and-performance">Token Economics and Performance<a class="headerlink" href="#token-economics-and-performance" title="Permanent link">&para;</a></h2>
+<h3 id="the-core-token-reality">The Core Token Reality<a class="headerlink" href="#the-core-token-reality" title="Permanent link">&para;</a></h3>
+<p>MCP standardizes <em>how</em> tools and context are connected, but the runtime loop still routes information through the model: tool discovery metadata → model decides tool calls → tool results returned → model incorporates results → repeat. The MCP client loads tool definitions into the model's context window, and intermediate results often pass through the model multiple times.</p>
+<p>Concrete example: for a 2-hour sales meeting transcript, copying content through tool calls can mean <strong>~50,000 additional tokens</strong>, potentially exceeding context windows and increasing error likelihood from manual copying (Anthropic engineering blog).</p>
+<h3 id="token-consumption-patterns">Token Consumption Patterns<a class="headerlink" href="#token-consumption-patterns" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Why it burns tokens</th>
+<th>Example magnitude</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tool catalogue inflation</strong></td>
+<td>Tool definitions injected into model context; JSON Schemas are verbose</td>
+<td>A medium tool schema = 150–400 tokens; 50 tools can consume 7.5k–20k tokens before any work begins</td>
+</tr>
+<tr>
+<td><strong>Large artifacts routed through model loop</strong></td>
+<td>Results returned as text force the model to re-read, rewrite, and re-emit</td>
+<td>+50,000 tokens for a 2-hour transcript echoed into a CRM update (sourced, Anthropic)</td>
+</tr>
+<tr>
+<td><strong>Binary-as-base64 in tool channel</strong></td>
+<td>Base64 expands payload; tokenizers treat it as many tokens</td>
+<td>Spec supports image/audio + base64 in sampling/tool content; rarely viable beyond tiny artifacts</td>
+</tr>
+<tr>
+<td><strong>Thinking/reasoning artifacts in tool results</strong></td>
+<td>Some server outputs include hidden chain tags or verbose reasoning</td>
+<td>Real servers expose <code>strip_thinking</code> options to remove <code>&lt;think&gt;…&lt;/think&gt;</code> tags explicitly to save tokens</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mitigation-strategies">Mitigation Strategies<a class="headerlink" href="#mitigation-strategies" title="Permanent link">&para;</a></h3>
+<p>Two complementary approaches emerging as best practice:</p>
+<ol>
+<li><strong>Do more work outside the model loop</strong>: present MCP servers as code APIs so an execution environment can process large data and only send compact results back to the model — reducing context pressure and copying errors (Anthropic engineering blog)</li>
+<li><strong>Reduce and target tool exposure</strong>: tool filtering and tool search prevent "thousands of tools" from becoming a context and latency disaster. OpenAI's Agents SDK bakes in tool filtering and <code>list_tools()</code> caching; Anthropic cites tool search and programmatic tool calling for production optimization</li>
+</ol>
+<h3 id="performance-bottlenecks">Performance Bottlenecks<a class="headerlink" href="#performance-bottlenecks" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Tool discovery</strong>: repeated <code>tools/list</code> calls are latency hotspots with remote servers; OpenAI explicitly warns that every agent run calls <code>list_tools()</code> and provides a <code>cache_tools_list</code> option with invalidation hooks</li>
+<li><strong>Remote auth and metadata discovery</strong>: OAuth discovery adds extra HTTP fetches and can become a latency and SSRF risk surface if not bounded</li>
+<li><strong>Statefulness trade-off</strong>: stateful servers cut repeated setup but require session management (resumability, expiration, hijack mitigations) and often additional infrastructure</li>
+</ul>
+<h3 id="code-execution-pattern-mcp-servers-as-code-apis">Code Execution Pattern: MCP Servers as Code APIs<a class="headerlink" href="#code-execution-pattern-mcp-servers-as-code-apis" title="Permanent link">&para;</a></h3>
+<p>The highest-leverage mitigation for MCP token overhead is <strong>presenting MCP servers as code APIs</strong> inside a sandboxed execution environment, rather than having the model make direct tool calls with results flowing through context each time. This pattern, documented by Anthropic's engineering team, achieves <strong>98.7% token reduction</strong> in representative workflows (from ~150,000 tokens to ~2,000 tokens).</p>
+<p><strong>The two problems this solves:</strong></p>
+<ol>
+<li><strong>Tool definition overhead</strong> — loading all tool definitions upfront can consume hundreds of thousands of tokens before the agent reads the user request</li>
+<li><strong>Intermediate result copying</strong> — when agents retrieve data to pass between tools, the full call transcript flows through context twice; a 2-hour meeting transcript attached to a CRM record means ~50,000 additional tokens</li>
+</ol>
+<p><strong>Architecture: file-per-tool with typed interfaces</strong></p>
+<div class="highlight"><pre><span></span><code>servers/
+├── google-drive/
+│   ├── getDocument.ts
+│   └── index.ts
+├── salesforce/
+│   ├── updateRecord.ts
+│   └── index.ts
+</code></pre></div>
+<p>Each tool becomes a TypeScript file with typed interfaces and wrapper functions. Instead of sequential tool calls passing data through the model, agents write code:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Data stays in execution environment — never enters model context</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">transcript</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">gdrive</span><span class="p">.</span><span class="nx">getDocument</span><span class="p">({...})).</span><span class="nx">content</span><span class="p">;</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">salesforce</span><span class="p">.</span><span class="nx">updateRecord</span><span class="p">({</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">Notes</span><span class="o">:</span><span class="w"> </span><span class="kt">transcript</span><span class="p">}});</span>
+</code></pre></div>
+<p><strong>Key capabilities unlocked:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>How It Works</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Progressive disclosure</strong></td>
+<td>Agent navigates filesystem to discover and load only needed tool definitions on demand</td>
+<td>Avoids upfront loading of entire tool catalogue</td>
+</tr>
+<tr>
+<td><strong>Data filtering</strong></td>
+<td>Agent writes code to transform large datasets (e.g., filter 10,000-row spreadsheet to 5 relevant rows) before results reach the model</td>
+<td>Dramatic token reduction for data-heavy workflows</td>
+</tr>
+<tr>
+<td><strong>Control flow in code</strong></td>
+<td>Loops, conditionals, and error handling execute in code rather than requiring repeated model evaluations</td>
+<td>Lower latency; fewer LLM round-trips</td>
+</tr>
+<tr>
+<td><strong>Privacy preservation</strong></td>
+<td>Intermediate results stay in the execution environment; PII can be automatically tokenized before model visibility, then restored for final tool calls</td>
+<td>Sensitive data never enters model context</td>
+</tr>
+<tr>
+<td><strong>State persistence</strong></td>
+<td>Agent can persist progress to files for resumption; enables reusable "skills" across sessions</td>
+<td>Avoids re-computation; builds institutional knowledge</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Trade-offs:</strong></p>
+<ul>
+<li>Requires a secure execution environment with sandboxing, resource limits, and monitoring</li>
+<li>Higher implementation complexity than direct tool calls</li>
+<li>Agent must be capable of writing correct code (increasingly viable with modern models)</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> The code execution pattern is not a workaround — it is the emerging production architecture for MCP at scale. Direct tool calls work for small tool surfaces; code execution is required when tool counts, data volumes, or privacy requirements exceed what fits comfortably in the context window. Cloudflare independently validated this approach, coining the term "Code Mode."</p>
+<p><strong>Key:</strong> MCP can reduce <em>integration engineering cost</em> (N×M connector sprawl), but may increase <em>runtime cost</em> unless carefully designed. Make token economy an explicit design target, not an afterthought.</p>
+</blockquote>
+<hr />
+<h2 id="security-privacy-and-governance">Security, Privacy, and Governance<a class="headerlink" href="#security-privacy-and-governance" title="Permanent link">&para;</a></h2>
+<h3 id="threat-model-what-mcp-changes">Threat Model: What MCP Changes<a class="headerlink" href="#threat-model-what-mcp-changes" title="Permanent link">&para;</a></h3>
+<p>MCP increases the <strong>blast radius</strong> of an LLM surface by making it easy to wire the agent into file systems, developer platforms, SaaS APIs, and infrastructure. The spec is explicit: MCP enables "arbitrary data access and code execution paths," and implementers must treat tool descriptions/annotations as untrusted unless obtained from trusted servers.</p>
+<p>Five trust boundaries in any MCP deployment:</p>
+<ol>
+<li>User ↔ host UX</li>
+<li>Host ↔ model provider</li>
+<li>Host/client ↔ MCP server</li>
+<li>MCP server ↔ upstream APIs/data stores</li>
+<li>Software supply chain (server distribution channel)</li>
+</ol>
+<h3 id="concrete-threats-and-mitigations">Concrete Threats and Mitigations<a class="headerlink" href="#concrete-threats-and-mitigations" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Threat</th>
+<th>How it happens</th>
+<th>Mitigations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Malicious MCP servers (supply chain)</strong></td>
+<td>Installing a server package that exfiltrates data or runs arbitrary code. Real incident: malicious <code>postmark-mcp</code> package added a hidden BCC to exfiltrate email contents</td>
+<td>Treat servers as code execution; use trusted publishers; prefer curated registries; sandbox local servers; continuously scan dependencies</td>
+</tr>
+<tr>
+<td><strong>DNS rebinding against local servers</strong></td>
+<td>Remote websites interact with a locally-bound MCP server</td>
+<td>Streamable HTTP spec requires validating <code>Origin</code> headers; bind to localhost for local deployments</td>
+</tr>
+<tr>
+<td><strong>OAuth token confusion / "token passthrough"</strong></td>
+<td>MCP server accepts a token intended for another audience and forwards it</td>
+<td>Spec requires Resource Indicators (RFC 8707), token audience validation; explicitly forbids token passthrough</td>
+</tr>
+<tr>
+<td><strong>Confused deputy in proxy servers</strong></td>
+<td>Proxy uses static client IDs + consent cookies; attacker tricks flow to skip consent</td>
+<td>Per-client consent registries, strict redirect URI checks, CSRF protections, careful state cookie timing</td>
+</tr>
+<tr>
+<td><strong>SSRF during auth metadata discovery</strong></td>
+<td>Malicious server supplies internal URLs in metadata endpoints; client fetches them</td>
+<td>HTTPS-only in production; block private IP ranges (incl. 169.254.169.254); validate redirect targets; use egress proxies</td>
+</tr>
+<tr>
+<td><strong>Session hijacking</strong></td>
+<td>Stealing Streamable HTTP session IDs or abusing long-lived sessions</td>
+<td>Secure session ID handling; session expiration; transport-level encryption</td>
+</tr>
+<tr>
+<td><strong>Cryptographic misuse inside MCP servers</strong></td>
+<td>Developers implement ad-hoc crypto and get it wrong. A 2025 study scanned 9,403 servers: crypto logic found in 720, ~19.7% exhibiting misuses (leaked keys, insecure primitives) (arXiv, 2025)</td>
+<td>Use established crypto libraries; avoid rolling custom crypto; scan for misuse patterns</td>
+</tr>
+<tr>
+<td><strong>Over-permissioned local execution</strong></td>
+<td>Local servers get broad filesystem/network access by default</td>
+<td>VS Code supports sandboxing for stdio servers on macOS/Linux (filesystem/network allowlists); trust prompts and org policy controls</td>
+</tr>
+<tr>
+<td><strong>Prompt injection via tool/results</strong></td>
+<td>Tool outputs instruct the model to exfiltrate data or escalate actions</td>
+<td>Treat tool outputs as untrusted; constrain tools to least privilege and narrow schemas; require per-call approval for risky tools; validate outputs in the host</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-model-layers">Security Model Layers<a class="headerlink" href="#security-model-layers" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Transport-level</strong>: Stdio is inherently local (no network exposure). HTTP transports should use TLS and the MCP authorization framework (OAuth 2.1, PKCE, RFC 8707 resource indicators, token audience validation, no token passthrough).</li>
+<li><strong>Capability negotiation</strong>: clients and servers declare only the capabilities they support — a server that doesn't declare <code>tools</code> cannot receive tool calls.</li>
+<li><strong>Roots</strong>: clients control which filesystem paths servers can see.</li>
+<li><strong>Human-in-the-loop</strong>: hosts should prompt users before executing sensitive tool calls. Tool annotations (<code>destructiveHint</code>, <code>readOnlyHint</code>) help UIs surface appropriate confirmation dialogs.</li>
+<li><strong>Sampling control</strong>: when a server requests sampling, the client can modify, reject, or gate the request behind user approval.</li>
+</ol>
+<blockquote>
+<p><strong>Key principle:</strong> The host application is always the trust boundary. MCP servers are untrusted by default; the host decides what to allow.</p>
+</blockquote>
+<h3 id="privacy-and-governance">Privacy and Governance<a class="headerlink" href="#privacy-and-governance" title="Permanent link">&para;</a></h3>
+<p>The spec's security principles require explicit user consent before exposing user data to servers and prohibit transmitting resource data elsewhere without consent. In practice, privacy risks arise from:</p>
+<ul>
+<li><strong>Data flow ambiguity</strong>: a tool call can route sensitive data through (a) the LLM provider, (b) MCP server operators, and (c) upstream APIs; logs and traces can unintentionally persist secrets</li>
+<li><strong>Discovery-layer trust</strong>: the Registry is metadata-only and delegates scanning to package registries and downstream aggregators; it uses namespace authentication and DNS verification but does not itself guarantee code safety. Enterprises are explicitly advised to run private registries for private servers.</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> Treat MCP adoption as a <strong>security programme</strong> (publisher allowlists, attestations, scanning, approvals, audit) rather than a pure developer convenience feature.</p>
+</blockquote>
+<hr />
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<p>MCP servers are configured per-client. The standard pattern for desktop clients is a JSON config file:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;filesystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/path/to/filesystem-server/build/index.js&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;ALLOWED_DIRECTORIES&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/Users/username/Documents&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;database&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/path/to/db-server/main.py&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;DATABASE_URL&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;postgresql://localhost/mydb&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>For <strong>Claude Desktop</strong>: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code> (macOS).</p>
+<p>For <strong>Claude Code</strong>: configured in <code>.claude/settings.json</code> or project-level <code>.mcp.json</code> files.</p>
+<hr />
+<h2 id="mcp-vs-direct-function-calling">MCP vs. Direct Function Calling<a class="headerlink" href="#mcp-vs-direct-function-calling" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Direct function calling (e.g., OpenAI tools)</th>
+<th>MCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scope</td>
+<td>Tools defined inline in API request</td>
+<td>Tools, resources, and prompts as a protocol</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>Static — defined at request time</td>
+<td>Dynamic — <code>list</code> + <code>listChanged</code> notifications</td>
+</tr>
+<tr>
+<td>Reusability</td>
+<td>Per-application</td>
+<td>Any MCP client can connect to any MCP server</td>
+</tr>
+<tr>
+<td>Data access</td>
+<td>Tool must fetch its own data</td>
+<td>Resources provide a separate, application-controlled data channel</td>
+</tr>
+<tr>
+<td>Server-initiated actions</td>
+<td>Not possible</td>
+<td>Sampling + elicitation let servers request LLM calls and user input</td>
+</tr>
+<tr>
+<td>Ecosystem</td>
+<td>Vendor-specific</td>
+<td>Open spec with growing ecosystem of pre-built servers</td>
+</tr>
+</tbody>
+</table>
+<p>MCP doesn't replace function calling — it builds on top of it. The client translates MCP tools into the underlying model's function-calling format. The value is in the <strong>standardized discovery, lifecycle, and multi-primitive model</strong> that function calling alone doesn't provide.</p>
+<hr />
+<h2 id="ecosystem-and-adoption">Ecosystem and Adoption<a class="headerlink" href="#ecosystem-and-adoption" title="Permanent link">&para;</a></h2>
+<p>As of early 2026, MCP is supported by:</p>
+<ul>
+<li><strong>Anthropic</strong>: Claude Desktop, Claude Code (native MCP client)</li>
+<li><strong>IDEs</strong>: Cursor, Windsurf, Continue (VS Code), Zed, VS Code Copilot agent mode</li>
+<li><strong>Frameworks</strong>: LangChain, LlamaIndex, Vercel AI SDK, Spring AI</li>
+<li><strong>Registries</strong>: Official MCP Registry, Smithery, mcp.run, Composio</li>
+<li><strong>Cloud providers</strong>: Google Cloud (managed remote servers + Apigee), Cloudflare (remote server hosting + Durable Objects), Microsoft (Azure MCP Server, 40+ integrations)</li>
+<li><strong>Governance</strong>: Linux Foundation AAIF (Anthropic, OpenAI, Block as founding members)</li>
+</ul>
+<p>The open-source server ecosystem covers: filesystems, databases (Postgres, SQLite, MongoDB), APIs (GitHub, Slack, Linear, Jira), browsers (Playwright, Puppeteer), search (Brave, Exa), memory/knowledge systems, and more.</p>
+<hr />
+<h2 id="building-mcp-servers">Building MCP Servers<a class="headerlink" href="#building-mcp-servers" title="Permanent link">&para;</a></h2>
+<h3 id="typescript-sdk">TypeScript SDK<a class="headerlink" href="#typescript-sdk" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@modelcontextprotocol/sdk/server/index.js&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">StdioServerTransport</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@modelcontextprotocol/sdk/server/stdio.js&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">CallToolRequestSchema</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">ListToolsRequestSchema</span><span class="p">,</span>
+<span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@modelcontextprotocol/sdk/types.js&quot;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Server</span><span class="p">(</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-server&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">version</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">capabilities</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">tools</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="p">);</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">setRequestHandler</span><span class="p">(</span><span class="nx">ListToolsRequestSchema</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">  </span><span class="nx">tools</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;get_weather&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Get current weather for a location&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">inputSchema</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">location</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;City name&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="p">}));</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">setRequestHandler</span><span class="p">(</span><span class="nx">CallToolRequestSchema</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">request</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;get_weather&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">request</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">arguments</span><span class="o">?</span><span class="p">.</span><span class="nx">location</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="sb">`Weather in </span><span class="si">${</span><span class="nx">location</span><span class="si">}</span><span class="sb">: 65F, Sunny`</span><span class="w"> </span><span class="p">}],</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">&quot;Tool not found&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">StdioServerTransport</span><span class="p">();</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">server</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">transport</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="python-sdk">Python SDK<a class="headerlink" href="#python-sdk" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server</span><span class="w"> </span><span class="kn">import</span> <span class="n">Server</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.stdio</span><span class="w"> </span><span class="kn">import</span> <span class="n">stdio_server</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mcp.types</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">types</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="s2">&quot;my-server&quot;</span><span class="p">)</span>
+
+<span class="nd">@server</span><span class="o">.</span><span class="n">list_tools</span><span class="p">()</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">list_tools</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">Tool</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">types</span><span class="o">.</span><span class="n">Tool</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_weather&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Get current weather for a location&quot;</span><span class="p">,</span>
+            <span class="n">inputSchema</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;City name&quot;</span><span class="p">}</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+
+<span class="nd">@server</span><span class="o">.</span><span class="n">call_tool</span><span class="p">()</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">call_tool</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">arguments</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">TextContent</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;get_weather&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">TextContent</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Weather in </span><span class="si">{</span><span class="n">arguments</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: 65F, Sunny&quot;</span><span class="p">)]</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tool not found: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">stdio_server</span><span class="p">()</span> <span class="k">as</span> <span class="p">(</span><span class="n">read_stream</span><span class="p">,</span> <span class="n">write_stream</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">server</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">read_stream</span><span class="p">,</span> <span class="n">write_stream</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="design-patterns-and-best-practices">Design Patterns and Best Practices<a class="headerlink" href="#design-patterns-and-best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="server-design-patterns">Server Design Patterns<a class="headerlink" href="#server-design-patterns" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Single-responsibility servers</strong> — one server per integration (GitHub server, Postgres server, Slack server). Compose at the host level, not inside a mega-server.</li>
+<li><strong>Thin wrappers over existing APIs</strong> — MCP servers should be adapters, not reimplementations. Wrap existing SDKs/CLIs.</li>
+<li><strong>Use tool annotations</strong> — declare <code>readOnlyHint: true</code> for safe tools, <code>destructiveHint: true</code> for dangerous ones. This helps clients build trust UIs.</li>
+<li><strong>Resource + tool combos</strong> — expose data via resources (for context injection) and actions via tools (for model-driven execution). Don't force everything through tools.</li>
+<li><strong>Graceful degradation</strong> — handle disconnections, respect timeouts, implement proper error responses with JSON-RPC error codes.</li>
+</ol>
+<h3 id="adoption-best-practices">Adoption Best Practices<a class="headerlink" href="#adoption-best-practices" title="Permanent link">&para;</a></h3>
+<p>These reflect current spec/security guidance and operational realities visible in vendor SDKs and IDE tooling:</p>
+<ol>
+<li><strong>Start with strict scope minimization</strong>: expose fewer tools than you think you need; prefer read-only resources and narrowly-scoped tools; adopt allowlists and per-run dynamic filters</li>
+<li><strong>Treat tool outputs as hostile inputs</strong>: validate, constrain schemas, and avoid "instructional" tool output that can override host policy; the spec explicitly warns that tool annotations/descriptions can be untrusted</li>
+<li><strong>Make token economy an explicit design target</strong>: keep large data out of the model loop; return minimal structured summaries; use execution environments for heavy lifting; avoid base64 blobs in context</li>
+<li><strong>Prefer Streamable HTTP for new remote deployments</strong>: align with the latest spec and SDK guidance to reduce future migration burden; keep SSE only for legacy</li>
+<li><strong>Implement OAuth correctly or not at all</strong>: for HTTP transports, follow the authorization spec (OAuth 2.1, Protected Resource Metadata, PKCE, RFC 8707 resource indicators, token audience validation; prohibit token passthrough)</li>
+<li><strong>Harden discovery and distribution</strong>: use curated registries/marketplaces, publisher verification, dependency scanning, and sandboxing for local servers; assume supply-chain attacks will target MCP servers because of their permissions</li>
+<li><strong>Operate MCP like a distributed system</strong>: add tracing/logging, cache tool lists when safe, and plan for upgrades (protocol versions, transport changes, extension negotiation)</li>
+</ol>
+<h3 id="mcp-maturity-lifecycle">MCP Maturity Lifecycle<a class="headerlink" href="#mcp-maturity-lifecycle" title="Permanent link">&para;</a></h3>
+<p>MCP has moved from hype to infrastructure. The pattern is standard for successful protocols:</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Status (early 2026)</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Launch</strong></td>
+<td>Complete</td>
+<td>Nov 2024 public release; spec + SDKs</td>
+</tr>
+<tr>
+<td><strong>2. Hype</strong></td>
+<td>Past peak</td>
+<td>Widespread "USB-C for AI" framing; demo-driven excitement</td>
+</tr>
+<tr>
+<td><strong>3. Security/governance headaches</strong></td>
+<td>Active</td>
+<td>OAuth 2.1 hardening; auth for remote servers; phishing/token-leakage risks identified; enterprise trust questions</td>
+</tr>
+<tr>
+<td><strong>4. Abstraction into products</strong></td>
+<td>Underway</td>
+<td>OpenAI Apps SDK builds on MCP; MCP Apps push conversation toward UI/UX; products and registries sit in front of the protocol</td>
+</tr>
+<tr>
+<td><strong>5. Boring but durable adoption</strong></td>
+<td>Emerging</td>
+<td>10,000+ public servers; ChatGPT, Cursor, Gemini, Copilot, VS Code support; Linux Foundation governance</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why MCP gets less attention now:</strong></p>
+<ul>
+<li><strong>Mindshare moved up the stack.</strong> Once MCP became plumbing, discourse shifted to the product layer: Apps SDK, agent UX, deployment workflows. People use the capability without naming the protocol.</li>
+<li><strong>Adjacent standards diluted the spotlight.</strong> Google's A2A protocol (agent-to-agent coordination) split the narrative — MCP for tools/context, A2A for agent coordination. Complementary, but they divide attention.</li>
+<li><strong>Security reality hit the hype.</strong> Moving from local demos to remote enterprise use made auth and trust the hard part. The roadmap is now enterprise-hardening (governance, transport scalability, working groups), not novelty.</li>
+<li><strong>No new spec since Nov 2025.</strong> Not stagnation — consolidation. But it reduces headline frequency.</li>
+</ul>
+<p>By March 2026, the <strong>"MCP is dead" discourse</strong> surfaced on Twitter, but the backlash was about <strong>ergonomics, not demand</strong> — @pamelafox joked MCP was "pronounced dead after mass exposure to curl," even as usage continued to boom (@pamelafox, Latent Space AINews, Mar 2026). The more substantive debate crystallized around the <strong>MCP-vs-skills architectural split</strong>: LlamaIndex drew the distinction that <strong>MCP tools are strongest when you need deterministic, centrally maintained APIs and rapidly changing ground truth</strong>, while <strong>skills are lighter-weight local natural-language procedures but more failure-prone</strong> (LlamaIndex, Mar 2026). This split is becoming a real decision point for agent builders choosing how to expose capabilities. Meanwhile, Chrome v146 added <strong>web MCP support</strong>, with a demo showing a LangChain Deep Agent continuously browsing X and compiling daily summaries — extending MCP's reach into the browser runtime (@tadasayy, @bromann, Latent Space AINews, Mar 2026).</p>
+<p>The <strong>MCP skepticism sharpened further</strong> in mid-March 2026. <strong>skirano</strong> bluntly declared "MCP was a mistake. Long live CLIs." (skirano, Mar 2026), while <strong>denisyarats</strong> joked about a <strong>"model CLI protocol"</strong> — both pointing at the same underlying tension: MCP's protocol overhead may be unnecessary when agents can simply invoke CLIs directly (denisyarats, Mar 2026). This is not a fringe position; it represents a visible counter-narrative that <strong>CLI-based tool integration</strong> is simpler, more composable, and already battle-tested, while MCP adds abstraction layers whose benefits are unclear for many local-first workflows. The counter-argument remains that CLIs lack standardized discovery, schema negotiation, and auth — exactly the things MCP provides for remote and multi-vendor scenarios. The debate tracks the broader pattern: MCP's value proposition is strongest in <strong>remote, multi-tenant, enterprise contexts</strong> and weakest in <strong>single-developer, local toolchain</strong> setups where a shell script suffices.</p>
+<blockquote>
+<p><strong>Key:</strong> "MCP is getting less attention because it is becoming more real." The adoption signal remains strong (10,000+ servers, multi-vendor backing, major platform integration). Less hype should not be confused with decline.</p>
+</blockquote>
+<p><strong>What MCP does NOT solve:</strong> MCP standardizes tool/data connectivity but does not solve evals, memory boundaries, auth end-to-end, observability, orchestration, or agent-to-agent coordination. Once teams realize they still need all of these, the "MCP is the whole answer" excitement naturally drops. That is a sign of maturation, not failure.</p>
+<h3 id="token-efficient-mcp-operational-best-practices">Token-Efficient MCP: Operational Best Practices<a class="headerlink" href="#token-efficient-mcp-operational-best-practices" title="Permanent link">&para;</a></h3>
+<p>The "MCP burns context window" criticism is valid — but the problem is usually <strong>naïve client patterns</strong>, not the protocol itself. Both OpenAI and Anthropic have published concrete mitigations.</p>
+<p><strong>The two token sinks:</strong></p>
+<ol>
+<li><strong>Tool definitions</strong> — MCP tools include names, descriptions, and JSON schemas. A medium tool schema costs 150–400 tokens; a server with 50 tools can consume 7.5k–20k tokens before any work begins. Many clients load all definitions up front, overloading the context window.</li>
+<li><strong>Intermediate tool results</strong> — many clients pass intermediate tool outputs back through the model each step. A long transcript can add 50,000+ tokens. Tool definitions and results can sometimes consume 50,000+ tokens before an agent even reads the user request.</li>
+</ol>
+<p><strong>Is this inherent to MCP?</strong> Partly. The MCP spec has mechanisms for selective loading (<code>tools/list</code> supports pagination; resources are separately listed/read). The inefficiency appears when clients choose the simple pattern: "list all tools, inject all schemas, loop all results through the LLM."</p>
+<p><strong>Practical thresholds:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Scale</th>
+<th>Approach</th>
+<th>Token Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1–10 tools</strong>, concise schemas</td>
+<td>Direct loading; usually fine</td>
+<td>Low overhead</td>
+</tr>
+<tr>
+<td><strong>10–30 tools</strong></td>
+<td>Filter with <code>allowed_tools</code>; cache stable definitions</td>
+<td>Manageable with discipline</td>
+</tr>
+<tr>
+<td><strong>50+ tools</strong> or large data payloads</td>
+<td>Deferred loading + tool search + code execution</td>
+<td>Naïve MCP gets expensive fast without these</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operational checklist for token-efficient MCP:</strong></p>
+<blockquote>
+<p><strong>Key -- MCP Token Efficiency Checklist:</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Split servers by task domain</strong> — one server per integration, not one mega-server</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Keep tool descriptions concise</strong> — put extended examples in system prompt, not in tool description fields</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Use <code>allowed_tools</code></strong> whenever task scope is known — prevents loading irrelevant tool definitions</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Use deferred loading / tool search</strong> for broad tool inventories — load definitions only as needed</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Cache stable tool definitions</strong> — tool schemas rarely change; cache them across runs</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Do transformation outside the model</strong> — fetch/filter/aggregate in code execution, return only distilled results to the model</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Never pipe large raw artifacts through the model</strong> — use resource handles, filtered extracts, or server-side summarization</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Strip thinking/reasoning artifacts</strong> — remove <code>&lt;think&gt;…&lt;/think&gt;</code> tags from server outputs to save tokens</li>
+</ul>
+</blockquote>
+<p><strong>The deeper insight:</strong> MCP exposed that raw LLM-mediated tool orchestration is often the wrong abstraction at scale. MCP is fine as a <strong>standardized discovery and invocation layer</strong>. It becomes ugly when the model itself serves as the router, data pipe, planner, and transformer for every step. The serious pattern is: <strong>MCP + harness/runtime discipline</strong> — the protocol for connectivity, the runtime for efficiency.</p>
+<p><strong>Real-world adoption of MCP:</strong> India's Ministry of Statistics (MoSPI) launched an MCP server to connect AI tools with government statistical data — a concrete example of MCP being used for authoritative, structured data access in production government contexts (Economic Times, 2026).</p>
+<hr />
+<h2 id="protocol-versioning-and-outlook">Protocol Versioning and Outlook<a class="headerlink" href="#protocol-versioning-and-outlook" title="Permanent link">&para;</a></h2>
+<h3 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h3>
+<p>MCP uses <strong>date-based versioning</strong> (e.g., <code>2024-11-05</code>, <code>2025-03-26</code>, <code>2025-06-18</code>, <code>2025-11-25</code>). Each version is a full spec revision. Version negotiation happens during initialization — the client proposes its latest, the server responds with its latest, and they must agree or disconnect.</p>
+<p>Key version milestones:</p>
+<ul>
+<li><strong>2024-11-05</strong>: Initial public release. Stdio + HTTP+SSE transports. Tools, resources, prompts, sampling.</li>
+<li><strong>2025-03-26</strong>: Streamable HTTP transport (replaces HTTP+SSE). Tool annotations. OAuth 2.1 authorization framework.</li>
+<li><strong>2025-06-18</strong>: Elicitation (form + URL modes). Structured tool output. Audio content type.</li>
+<li><strong>2025-11-25</strong>: Tasks (long-running operations). Enhanced capability negotiation. Completion and validation improvements.</li>
+</ul>
+<h3 id="extensions-system">Extensions System<a class="headerlink" href="#extensions-system" title="Permanent link">&para;</a></h3>
+<p>MCP now has a formal extensions mechanism with vendor prefixes: official extensions use <code>io.modelcontextprotocol</code>; third parties use reversed domains. Official extensions include OAuth client credentials and enterprise-managed authorization frameworks. The existence of this layered model (small core + optional capabilities) signals convergence toward a sustainable, extensible architecture rather than a monolith.</p>
+<h3 id="outlook">Outlook<a class="headerlink" href="#outlook" title="Permanent link">&para;</a></h3>
+<p><strong>Grounded trends</strong> (strong evidence in 2025–early 2026 releases):</p>
+<ul>
+<li><strong>Managed MCP servers will expand</strong>: Google Cloud, Cloudflare, and Microsoft have already positioned MCP servers as managed infrastructure; first-party doc servers are proliferating</li>
+<li><strong>Security hardening will continue</strong>: Streamable HTTP tightened Origin validation; OAuth requirements now explicitly include PKCE and resource indicators; real incidents and research (cryptographic misuse study, supply-chain attacks) keep pressure on defaults and scanning</li>
+<li><strong>Tool scalability work is becoming first-class</strong>: caching, tool filtering, tool search, and programmatic calling are being treated as necessary for "thousands of tools" scenarios</li>
+</ul>
+<p><strong>Emerging category — headless SaaS / agent-native enterprise apps.</strong> <strong>ivanburazin</strong> describes a new wave of <strong>headless SaaS</strong> — traditional enterprise software rebuilt as <strong>agent-first APIs with no human UI</strong> (ivanburazin, Mar 2026). The thesis: if the primary consumer of a SaaS product is an agent rather than a human, the product should ship an API (or MCP server) as the primary interface, not a dashboard. This aligns with concrete product launches: <strong>Rippling's AI analyst</strong> (agent-driven HR/finance queries), <strong>Anthropic's Claude for Excel/PowerPoint</strong> (agent-as-office-tool), and the observation that meeting-notes apps are quietly becoming broader <strong>AI context/data apps</strong> whose real value is structured data extraction for downstream agents (<strong>zachtratar</strong>, Mar 2026). MCP is a natural delivery mechanism for headless SaaS — the server exposes the product's capabilities as tools and resources, and agents consume them without a browser in the loop. This pattern could accelerate MCP adoption in enterprise contexts where the "server" is not a developer tool but the product itself.</p>
+<p><strong>Speculation</strong> (clearly flagged): If MCP continues to attract cloud-vendor managed endpoints, the ecosystem may split into (a) <strong>local-first</strong> workflows for developer productivity and private data, and (b) <strong>governed remote</strong> workflows for enterprise automation, where the MCP server becomes a policy-enforcing gateway (auth, rate limits, auditing, PII controls) rather than a thin tool wrapper. This would mirror the evolution of APIs from library calls to API gateways — especially given Google's explicit Apigee positioning.</p>
+<hr />
+<h2 id="key-references">Key References<a class="headerlink" href="#key-references" title="Permanent link">&para;</a></h2>
+<h3 id="spec-and-docs">Spec and Docs<a class="headerlink" href="#spec-and-docs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>modelcontextprotocol.io</code> -- MCP specification and documentation</li>
+<li><code>modelcontextprotocol.io/docs/tutorials/security/authorization</code> -- Authorization in MCP (OAuth 2.1)</li>
+<li><code>blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/</code> -- 2026 MCP Roadmap</li>
+<li><code>blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/</code> -- MCP Apps: UI Capabilities for MCP Clients</li>
+</ul>
+<h3 id="engineering-and-architecture">Engineering and Architecture<a class="headerlink" href="#engineering-and-architecture" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>anthropic.com/engineering/code-execution-with-mcp</code> -- Code Execution with MCP: Building More Efficient AI Agents (Anthropic)</li>
+<li><code>anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation</code> -- MCP donation to Linux Foundation AAIF</li>
+<li><code>developers.openai.com/api/docs/guides/tools-connectors-mcp/</code> -- OpenAI MCP and Connectors Guide</li>
+<li><code>developers.openai.com/api/docs/guides/tools-tool-search/</code> -- OpenAI Tool Search (deferred loading)</li>
+<li><code>developers.openai.com/apps-sdk/quickstart/</code> -- OpenAI Apps SDK (built on MCP)</li>
+<li><code>developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/</code> -- Google A2A Protocol (complementary to MCP)</li>
+</ul>
+<h3 id="sdks-and-tools">SDKs and Tools<a class="headerlink" href="#sdks-and-tools" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>github.com/modelcontextprotocol/python-sdk</code> -- MCP Python SDK</li>
+<li><code>github.com/modelcontextprotocol/typescript-sdk</code> -- MCP TypeScript SDK</li>
+<li><code>github.com/modelcontextprotocol/inspector</code> -- MCP Inspector</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

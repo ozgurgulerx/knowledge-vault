@@ -1,0 +1,5412 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/">
+      
+      
+        <link rel="prev" href="../inference_engineering/">
+      
+      
+        <link rel="next" href="../250821_multiuser_b2c_architecture/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>GPU & Datacenter Infrastructure - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gpu-datacenter-infrastructure" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GPU & Datacenter Infrastructure
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-i-gpu-as-a-service-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part I — GPU-as-a-Service Stack
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part I — GPU-as-a-Service Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gpu-virtualization-server-virtualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. GPU Virtualization &amp; Server Virtualization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. GPU Virtualization & Server Virtualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Modes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hypervisors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hypervisors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bare-metal-provisioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bare-Metal Provisioning
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-container-vm-orchestration-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Container &amp; VM Orchestration Layer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Container & VM Orchestration Layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vm-orchestration-openstack" class="md-nav__link">
+    <span class="md-ellipsis">
+      VM Orchestration — OpenStack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#container-orchestration-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Container Orchestration — Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-orchestrators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Orchestrators
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-resource-provisioning-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Resource Provisioning &amp; Scheduling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Resource Provisioning & Scheduling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gpu-scheduling-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Scheduling in Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hpc-schedulers" class="md-nav__link">
+    <span class="md-ellipsis">
+      HPC Schedulers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-provisioning-autoscaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Provisioning &amp; Autoscaling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-quotas-fairness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Quotas &amp; Fairness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workload-placement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workload Placement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-multitenancy-isolation-mechanisms" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Multitenancy &amp; Isolation Mechanisms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Multitenancy & Isolation Mechanisms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isolation-spectrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolation Spectrum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-isolation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Isolation Details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-isolation-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute Isolation Enhancements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rbac-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      RBAC &amp; Auth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-throttling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Throttling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-billing-metering" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Billing &amp; Metering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Billing & Metering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-metering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Metering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#billing-for-shared-gpus-mig" class="md-nav__link">
+    <span class="md-ellipsis">
+      Billing for Shared GPUs (MIG)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commercial-metering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commercial Metering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#licensing-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licensing Costs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-storage-networking-for-gpu-workloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Storage &amp; Networking for GPU Workloads
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Storage & Networking for GPU Workloads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Networking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Topology
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-security-access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Security &amp; Access Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Security & Access Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defense-in-depth-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Defense in Depth Layers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-developeruser-access-portal-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Developer/User Access Portal &amp; APIs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Developer/User Access Portal & APIs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#portal-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Portal Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIs &amp; CLI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commercial-portals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commercial Portals
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-early-hyperscaler-vs-modern-gpu-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Early Hyperscaler vs Modern GPU Stack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-open-source-vs-commercial-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Open-Source vs Commercial Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Open-Source vs Commercial Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#amd-as-nvidias-closest-competitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      AMD as Nvidia's Closest Competitor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-kernel-ecosystem-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Kernel Ecosystem Development
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-ii-groq-lpu-datacenter-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part II — Groq LPU Datacenter Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part II — Groq LPU Datacenter Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-alternative-silicon-is-so-hard-nvidias-full-stack-moat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Alternative Silicon Is So Hard: Nvidia's Full-Stack Moat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-lpu-architecture-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. LPU Architecture Principles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-hardware-building-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Hardware Building Blocks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Hardware Building Blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hierarchy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groqchip-tensor-streaming-processor" class="md-nav__link">
+    <span class="md-ellipsis">
+      GroqChip (Tensor Streaming Processor)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groqcard-accelerator-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      GroqCard Accelerator Card
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groqnode-gn1-b8c-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      GroqNode (GN1-B8C) Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groqrack-cluster-gr1-c9a" class="md-nav__link">
+    <span class="md-ellipsis">
+      GroqRack Cluster (GR1-C9A)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-realscale-interconnect-cluster-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. RealScale Interconnect &amp; Cluster Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-llm-inference-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. LLM Inference Performance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. LLM Inference Performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmarks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Performance Characteristics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Scaling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-power-cooling-and-rack-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Power, Cooling, and Rack Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Power, Cooling, and Rack Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#power" class="md-nav__link">
+    <span class="md-ellipsis">
+      Power
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cooling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rack-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rack Layout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Networking Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#energy-supply-the-datacenter-buildout-bottleneck" class="md-nav__link">
+    <span class="md-ellipsis">
+      Energy Supply: The Datacenter Buildout Bottleneck
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-software-stack-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Software Stack &amp; Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Software Stack & Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-real-world-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Real-World Deployments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Real-World Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scale-indicators-as-of-late-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scale Indicators (as of late 2025)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customer-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customer Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-anticipated-discussion-points-for-groq-engagement" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Anticipated Discussion Points for Groq Engagement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-iii-commercial-vllm-inference-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part III — Commercial vLLM Inference Service
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part III — Commercial vLLM Inference Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-target-customer-segments-go-to-market" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Target Customer Segments &amp; Go-to-Market
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-expanded-feature-set-beyond-basic-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Expanded Feature Set Beyond Basic Inference
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-billing-infrastructure-usage-metering" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Billing Infrastructure &amp; Usage Metering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Billing Infrastructure & Usage Metering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#token-counting-metering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Counting &amp; Metering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pricing-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pricing Model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#billing-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Billing Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#free-tier-overage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Free Tier &amp; Overage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-technical-infrastructure-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Technical Infrastructure Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Technical Infrastructure Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-design-rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Design &amp; Rate Limiting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-tenant-resource-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Tenant Resource Isolation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observability-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observability &amp; Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-scaling-capacity-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto-Scaling &amp; Capacity Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ab-testing-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      A/B Testing &amp; Deployment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reliability-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reliability Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-security-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Security &amp; Compliance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-uptime-reliability-slas" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Uptime, Reliability &amp; SLAs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-support-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Support Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-competitive-benchmarking-late-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Competitive Benchmarking (Late 2025)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Competitive Benchmarking (Late 2025)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ai-infrastructure-capex-buildout-not-bubble" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI Infrastructure Capex: Buildout, Not Bubble
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gtc-2026-the-token-factory-thesis-and-agent-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      GTC 2026: The "Token Factory" Thesis and Agent Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-i-gpu-as-a-service-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part I — GPU-as-a-Service Stack
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part I — GPU-as-a-Service Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gpu-virtualization-server-virtualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. GPU Virtualization &amp; Server Virtualization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. GPU Virtualization & Server Virtualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Modes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hypervisors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hypervisors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bare-metal-provisioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bare-Metal Provisioning
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-container-vm-orchestration-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Container &amp; VM Orchestration Layer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Container & VM Orchestration Layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vm-orchestration-openstack" class="md-nav__link">
+    <span class="md-ellipsis">
+      VM Orchestration — OpenStack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#container-orchestration-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Container Orchestration — Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-orchestrators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Orchestrators
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-resource-provisioning-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Resource Provisioning &amp; Scheduling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Resource Provisioning & Scheduling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gpu-scheduling-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Scheduling in Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hpc-schedulers" class="md-nav__link">
+    <span class="md-ellipsis">
+      HPC Schedulers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-provisioning-autoscaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Provisioning &amp; Autoscaling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-quotas-fairness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Quotas &amp; Fairness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workload-placement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workload Placement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-multitenancy-isolation-mechanisms" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Multitenancy &amp; Isolation Mechanisms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Multitenancy & Isolation Mechanisms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isolation-spectrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolation Spectrum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-isolation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Isolation Details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-isolation-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute Isolation Enhancements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rbac-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      RBAC &amp; Auth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-throttling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Throttling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-billing-metering" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Billing &amp; Metering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Billing & Metering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-metering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Metering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#billing-for-shared-gpus-mig" class="md-nav__link">
+    <span class="md-ellipsis">
+      Billing for Shared GPUs (MIG)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commercial-metering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commercial Metering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#licensing-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licensing Costs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-storage-networking-for-gpu-workloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Storage &amp; Networking for GPU Workloads
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Storage & Networking for GPU Workloads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Networking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Topology
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-security-access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Security &amp; Access Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Security & Access Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defense-in-depth-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Defense in Depth Layers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-developeruser-access-portal-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Developer/User Access Portal &amp; APIs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Developer/User Access Portal & APIs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#portal-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Portal Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIs &amp; CLI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commercial-portals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commercial Portals
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-early-hyperscaler-vs-modern-gpu-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Early Hyperscaler vs Modern GPU Stack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-open-source-vs-commercial-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Open-Source vs Commercial Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Open-Source vs Commercial Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#amd-as-nvidias-closest-competitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      AMD as Nvidia's Closest Competitor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-kernel-ecosystem-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Kernel Ecosystem Development
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-ii-groq-lpu-datacenter-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part II — Groq LPU Datacenter Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part II — Groq LPU Datacenter Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-alternative-silicon-is-so-hard-nvidias-full-stack-moat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Alternative Silicon Is So Hard: Nvidia's Full-Stack Moat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-lpu-architecture-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. LPU Architecture Principles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-hardware-building-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Hardware Building Blocks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Hardware Building Blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hierarchy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groqchip-tensor-streaming-processor" class="md-nav__link">
+    <span class="md-ellipsis">
+      GroqChip (Tensor Streaming Processor)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groqcard-accelerator-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      GroqCard Accelerator Card
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groqnode-gn1-b8c-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      GroqNode (GN1-B8C) Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groqrack-cluster-gr1-c9a" class="md-nav__link">
+    <span class="md-ellipsis">
+      GroqRack Cluster (GR1-C9A)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-realscale-interconnect-cluster-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. RealScale Interconnect &amp; Cluster Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-llm-inference-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. LLM Inference Performance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. LLM Inference Performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmarks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Performance Characteristics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Scaling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-power-cooling-and-rack-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Power, Cooling, and Rack Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Power, Cooling, and Rack Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#power" class="md-nav__link">
+    <span class="md-ellipsis">
+      Power
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cooling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rack-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rack Layout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Networking Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#energy-supply-the-datacenter-buildout-bottleneck" class="md-nav__link">
+    <span class="md-ellipsis">
+      Energy Supply: The Datacenter Buildout Bottleneck
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-software-stack-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Software Stack &amp; Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Software Stack & Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-real-world-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Real-World Deployments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Real-World Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scale-indicators-as-of-late-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scale Indicators (as of late 2025)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customer-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customer Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-anticipated-discussion-points-for-groq-engagement" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Anticipated Discussion Points for Groq Engagement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-iii-commercial-vllm-inference-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part III — Commercial vLLM Inference Service
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part III — Commercial vLLM Inference Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-target-customer-segments-go-to-market" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Target Customer Segments &amp; Go-to-Market
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-expanded-feature-set-beyond-basic-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Expanded Feature Set Beyond Basic Inference
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-billing-infrastructure-usage-metering" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Billing Infrastructure &amp; Usage Metering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Billing Infrastructure & Usage Metering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#token-counting-metering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Counting &amp; Metering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pricing-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pricing Model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#billing-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Billing Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#free-tier-overage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Free Tier &amp; Overage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-technical-infrastructure-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Technical Infrastructure Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Technical Infrastructure Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-design-rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Design &amp; Rate Limiting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-tenant-resource-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Tenant Resource Isolation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observability-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observability &amp; Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-scaling-capacity-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto-Scaling &amp; Capacity Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ab-testing-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      A/B Testing &amp; Deployment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reliability-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reliability Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-security-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Security &amp; Compliance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-uptime-reliability-slas" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Uptime, Reliability &amp; SLAs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-support-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Support Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-competitive-benchmarking-late-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Competitive Benchmarking (Late 2025)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Competitive Benchmarking (Late 2025)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ai-infrastructure-capex-buildout-not-bubble" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI Infrastructure Capex: Buildout, Not Bubble
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gtc-2026-the-token-factory-thesis-and-agent-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      GTC 2026: The "Token Factory" Thesis and Agent Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="gpu-datacenter-infrastructure">GPU &amp; Datacenter Infrastructure<a class="headerlink" href="#gpu-datacenter-infrastructure" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The defining constraint of modern AI infrastructure is not raw compute but rather the isolation-utilization trade-off: every mechanism that guarantees one tenant cannot interfere with another simultaneously reduces the fraction of silicon doing useful work. This tension governs decisions from GPU partitioning all the way up through API-layer metering, and it explains why the industry's most consequential hardware advances are not faster chips but smarter ways to share them. NVIDIA's Multi-Instance GPU technology, which firmware-partitions an H100 into up to seven isolated instances each with dedicated streaming multiprocessors, memory controllers, and L2 cache, delivers as much as a 7x improvement in aggregate utilization over whole-GPU passthrough while maintaining hardware-enforced separation that software time-slicing cannot match. MIG carries no additional licensing cost, whereas vGPU requires per-GPU datacenter licenses — a detail that reshapes the economics of every multi-tenant GPU cloud built on Ampere or Hopper silicon.</p>
+<p>Groq's Language Processing Unit offers a structurally different resolution to the same tension. By replacing HBM with 230 MB of on-chip SRAM per die running at 80 TB/s internal bandwidth, and by scheduling every operation and data movement at compile time rather than runtime, the LPU eliminates caches, branch predictors, and kernel launch variability entirely. The result is that <strong>tail latency equals average latency</strong> — a property no GPU architecture can claim. A single GroqRack packs 64 chips into a standard 42U cabinet delivering 48 POPS INT8 at roughly 30 kW, air-cooled, with no liquid plumbing or exotic networking. The RealScale interconnect connects all 64 chips via 704 direct links in a switchless mesh with 1.6 microsecond end-to-end latency and 3.2 TB/s bisection bandwidth, and it has been proven at 20,000 LPUs operating as a single cluster. Groq stood up that Saudi deployment in eight days. The European demo pod took thirty-four. These timelines are not marketing; they follow directly from deterministic hardware that requires no runtime debugging.</p>
+<p>The second-order consequence is that <strong>capacity planning becomes arithmetic rather than stochastic modeling</strong>. When every token costs a fixed, compile-time-known number of cycles, doubling racks exactly doubles throughput, SLA guarantees reduce to simple multiplication, and billing can be tied to precise per-token attribution without the high-cardinality observability burden that Together AI and others have publicly described as a major engineering challenge on GPU-based stacks. This predictability collapses the distance between raw infrastructure and commercial service: the same isolation, metering, and multi-tenancy patterns that define a GPU IaaS platform reappear at the API layer of a vLLM-based inference business, differing only in the abstraction boundary.</p>
+<p>This document traces that full arc — from <strong>GPU virtualization and datacenter fabric</strong> through purpose-built inference silicon to the billing and compliance machinery required to sell tokens commercially — treating them as layers of a single system rather than independent domains.</p>
+<hr />
+<h2 id="part-i-gpu-as-a-service-stack">Part I — GPU-as-a-Service Stack<a class="headerlink" href="#part-i-gpu-as-a-service-stack" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key:</strong> A comprehensive reference for building a multi-tenant GPU IaaS platform using NVIDIA GPUs on HPE servers. Covers virtualization, orchestration, scheduling, multitenancy, billing, storage/networking, security, user portals, and open-source vs commercial trade-offs. Includes comparison with early hyperscaler GPU stacks (AWS/GCP circa 2014).</p>
+</blockquote>
+<hr />
+<h3 id="1-gpu-virtualization-server-virtualization">1. GPU Virtualization &amp; Server Virtualization<a class="headerlink" href="#1-gpu-virtualization-server-virtualization" title="Permanent link">&para;</a></h3>
+<h4 id="access-modes">Access Modes<a class="headerlink" href="#access-modes" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Description</th>
+<th>Isolation</th>
+<th>Sharing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bare-metal (BMaaS)</strong></td>
+<td>Tenant gets entire physical node with GPUs</td>
+<td>Strongest (no shared HW)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>VM (passthrough)</strong></td>
+<td>Full GPU assigned to one VM via PCIe passthrough</td>
+<td>Strong (hypervisor boundary)</td>
+<td>None — 1 GPU = 1 tenant</td>
+</tr>
+<tr>
+<td><strong>NVIDIA vGPU</strong></td>
+<td>Software time-slices or partitions GPU memory across VMs/containers</td>
+<td>Moderate (framebuffer isolation, not full compute isolation)</td>
+<td>Yes — multiple tenants per GPU</td>
+</tr>
+<tr>
+<td><strong>NVIDIA MIG</strong></td>
+<td>Hardware-partitions A100/H100 into up to <strong>7 isolated instances</strong> with dedicated SMs, memory, cache</td>
+<td>Strong (firmware-enforced)</td>
+<td>Yes — hardware-level</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> <strong>MIG</strong> is the game-changer for multi-tenancy — hardware-enforced isolation, predictable performance (no time-slicing jitter), up to <strong>7x better utilization</strong> by right-sizing GPU slices to workloads. Available on A100/H100 only. Older GPUs use vGPU (requires NVIDIA datacenter licenses) or passthrough.</p>
+</blockquote>
+<h4 id="hypervisors">Hypervisors<a class="headerlink" href="#hypervisors" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>KVM/QEMU</strong> (open-source, Linux built-in) — robust, free, used by most private GPU clouds</li>
+<li><strong>Xen</strong> — historically used by AWS</li>
+<li><strong>VMware ESXi/vSphere</strong> — commercial, polished management, live migration, licensing cost</li>
+<li>Both KVM and Xen support PCIe GPU passthrough; for vGPU/MIG, hypervisor loads NVIDIA drivers</li>
+</ul>
+<h4 id="bare-metal-provisioning">Bare-Metal Provisioning<a class="headerlink" href="#bare-metal-provisioning" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>OpenStack Ironic</strong> — bare-metal provisioning service for "hard isolation" scenarios</li>
+<li><strong>HPE OneView</strong>, <strong>Canonical MAAS</strong> — vendor tools for physical GPU node allocation on demand</li>
+</ul>
+<hr />
+<h3 id="2-container-vm-orchestration-layer">2. Container &amp; VM Orchestration Layer<a class="headerlink" href="#2-container-vm-orchestration-layer" title="Permanent link">&para;</a></h3>
+<h4 id="vm-orchestration-openstack">VM Orchestration — OpenStack<a class="headerlink" href="#vm-orchestration-openstack" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Nova</strong> compute service supports GPU passthrough and vGPU flavors</li>
+<li><strong>Neutron</strong> handles multi-tenant networking; <strong>Keystone</strong> provides identity/RBAC</li>
+<li><strong>Horizon</strong> dashboard for self-service (can be extended to show GPU-specific resources)</li>
+<li>Operators define GPU flavors (e.g., "1 GPU", "1 MIG slice") — tenants launch via web/API</li>
+</ul>
+<h4 id="container-orchestration-kubernetes">Container Orchestration — Kubernetes<a class="headerlink" href="#container-orchestration-kubernetes" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>NVIDIA K8s device plugin</strong> advertises GPUs to scheduler; supports MIG partitions as discrete devices</li>
+<li>Containerized AI workflows (TensorFlow/PyTorch in Docker) make K8s a natural fit</li>
+<li><strong>Red Hat OpenShift</strong> — enterprise K8s positioned as multi-tenant GPU-as-a-Service platform</li>
+</ul>
+<h4 id="integration-patterns">Integration Patterns<a class="headerlink" href="#integration-patterns" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>K8s-first:</strong> Everything as containers on a multi-tenant K8s cluster</li>
+<li><strong>VM-first (OpenStack):</strong> Mimic AWS-like IaaS — tenants get GPU VMs, possibly running K8s inside</li>
+<li><strong>Hybrid:</strong> OpenStack provisions GPU-backed VMs, each running K8s nodes; tenants get whole VMs or K8s clusters on demand</li>
+</ul>
+<h4 id="other-orchestrators">Other Orchestrators<a class="headerlink" href="#other-orchestrators" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>OpenShift</strong> — K8s + multitenancy + pipeline integration (commercial)</li>
+<li><strong>VMware vSphere/vCenter</strong> — VM management with BitFusion GPU sharing (proprietary)</li>
+<li><strong>OpenNebula</strong>, <strong>CloudStack</strong> — simpler open-source alternatives to OpenStack</li>
+<li><strong>Rancher</strong>, <strong>Kubeflow</strong> — container platforms / ML toolkit on K8s</li>
+</ul>
+<hr />
+<h3 id="3-resource-provisioning-scheduling">3. Resource Provisioning &amp; Scheduling<a class="headerlink" href="#3-resource-provisioning-scheduling" title="Permanent link">&para;</a></h3>
+<h4 id="gpu-scheduling-in-kubernetes">GPU Scheduling in Kubernetes<a class="headerlink" href="#gpu-scheduling-in-kubernetes" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Scheduler</th>
+<th>Type</th>
+<th>Key Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Default K8s scheduler</strong></td>
+<td>Built-in</td>
+<td>GPU-aware resource counting only</td>
+</tr>
+<tr>
+<td><strong>Kueue</strong> (Kubernetes Elastic Queue)</td>
+<td>Extension</td>
+<td>Quota-based fair sharing, multi-tenancy via quotas, queuing when resources full</td>
+</tr>
+<tr>
+<td><strong>Volcano</strong></td>
+<td>Extension</td>
+<td>Gang scheduling, topology-aware placement, virtual GPU slicing, backfilling</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hpc-schedulers">HPC Schedulers<a class="headerlink" href="#hpc-schedulers" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Slurm</strong> — widely used in HPC/AI clusters; integrates with MIG; supports fair share, preemption</li>
+<li><strong>PBS Pro</strong>, <strong>IBM Spectrum LSF</strong>, <strong>Grid Engine</strong> — alternatives for batch environments</li>
+</ul>
+<h4 id="dynamic-provisioning-autoscaling">Dynamic Provisioning &amp; Autoscaling<a class="headerlink" href="#dynamic-provisioning-autoscaling" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>KEDA</strong> (Kubernetes Event-Driven Autoscaling) — scales GPU nodes based on queue metrics (pending jobs in Kueue)</li>
+<li>Scale-up latency: GPU node provisioning takes minutes — use <strong>warm pools</strong> or over-provision</li>
+<li>Goal: don't pay for idle GPUs</li>
+</ul>
+<h4 id="resource-quotas-fairness">Resource Quotas &amp; Fairness<a class="headerlink" href="#resource-quotas-fairness" title="Permanent link">&para;</a></h4>
+<ul>
+<li>OpenStack: tenant quotas on GPU instance count</li>
+<li>K8s: <strong>ResourceQuota</strong>, <strong>LimitRange</strong>, Kueue scheduler quotas per namespace/tenant</li>
+<li>Multi-tenant GPU orchestration improves aggregate utilization by <strong>30-40%</strong> through intelligent packing</li>
+</ul>
+<h4 id="workload-placement">Workload Placement<a class="headerlink" href="#workload-placement" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Multi-GPU jobs need <strong>NVLink-connected GPUs</strong> on same server — topology-aware scheduling critical</li>
+<li>K8s topology spread constraints; Slurm can constrain to same network switch for parallel jobs</li>
+</ul>
+<hr />
+<h3 id="4-multitenancy-isolation-mechanisms">4. Multitenancy &amp; Isolation Mechanisms<a class="headerlink" href="#4-multitenancy-isolation-mechanisms" title="Permanent link">&para;</a></h3>
+<h4 id="isolation-spectrum">Isolation Spectrum<a class="headerlink" href="#isolation-spectrum" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Hard Isolation</th>
+<th>Soft Isolation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Compute</strong></td>
+<td>Dedicated physical servers/VMs, separate K8s clusters</td>
+<td>Shared K8s cluster with namespaces + quotas</td>
+</tr>
+<tr>
+<td><strong>GPU</strong></td>
+<td>Passthrough (whole GPU per tenant) or MIG (firmware-enforced)</td>
+<td>vGPU time-slicing (framebuffer isolation only)</td>
+</tr>
+<tr>
+<td><strong>Network</strong></td>
+<td>Separate VLANs/NICs, dedicated InfiniBand PKeys, physical separation</td>
+<td>VXLAN overlays, K8s NetworkPolicy, EVPN virtual routers</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>Separate Ceph pools, dedicated credentials, per-tenant encryption keys</td>
+<td>Namespace-scoped volumes, access controls, VRF</td>
+</tr>
+</tbody>
+</table>
+<h4 id="gpu-isolation-details">GPU Isolation Details<a class="headerlink" href="#gpu-isolation-details" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>MIG:</strong> Each slice has own SMs, memory, cache — firmware guarantees; one tenant's high memory usage won't starve others</li>
+<li><strong>vGPU:</strong> Isolates framebuffers and contexts but time-sliced compute isn't fully isolated</li>
+<li><strong>Without MIG/vGPU:</strong> Dedicate whole GPUs to tenants (passthrough) to prevent data leakage</li>
+</ul>
+<h4 id="compute-isolation-enhancements">Compute Isolation Enhancements<a class="headerlink" href="#compute-isolation-enhancements" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Kata Containers</strong> — lightweight VMs wrapping containers for extra isolation layer</li>
+<li><strong>gVisor</strong> — user-space kernel for container sandboxing</li>
+<li>Separate node pools per tenant or even separate K8s clusters</li>
+</ul>
+<h4 id="rbac-auth">RBAC &amp; Auth<a class="headerlink" href="#rbac-auth" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>OpenStack Keystone</strong> or <strong>LDAP/AD</strong> for identity</li>
+<li>Hierarchical RBAC: org admins see all projects, project users see only their resources</li>
+<li>SSO/OAuth support for enterprise integration</li>
+</ul>
+<h4 id="resource-throttling">Resource Throttling<a class="headerlink" href="#resource-throttling" title="Permanent link">&para;</a></h4>
+<ul>
+<li>CPU/RAM cgroups, GPU time quotas, disk IOPS limits per tenant</li>
+<li>MIG or vGPU QoS caps ensure no single container exceeds its GPU share</li>
+</ul>
+<hr />
+<h3 id="5-billing-metering">5. Billing &amp; Metering<a class="headerlink" href="#5-billing-metering" title="Permanent link">&para;</a></h3>
+<h4 id="usage-metering">Usage Metering<a class="headerlink" href="#usage-metering" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Track <strong>per-tenant GPU-hours</strong> at minimum; also CPU hours, memory GB, network egress, storage GB</li>
+<li><strong>OpenStack:</strong> Ceilometer telemetry service collects resource usage events; extend for GPU allocation metering</li>
+<li><strong>Kubernetes:</strong> Prometheus metrics (GPU utilization, pod lifetimes) aggregated per tenant namespace; <strong>Kubecost</strong> for cost reports</li>
+</ul>
+<h4 id="billing-for-shared-gpus-mig">Billing for Shared GPUs (MIG)<a class="headerlink" href="#billing-for-shared-gpus-mig" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Bill per GPU-memory fraction or per MIG slice (e.g., 20% of GPU = 0.2 GPU-hour)</li>
+<li>Alternative: bill based on actual utilization via <strong>NVIDIA DCGM</strong> (Data Center GPU Manager) per-process metrics</li>
+<li>Simpler approach: treat allocated fraction as billable unit (like vCPUs)</li>
+</ul>
+<h4 id="commercial-metering">Commercial Metering<a class="headerlink" href="#commercial-metering" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Rafay</strong> platform: built-in GPU usage metering + cost attribution APIs, chargeback enforcement, integrates with finance systems</li>
+<li><strong>CloudKitty</strong> (open-source): converts Ceilometer metrics to bills (e.g., X GPU-hours at $Y/hr)</li>
+<li><strong>Stripe</strong> integration for public cloud; internal accounting for private cloud</li>
+</ul>
+<h4 id="licensing-costs">Licensing Costs<a class="headerlink" href="#licensing-costs" title="Permanent link">&para;</a></h4>
+<ul>
+<li>NVIDIA vGPU requires per-GPU datacenter licenses — pass to tenant or absorb in price</li>
+<li>MIG has no extra license cost (built into A100/H100)</li>
+</ul>
+<hr />
+<h3 id="6-storage-networking-for-gpu-workloads">6. Storage &amp; Networking for GPU Workloads<a class="headerlink" href="#6-storage-networking-for-gpu-workloads" title="Permanent link">&para;</a></h3>
+<h4 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Solution</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Local NVMe</strong></td>
+<td>Direct-attached SSDs</td>
+<td>Cache, scratch, data shuffling during training</td>
+</tr>
+<tr>
+<td><strong>Distributed parallel FS</strong></td>
+<td><strong>Lustre</strong>, <strong>BeeGFS</strong>, <strong>IBM Spectrum Scale (GPFS)</strong></td>
+<td>Multi-petabyte shared datasets, multi-node training</td>
+</tr>
+<tr>
+<td><strong>Object storage</strong></td>
+<td><strong>MinIO</strong> (S3-compatible), Ceph RGW</td>
+<td>Datasets, model checkpoints (write-once-read-many)</td>
+</tr>
+<tr>
+<td><strong>Block storage</strong></td>
+<td>Ceph RBD, OpenStack Cinder</td>
+<td>VM/container persistent volumes</td>
+</tr>
+<tr>
+<td><strong>GPUDirect Storage (GDS)</strong></td>
+<td>NVIDIA GDS</td>
+<td>DMA from NVMe/NIC directly to GPU memory, bypassing CPU</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Storage goal is to <strong>keep GPUs fed with data</strong>. Parallel filesystems (Lustre, BeeGFS) deliver tens of GB/s aggregate bandwidth. GPUDirect Storage eliminates CPU overhead for streaming large batches.</p>
+</blockquote>
+<h4 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Technology</th>
+<th>Bandwidth</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Intra-server GPU</strong></td>
+<td>NVLink/NVSwitch</td>
+<td>900 GB/s (H100)</td>
+<td>Mandatory for tensor parallelism</td>
+</tr>
+<tr>
+<td><strong>Inter-node GPU</strong></td>
+<td>InfiniBand NDR</td>
+<td>400 Gb/s</td>
+<td>Best for distributed training; RDMA; requires IB fabric management</td>
+</tr>
+<tr>
+<td><strong>Inter-node GPU</strong></td>
+<td>RoCEv2 Ethernet</td>
+<td>100-200 GbE</td>
+<td>Easier IP integration; lossless Ethernet fabric needed; adaptive routing</td>
+</tr>
+<tr>
+<td><strong>Tenant overlay</strong></td>
+<td>EVPN/VXLAN</td>
+<td>—</td>
+<td>Per-tenant L2 networks; firewalls/security groups at virtual router</td>
+</tr>
+<tr>
+<td><strong>Client access</strong></td>
+<td>Standard Ethernet</td>
+<td>—</td>
+<td>Frontend for API/portal access; direct connect for high-bandwidth data push</td>
+</tr>
+</tbody>
+</table>
+<h4 id="topology">Topology<a class="headerlink" href="#topology" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Non-blocking leaf-spine fabric</strong> (100GbE or IB in Clos topology) — avoid oversubscription</li>
+<li>Schedule TP groups on NVLink-connected GPUs; avoid PCIe-only paths</li>
+<li><strong>SR-IOV</strong> for VMs/containers to get near line-rate NIC performance</li>
+</ul>
+<hr />
+<h3 id="7-security-access-control">7. Security &amp; Access Control<a class="headerlink" href="#7-security-access-control" title="Permanent link">&para;</a></h3>
+<h4 id="defense-in-depth-layers">Defense in Depth Layers<a class="headerlink" href="#defense-in-depth-layers" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Mechanism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>Keystone / LDAP / AD / SSO (SAML/OAuth); per-user/project API tokens</td>
+</tr>
+<tr>
+<td><strong>Authorization (RBAC)</strong></td>
+<td>Hierarchical roles (admin, member) in OpenStack projects / K8s namespaces</td>
+</tr>
+<tr>
+<td><strong>API security</strong></td>
+<td>TLS on all APIs; audit logging on all API calls</td>
+</tr>
+<tr>
+<td><strong>Image security</strong></td>
+<td>Container/VM image scanning; curated base image catalog with NVIDIA drivers</td>
+</tr>
+<tr>
+<td><strong>GPU isolation</strong></td>
+<td>MIG (firmware-enforced), IOMMU, SR-IOV for device-level address space isolation</td>
+</tr>
+<tr>
+<td><strong>Compute isolation</strong></td>
+<td>VMs, Kata Containers, gVisor for container workloads</td>
+</tr>
+<tr>
+<td><strong>Network isolation</strong></td>
+<td>VLAN/VXLAN segmentation, K8s NetworkPolicy, InfiniBand PKey partitioning</td>
+</tr>
+<tr>
+<td><strong>Storage encryption</strong></td>
+<td>At-rest encryption (Ceph, LUKS volumes); <strong>KMS</strong> integration (Vault or cloud KMS)</td>
+</tr>
+<tr>
+<td><strong>In-transit encryption</strong></td>
+<td>TLS/IPsec for Ethernet; IB uses partition keys (not encrypted by default)</td>
+</tr>
+<tr>
+<td><strong>Hardware security</strong></td>
+<td>Secure boot, TPMs, firmware attestation on server hardware</td>
+</tr>
+<tr>
+<td><strong>Monitoring/auditing</strong></td>
+<td>GPU utilization anomaly detection; API audit logs; console session recording</td>
+</tr>
+<tr>
+<td><strong>Multi-tenancy policies</strong></td>
+<td>Affinity/anti-affinity rules to prevent co-tenancy on same host (compliance)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="8-developeruser-access-portal-apis">8. Developer/User Access Portal &amp; APIs<a class="headerlink" href="#8-developeruser-access-portal-apis" title="Permanent link">&para;</a></h3>
+<h4 id="portal-features">Portal Features<a class="headerlink" href="#portal-features" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Self-service GUI:</strong> Launch GPU instances, attach volumes, view usage — OpenStack Horizon or custom portal</li>
+<li><strong>Service catalog:</strong> Pre-built environments (PyTorch + CUDA images), MIG size options ("small GPU 10GB", "medium 20GB", "full GPU")</li>
+<li><strong>Jupyter notebooks:</strong> One-click notebook environments on GPU pods/VMs (Kubeflow Notebook Controller)</li>
+<li><strong>Project/team management:</strong> Invite members, assign roles, view combined usage; SAML/SSO integration</li>
+<li><strong>Notifications:</strong> "Job completed", "80% of GPU quota reached", usage reports downloadable</li>
+<li><strong>Documentation &amp; support:</strong> Docs, examples, support channel</li>
+</ul>
+<h4 id="apis-cli">APIs &amp; CLI<a class="headerlink" href="#apis-cli" title="Permanent link">&para;</a></h4>
+<ul>
+<li>OpenStack REST APIs + CLI; K8s APIs + kubectl</li>
+<li>Custom CLI for GPU cloud (e.g., "submit training job with 4 GPUs" without low-level K8s details)</li>
+<li><strong>Terraform</strong> providers for infrastructure-as-code</li>
+</ul>
+<h4 id="commercial-portals">Commercial Portals<a class="headerlink" href="#commercial-portals" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>NVIDIA Base Command Platform</strong> — polished web UI for DGX GPU clusters (job scheduling, dataset management)</li>
+<li><strong>NVIDIA DGX Spark (Asus Ascent GX10)</strong> — 128 GB DDR5 consumer-grade unit capable of running Qwen3.5-122B locally at 100 W; benchmarked at 27-29 tok/s generation and 1,500 tok/s prefill at 200K context (March 2026)</li>
+<li><strong>Rafay</strong> — branded developer portals and service catalogs for GPU environments</li>
+<li><strong>Morpheus Data / CloudBolt</strong> — cloud management portals supporting VMware/OpenStack</li>
+<li><strong>Open OnDemand</strong> — open-source HPC portal (job submission, VNC sessions) adaptable for GPU</li>
+</ul>
+<hr />
+<h3 id="9-early-hyperscaler-vs-modern-gpu-stack">9. Early Hyperscaler vs Modern GPU Stack<a class="headerlink" href="#9-early-hyperscaler-vs-modern-gpu-stack" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Early (AWS/GCP ~2014)</th>
+<th>Modern GPU IaaS (2020s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GPU Virtualization</strong></td>
+<td>Dedicated GPU per VM (passthrough only); no MIG; vGPU only for graphics</td>
+<td>MIG splits 1 GPU into 7 isolated instances; vGPU for time-slicing; fractional GPU billing</td>
+</tr>
+<tr>
+<td><strong>Orchestration</strong></td>
+<td>Proprietary VM orchestration (EC2 control plane); manual workload management</td>
+<td>K8s + cloud-native orchestration; auto-scaling GPU nodes; Kueue/Volcano for fair scheduling</td>
+</tr>
+<tr>
+<td><strong>GPU Sharing</strong></td>
+<td>1 tenant per GPU; no fractional billing; GPU context switching within one VM only</td>
+<td>Fractional allocation as first-class; MIG/vGPU enable "GPU-small" instances; time-sliced sharing achieves &gt;90% utilization</td>
+</tr>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>Basic infrastructure — 10 Gbps Ethernet, general-purpose storage (EBS), single instances</td>
+<td>AI-optimized full stack — 100 Gbps+ Ethernet/InfiniBand with RDMA, parallel FS (Lustre), NVLink, distributed training support, integrated monitoring</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> A new GPU cloud built today can <strong>leapfrog</strong> what AWS/GCP started with by leveraging MIG, K8s orchestration, high-speed interconnects, and specialized scheduling — operating GPUs "as a service" rather than just raw VMs.</p>
+</blockquote>
+<hr />
+<h3 id="10-open-source-vs-commercial-components">10. Open-Source vs Commercial Components<a class="headerlink" href="#10-open-source-vs-commercial-components" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Open-Source</th>
+<th>Commercial</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hypervisor</strong></td>
+<td>KVM/QEMU, Xen</td>
+<td>VMware ESXi</td>
+<td>Free + flexible vs polished + licensed + live migration</td>
+</tr>
+<tr>
+<td><strong>GPU Partitioning</strong></td>
+<td>MIG (free on A100/H100), MPS, K8s device plugins</td>
+<td>NVIDIA vGPU (GRID), Run:AI, VMware BitFusion</td>
+<td>MIG = HW isolation but A100/H100 only; vGPU = broader GPU support but licensing cost</td>
+</tr>
+<tr>
+<td><strong>GPU Kernel Libraries</strong></td>
+<td>Bastile (CUDA kernel library built on cuTile; claims faster performance than Liger for Qwen3 workloads; includes FlashAttention backward kernel; optimizations adapted from TileGym)</td>
+<td>NVIDIA cuDNN, cuBLAS</td>
+<td>Open-source kernel libraries narrowing gap with vendor-optimized libraries</td>
+</tr>
+<tr>
+<td><strong>VM Orchestration</strong></td>
+<td>OpenStack (Nova, Neutron, Cinder), CloudStack, OpenNebula</td>
+<td>VMware vCloud, HPE GreenLake</td>
+<td>OpenStack = feature-rich + free but complex; commercial = easier OOB but expensive</td>
+</tr>
+<tr>
+<td><strong>Container Orchestration</strong></td>
+<td>Kubernetes, OKD, Rancher, Kubeflow</td>
+<td>OpenShift, VMware Tanzu, Google Anthos, NVIDIA Base Command/DGX Cloud</td>
+<td>Upstream K8s = full control; enterprise distros add security/monitoring at subscription cost</td>
+</tr>
+<tr>
+<td><strong>Scheduling</strong></td>
+<td>Slurm, Volcano, Kueue, Apache YuniKorn, Airflow/Argo</td>
+<td>IBM LSF, Altair PBS Pro, Run:AI, AWS Batch</td>
+<td>Open-source = powerful but needs tuning; commercial = better GUIs/support</td>
+</tr>
+<tr>
+<td><strong>Multitenancy/Isolation</strong></td>
+<td>Linux cgroups/namespaces, SELinux, K8s NetworkPolicy, Kata Containers, Keycloak/Dex</td>
+<td>Rafay, Aarna GPU Cloud Management, VMware NSX, Cisco ACI</td>
+<td>Open-source covers most needs but requires ops expertise; commercial = pre-integrated</td>
+</tr>
+<tr>
+<td><strong>Monitoring/Metering</strong></td>
+<td>Prometheus + Grafana, Ceilometer/Gnocchi, ELK Stack, Kubecost</td>
+<td>Datadog, NewRelic, CloudWatch, NVIDIA Base Command Manager, Cisco Intersight</td>
+<td>Open-source = capable but scale/tuning required; commercial = turnkey GPU metrics</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>Ceph, Lustre, BeeGFS, MinIO, NFS</td>
+<td>DDN, WekaIO, VAST, NetApp, Dell EMC, Cloudian</td>
+<td>Open-source = low cost but tuning expertise needed; commercial = peak performance + support</td>
+</tr>
+<tr>
+<td><strong>Networking</strong></td>
+<td>Cumulus/SONiC, FRR, Open vSwitch/OVN, Calico/Cilium</td>
+<td>Cisco/Juniper, NVIDIA/Mellanox InfiniBand, VMware NSX, Cisco ACI</td>
+<td>InfiniBand = top GPU performance (NVIDIA ecosystem); Ethernet = multi-vendor flexibility</td>
+</tr>
+<tr>
+<td><strong>User Portal</strong></td>
+<td>OpenStack Horizon, K8s Dashboard, Open OnDemand, JupyterHub, custom React/Angular</td>
+<td>Rafay, Morpheus/CloudBolt, NVIDIA Base Command, vendor consoles</td>
+<td>Custom = maximum flexibility; commercial CMPs = faster time-to-market</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> The practical sweet spot is a <strong>hybrid approach</strong> — open-source foundation (KVM + OpenStack + K8s + Ceph + Prometheus) with selective commercial additions where they add significant value (e.g., NVIDIA vGPU licenses for older GPUs, OpenShift for enterprise security, commercial parallel FS for peak storage performance).</p>
+</blockquote>
+<h4 id="amd-as-nvidias-closest-competitor">AMD as Nvidia's Closest Competitor<a class="headerlink" href="#amd-as-nvidias-closest-competitor" title="Permanent link">&para;</a></h4>
+<p>AMD is the only credible alternative to Nvidia for large-scale GPU training and inference, but the gap remains significant — and it is primarily a <strong>software gap, not a hardware gap</strong>. AMD's MI300X offers competitive specifications on paper (192 GB HBM3 memory, 5.3 TB/s memory bandwidth — exceeding the H100 on both counts), yet real-world performance consistently lags because ROCm, AMD's CUDA competitor, lacks the maturity, library breadth, and developer ecosystem that CUDA has built over two decades. Models that run out of the box on CUDA frequently require porting effort, debugging, and performance tuning on ROCm, and many third-party frameworks and tools still treat AMD support as experimental.</p>
+<p>AMD's most promising path is <strong>inference workloads</strong>, where the software requirements are simpler (fewer custom kernels, more standardized operations) and AMD's memory bandwidth advantages translate more directly into throughput gains. For training — especially distributed training across hundreds of GPUs requiring tight NCCL-equivalent communication — the software gap remains a serious obstacle. AMD's investment in kernel competitions and open-source tooling (see below) reflects a deliberate strategy to close the ecosystem gap through community engagement rather than trying to match Nvidia's internal library development dollar-for-dollar.</p>
+<h4 id="gpu-kernel-ecosystem-development">GPU Kernel Ecosystem Development<a class="headerlink" href="#gpu-kernel-ecosystem-development" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>AMD $1.1M kernel competition</strong> (GPU MODE, March 2026): targets MI355X GPUs for optimizing DeepSeek-R1-0528 and GPT-OSS-120B workloads. Phase 1 focuses on MXFP4 MoE, MLA Decode, and MXFP4 GEMM kernels. Submissions via Popcorn CLI without requiring MI355X hardware (remote evaluation infrastructure provided). This competition exemplifies AMD's strategy of leveraging open-source community contributions to narrow the kernel optimization gap with Nvidia's proprietary libraries.</li>
+<li><strong>Apple Neural Engine LoRA training</strong> (March 2026): demonstrated LoRA fine-tuning running entirely on Apple's Neural Engine at ~2.8 W, 192 gradient dispatches without GPU fallback. Known quirks: matmul compiles but doesn't execute, tensor spatial dimensions need multiples of 16, silent compilation failures after ~119 builds</li>
+</ul>
+<hr />
+<h2 id="part-ii-groq-lpu-datacenter-design">Part II — Groq LPU Datacenter Design<a class="headerlink" href="#part-ii-groq-lpu-datacenter-design" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key:</strong> Technical reference for designing an LLM inference data center around Groq's <strong>Language Processing Unit (LPU)</strong>. Covers chip architecture, hardware hierarchy (GroqChip -&gt; GroqCard -&gt; GroqNode -&gt; GroqRack), RealScale interconnect, inference performance benchmarks, power/cooling/rack design, software stack, and real-world deployments (Saudi Arabia, Finland, Australia).</p>
+</blockquote>
+<h4 id="why-alternative-silicon-is-so-hard-nvidias-full-stack-moat">Why Alternative Silicon Is So Hard: Nvidia's Full-Stack Moat<a class="headerlink" href="#why-alternative-silicon-is-so-hard-nvidias-full-stack-moat" title="Permanent link">&para;</a></h4>
+<p>Before examining Groq's architecture, it is worth understanding the competitive landscape any alternative inference chip enters. Nvidia's dominance does not rest on any single component but on owning the <strong>entire stack end-to-end</strong>: chips (A100/H100/B200), intra-node interconnects (NVLink/NVSwitch), datacenter networking (Mellanox-derived InfiniBand and Spectrum-X Ethernet), software (the CUDA ecosystem with decades of libraries, frameworks, and developer tooling), and now custom silicon (Grace CPU for tightly coupled CPU-GPU nodes). Each layer reinforces the others — NVLink is designed for Nvidia GPUs, CUDA is optimized for Nvidia architectures, InfiniBand drivers integrate with NCCL — creating a platform where leaving any single layer means losing the benefits of all the others. The real moat is not performance on any benchmark but the <strong>integrated platform lock-in</strong> that makes migration painful and risky.</p>
+<p>This lock-in shapes the economics of every chip startup attempting to compete. The odds of a new entrant succeeding against Nvidia are estimated at <strong>less than 1%</strong>. The capital barrier alone is daunting: reaching tape-out and production for a competitive datacenter accelerator requires <strong>$500M or more</strong> before a single chip ships to a customer. Beyond capital, the software ecosystem gap is nearly insurmountable — CUDA has accumulated decades of optimized libraries (cuDNN, cuBLAS, CUTLASS, TensorRT, Triton), and replicating even a fraction of that ecosystem takes years. Customer risk aversion compounds the problem: procurement teams default to Nvidia because nobody gets fired for buying the market leader. Even well-funded startups — Graphcore (raised over $700M), Habana (acquired by Intel for $2B), SambaNova (raised $1.1B+) — have struggled to capture meaningful market share against this combination of capital requirements, ecosystem depth, and buyer inertia.</p>
+<p>Groq's strategy for navigating these barriers is instructive: rather than competing head-to-head on training (Nvidia's strongest position), Groq targets <strong>inference-only</strong> workloads where the software requirements are narrower, the performance metric (latency) is more differentiated, and the deterministic architecture offers a structural advantage no GPU can match.</p>
+<hr />
+<h3 id="1-lpu-architecture-principles">1. LPU Architecture Principles<a class="headerlink" href="#1-lpu-architecture-principles" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Single-core, assembly-line execution</strong></td>
+<td>One massive core with hundreds of functional units in <strong>Superlanes</strong>; instructions flow one direction, data flows orthogonally (systolic array); no complex on-chip control</td>
+</tr>
+<tr>
+<td><strong>On-chip SRAM as primary memory</strong></td>
+<td><strong>230 MB SRAM per GroqChip</strong>; ~<strong>80 TB/s</strong> internal memory bandwidth; no external DRAM; weights stored on-die; enables tensor parallelism across chips</td>
+</tr>
+<tr>
+<td><strong>Deterministic, static scheduling</strong></td>
+<td>Custom compiler schedules all ops and data movement at <strong>compile time</strong>; no caches, no branch predictors, no runtime kernel launch variability; <strong>every cycle accounted for</strong>; zero run-to-run variation</td>
+</tr>
+<tr>
+<td><strong>Minimalistic inference-only design</strong></td>
+<td>Purpose-built for linear algebra (matmuls); no training overhead; <strong>10x better energy efficiency</strong> than GPUs per inference</td>
+</tr>
+<tr>
+<td><strong>Compiler-first development</strong></td>
+<td>Compiler designed <strong>before</strong> the chip hardware; hardware is straightforward for compiler to control; <strong>GroqFlow</strong> + SDK take models from frameworks and compile to optimized LPU binaries</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Deterministic execution means <strong>fully predictable latency</strong> — tail latency equals average latency. Performance can be calculated in advance, simplifying capacity planning.</p>
+</blockquote>
+<hr />
+<h3 id="2-hardware-building-blocks">2. Hardware Building Blocks<a class="headerlink" href="#2-hardware-building-blocks" title="Permanent link">&para;</a></h3>
+<h4 id="hierarchy">Hierarchy<a class="headerlink" href="#hierarchy" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th><strong>GroqChip LPU</strong> (per card)</th>
+<th><strong>GroqNode</strong> Server (8 LPUs)</th>
+<th><strong>GroqRack</strong> Cluster (64 LPUs)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compute (INT8)</td>
+<td>750 TOPS</td>
+<td>~6,000 TOPS (6 POPS)</td>
+<td>~48,000 TOPS (48 POPS)</td>
+</tr>
+<tr>
+<td>Compute (FP16)</td>
+<td>188 TFLOPS</td>
+<td>~1.5 PFLOPS</td>
+<td>~12 PFLOPS</td>
+</tr>
+<tr>
+<td>On-Chip Memory</td>
+<td>230 MB SRAM</td>
+<td>1.76 GB SRAM</td>
+<td>~14 GB SRAM</td>
+</tr>
+<tr>
+<td>On-Chip Mem BW</td>
+<td>80 TB/s</td>
+<td>640 TB/s</td>
+<td>— (internal fabric 3.2 TB/s)</td>
+</tr>
+<tr>
+<td>RealScale Links</td>
+<td>11 ports per chip</td>
+<td>88 links per server</td>
+<td>704 links total</td>
+</tr>
+<tr>
+<td>Host / I/O</td>
+<td>PCIe 4 x16 (31.5 GB/s)</td>
+<td>2x CPU + 100GbE NIC</td>
+<td>100 GbE TOR + 1 GbE mgmt</td>
+</tr>
+<tr>
+<td>Power (Typical/TDP)</td>
+<td>~240-275 W (≤375 W max)</td>
+<td>~2.5-3 kW per server</td>
+<td>~30 kW per rack</td>
+</tr>
+<tr>
+<td>Form Factor</td>
+<td>FHFL PCIe card</td>
+<td>4U chassis (736 x 437 x 737 mm)</td>
+<td>42U rack (~600 x 1200 mm)</td>
+</tr>
+<tr>
+<td>Cooling</td>
+<td>Passive card (server fans)</td>
+<td>8x hot-swap fans (air)</td>
+<td><strong>Air-cooled</strong> (no liquid needed)</td>
+</tr>
+<tr>
+<td>External Scaling</td>
+<td>—</td>
+<td>Up to 32 RealScale cables out</td>
+<td>Multi-rack capable (no switch)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="groqchip-tensor-streaming-processor">GroqChip (Tensor Streaming Processor)<a class="headerlink" href="#groqchip-tensor-streaming-processor" title="Permanent link">&para;</a></h4>
+<ul>
+<li>~725 mm² die; first-generation TSP</li>
+<li>Supports <strong>INT8/INT16</strong> and <strong>FP16/FP32</strong> (via <strong>TruePoint</strong> format retaining FP32 precision in INT)</li>
+<li><strong>11 high-speed RealScale</strong> interconnect links for direct LPU-to-LPU communication</li>
+</ul>
+<h4 id="groqcard-accelerator-card">GroqCard Accelerator Card<a class="headerlink" href="#groqcard-accelerator-card" title="Permanent link">&para;</a></h4>
+<ul>
+<li>FHFL double-width PCIe add-in card; ~250 W</li>
+<li>Breakout ports for <strong>RealScale</strong> interconnect — up to <strong>11 chip-to-chip links</strong> per card</li>
+<li>Near-linear scaling across servers <strong>without external switching</strong></li>
+</ul>
+<h4 id="groqnode-gn1-b8c-server">GroqNode (GN1-B8C) Server<a class="headerlink" href="#groqnode-gn1-b8c-server" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>4U rack-mount</strong>, <strong>8 GroqCards (8 LPUs)</strong> internally connected via RealScale</li>
+<li>Dual <strong>AMD EPYC 7313 16-core</strong> CPUs; up to 1 TB DDR4 RAM</li>
+<li><strong>32 external RealScale ports</strong> for multi-node scaling</li>
+<li>100 Gb Ethernet or InfiniBand + 1 GbE management</li>
+<li>Four 2000 W PSUs in N+N redundant config</li>
+</ul>
+<h4 id="groqrack-cluster-gr1-c9a">GroqRack Cluster (GR1-C9A)<a class="headerlink" href="#groqrack-cluster-gr1-c9a" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>8 active GroqNode servers (64 LPUs)</strong> + 1 spare node for redundancy</li>
+<li>Standard <strong>42U rack</strong></li>
+<li>64 GroqChips <strong>fully interconnected</strong> via 704 direct RealScale links</li>
+<li>End-to-end communication latency <strong>~1.6 μs</strong> within rack</li>
+<li>Internal fabric: <strong>3.2 TB/s global bisection bandwidth</strong> — switchless all-to-all mesh</li>
+<li>Top-of-rack <strong>100 GbE switch</strong> (32+ ports) + <strong>1 GbE management switch</strong></li>
+<li>Power: <strong>4x 17.3 kW PDUs</strong> (2N redundancy); ~30 kW total rack load</li>
+<li>Runs <strong>Ubuntu Linux</strong> with <strong>GroqWare</strong> pre-installed</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> A single GroqRack delivers ~<strong>48 POPS INT8</strong> and <strong>12 PFLOPS FP16</strong> with ~14 GB on-die SRAM across 64 chips. It is the primary <strong>building block for scaling out an AI data center</strong>.</p>
+</blockquote>
+<hr />
+<h3 id="3-realscale-interconnect-cluster-architecture">3. RealScale Interconnect &amp; Cluster Architecture<a class="headerlink" href="#3-realscale-interconnect-cluster-architecture" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Direct chip-to-chip links</strong></td>
+<td>11 serial links per chip via QSFP-28; <strong>plesiochronous protocol</strong> (near-same clock, compiler-scheduled)</td>
+</tr>
+<tr>
+<td><strong>No switches or routers</strong></td>
+<td>Chips communicate directly; compiler schedules data arrival deterministically; fundamentally different from GPU InfiniBand/NVLink clusters</td>
+</tr>
+<tr>
+<td><strong>Switchless all-to-all</strong></td>
+<td>704 links in GroqRack form flat accelerator network; one hop between any two chips; <strong>~1.6 μs</strong> end-to-end across 64 chips</td>
+</tr>
+<tr>
+<td><strong>No store-and-forward latency</strong></td>
+<td>Saturates available bandwidth at common message sizes; outperforms GPU AllReduce on 8xA100 when normalized for bandwidth</td>
+</tr>
+<tr>
+<td><strong>Multi-rack scaling</strong></td>
+<td>Additional RealScale cables connect GroqNodes across racks (hypercube or mesh); <strong>near-linear scalability without external switches</strong></td>
+</tr>
+<tr>
+<td><strong>Proven scale</strong></td>
+<td>Ran single model on <strong>4,000 LPUs</strong> — "just worked on first attempt"; Saudi deployment: <strong>20,000 LPUs</strong> as one cluster</td>
+</tr>
+<tr>
+<td><strong>Standard networks for I/O</strong></td>
+<td>Ethernet/InfiniBand for data in/out and host coordination; RealScale is local high-speed fabric only (not routable)</td>
+</tr>
+<tr>
+<td><strong>Deterministic networking</strong></td>
+<td>Communication costs are fixed and known at compile time; enables <strong>linear speedup</strong> when scaling models across more LPUs</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> RealScale eliminates the need for complex GPU cluster networking (NVLink, InfiniBand switches, fat-tree topologies). Direct cabling between chips, orchestrated by the compiler, yields deterministic communication with no congestion or synchronization overhead.</p>
+</blockquote>
+<hr />
+<h3 id="4-llm-inference-performance">4. LLM Inference Performance<a class="headerlink" href="#4-llm-inference-performance" title="Permanent link">&para;</a></h3>
+<h4 id="benchmarks">Benchmarks<a class="headerlink" href="#benchmarks" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Llama-2 70B output throughput</strong></td>
+<td><strong>241 tokens/sec</strong> (ArtificialAnalysis.ai benchmark) — 2x+ next fastest competitor</td>
+</tr>
+<tr>
+<td><strong>Llama-2 70B 100-token generation</strong></td>
+<td><strong>0.8 seconds</strong> total</td>
+</tr>
+<tr>
+<td><strong>Llama-2 70B internal optimized</strong></td>
+<td><strong>300 tokens/sec</strong></td>
+</tr>
+<tr>
+<td><strong>BERT-Base batch=1 latency</strong></td>
+<td><strong>130 μs</strong> — <strong>6x faster</strong> than leading GPU</td>
+</tr>
+<tr>
+<td><strong>Global network aggregate</strong></td>
+<td><strong>&gt;20 million tokens/sec</strong> across all deployed data centers</td>
+</tr>
+<tr>
+<td><strong>Groq vs GPU cost</strong></td>
+<td>Claims <strong>&gt;5x faster</strong> inference at <strong>20-60% lower cost</strong>, using <strong>up to 80% less power</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="key-performance-characteristics">Key Performance Characteristics<a class="headerlink" href="#key-performance-characteristics" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Batch=1 excellence</strong> — single inference fully utilizes the LPU; no need to accumulate batches to hide memory latency (as GPUs require); <strong>latency does not suffer at batch=1</strong></li>
+<li><strong>Tail latency ≈ average latency</strong> — deterministic execution eliminates jitter</li>
+<li><strong>Consistent latency under load</strong> — no cache misses or context switching; maintains performance as utilization increases</li>
+<li><strong>No speculative decoding needed</strong> — raw speed sufficient; simplifies serving stack</li>
+<li><strong>Multi-threaded decoding</strong> supported but hardware speed alone often sufficient</li>
+</ul>
+<h4 id="model-scaling">Model Scaling<a class="headerlink" href="#model-scaling" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Models exceeding single chip's 230 MB SRAM are <strong>pipelined across multiple LPUs</strong> via RealScale</li>
+<li><strong>64-chip GroqRack</strong> = ~14 GB SRAM total → hosts 100B+ parameter models at INT8 (~1 byte/param)</li>
+<li><strong>4,000 LPUs</strong> ≈ 920 GB SRAM → supports <strong>0.5-1 trillion parameter</strong> models</li>
+<li>Practical LLM deployments: <strong>70B Llama</strong> runs on 8-16 LPUs (quantized); <strong>GPT-3 175B</strong> on a handful of GroqNodes</li>
+</ul>
+<h4 id="model-optimization">Model Optimization<a class="headerlink" href="#model-optimization" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>GroqFlow</strong> compiles models from PyTorch/TensorFlow (often via ONNX) to LPU binaries</li>
+<li><strong>INT8 quantization with calibration</strong> — minimal accuracy loss; <strong>4x throughput vs FP16</strong>; hardware natively benefits from INT8</li>
+<li><strong>TruePoint</strong> format maintains FP32 precision in INT representation</li>
+<li>Supports <strong>Mixture-of-Experts (MoE)</strong> — compiler routes tokens to expert shards across chips</li>
+<li><strong>MLAgility</strong> tool for automated benchmarking across models</li>
+<li><strong>Model loading is an event</strong> (binary loaded to SRAM); switching models requires PCIe transfer (seconds) — better to <strong>pin models to dedicated LPU groups</strong> for multi-model serving</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> For LLM inference, performance tuning on Groq is about <strong>ensuring the model fits in on-chip memory and choosing the right number of LPUs</strong>. Once compiled, latency per token is fixed and predictable.</p>
+</blockquote>
+<hr />
+<h3 id="5-power-cooling-and-rack-design">5. Power, Cooling, and Rack Design<a class="headerlink" href="#5-power-cooling-and-rack-design" title="Permanent link">&para;</a></h3>
+<h4 id="power">Power<a class="headerlink" href="#power" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Power Draw</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Per GroqChip/Card</td>
+<td>~240-275 W typical (≤375 W peak)</td>
+</tr>
+<tr>
+<td>Per GroqNode (8 LPUs)</td>
+<td>~2.5-3 kW</td>
+</tr>
+<tr>
+<td>Per GroqRack (64 LPUs)</td>
+<td>~25-30 kW (heavy load)</td>
+</tr>
+<tr>
+<td>5-rack deployment</td>
+<td>~150 kW + cooling overhead</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>2N power redundancy</strong> — 4x 17.3 kW PDUs per rack (2 per feed A/B)</li>
+<li>Each GroqNode has <strong>4 PSUs</strong> (2 on feed A, 2 on feed B)</li>
+<li>17 kW at 230 V = ~74 A per PDU → three-phase or multiple circuits per PDU</li>
+<li>ATS or dual utility feeds recommended; battery/generator backup for availability</li>
+</ul>
+<h4 id="cooling">Cooling<a class="headerlink" href="#cooling" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Air-cooled by design</strong> — no liquid cooling, no immersion, no water</li>
+<li>8 hot-swap fans per 4U GroqNode server</li>
+<li>30 kW per rack requires robust HVAC: <strong>hot aisle-cold aisle containment</strong> recommended</li>
+<li>Design for <strong>500-1000 W/sqft</strong> in high-density zones</li>
+<li>CRAC units or chilled-water CRAH sized for continuous 30 kW per rack</li>
+<li>Nordic deployments use <strong>free-air cooling</strong>; hot climates need in-row or rear-door heat exchangers</li>
+<li><strong>Air cooling speeds deployment</strong> — Groq stood up European data center in <strong>34 days</strong></li>
+</ul>
+<h4 id="rack-layout">Rack Layout<a class="headerlink" href="#rack-layout" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Standard 19" <strong>42U cabinet</strong></li>
+<li>9x 4U servers (8 active + 1 spare) + 1U switches + cable routing ≈ fills 42U</li>
+<li>Weight: <strong>400-500 kg</strong> per rack fully loaded</li>
+<li>Extensive QSFP cabling between nodes; clean cable management via top-of-rack patch panels</li>
+<li>Inter-rack RealScale: QSFP copper (&lt;3m) or fiber/AOC for longer runs</li>
+</ul>
+<h4 id="networking-integration">Networking Integration<a class="headerlink" href="#networking-integration" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>100 GbE TOR switch</strong> per rack for data plane</li>
+<li><strong>1 GbE management switch</strong> per rack for BMC/ILO/host management</li>
+<li>Multiple racks can uplink to spine switches or peer directly</li>
+<li>LLM serving bandwidth is modest (few KB in, ~100 KB out per request) — 100 GbE sufficient</li>
+</ul>
+<h4 id="energy-supply-the-datacenter-buildout-bottleneck">Energy Supply: The Datacenter Buildout Bottleneck<a class="headerlink" href="#energy-supply-the-datacenter-buildout-bottleneck" title="Permanent link">&para;</a></h4>
+<p>The limiting factor for AI datacenter expansion is increasingly <strong>energy supply, not chip supply</strong>. As hyperscalers and inference providers scale to hundreds of megawatts per site, the question of where the power comes from becomes as important as the hardware inside the facility. The practical near-term answer is <strong>natural gas, not nuclear</strong>. Nuclear power plants take 10-15 years to permit and build; natural gas plants can be operational in 2-3 years, and gas turbine efficiency has improved dramatically in recent generations. The AI infrastructure buildout is happening now — the 2025-2028 energy crunch cannot wait for nuclear timelines. Datacenter operators are actively signing long-term gas contracts and building on-site generation capacity to secure power for new facilities. Nuclear remains a compelling long-term play for baseload clean energy, but it will not meaningfully contribute to the current wave of AI datacenter construction. This energy reality favors architectures like Groq's that deliver more inference throughput per watt — a 30 kW air-cooled rack that rivals GPU clusters consuming 2-3x the power represents a structural advantage as energy becomes the binding constraint.</p>
+<blockquote>
+<p><strong>Key:</strong> GroqRack clusters are <strong>high-power, high-cooling but standard infrastructure</strong> — no liquid cooling, no exotic networking. Comparable to 8xA100 GPU racks in power density. Air cooling simplifies and accelerates deployment. As energy supply becomes the primary bottleneck for datacenter expansion, power efficiency per token of inference is an increasingly important competitive dimension.</p>
+</blockquote>
+<hr />
+<h3 id="6-software-stack-deployment">6. Software Stack &amp; Deployment<a class="headerlink" href="#6-software-stack-deployment" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GroqWare SDK</strong></td>
+<td>Compilers, drivers, libraries; PCIe driver offloads work to CPU; C++ and Python APIs (GroqAPI); pre-installed on GroqNodes (Ubuntu/RHEL)</td>
+</tr>
+<tr>
+<td><strong>GroqFlow</strong></td>
+<td>Model compilation toolchain; imports from PyTorch/TensorFlow via ONNX; fuses ops, schedules statically, splits across chips</td>
+</tr>
+<tr>
+<td><strong>MLAgility</strong></td>
+<td>Automated model benchmarking tool; estimates tokens/s and LPU requirements</td>
+</tr>
+<tr>
+<td><strong>GroqCloud / API server</strong></td>
+<td>Cloud service or on-prem API endpoint; Tokens-as-a-Service; runtime dispatches requests to LPUs via host CPU</td>
+</tr>
+<tr>
+<td><strong>GroqView</strong> (monitoring)</td>
+<td>Visualize throughput, latency, health per LPU; likely exposes Prometheus-compatible metrics</td>
+</tr>
+</tbody>
+</table>
+<h4 id="deployment-best-practices">Deployment Best Practices<a class="headerlink" href="#deployment-best-practices" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Compile models ahead of deployment</strong> — share model details (parameter count, layer types, max sequence length) with Groq for compilation guidance</li>
+<li><strong>Assign dedicated GroqNodes/chips per model</strong> rather than swapping models on same LPU (model loading takes seconds via PCIe)</li>
+<li><strong>Capacity planning is predictable</strong> — if one GroqRack yields X QPS, two yields ~2X; linear scaling simplifies sizing</li>
+<li><strong>Multi-tenancy</strong>: Groq focuses on single-tenant high-performance use; on-prem security is mainly network isolation + API authentication</li>
+<li><strong>Data sovereignty</strong> advantage — Groq deploys in Saudi, Finland, Australia specifically for local data processing</li>
+</ul>
+<hr />
+<h3 id="7-real-world-deployments">7. Real-World Deployments<a class="headerlink" href="#7-real-world-deployments" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Deployment</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Saudi Arabia (SDAIA/Allam)</strong></td>
+<td>Dammam, late 2024; <strong>20,000 GroqChips</strong>; region's largest inference cluster; online in <strong>8 days</strong>; $1.5B investment; supports Arabic LLM (Allam) + global GroqCloud; live reasoning + TTS in English/Arabic at LEAP 2025</td>
+</tr>
+<tr>
+<td><strong>Helsinki, Finland</strong></td>
+<td>July 2025; <strong>first European data center</strong>; Equinix partnership; <strong>free-air cooling</strong> (Nordic climate); data sovereignty for EU customers; part of global network serving <strong>20+ million tokens/sec</strong></td>
+</tr>
+<tr>
+<td><strong>Sydney, Australia</strong></td>
+<td>Nov 2025; Equinix partnership; GroqCloud availability in APAC; government and enterprise access; <strong>deterministic performance and cost predictability</strong> highlighted</td>
+</tr>
+<tr>
+<td><strong>European Demo Pod</strong></td>
+<td>Groq CEO spun up small European data center in <strong>34 days</strong> (beating prior 51-day KSA record); ~20k chips; air cooling, no exotic infra, no debugging needed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="scale-indicators-as-of-late-2025">Scale Indicators (as of late 2025)<a class="headerlink" href="#scale-indicators-as-of-late-2025" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Hundreds of thousands of LPUs</strong> deployed across <strong>13+ data centers worldwide</strong></li>
+<li>Groq valuation: <strong>$6.9B</strong> (Sep 2025)</li>
+<li>Raised <strong>$300M+</strong> in funding rounds</li>
+<li>Plans for <strong>12+ new data centers</strong> next year</li>
+</ul>
+<h4 id="customer-use-cases">Customer Use Cases<a class="headerlink" href="#customer-use-cases" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Conversational AI</strong>, coding assistants, speech AI, content moderation, <strong>cybersecurity anomaly detection</strong> (US Army validation)</li>
+<li>Interactive chatbots, real-time transcription (thousands of audio streams), batch document processing</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> Groq has proven rapid deployment (8-34 days from decision to live inference), massive scale (20,000 LPUs in single cluster), and operation across diverse climates (Middle East to Nordic). The GroqRack's air-cooled, pre-integrated design slots into standard colocation facilities requiring only power and network connectivity.</p>
+</blockquote>
+<hr />
+<h3 id="8-anticipated-discussion-points-for-groq-engagement">8. Anticipated Discussion Points for Groq Engagement<a class="headerlink" href="#8-anticipated-discussion-points-for-groq-engagement" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Key Questions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Model Specifications</strong></td>
+<td>Model names, parameter counts, formats (FP16/INT8), context lengths; does model fit in one GroqNode or require multi-node?</td>
+</tr>
+<tr>
+<td><strong>Performance Targets</strong></td>
+<td>Required QPS, latency SLAs (e.g., 95th percentile under X sec), output length assumptions</td>
+</tr>
+<tr>
+<td><strong>Scaling Plans</strong></td>
+<td>Initial deployment size vs growth plan; can facility accommodate additional GroqRacks?</td>
+</tr>
+<tr>
+<td><strong>Use Case &amp; SLA</strong></td>
+<td>Interactive (low-latency) vs batch (throughput-centric); Groq's determinism enables guaranteed latency SLAs</td>
+</tr>
+<tr>
+<td><strong>Data Center Facilities</strong></td>
+<td>Confirm ~30 kW/rack power, 100 GbE connectivity, adequate cooling; redundancy scheme</td>
+</tr>
+<tr>
+<td><strong>Integration Architecture</strong></td>
+<td>Direct API vs microservice wrapper; streaming token output; routing to Groq from existing inference service</td>
+</tr>
+<tr>
+<td><strong>Costs &amp; Efficiency</strong></td>
+<td>Cost per million tokens; power per token; TCO comparison vs equivalent GPU cluster</td>
+</tr>
+<tr>
+<td><strong>Support &amp; Training</strong></td>
+<td>On-site support during installation; team training on GroqFlow/SDK; developer relations program</td>
+</tr>
+<tr>
+<td><strong>Timeline &amp; Delivery</strong></td>
+<td>Hardware delivery lead time; Groq deployment engineering assistance; 8-34 day deployment track record</td>
+</tr>
+<tr>
+<td><strong>Future Roadmap</strong></td>
+<td><strong>GroqChip2</strong> with more memory/performance; upgrade path; generation mixing</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="part-iii-commercial-vllm-inference-service">Part III — Commercial vLLM Inference Service<a class="headerlink" href="#part-iii-commercial-vllm-inference-service" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key:</strong> A business and technical playbook for turning a vLLM-based inference server into a commercial API service. Covers target market, feature set beyond basic inference, billing infrastructure, technical requirements, compliance, reliability/SLAs, support strategy, and competitive benchmarking against Together AI, Replicate, Anyscale, AWS Bedrock, and Groq.</p>
+</blockquote>
+<hr />
+<h3 id="1-target-customer-segments-go-to-market">1. Target Customer Segments &amp; Go-to-Market<a class="headerlink" href="#1-target-customer-segments-go-to-market" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Segment</th>
+<th>Strategy</th>
+<th>Key Needs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Startups &amp; SMBs</strong></td>
+<td>Self-serve platform, generous free tier, usage-based pricing, community (blog posts, hackathons, case studies)</td>
+<td>Easy onboarding, cost scales with growth; Together AI runs a <strong>Startup Accelerator</strong></td>
+</tr>
+<tr>
+<td><strong>Enterprises</strong></td>
+<td>Dedicated sales, custom contracts, volume discounts, SLAs</td>
+<td>VPC deployment, SOC 2 compliance, <strong>BYOC</strong> (Bring Your Own Cloud); Washington Post saw <strong>2x lower latency, 33% cost reduction</strong> with Together AI</td>
+</tr>
+<tr>
+<td><strong>Individual Developers</strong></td>
+<td>Frictionless sign-up, free tier (e.g., free credits or first N tokens free), <strong>OpenAI-compatible API</strong></td>
+<td>Clear docs, community Discord/Slack, quick support</td>
+</tr>
+<tr>
+<td><strong>ML Researchers / Academia</strong></td>
+<td>Open-source tie-in, model playground, community goodwill</td>
+<td>Less revenue-driving but brand-building</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Marketing:</strong> Content marketing (tutorials, SDK examples, comparison blogs), integration into AI toolchains (HuggingFace, open-source frameworks), customer success stories ("saved 60% costs, achieved 5x performance"). Tiered approach: free/pay-as-you-go developer tier, then upsell to business/enterprise plans.</p>
+<hr />
+<h3 id="2-expanded-feature-set-beyond-basic-inference">2. Expanded Feature Set Beyond Basic Inference<a class="headerlink" href="#2-expanded-feature-set-beyond-basic-inference" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+<th>Competitive Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fine-Tuning Services</strong></td>
+<td><strong>LoRA-based</strong> (efficient) and <strong>full model</strong> fine-tuning as managed service; upload data, schedule training, host resulting model</td>
+<td>Together AI supports both LoRA and full fine-tuning</td>
+</tr>
+<tr>
+<td><strong>Embeddings &amp; Vector Search</strong></td>
+<td>Embedding model endpoints for semantic search / RAG; optionally integrate vector DB support</td>
+<td>OpenAI, Cohere, AWS Bedrock Titan Embeddings all offer this</td>
+</tr>
+<tr>
+<td><strong>Custom Model Hosting (BYOM)</strong></td>
+<td>Let users upload HuggingFace models or saved checkpoints; deploy as <strong>Dedicated Endpoints</strong></td>
+<td>Together AI dedicated endpoints; Replicate uses <code>Cog</code> tool for packaging</td>
+</tr>
+<tr>
+<td><strong>Multi-Model &amp; Modalities</strong></td>
+<td>Library of 200+ models (LLaMA, Mistral, multimodal, vision-language); easy switching via <code>model=</code> parameter; Whisper, Stable Diffusion</td>
+<td>Together AI offers 200+ models including multimodal</td>
+</tr>
+<tr>
+<td><strong>Model Versioning &amp; Evaluation</strong></td>
+<td>Playground UI for testing prompts across model versions; evaluation dashboard for benchmarks / A/B tests</td>
+<td>Together AI's Evaluations product</td>
+</tr>
+<tr>
+<td><strong>Batch &amp; Async Inference</strong></td>
+<td>Batch API for processing billions of tokens at discounted cost; async job queue with callback/export</td>
+<td>Together AI Batch Inference API</td>
+</tr>
+<tr>
+<td><strong>Tool Integration (Agents)</strong></td>
+<td>Built-in tool APIs (web search, code execution) with per-call pricing</td>
+<td>Groq offers tool APIs with pricing per 1000 calls</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Evolve from raw inference into a <strong>full ML platform</strong> — custom model deployment, fine-tuning, embeddings, evaluation, batch jobs. Customers need to build complete applications on top of your API.</p>
+</blockquote>
+<hr />
+<h3 id="3-billing-infrastructure-usage-metering">3. Billing Infrastructure &amp; Usage Metering<a class="headerlink" href="#3-billing-infrastructure-usage-metering" title="Permanent link">&para;</a></h3>
+<h4 id="token-counting-metering">Token Counting &amp; Metering<a class="headerlink" href="#token-counting-metering" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Precisely count <strong>input and output tokens</strong> per API call using vLLM/tokenizer libraries</li>
+<li>Every request records: API key, model used, timestamp, input/output token counts</li>
+<li>Together AI discovered need for <em>"precise, token-level attribution to model costs"</em> for accurate billing</li>
+<li>Real-time usage dashboard with prompt-level breakdowns; alerting when usage exceeds thresholds</li>
+</ul>
+<h4 id="pricing-model">Pricing Model<a class="headerlink" href="#pricing-model" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Separate rates for input vs output tokens</strong> (output costs more compute) — industry standard</li>
+<li>Reference pricing: Groq charges <strong>$0.075/1M input tokens</strong> and <strong>$0.30/1M output tokens</strong> for a 20B model</li>
+<li>Price by model size/tier; simpler/distilled models cheaper; instruction-tuned models may cost more</li>
+<li><strong>Volume discounts</strong> or tiered plans (first 50M at $X, next 50M at $Y) to encourage commitments</li>
+<li><strong>Transparent pricing tables</strong> per model or GPU class</li>
+</ul>
+<h4 id="billing-integration">Billing Integration<a class="headerlink" href="#billing-integration" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Stripe metered billing</strong> — report token usage via webhooks, Stripe charges per billing cycle</li>
+<li>Support credit cards for self-serve + invoices/Purchase Orders for enterprise (Net-30 terms)</li>
+<li><strong>Prepaid plans</strong> (e.g., $100/month for up to 100M tokens at discount) for predictable revenue</li>
+</ul>
+<h4 id="free-tier-overage">Free Tier &amp; Overage<a class="headerlink" href="#free-tier-overage" title="Permanent link">&para;</a></h4>
+<ul>
+<li>"$5 free credit" or "first 1M tokens free each month" — lower barrier to trial</li>
+<li>Monitor abuse (multiple accounts); require email/credit card verification</li>
+<li>Automatic overage billing (preferred) or throttle at quota — don't interrupt production apps</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> Billing must be <strong>accurate, transparent, and flexible</strong> — no hidden costs or idle fees. Tie billing to authentication (API keys linked to accounts) so every request is metered.</p>
+</blockquote>
+<hr />
+<h3 id="4-technical-infrastructure-requirements">4. Technical Infrastructure Requirements<a class="headerlink" href="#4-technical-infrastructure-requirements" title="Permanent link">&para;</a></h3>
+<h4 id="api-design-rate-limiting">API Design &amp; Rate Limiting<a class="headerlink" href="#api-design-rate-limiting" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RESTful or gRPC API</strong> following OpenAI's schema for easy migration</li>
+<li><strong>API key authentication</strong> per customer; multiple keys per account to segregate projects</li>
+<li><strong>Rate limits</strong> per key/account (e.g., 100 requests/minute default, adjustable for paid tiers)</li>
+<li>Return HTTP 429 Too Many Requests when exceeded</li>
+<li><strong>Streaming API</strong> for token-by-token output (SSE); request IDs for idempotency/retry</li>
+</ul>
+<h4 id="multi-tenant-resource-isolation">Multi-Tenant Resource Isolation<a class="headerlink" href="#multi-tenant-resource-isolation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>vLLM's continuous batching pools requests efficiently, but implement per-request <strong>timeouts</strong> and <strong>token limits</strong> to prevent one user's long prompt from starving others</li>
+<li><strong>Dedicated Endpoints</strong> for enterprise (isolated model instance per customer) — Together AI offers this</li>
+<li><strong>Namespace isolation</strong> in memory — no user can access another's prompts/completions</li>
+<li><strong>Sandboxing</strong> for code execution tools (hardened sandboxes like Northflank)</li>
+</ul>
+<h4 id="observability-logging">Observability &amp; Logging<a class="headerlink" href="#observability-logging" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>System metrics:</strong> GPU utilization, memory, latency per request, queue lengths</li>
+<li><strong>Application metrics:</strong> Tokens per request, success/error counts, per-model latency</li>
+<li>Prometheus/Grafana for internal dashboards; ELK or cloud logging for logs</li>
+<li>Together AI needed <em>"high-cardinality slicing and dicing (by API key, model, user, region)"</em> in sub-second queries</li>
+<li>Anomaly detection alerts for error spikes, latency regressions, throughput drops</li>
+</ul>
+<h4 id="auto-scaling-capacity-management">Auto-Scaling &amp; Capacity Management<a class="headerlink" href="#auto-scaling-capacity-management" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Horizontal scaling:</strong> Spin up GPU nodes/containers when traffic increases; scale down when idle</li>
+<li>Orchestrate with Kubernetes, Ray, or custom job manager</li>
+<li>Scaling policies: e.g., GPU utilization &gt;70% for 5 minutes triggers scale-up</li>
+<li><strong>Scale-to-zero</strong> for free tiers / dev environments (cold-start trade-off)</li>
+<li>Keep small <strong>buffer of idle capacity</strong> for sudden bursts (cold-starting a large model takes minutes)</li>
+<li><strong>GPU state snapshot restore</strong> can dramatically reduce cold-start times — cold-starting Qwen-32B on H100 has been demonstrated in ~1.5 seconds by restoring full GPU runtime state (weights, CUDA context, memory layout) from snapshot rather than reloading from scratch (March 2026)</li>
+<li>Anyscale emphasizes fast node launch times and autoscaling as key features</li>
+</ul>
+<h4 id="ab-testing-deployment">A/B Testing &amp; Deployment<a class="headerlink" href="#ab-testing-deployment" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Canary deployments:</strong> Route 5% of traffic to new model/vLLM version, compare metrics before full rollout</li>
+<li>Allow users to A/B test across model endpoints (Together's OpenAI-compatible API makes switching trivial — just change base URL)</li>
+<li>Provide evaluation harness for users to compare models</li>
+</ul>
+<h4 id="reliability-features">Reliability Features<a class="headerlink" href="#reliability-features" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Request <strong>timeouts</strong> and max-token limits per request</li>
+<li>Idempotency via request IDs for safe retries</li>
+<li><strong>Global availability</strong> — multi-region servers; route to nearest region or let users specify</li>
+</ul>
+<hr />
+<h3 id="5-security-compliance">5. Security &amp; Compliance<a class="headerlink" href="#5-security-compliance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SOC 2 Type II</strong></td>
+<td>Mandatory for serious B2B; Anyscale and Together AI both have SOC 2 attestation; covers security, availability, confidentiality, processing integrity, privacy</td>
+</tr>
+<tr>
+<td><strong>GDPR</strong></td>
+<td>Mandatory for EU users; consent for data processing, right to delete/export, ephemeral or properly protected prompt logging, data residency (offer EU hosting or BYOC)</td>
+</tr>
+<tr>
+<td><strong>HIPAA</strong></td>
+<td>For healthcare: encrypt in transit + at rest, audit logs, BAA with customers, segregated workloads; SOC 2 Type II often overlaps with HIPAA controls</td>
+</tr>
+<tr>
+<td><strong>PCI</strong></td>
+<td>If handling credit card data in prompts; <strong>FedRAMP</strong> for government contracts</td>
+</tr>
+<tr>
+<td><strong>Encryption</strong></td>
+<td>TLS for all APIs (standard); encryption at rest for stored data (cloud KMS); limit data retention — don't store prompt/output content unless needed</td>
+</tr>
+<tr>
+<td><strong>RBAC</strong></td>
+<td>Internal: only authorized staff access production systems / customer data; external: role-based API key permissions</td>
+</tr>
+<tr>
+<td><strong>Customer Isolation</strong></td>
+<td>Memory/process isolation in multi-tenant; each tenant's data tagged and separated; offer <strong>single-tenant deployment</strong> (dedicated cluster/VPC) for enterprise</td>
+</tr>
+<tr>
+<td><strong>Trust Center</strong></td>
+<td>Public security page documenting compliance (Groq, Together AI, others all publish trust centers); sign DPAs; respond to security questionnaires</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> AWS Bedrock leverages AWS's <strong>140+ security and compliance certifications</strong>. If built on a major cloud provider, you inherit much of their compliance — but must still handle application-level aspects (data redaction, PII protection, moderation tools).</p>
+</blockquote>
+<hr />
+<h3 id="6-uptime-reliability-slas">6. Uptime, Reliability &amp; SLAs<a class="headerlink" href="#6-uptime-reliability-slas" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>SLA Target:</strong> <strong>99.9% uptime</strong> for enterprise plans (~45 min downtime/month); Together AI and AWS Bedrock both advertise 99.9%</li>
+<li><strong>Multi-AZ / multi-region</strong> deployments for redundancy</li>
+<li><strong>Health monitoring:</strong> K8s liveness/readiness probes auto-restart crashed pods; external uptime monitoring (Pingdom); alert on-call at &gt;1% error rate or latency spikes</li>
+<li><strong>Auto-restart &amp; self-healing:</strong> OOM crashes auto-restart; no single points of failure; stateless API instances behind load balancers; buffer of extra capacity for failover</li>
+<li><strong>Graceful degradation:</strong> Queue requests briefly if model is down; failback routes across data centers (DNS/API gateway redirect); return partial response on timeout; optionally fall back to smaller backup model</li>
+<li><strong>NOC dashboard</strong> for ops (requests/sec, latency, GPU util, errors); external <strong>Status Page</strong> for customer transparency</li>
+<li><strong>Capacity planning:</strong> Know per-GPU throughput ceiling; throttle/queue (503 with Retry-After) rather than fail; ideally autoscale kicks in before capacity is hit</li>
+<li><strong>Incident response:</strong> Runbooks for common failures (OOM, slowdown); communicate promptly via email/status page; post-mortems to prevent recurrence</li>
+</ul>
+<hr />
+<h3 id="7-support-strategy">7. Support Strategy<a class="headerlink" href="#7-support-strategy" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Tier</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Documentation &amp; Guides</strong></td>
+<td>All</td>
+<td>Comprehensive API docs with Python/JS examples; quickstart guides; cookbooks/tutorials; how-to guides for fine-tuning/model selection; Together AI publishes Cookbooks</td>
+</tr>
+<tr>
+<td><strong>Client Libraries &amp; SDKs</strong></td>
+<td>All</td>
+<td>Python package (<code>pip install yourservice</code>), Node.js, etc.; open-source on GitHub; CLI tools for testing</td>
+</tr>
+<tr>
+<td><strong>Community (Discord/Slack)</strong></td>
+<td>All</td>
+<td>Real-time Q&A; team members active during launch; Groq has official Discord</td>
+</tr>
+<tr>
+<td><strong>Direct Support</strong></td>
+<td>Tiered</td>
+<td>Free = best-effort; Business = 24hr response; Enterprise = 1hr response for urgent issues</td>
+</tr>
+<tr>
+<td><strong>Customer Success Manager</strong></td>
+<td>Enterprise</td>
+<td>Dedicated CSM for onboarding, periodic check-ins, guidance; Together AI promises <em>"dedicated customer success representative"</em></td>
+</tr>
+<tr>
+<td><strong>Knowledge Base &amp; FAQ</strong></td>
+<td>All</td>
+<td>Error codes, best practices for prompt design, service limits</td>
+</tr>
+<tr>
+<td><strong>Developer Outreach</strong></td>
+<td>All</td>
+<td>SDKs/examples on GitHub, blog posts, webinars, showcase/gallery of use cases</td>
+</tr>
+<tr>
+<td><strong>Feedback Loop</strong></td>
+<td>All</td>
+<td>Official feedback portal; early users shape roadmap (new models, features, metrics)</td>
+</tr>
+<tr>
+<td><strong>Incident Communication</strong></td>
+<td>All</td>
+<td>Proactive outreach during outages (status page, email, pinned Discord messages)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="8-competitive-benchmarking-late-2025">8. Competitive Benchmarking (Late 2025)<a class="headerlink" href="#8-competitive-benchmarking-late-2025" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Focus</th>
+<th>Pricing</th>
+<th>Notable Features</th>
+<th>Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Together AI</strong></td>
+<td>Open-source LLM hosting, 200+ models, training + inference</td>
+<td>Per-token (serverless), per-GPU-minute (dedicated clusters)</td>
+<td>Large model catalog with instant deployment; LoRA + full fine-tuning; OpenAI-compatible API; dedicated endpoints; 99.9% SLA</td>
+<td>BYOC/on-prem enterprise-only; limited full-stack ML services; basic CI/CD</td>
+</tr>
+<tr>
+<td><strong>Replicate</strong></td>
+<td>Developer-friendly model marketplace; community-contributed models</td>
+<td>Per-second GPU time or per-output; pay-as-you-go</td>
+<td>Huge model variety (Stable Diffusion, custom research models); simple pay-for-time billing; deploy private models via Cog; autoscaling</td>
+<td>Cost unpredictable at scale ("seems simple until you're making thousands of calls"); no default enterprise features (compliance, VPC); mostly self-serve support</td>
+</tr>
+<tr>
+<td><strong>Anyscale</strong></td>
+<td>Ray-based AI platform; enterprise reliability</td>
+<td>Infrastructure-based (managed Ray cluster by node/hours); enterprise contracts</td>
+<td>Best-in-class autoscaling (multi-AZ, zero-downtime upgrades); multi-engine (vLLM, Triton, HF); 20% cost reduction via proprietary optimizations; fine-tuning on your data; <strong>SOC 2 Type II + HIPAA</strong></td>
+<td>Tied to Ray ecosystem; no user-facing model catalog; pricing complex; geared for larger teams</td>
+</tr>
+<tr>
+<td><strong>AWS Bedrock</strong></td>
+<td>Managed foundation model service (Anthropic Claude, Meta Llama, Amazon Titan)</td>
+<td>Per-token (input/output); different rates per model (Claude $3 in / $15 out per million); <strong>Provisioned Throughput</strong> for reserved capacity; no free tier beyond AWS credits</td>
+<td>Multiple top-tier models OOB; deploy custom models via SageMaker; VPC endpoints, IAM, CloudWatch; <strong>140+ compliance certs</strong>; Bedrock Guardrails for content filtering; 99.9% SLA</td>
+<td>AWS-only (requires AWS account); some models expensive (Claude output $15/M); less fine-tuning flexibility; complex for non-AWS users</td>
+</tr>
+<tr>
+<td><strong>Groq (GroqCloud)</strong></td>
+<td>Ultra-fast, cheap inference on custom LPU chips</td>
+<td>Token-based; very aggressive — <strong>$0.075/1M input</strong>, $0.30/1M output (20B model); no idle cost; purely linear usage billing</td>
+<td>Speed: 7x speedups, ~90% cost reduction vs GPU providers; OpenAI-compatible API (change base URL to migrate); <strong>prompt caching</strong> halves cost on repeated prompts; public + on-prem ("co-cloud"); free trial; community Discord</td>
+<td>Open models only (no GPT-4/Claude); newer tech with less community knowledge for issues; enterprise compliance still evolving</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ai-infrastructure-capex-buildout-not-bubble">AI Infrastructure Capex: Buildout, Not Bubble<a class="headerlink" href="#ai-infrastructure-capex-buildout-not-bubble" title="Permanent link">&para;</a></h4>
+<p>The competitive landscape above sits atop a wave of AI infrastructure spending that shows no signs of slowing. Hyperscalers are collectively investing <strong>$150B+ annually</strong> in AI infrastructure, a figure that invites "bubble" comparisons but is better understood as a <strong>generational infrastructure buildout</strong> rather than speculation. Three structural factors support sustained investment: (a) <strong>inference demand is growing faster than training demand</strong> — every deployed model generates ongoing compute costs that scale with user adoption, meaning the installed base of inference capacity must continuously expand; (b) <strong>enterprise AI deployment is still early</strong> — most large organizations are in pilot or early production phases, with massive latent demand yet to materialize; and (c) <strong>AI infrastructure ROI compounds</strong> — each generation of more capable models makes the underlying infrastructure more valuable, as the same GPU cluster or inference rack serves increasingly capable (and monetizable) applications. For inference service providers, this capex environment is favorable: it means the addressable market is expanding, hardware costs are declining on a per-token basis with each generation, and customers are building AI into core workflows rather than running one-off experiments. The risk is not that spending will collapse but that it will <strong>consolidate</strong> — favoring providers who can demonstrate clear cost, performance, or flexibility advantages over commodity alternatives.</p>
+<blockquote>
+<p><strong>Key:</strong> Compete on <strong>cost and flexibility</strong> via open-source models (like Together AI and Groq). Emphasize model selection freedom, easy API switching (OpenAI compatibility), and performance optimizations. But to win enterprise deals, match bigger platforms on <strong>security, SLAs, and support</strong>. Consider positioning as either a <strong>specialist</strong> (inference/fine-tuning focus like Fireworks/Together) or a <strong>broader platform</strong> (like Anyscale/Northflank for full-stack needs). The $150B+ annual hyperscaler capex cycle means the market is expanding, but competitive advantages in cost-per-token and operational efficiency will determine who captures that growth.</p>
+</blockquote>
+<hr />
+<h3 id="gtc-2026-the-token-factory-thesis-and-agent-infrastructure">GTC 2026: The "Token Factory" Thesis and Agent Infrastructure<a class="headerlink" href="#gtc-2026-the-token-factory-thesis-and-agent-infrastructure" title="Permanent link">&para;</a></h3>
+<p>NVIDIA GTC 2026 messaging centered on <strong>inference as the next capacity wave</strong>, with Jensen Huang framing future computers as systems for <strong>"manufacturing tokens"</strong> — a shift from training-centric to inference-centric infrastructure economics. The often-cited $1T AI infrastructure opportunity <strong>only covers a subset of the stack through 2027</strong>, reinforcing that the industry is still very early in inference infrastructure buildout (@TheTuringPost, Jun 2026).</p>
+<p>Key ecosystem signals from GTC:</p>
+<ul>
+<li><strong>Nemotron 3 Nano 4B</strong> now supported in llama.cpp, extending NVIDIA's open model strategy into the local inference ecosystem (@ggerganov, Jun 2026)</li>
+<li><strong>LangChain</strong> frameworks crossed <strong>1B downloads</strong> and joined the NVIDIA Nemotron Coalition (@hwchase17, Jun 2026)</li>
+<li><strong>Holotron-12B</strong> (H Company + NVIDIA) — an open multimodal model purpose-built for <strong>computer-use agents</strong>, extending NVIDIA's agent infrastructure play beyond hardware into model-level capabilities</li>
+<li><strong>Perplexity Comet Enterprise</strong> — AI browser for enterprise teams with rollout controls and <strong>CrowdStrike Falcon</strong> security integration, signalling that enterprise agent deployment requires security-stack partnerships from day one</li>
+<li>Hugging Face recapped open NVIDIA drops spanning reasoning models, robotics datasets, and world models — NVIDIA's open strategy is broadening beyond inference chips into the full model-to-deployment pipeline (@jeffboudier, Jun 2026)</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> GTC reinforced the structural thesis: the inference infrastructure buildout is the dominant investment wave, agent workloads are the demand driver, and NVIDIA is expanding from hardware into model + ecosystem control points. The "token factory" framing — computers that manufacture tokens rather than store data — is the clearest articulation yet of how the industry sees the next decade of infrastructure economics.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2859 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/2603_rag_post/">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>10 RAG Shifts You Missed While Optimizing Top-K (2026) - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10-rag-shifts-you-missed-while-optimizing-top-k-2026" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              10 RAG Shifts You Missed While Optimizing Top-K (2026)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-retrieval-has-scaling-laws-now-and-theyre-not-what-you-think" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Retrieval Has Scaling Laws Now — And They're Not What You Think
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-composable-rag-the-pipeline-ate-the-function-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Composable RAG: The Pipeline Ate the Function Call
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-colbert-came-back-and-brought-infrastructure-with-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. ColBERT Came Back and Brought Infrastructure With It
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-vector-databases-are-becoming-unified-retrieval-engines" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Vector Databases Are Becoming Unified Retrieval Engines
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-streaming-rag-batch-ingestion-is-already-legacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Streaming RAG: Batch Ingestion Is Already Legacy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-counterfactual-testing-is-your-retrieval-actually-doing-anything" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Counterfactual Testing: Is Your Retrieval Actually Doing Anything?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-retrieval-attribution-which-chunk-actually-changed-your-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Retrieval Attribution: Which Chunk Actually Changed Your Output?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-graphrag-became-a-reasoning-engine-not-just-a-retriever" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. GraphRAG Became a Reasoning Engine (Not Just a Retriever)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-rag-program-synthesis-stop-embedding-your-database-rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. RAG + Program Synthesis: Stop Embedding Your Database Rows
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-speculative-retrieval-fetch-before-they-ask" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Speculative Retrieval: Fetch Before They Ask
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-what-actually-changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      So What Actually Changed?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-and-further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      References and Further Reading
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="References and Further Reading">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Papers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repos-and-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repos and Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blogs-and-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blogs and Docs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="10-rag-shifts-you-missed-while-optimizing-top-k-2026">10 RAG Shifts You Missed While Optimizing Top-K (2026)<a class="headerlink" href="#10-rag-shifts-you-missed-while-optimizing-top-k-2026" title="Permanent link">&para;</a></h1>
+<p>Most teams building RAG systems right now are solving last year's problem. They're fine-tuning top-k, swapping embedding models, tweaking chunk sizes — and wondering why their system still hallucinates on anything beyond a simple lookup.</p>
+<p>I went through roughly thirty papers, release notes, and production case studies from late 2025 through early 2026. Pulled out what actually changed, threw away the noise. What came out is ten distinct shifts — some obvious in hindsight, some genuinely surprising. If you're building anything retrieval-heavy, at least a few of these will change how you think about your stack.</p>
+<hr />
+<h2 id="1-retrieval-has-scaling-laws-now-and-theyre-not-what-you-think">1. Retrieval Has Scaling Laws Now — And They're Not What You Think<a class="headerlink" href="#1-retrieval-has-scaling-laws-now-and-theyre-not-what-you-think" title="Permanent link">&para;</a></h2>
+<p>This one caught me off guard. New research shows RAG performance follows scaling behavior similar to what we've seen with LLMs — but the axis that matters is not depth. It's breadth.</p>
+<p>Adding more diverse retrieval sources consistently beats going deeper on top-k from a single source. Marginal returns drop hard after about twenty to forty chunks. And retrieval diversity — pulling from heterogeneous sources with different coverage profiles — matters more than raw similarity scores.</p>
+<p>I've watched teams spend weeks tuning k from 10 to 15 to 20 and A/B testing reranker configurations, when the actual lever was staring them in the face: add a second retrieval source. Add a keyword index alongside your vector store. Pull from a different document collection. The diversity is what moves the needle, not squeezing another percentage point out of a single retriever.</p>
+<blockquote>
+<p><strong>Diagram idea:</strong> Diminishing-returns curve — answer quality vs. top-k depth plateauing at ~20-40, overlaid with a second curve (quality vs. number of diverse sources) that keeps climbing. Title: <em>"Diversity scales. Depth doesn't."</em></p>
+</blockquote>
+<p><strong>Try it yourself:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Instead of this:</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">vector_store</span><span class="o">.</span><span class="n">similarity_search</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Try this — fan out across sources, then fuse:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.retrievers</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnsembleRetriever</span>
+
+<span class="n">vector_retriever</span> <span class="o">=</span> <span class="n">vector_store</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+<span class="n">bm25_retriever</span> <span class="o">=</span> <span class="n">BM25Retriever</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># add a third source — structured DB, knowledge graph, different corpus</span>
+
+<span class="n">ensemble</span> <span class="o">=</span> <span class="n">EnsembleRetriever</span><span class="p">(</span>
+    <span class="n">retrievers</span><span class="o">=</span><span class="p">[</span><span class="n">vector_retriever</span><span class="p">,</span> <span class="n">bm25_retriever</span><span class="p">],</span>
+    <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</code></pre></div>
+<p>The point isn't the specific implementation — it's the principle. Multiple shallow passes across diverse sources beat one deep pass through a single index.</p>
+<hr />
+<h2 id="2-composable-rag-the-pipeline-ate-the-function-call">2. Composable RAG: The Pipeline Ate the Function Call<a class="headerlink" href="#2-composable-rag-the-pipeline-ate-the-function-call" title="Permanent link">&para;</a></h2>
+<p>The way most teams think about RAG is still "embed, retrieve, stuff into prompt." That mental model is roughly two years out of date. The systems that actually perform in production look nothing like that. They look like this:</p>
+<p>Query understanding. Retrieval planning. Multi-retriever execution. Fusion. Reasoning.</p>
+<p>Five stages. Each one independently swappable, independently testable, independently optimizable. This is composable RAG, and it maps directly onto microservice-style thinking. You don't build a monolith retriever any more than you'd build a monolith web app. You build stages with clean interfaces, and you iterate on each stage against its own metrics.</p>
+<p>LlamaIndex Workflows is probably the most accessible production implementation of this right now. It gives you declarative multi-step retrieval with planners, tool calling, and retrievers wired into a single orchestration layer. But the principle is framework-agnostic — if your RAG system doesn't have explicit stage boundaries, you can't diagnose where it's failing or improve it in any targeted way.</p>
+<blockquote>
+<p><strong>Diagram idea:</strong> Horizontal pipeline — five boxes (Query Understanding -&gt; Retrieval Planning -&gt; Multi-Retriever Execution -&gt; Fusion -&gt; Reasoning) with a swap icon and independent metric beneath each. Title: <em>"Composable RAG: each stage is its own product."</em></p>
+</blockquote>
+<p><strong>A minimal composable pipeline in LlamaIndex:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">llama_index.core.workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workflow</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">Context</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ComposableRAG</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
+    <span class="nd">@step</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">understand_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># rewrite, decompose, classify intent</span>
+        <span class="n">sub_queries</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">query_planner</span><span class="o">.</span><span class="n">decompose</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sub_queries</span>
+
+    <span class="nd">@step</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">retrieve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">sub_queries</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="c1"># fan out to multiple retrievers</span>
+        <span class="n">all_results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sq</span> <span class="ow">in</span> <span class="n">sub_queries</span><span class="p">:</span>
+            <span class="n">all_results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector_retriever</span><span class="o">.</span><span class="n">aretrieve</span><span class="p">(</span><span class="n">sq</span><span class="p">))</span>
+            <span class="n">all_results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyword_retriever</span><span class="o">.</span><span class="n">aretrieve</span><span class="p">(</span><span class="n">sq</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">all_results</span>
+
+    <span class="nd">@step</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fuse_and_rerank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="c1"># deduplicate, rerank, compress</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">reranker</span><span class="o">.</span><span class="n">rerank</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+    <span class="nd">@step</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">reason</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+</code></pre></div>
+<p>The beauty is that you can swap <code>keyword_retriever</code> for a graph retriever, change the reranker, or add a critique loop — all without touching the other stages.</p>
+<p><strong>Repos worth exploring:</strong></p>
+<ul>
+<li><a href="https://github.com/run-llama/llama_index">LlamaIndex Workflows</a> — declarative multi-step RAG orchestration</li>
+<li><a href="https://github.com/deepset-ai/haystack">Haystack</a> — modular pipelines with explicit component graphs</li>
+<li><a href="https://github.com/langchain-ai/langgraph">LangGraph</a> — stateful orchestration for multi-step retrieval</li>
+</ul>
+<hr />
+<h2 id="3-colbert-came-back-and-brought-infrastructure-with-it">3. ColBERT Came Back and Brought Infrastructure With It<a class="headerlink" href="#3-colbert-came-back-and-brought-infrastructure-with-it" title="Permanent link">&para;</a></h2>
+<p>Single-vector retrieval dominated production RAG for a good reason. One embedding per document, one cosine score — simple, fast, cheap to serve. But it compresses away exactly the signals that matter for hard queries: entities scattered across a long document, table cells, multi-facet questions where different parts of the query need to match different parts of the passage.</p>
+<p>Late interaction retrieval, the approach ColBERT pioneered back in 2020, keeps token-level embeddings and scores them with MaxSim. Each query token finds its best match anywhere in the document, and the scores get summed. The quality gap is real — substantially better on long documents, out-of-domain queries, and visually rich content.</p>
+<p>So why didn't everyone switch years ago? Infrastructure. Storing and scoring many vectors per document was expensive and slow. That changed. PLAID demonstrated 45x CPU speedups. SMVE from TopK made late interaction viable as a first-stage retrieval primitive — not just an expensive reranker you bolt on at the end.</p>
+<p>The blocker was never the algorithm. It was the serving cost. That blocker is gone now.</p>
+<p>The practical move for most teams is hybrid: cheap coarse retrieval (single-vector or BM25) to get candidates, then ColBERT-style late interaction to rerank. You get most of the quality without the full infrastructure hit.</p>
+<blockquote>
+<p><strong>Diagram idea:</strong> Side-by-side. Left: single vector — one arrow from query embedding to document embedding ("summary vs. summary"). Right: ColBERT — many arrows from individual query tokens to document tokens ("each part finds its best match"). Title: <em>"Why late interaction wins on complex queries."</em></p>
+</blockquote>
+<p><strong>Getting started with ColBERT:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Using RAGatouille — the simplest way to use ColBERT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ragatouille</span><span class="w"> </span><span class="kn">import</span> <span class="n">RAGPretrainedModel</span>
+
+<span class="n">rag</span> <span class="o">=</span> <span class="n">RAGPretrainedModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;colbert-ir/colbertv2.0&quot;</span><span class="p">)</span>
+
+<span class="c1"># index your documents</span>
+<span class="n">rag</span><span class="o">.</span><span class="n">index</span><span class="p">(</span>
+    <span class="n">collection</span><span class="o">=</span><span class="n">documents</span><span class="p">,</span>
+    <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;my_index&quot;</span><span class="p">,</span>
+    <span class="n">split_documents</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># retrieve with token-level late interaction</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">rag</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;safety inspection british steel plants&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Repos:</strong></p>
+<ul>
+<li><a href="https://github.com/stanford-futuredata/ColBERT">ColBERT</a> — the original late-interaction retrieval model</li>
+<li><a href="https://github.com/AnswerDotAI/RAGatouille">RAGatouille</a> — simplest ColBERT integration for RAG pipelines</li>
+<li><a href="https://topk.io/blog/20260311-smve-multi-vector-retrieval">TopK SMVE</a> — production-grade multi-vector retrieval</li>
+<li><a href="https://arxiv.org/abs/2407.01449">ColPali</a> — late interaction for visual document retrieval (skip OCR entirely)</li>
+</ul>
+<hr />
+<h2 id="4-vector-databases-are-becoming-unified-retrieval-engines">4. Vector Databases Are Becoming Unified Retrieval Engines<a class="headerlink" href="#4-vector-databases-are-becoming-unified-retrieval-engines" title="Permanent link">&para;</a></h2>
+<p>This one crept up quietly while everyone was arguing about which embedding model to use. Weaviate, Qdrant, and Milvus are all converging on the same architecture: vector search plus keyword search plus graph traversal plus structured filtering, all in one engine.</p>
+<p>The separate-infra pattern — a vector DB here, an Elasticsearch there, a graph database somewhere else — is collapsing. The driver is composable RAG. When your pipeline fans out to multiple retrieval modes per query, maintaining three separate backends becomes an operational headache that doesn't justify itself. A unified engine that handles hybrid retrieval natively is simpler to run, cheaper to operate, and way easier to reason about when something breaks at 3am.</p>
+<p>If you're currently running separate infrastructure for vector, keyword, and structured retrieval, pay attention. The migration path from three backends to one is getting shorter every quarter.</p>
+<p><strong>What hybrid search looks like in practice:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Weaviate hybrid search — vector + keyword in one call</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">weaviate</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">weaviate</span><span class="o">.</span><span class="n">connect_to_local</span><span class="p">()</span>
+<span class="n">collection</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Documents&quot;</span><span class="p">)</span>
+
+<span class="c1"># single query hits both vector and keyword indexes</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">hybrid</span><span class="p">(</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;RAG pipeline architecture&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># balance between vector (1.0) and keyword (0.0)</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">filters</span><span class="o">=</span><span class="n">weaviate</span><span class="o">.</span><span class="n">classes</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">by_property</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="s2">&quot;engineering&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Qdrant with payload filtering + vector search</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdrant_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">QdrantClient</span><span class="p">,</span> <span class="n">models</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">QdrantClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;localhost:6333&quot;</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_points</span><span class="p">(</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;documents&quot;</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span><span class="n">embedding_vector</span><span class="p">,</span>
+    <span class="n">query_filter</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span>
+        <span class="n">must</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">models</span><span class="o">.</span><span class="n">FieldCondition</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">Range</span><span class="p">(</span><span class="n">gte</span><span class="o">=</span><span class="mi">2025</span><span class="p">)),</span>
+            <span class="n">models</span><span class="o">.</span><span class="n">FieldCondition</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">MatchValue</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;engineering&quot;</span><span class="p">))</span>
+        <span class="p">]</span>
+    <span class="p">),</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><strong>Repos:</strong></p>
+<ul>
+<li><a href="https://github.com/weaviate/weaviate">Weaviate</a> — hybrid search with modular extensions</li>
+<li><a href="https://github.com/qdrant/qdrant">Qdrant</a> — vector + payload filtering, strong benchmarks</li>
+<li><a href="https://github.com/milvus-io/milvus">Milvus</a> — distributed vector DB, cloud-native, pipeline support</li>
+</ul>
+<hr />
+<h2 id="5-streaming-rag-batch-ingestion-is-already-legacy">5. Streaming RAG: Batch Ingestion Is Already Legacy<a class="headerlink" href="#5-streaming-rag-batch-ingestion-is-already-legacy" title="Permanent link">&para;</a></h2>
+<p>Pathway is the name to know here. Incremental indexing over live data streams — documents get indexed as they arrive, no full reindex, no batch windows, no stale data.</p>
+<p>I've seen teams build genuinely good RAG systems that still answer questions about data that's three hours old because that's when the last batch ran. No amount of retrieval quality tuning fixes a freshness problem. If your domain involves data that changes faster than your indexing cycle — financial data, operational logs, event streams, customer support contexts — batch RAG is already holding you back.</p>
+<p>The broader shift: RAG is moving from batch ingestion to continuous ingestion. This is an infrastructure change, not an algorithmic one, but it transforms the operational profile of RAG systems. You stop thinking in terms of "reindex nightly" and start thinking in terms of "documents are queryable within seconds of arrival."</p>
+<p><strong>Pathway streaming RAG example:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pathway</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathway.xpacks.llm.vector_store</span><span class="w"> </span><span class="kn">import</span> <span class="n">VectorStoreServer</span>
+
+<span class="c1"># define a live data source — files, S3, Kafka, database CDC</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">pw</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./live_docs/&quot;</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;streaming&quot;</span><span class="p">,</span>  <span class="c1"># watch for new/changed files continuously</span>
+    <span class="n">with_metadata</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># incremental indexing — no full reindex needed</span>
+<span class="n">vector_server</span> <span class="o">=</span> <span class="n">VectorStoreServer</span><span class="p">(</span>
+    <span class="n">docs</span><span class="p">,</span>
+    <span class="n">embedder</span><span class="o">=</span><span class="n">embedder</span><span class="p">,</span>
+    <span class="n">splitter</span><span class="o">=</span><span class="n">splitter</span>
+<span class="p">)</span>
+
+<span class="c1"># serves a REST API, index updates automatically as docs arrive</span>
+<span class="n">vector_server</span><span class="o">.</span><span class="n">run_server</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8765</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Repos:</strong></p>
+<ul>
+<li><a href="https://github.com/pathwaycom/pathway">Pathway</a> — streaming data processing with incremental RAG indexing</li>
+<li><a href="https://pathway.com/developers/templates/adaptive-rag">Pathway LLM xpack</a> — production templates for streaming RAG</li>
+</ul>
+<hr />
+<h2 id="6-counterfactual-testing-is-your-retrieval-actually-doing-anything">6. Counterfactual Testing: Is Your Retrieval Actually Doing Anything?<a class="headerlink" href="#6-counterfactual-testing-is-your-retrieval-actually-doing-anything" title="Permanent link">&para;</a></h2>
+<p>This is the shift that made me rethink how I measure RAG systems.</p>
+<p>Standard testing asks: "Is the answer correct? Is it faithful to the retrieved context?" Fine questions. Also insufficient. The sharper question is counterfactual: remove the retrieved context entirely and see if the answer changes. If it doesn't — if the model produces the same output with or without your carefully retrieved passages — then your retrieval is decorative. You're paying for latency, infrastructure, and complexity that adds exactly zero grounding benefit.</p>
+<p>I've actually seen this in production. A system that scored great on faithfulness because the LLM happened to know the answer from training data, and the retrieved passages just confirmed what it already "knew." The retrieval stack was pure overhead — it didn't change a single token of output.</p>
+<p>Counterfactual testing catches this. Faithfulness scores don't.</p>
+<p>Two concrete perturbation strategies:</p>
+<ul>
+<li><strong>Context ablation</strong> — remove key passages, measure answer degradation. High degradation means retrieval is load-bearing. Low degradation means retrieval is decorative.</li>
+<li><strong>Noise injection</strong> — insert irrelevant or contradictory passages, measure whether the model resists or gets misled. Resistance means robust grounding. Susceptibility means the model isn't really using context, it's just pattern matching.</li>
+</ul>
+<blockquote>
+<p><strong>Diagram idea:</strong> 2x2 matrix. X-axis: faithfulness score (low to high). Y-axis: counterfactual dependency (low to high). Top-right = "real grounding." Bottom-right = "decorative retrieval — you're paying for nothing." Title: <em>"The test that actually matters."</em></p>
+</blockquote>
+<p><strong>A simple counterfactual check you can run today:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">counterfactual_check</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">retrieved_context</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Measure whether retrieval actually changed the answer.&quot;&quot;&quot;</span>
+
+    <span class="c1"># generate WITH context</span>
+    <span class="n">grounded_answer</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Context: </span><span class="si">{</span><span class="n">retrieved_context</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Question: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># generate WITHOUT context</span>
+    <span class="n">ungrounded_answer</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Question: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># measure divergence — if answers are similar, retrieval didn&#39;t matter</span>
+    <span class="n">divergence</span> <span class="o">=</span> <span class="n">semantic_distance</span><span class="p">(</span><span class="n">grounded_answer</span><span class="p">,</span> <span class="n">ungrounded_answer</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;retrieval_dependency&quot;</span><span class="p">:</span> <span class="n">divergence</span><span class="p">,</span>
+        <span class="s2">&quot;grounded_answer&quot;</span><span class="p">:</span> <span class="n">grounded_answer</span><span class="p">,</span>
+        <span class="s2">&quot;ungrounded_answer&quot;</span><span class="p">:</span> <span class="n">ungrounded_answer</span><span class="p">,</span>
+        <span class="s2">&quot;retrieval_is_decorative&quot;</span><span class="p">:</span> <span class="n">divergence</span> <span class="o">&lt;</span> <span class="mf">0.15</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p><strong>Repos:</strong></p>
+<ul>
+<li><a href="https://github.com/explodinggradients/ragas">RAGAS</a> — RAG assessment framework with context relevance metrics</li>
+<li><a href="https://github.com/confident-ai/deepeval">DeepEval</a> — LLM testing with RAG-specific metrics and CI/CD integration</li>
+</ul>
+<hr />
+<h2 id="7-retrieval-attribution-which-chunk-actually-changed-your-output">7. Retrieval Attribution: Which Chunk Actually Changed Your Output?<a class="headerlink" href="#7-retrieval-attribution-which-chunk-actually-changed-your-output" title="Permanent link">&para;</a></h2>
+<p>Beyond the counterfactual question of "did retrieval matter at all," attribution scoring asks the finer-grained question: which specific chunk influenced which specific generated token or claim?</p>
+<p>This distinction matters a lot in practice. A single answer can contain five claims — three grounded in retrieved passages and two hallucinated. Passage-level faithfulness scores might rate the overall answer as "mostly faithful." Attribution scoring catches the two hallucinated claims individually.</p>
+<p>For anyone building in regulated domains — finance, healthcare, legal — this is heading toward non-negotiable. Per-claim provenance isn't a nice feature, it's an audit requirement. The question isn't "did you cite a source" but "did that source actually influence what you generated, or did you just attach a plausible-looking citation after the fact?"</p>
+<p>The tooling is still maturing, but the pattern is clear: track the causal link from chunk to claim, not just the correlation between context and output.</p>
+<p><strong>Attribution scoring sketch:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">attribute_claims</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="n">retrieved_chunks</span><span class="p">,</span> <span class="n">llm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map each claim in the answer to its supporting chunk(s).&quot;&quot;&quot;</span>
+
+    <span class="c1"># extract individual claims from the answer</span>
+    <span class="n">claims</span> <span class="o">=</span> <span class="n">extract_claims</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>  <span class="c1"># sentence-level or proposition-level</span>
+
+    <span class="n">attributions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">claim</span> <span class="ow">in</span> <span class="n">claims</span><span class="p">:</span>
+        <span class="c1"># score each chunk&#39;s support for this specific claim</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">retrieved_chunks</span><span class="p">:</span>
+            <span class="n">support</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Does this passage support this claim?</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Passage: </span><span class="si">{</span><span class="n">chunk</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Claim: </span><span class="si">{</span><span class="n">claim</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Answer with: supported / contradicted / not mentioned&quot;</span>
+            <span class="p">)</span>
+            <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;chunk_id&quot;</span><span class="p">:</span> <span class="n">chunk</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">&quot;support&quot;</span><span class="p">:</span> <span class="n">support</span><span class="p">})</span>
+
+        <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;support&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;supported&quot;</span><span class="p">)</span>
+        <span class="n">attributions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;claim&quot;</span><span class="p">:</span> <span class="n">claim</span><span class="p">,</span>
+            <span class="s2">&quot;attributed_to&quot;</span><span class="p">:</span> <span class="n">best</span><span class="p">[</span><span class="s2">&quot;chunk_id&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">best</span><span class="p">[</span><span class="s2">&quot;support&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;supported&quot;</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;grounded&quot;</span><span class="p">:</span> <span class="n">best</span><span class="p">[</span><span class="s2">&quot;support&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;supported&quot;</span>
+        <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">attributions</span>
+</code></pre></div>
+<p><strong>Repos and tools:</strong></p>
+<ul>
+<li><a href="https://docs.ragas.io">RAGAS</a> — includes context precision and faithfulness at the claim level</li>
+<li><a href="https://github.com/Arize-AI/phoenix">Arize Phoenix</a> — trace-level RAG observability with per-span attribution</li>
+<li><a href="https://smith.langchain.com">LangSmith</a> — per-step tracing for retrieval attribution debugging</li>
+</ul>
+<hr />
+<h2 id="8-graphrag-became-a-reasoning-engine-not-just-a-retriever">8. GraphRAG Became a Reasoning Engine (Not Just a Retriever)<a class="headerlink" href="#8-graphrag-became-a-reasoning-engine-not-just-a-retriever" title="Permanent link">&para;</a></h2>
+<p>GraphRAG started as "retrieve better context by traversing a knowledge graph." That framing is already too narrow for what's happening now.</p>
+<p>Modern GraphRAG stacks don't just retrieve subgraphs and dump them into a prompt. They run reasoning over graph paths — shortest paths, constraint propagation, causal chain extraction — before converting results to text for the LLM. The graph isn't assembling context anymore. It's a computation layer where inference actually happens.</p>
+<p>I think of it this way: old GraphRAG asked the graph "give me relevant nodes." New GraphRAG asks the graph "traverse these relationships, check these constraints, and tell me what you found." Then the LLM synthesizes the graph's findings into natural language.</p>
+<p>This is a convergence of GraphRAG with graph ML and symbolic reasoning. The graph participates in inference, not just retrieval. For builders, the practical filter is simple: do your queries need relationship traversal, temporal reasoning, or multi-hop logic? If yes, the graph should be doing computation, not just supplying context.</p>
+<blockquote>
+<p><strong>Diagram idea:</strong> Flow: Query -&gt; Retrieve Subgraph -&gt; Path Reasoning (inside graph engine) -&gt; Graph-to-Text -&gt; LLM Generation. The "Path Reasoning" box is highlighted as the new addition. Title: <em>"The graph is no longer just retrieval. It's execution."</em></p>
+</blockquote>
+<p><strong>Graph reasoning with Neo4j + LangChain:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Neo4jGraph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chains</span><span class="w"> </span><span class="kn">import</span> <span class="n">GraphCypherQAChain</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">Neo4jGraph</span><span class="p">(</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;bolt://localhost:7687&quot;</span><span class="p">,</span>
+    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;neo4j&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;password&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># the LLM generates Cypher, the graph EXECUTES reasoning</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">GraphCypherQAChain</span><span class="o">.</span><span class="n">from_llm</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">allow_dangerous_requests</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># multi-hop reasoning happens in the DB, not the LLM</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span>
+    <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;Which companies invested in AI startups that later acquired NLP teams?&quot;</span>
+<span class="p">})</span>
+</code></pre></div>
+<p><strong>Repos:</strong></p>
+<ul>
+<li><a href="https://github.com/microsoft/graphrag">GraphRAG (Microsoft)</a> — the canonical reference implementation</li>
+<li><a href="https://github.com/neo4j/neo4j-graphrag-python">Neo4j GraphRAG for Python</a> — KG creation + hybrid retrieval</li>
+<li><a href="https://github.com/HKUDS/LightRAG">LightRAG</a> — lightweight graph+vector RAG with interactive exploration</li>
+<li><a href="https://github.com/neo4j-labs/llm-graph-builder">Neo4j LLM Graph Builder</a> — transform docs into knowledge graphs</li>
+</ul>
+<hr />
+<h2 id="9-rag-program-synthesis-stop-embedding-your-database-rows">9. RAG + Program Synthesis: Stop Embedding Your Database Rows<a class="headerlink" href="#9-rag-program-synthesis-stop-embedding-your-database-rows" title="Permanent link">&para;</a></h2>
+<p>Here's a take I wish more people would internalize: for structured data, text retrieval is the wrong pattern.</p>
+<p>If your data lives in a relational database, a graph store, or any structured format — and the answer to the user's question is computable from that structure — then generating a SQL query, a Cypher query, or a domain-specific language expression and executing it against the source will almost always beat retrieving text chunks that happen to mention the answer.</p>
+<p>The answer is computable, not extractable. There's a fundamental difference between "find the passage that talks about Q3 revenue" and "SELECT revenue FROM financials WHERE quarter='Q3'." The second one returns the exact number. The first one returns a paragraph that the LLM has to parse, hope it finds the right figure, and pray it doesn't hallucinate an adjacent number from the same table.</p>
+<p>I've tested this side by side on financial data, inventory systems, and graph-structured knowledge bases. Program synthesis wins every time the data has structure. It's not even close.</p>
+<p><strong>Text-to-SQL as RAG replacement:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLDatabase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chains</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_sql_query_chain</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLDatabase</span><span class="o">.</span><span class="n">from_uri</span><span class="p">(</span><span class="s2">&quot;sqlite:///company_data.db&quot;</span><span class="p">)</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># generate SQL instead of retrieving text chunks</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">create_sql_query_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+<span class="n">sql_query</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;What was our Q3 revenue by region?&quot;</span><span class="p">})</span>
+
+<span class="c1"># execute — returns exact numbers, not approximate passages</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sql_query</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>For graph stores — Cypher synthesis:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># instead of embedding graph nodes as text chunks:</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    MATCH (c:Company)-[:INVESTED_IN]-&gt;(s:Startup)-[:ACQUIRED]-&gt;(t:Team {domain: &#39;NLP&#39;})</span>
+<span class="s2">    RETURN c.name, s.name, t.name, s.funding_amount</span>
+<span class="s2">    ORDER BY s.funding_amount DESC</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="c1"># precise, auditable, no hallucination risk on the data itself</span>
+</code></pre></div>
+<p><strong>Repos:</strong></p>
+<ul>
+<li><a href="https://python.langchain.com/docs/tutorials/sql_qa/">LangChain SQL Agent</a> — text-to-SQL chains and agents</li>
+<li><a href="https://github.com/vanna-ai/vanna">Vanna</a> — text-to-SQL trained on your schema</li>
+<li><a href="https://github.com/neo4j/neo4j-graphrag-python">Neo4j GraphRAG</a> — Cypher generation from natural language</li>
+</ul>
+<hr />
+<h2 id="10-speculative-retrieval-fetch-before-they-ask">10. Speculative Retrieval: Fetch Before They Ask<a class="headerlink" href="#10-speculative-retrieval-fetch-before-they-ask" title="Permanent link">&para;</a></h2>
+<p>This is the latency optimization frontier, and almost nobody is shipping it yet.</p>
+<p>The idea: predict the user's next query before they finish typing it. Pre-cache the retrieval results. Overlap the retrieval latency with user think-time so that by the time they hit enter, the context is already assembled and waiting.</p>
+<p>In multi-turn conversational RAG, query patterns are surprisingly predictable. If someone asks about Q3 revenue, there's a good chance the follow-up is about Q3 costs, or Q4 projections, or a comparison to the prior year. If someone asks about a specific API endpoint, the next question is usually about authentication, rate limits, or error codes for that same endpoint.</p>
+<p>Speculative retrieval exploits this predictability. Run the likely next retrievals in the background while the user is still reading your current answer. When they ask the follow-up, you respond in milliseconds instead of seconds.</p>
+<p>Nobody has shipped this cleanly in an open-source framework yet — which means it's a genuine competitive advantage for whoever gets there first. The UX difference between "instant follow-up" and "2-second retrieval delay on every turn" is enormous in conversational products.</p>
+<p><strong>A sketch of speculative retrieval:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SpeculativeRetriever</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">retriever</span><span class="p">,</span> <span class="n">predictor</span><span class="p">,</span> <span class="n">cache</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">retriever</span> <span class="o">=</span> <span class="n">retriever</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor</span> <span class="o">=</span> <span class="n">predictor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">cache</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">retrieve_and_speculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># retrieve for the actual query</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">retriever</span><span class="o">.</span><span class="n">aretrieve</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+        <span class="c1"># predict likely follow-ups and pre-fetch in background</span>
+        <span class="n">predicted_queries</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">predictor</span><span class="o">.</span><span class="n">predict_followups</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">pq</span> <span class="ow">in</span> <span class="n">predicted_queries</span><span class="p">:</span>
+            <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prefetch</span><span class="p">(</span><span class="n">pq</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_prefetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicted_query</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">retriever</span><span class="o">.</span><span class="n">aretrieve</span><span class="p">(</span><span class="n">predicted_query</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">predicted_query</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">retrieve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># check cache first — speculative hit = near-zero latency</span>
+        <span class="n">cached</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cached</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cached</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">retriever</span><span class="o">.</span><span class="n">aretrieve</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</code></pre></div>
+<p>This is deliberately simple. The hard part is the predictor — what follow-ups are likely? That's where the product insight lives, and it'll be different for every domain.</p>
+<hr />
+<h2 id="so-what-actually-changed">So What Actually Changed?<a class="headerlink" href="#so-what-actually-changed" title="Permanent link">&para;</a></h2>
+<p>If I had to compress everything above into five sentences for a builder who's behind on their reading:</p>
+<p>Optimize for retrieval diversity, not retrieval depth — more sources beats higher k. Treat RAG as a composable pipeline where each stage has its own interface and its own testing, not a monolithic function call. Test with counterfactuals — if removing context doesn't change the answer, your retrieval is overhead. Graphs are becoming reasoning substrates, not just context suppliers. And the infrastructure layer is consolidating fast — unified retrieval engines, streaming ingestion, and agent-scale concurrency are the new baseline, not the frontier.</p>
+<p>The retrieval layer as we knew it is done. Orchestration is what separates the systems that ship from the systems that demo.</p>
+<hr />
+<h2 id="references-and-further-reading">References and Further Reading<a class="headerlink" href="#references-and-further-reading" title="Permanent link">&para;</a></h2>
+<h3 id="papers">Papers<a class="headerlink" href="#papers" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>What It Covers</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ColBERT (Khattab &amp; Zaharia, 2020)</td>
+<td>Original late-interaction architecture</td>
+<td><a href="https://arxiv.org/abs/2004.12832">arxiv.org/abs/2004.12832</a></td>
+</tr>
+<tr>
+<td>ColBERTv2 (Santhanam et al., 2022)</td>
+<td>Residual compression, improved training</td>
+<td><a href="https://arxiv.org/abs/2112.01488">arxiv.org/abs/2112.01488</a></td>
+</tr>
+<tr>
+<td>ColPali (2024)</td>
+<td>Late interaction for visual documents — skip OCR</td>
+<td><a href="https://arxiv.org/abs/2407.01449">arxiv.org/abs/2407.01449</a></td>
+</tr>
+<tr>
+<td>PLAID (2022)</td>
+<td>7x GPU / 45x CPU speedup for ColBERT</td>
+<td><a href="https://arxiv.org/abs/2205.09707">arxiv.org/abs/2205.09707</a></td>
+</tr>
+<tr>
+<td>SMVE (TopK, 2026)</td>
+<td>Production-scale multi-vector retrieval</td>
+<td><a href="https://openreview.net/pdf?id=yhVKwOXPCH">openreview.net</a></td>
+</tr>
+<tr>
+<td>GraphRAG (Microsoft, 2024)</td>
+<td>Community-summary graph retrieval</td>
+<td><a href="https://arxiv.org/abs/2404.16130">arxiv.org/abs/2404.16130</a></td>
+</tr>
+<tr>
+<td>EA-GraphRAG (Dong et al., 2026)</td>
+<td>Adaptive routing: dense vs graph retrieval</td>
+<td><a href="https://arxiv.org/abs/2602.03578">arxiv.org/abs/2602.03578</a></td>
+</tr>
+<tr>
+<td>Self-RAG (2023)</td>
+<td>Reflection tokens for self-grounding</td>
+<td><a href="https://arxiv.org/abs/2310.11578">arxiv.org/abs/2310.11578</a></td>
+</tr>
+<tr>
+<td>A-RAG (2025)</td>
+<td>Multi-granularity agentic retrieval</td>
+<td><a href="https://arxiv.org/abs/2502.05014">arxiv.org/abs/2502.05014</a></td>
+</tr>
+<tr>
+<td>RAGAS (2023)</td>
+<td>Low-annotation RAG assessment framework</td>
+<td><a href="https://arxiv.org/abs/2309.15217">arxiv.org/abs/2309.15217</a></td>
+</tr>
+<tr>
+<td>RAPTOR (2024)</td>
+<td>Hierarchical clustered summaries for retrieval</td>
+<td><a href="https://huggingface.co/papers/2401.18059">huggingface.co/papers/2401.18059</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="repos-and-tools">Repos and Tools<a class="headerlink" href="#repos-and-tools" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Repo</th>
+<th>What It's For</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ColBERT</td>
+<td>Late-interaction retrieval (reference impl)</td>
+<td><a href="https://github.com/stanford-futuredata/ColBERT">github.com/stanford-futuredata/ColBERT</a></td>
+</tr>
+<tr>
+<td>RAGatouille</td>
+<td>Simplest way to add ColBERT to a pipeline</td>
+<td><a href="https://github.com/AnswerDotAI/RAGatouille">github.com/AnswerDotAI/RAGatouille</a></td>
+</tr>
+<tr>
+<td>LlamaIndex</td>
+<td>Composable RAG orchestration with Workflows</td>
+<td><a href="https://github.com/run-llama/llama_index">github.com/run-llama/llama_index</a></td>
+</tr>
+<tr>
+<td>LangChain</td>
+<td>Retrieval abstractions, chains, agents</td>
+<td><a href="https://github.com/langchain-ai/langchain">github.com/langchain-ai/langchain</a></td>
+</tr>
+<tr>
+<td>LangGraph</td>
+<td>Stateful multi-step retrieval orchestration</td>
+<td><a href="https://github.com/langchain-ai/langgraph">github.com/langchain-ai/langgraph</a></td>
+</tr>
+<tr>
+<td>Haystack</td>
+<td>Modular pipeline-based RAG framework</td>
+<td><a href="https://github.com/deepset-ai/haystack">github.com/deepset-ai/haystack</a></td>
+</tr>
+<tr>
+<td>Pathway</td>
+<td>Streaming data + incremental RAG indexing</td>
+<td><a href="https://github.com/pathwaycom/pathway">github.com/pathwaycom/pathway</a></td>
+</tr>
+<tr>
+<td>Weaviate</td>
+<td>Hybrid vector + keyword + filtering</td>
+<td><a href="https://github.com/weaviate/weaviate">github.com/weaviate/weaviate</a></td>
+</tr>
+<tr>
+<td>Qdrant</td>
+<td>Vector search + payload filtering</td>
+<td><a href="https://github.com/qdrant/qdrant">github.com/qdrant/qdrant</a></td>
+</tr>
+<tr>
+<td>Milvus</td>
+<td>Distributed cloud-native vector DB</td>
+<td><a href="https://github.com/milvus-io/milvus">github.com/milvus-io/milvus</a></td>
+</tr>
+<tr>
+<td>Microsoft GraphRAG</td>
+<td>Reference GraphRAG implementation</td>
+<td><a href="https://github.com/microsoft/graphrag">github.com/microsoft/graphrag</a></td>
+</tr>
+<tr>
+<td>Neo4j GraphRAG Python</td>
+<td>KG creation + graph/vector/hybrid retrievers</td>
+<td><a href="https://github.com/neo4j/neo4j-graphrag-python">github.com/neo4j/neo4j-graphrag-python</a></td>
+</tr>
+<tr>
+<td>LightRAG</td>
+<td>Lightweight graph+vector RAG server</td>
+<td><a href="https://github.com/HKUDS/LightRAG">github.com/HKUDS/LightRAG</a></td>
+</tr>
+<tr>
+<td>Neo4j LLM Graph Builder</td>
+<td>Transform docs into knowledge graphs</td>
+<td><a href="https://github.com/neo4j-labs/llm-graph-builder">github.com/neo4j-labs/llm-graph-builder</a></td>
+</tr>
+<tr>
+<td>RAGAS</td>
+<td>RAG assessment (faithfulness, relevance)</td>
+<td><a href="https://github.com/explodinggradients/ragas">github.com/explodinggradients/ragas</a></td>
+</tr>
+<tr>
+<td>DeepEval</td>
+<td>LLM testing with CI/CD integration</td>
+<td><a href="https://github.com/confident-ai/deepeval">github.com/confident-ai/deepeval</a></td>
+</tr>
+<tr>
+<td>Arize Phoenix</td>
+<td>Trace-level RAG observability</td>
+<td><a href="https://github.com/Arize-AI/phoenix">github.com/Arize-AI/phoenix</a></td>
+</tr>
+<tr>
+<td>Vanna</td>
+<td>Text-to-SQL trained on your schema</td>
+<td><a href="https://github.com/vanna-ai/vanna">github.com/vanna-ai/vanna</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="blogs-and-docs">Blogs and Docs<a class="headerlink" href="#blogs-and-docs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://topk.io/blog/20260311-smve-multi-vector-retrieval">TopK SMVE blog</a> — multi-vector retrieval at scale</li>
+<li><a href="https://pathway.com/developers/templates/adaptive-rag">Pathway adaptive RAG template</a> — streaming RAG reference</li>
+<li><a href="https://docs.ragas.io">RAGAS documentation</a> — metrics and implementation guides</li>
+<li><a href="https://python.langchain.com/docs/tutorials/sql_qa/">LangChain SQL QA tutorial</a> — text-to-SQL patterns</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

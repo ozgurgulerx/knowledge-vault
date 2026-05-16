@@ -1,0 +1,2823 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/ai_infra_basics/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>AI Infra Basics — GPU Inference Observability & Optimization - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ai-infra-basics-gpu-inference-observability-optimization" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AI Infra Basics — GPU Inference Observability &amp; Optimization
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-cuda-kernel-vs-compiler" class="md-nav__link">
+    <span class="md-ellipsis">
+      1) CUDA kernel vs compiler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1) CUDA kernel vs compiler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuda-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      CUDA kernel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-pytorch-compiler-stack-precise-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      The PyTorch compiler stack — precise mental model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eager-mode-vs-compiled-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eager mode vs compiled mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph-breaks-compilation-is-not-all-or-nothing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph breaks — compilation is not all-or-nothing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-inference-backends" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternative inference backends
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key difference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-sm-occupancy" class="md-nav__link">
+    <span class="md-ellipsis">
+      2) SM occupancy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-memory-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      3) Memory throughput
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-heartbeat-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      4) Heartbeat counters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-gpu-kernel-introspection" class="md-nav__link">
+    <span class="md-ellipsis">
+      5) GPU kernel introspection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-apm-application-performance-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      6) APM (Application Performance Monitoring)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-warp-stalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      7) Warp stalls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-first-principles-bottleneck-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      8) First-principles bottleneck stack
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-llm-serving-runtime-prefill-decode-kv-cache-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      9) LLM serving runtime — prefill, decode, KV cache, routing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9) LLM serving runtime — prefill, decode, KV cache, routing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-the-4-layer-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1) The 4-layer mental model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-prefill-vs-decode-the-core-asymmetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2) Prefill vs decode — the core asymmetry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-disaggregated-serving-split-prefill-and-decode" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3) Disaggregated serving — split prefill and decode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-kv-cache-why-it-dominates-decode" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4) KV cache — why it dominates decode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-pagedattention-continuous-batching-prefix-caching-vllm" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.5) PagedAttention, continuous batching, prefix caching (vLLM)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96-kv-cache-aware-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.6) KV cache-aware routing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#97-kv-cache-offloading-across-memory-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.7) KV cache offloading across memory tiers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#98-tensor-parallelism-tuning" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.8) Tensor parallelism tuning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#99-where-the-compiler-ends-and-the-runtime-begins" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.9) Where the compiler ends and the runtime begins
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-what-matters-in-2026-non-obvious-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      10) What matters in 2026 (non-obvious insight)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-clean-mental-model-glossary" class="md-nav__link">
+    <span class="md-ellipsis">
+      11) Clean mental model (glossary)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See also
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="ai-infra-basics-gpu-inference-observability-optimization">AI Infra Basics — GPU Inference Observability &amp; Optimization<a class="headerlink" href="#ai-infra-basics-gpu-inference-observability-optimization" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>A compact first-principles mental model of the GPU inference stack — from CUDA kernels and compilers up through LLM serving runtimes: what each layer does, what its metrics measure, and where real 2026 bottlenecks come from.</p>
+</blockquote>
+<hr />
+<h2 id="1-cuda-kernel-vs-compiler">1) CUDA kernel vs compiler<a class="headerlink" href="#1-cuda-kernel-vs-compiler" title="Permanent link">&para;</a></h2>
+<h3 id="cuda-kernel">CUDA kernel<a class="headerlink" href="#cuda-kernel" title="Permanent link">&para;</a></h3>
+<p>A kernel is the small unit of work that runs on the GPU — a function launched from the CPU that the GPU executes across many threads in parallel.</p>
+<ul>
+<li>A <strong>CUDA kernel</strong> = the actual function executed on GPU cores (SMs)</li>
+<li>Written in CUDA C/C++ (or generated by frameworks)</li>
+<li>Launched across <strong>many threads in parallel</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">matmul</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">C</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>In inference: each op (matmul, attention, layernorm) → one or more kernels. Performance = how efficient these kernels are.</p>
+<p><strong>Execution hierarchy.</strong> The GPU runs a kernel as a <strong>grid of thread blocks</strong>, each block containing many threads, with threads grouped physically into <strong>warps of 32</strong> (the unit the scheduler actually issues). CPU-side code is the <strong>host</strong>, GPU-side is the <strong>device</strong>, and a <strong>kernel launch</strong> is the host telling the device to execute a parallel function:</p>
+<div class="highlight"><pre><span></span><code><span class="n">vector_add</span><span class="o">&lt;&lt;&lt;</span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">block</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span><span class="w">  </span><span class="c1">// host launches vector_add on device</span>
+</code></pre></div>
+<p>Each GPU thread runs the same code on different data (SIMT). A bad kernel wastes memory bandwidth, SM occupancy, warp time, or tensor cores — which is why Nsight looks at warp stalls, memory coalescing, branch divergence, and register pressure (see §5, §7).</p>
+<p><strong>Concrete LLM kernels.</strong> An LLM forward pass is ultimately a sequence of launches: <strong>GEMM</strong> (cuBLAS), <strong>fused attention</strong> (FlashAttention), <strong>layernorm</strong>, <strong>softmax</strong>, <strong>KV-cache read/write</strong>, activation fusions. Frameworks like PyTorch, TensorRT-LLM, Triton, and cuBLAS all eventually resolve to CUDA kernel launches.</p>
+<blockquote>
+<p>A kernel is <strong>not</strong> the whole model. It is a low-level building block the runtime orchestrates into layers, which the compiler and serving runtime (§9) schedule across time and GPUs.</p>
+</blockquote>
+<h3 id="the-pytorch-compiler-stack-precise-mental-model">The PyTorch compiler stack — precise mental model<a class="headerlink" href="#the-pytorch-compiler-stack-precise-mental-model" title="Permanent link">&para;</a></h3>
+<p>"PyTorch is the compiler" is too coarse. The accurate layering (PyTorch 2.x docs, 2026):</p>
+<ul>
+<li><strong>Python</strong> — the language</li>
+<li><strong>PyTorch</strong> — framework / runtime / operator system. <strong>ATen</strong> is its foundational tensor-op layer; the <strong>dispatcher</strong> routes each op to the right backend kernel (CPU/CUDA, autograd, autocast)</li>
+<li><strong><code>torch.compile</code></strong> — the compiler entry point</li>
+<li><strong>TorchDynamo</strong> — Python-level JIT tracer. Hooks CPython's frame evaluation API, rewrites bytecode, and extracts PyTorch op sequences into an <strong>FX graph</strong> (ATen IR)</li>
+<li><strong>AOT Autograd</strong> — captures backward graph ahead of time (training only; irrelevant for pure inference)</li>
+<li><strong>TorchInductor</strong> — default backend compiler. Lowers the captured graph into optimized code</li>
+<li><strong>Triton</strong> — GPU kernel language/compiler used by Inductor for GPU codegen; on CPU, Inductor emits C++/OpenMP</li>
+<li><strong>CUDA kernels</strong> — the actual GPU work units that execute on SMs</li>
+</ul>
+<h3 id="eager-mode-vs-compiled-mode">Eager mode vs compiled mode<a class="headerlink" href="#eager-mode-vs-compiled-mode" title="Permanent link">&para;</a></h3>
+<p><strong>Eager mode</strong> (default, no <code>torch.compile</code>): PyTorch runs each op immediately via the dispatcher. One op → one kernel launch → next op.</p>
+<div class="highlight"><pre><span></span><code>Python → PyTorch op → ATen/dispatcher → CUDA kernel → next op → next kernel
+</code></pre></div>
+<p>Every pointwise op is a separate launch with intermediate memory writes — the main reason eager mode is slow for bandwidth-bound workloads (PyTorch tuning docs flag this explicitly).</p>
+<p><strong>Compiled mode</strong> (<code>torch.compile</code>): Dynamo captures a <strong>region</strong> of Python into an FX/ATen graph, then a backend compiles it.</p>
+<div class="highlight"><pre><span></span><code>Python → TorchDynamo (FX/ATen graph) → TorchInductor → Triton codegen → fused kernels
+</code></pre></div>
+<p>Capture and codegen are <strong>distinct phases</strong> — PyTorch's <code>aot_eager</code> path captures forward+backward graphs but executes them eagerly, proving the two concerns are separable.</p>
+<p><strong>Why compilation helps:</strong> for <code>y = gelu(x @ W + b)</code>, eager mode launches 3 kernels with intermediate memory traffic. Compiled mode can fuse eligible pieces into fewer kernels, cutting launch overhead and memory movement.</p>
+<h3 id="graph-breaks-compilation-is-not-all-or-nothing">Graph breaks — compilation is not all-or-nothing<a class="headerlink" href="#graph-breaks-compilation-is-not-all-or-nothing" title="Permanent link">&para;</a></h3>
+<p>When Dynamo hits untraceable Python (unsupported ops, messy control flow), a <strong>graph break</strong> occurs: it compiles the graph accumulated so far, runs the unsupported region eagerly, then resumes tracing with a new graph. Compiled PyTorch is usually a <strong>hybrid of compiled regions + eager fallback</strong>, which is why some models see huge speedups from <code>torch.compile</code> while others barely move.</p>
+<h3 id="alternative-inference-backends">Alternative inference backends<a class="headerlink" href="#alternative-inference-backends" title="Permanent link">&para;</a></h3>
+<p><code>torch.compile</code> can delegate to other backends via <code>backend="..."</code>. For inference, <strong><code>backend="tensorrt"</code></strong> (Torch-TensorRT) hands the graph to NVIDIA's TensorRT — an SDK containing an inference optimizer + runtime. In that path, PyTorch delegates final low-level optimization to a specialized stack.</p>
+<div class="highlight"><pre><span></span><code>Python + PyTorch model
+  → TorchDynamo capture
+  → FX / ATen graph
+  → TorchInductor | TensorRT | TVM | OpenVINO
+  → GPU kernels / optimized runtime
+</code></pre></div>
+<h3 id="key-difference">Key difference<a class="headerlink" href="#key-difference" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>execution unit on GPU SMs</td>
+</tr>
+<tr>
+<td>Compiler</td>
+<td>graph capture + kernel generator/optimizer</td>
+</tr>
+<tr>
+<td>Dynamo</td>
+<td>graph capture (Python bytecode → FX)</td>
+</tr>
+<tr>
+<td>Inductor</td>
+<td>default graph compiler (FX → GPU/CPU code)</td>
+</tr>
+<tr>
+<td>Triton</td>
+<td>GPU kernel codegen language used by Inductor</td>
+</tr>
+<tr>
+<td>TensorRT</td>
+<td>alternative inference backend (optimizer + runtime SDK)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-sm-occupancy">2) SM occupancy<a class="headerlink" href="#2-sm-occupancy" title="Permanent link">&para;</a></h2>
+<p><strong>Definition:</strong> % of GPU Streaming Multiprocessor (SM) capacity actively used.</p>
+<p>Formula (conceptual):</p>
+<div class="highlight"><pre><span></span><code>occupancy = active warps / max warps
+</code></pre></div>
+<p>Why it matters:</p>
+<ul>
+<li>Low occupancy → GPU idle</li>
+<li>High occupancy → better latency hiding</li>
+</ul>
+<p>BUT:</p>
+<ul>
+<li>100% ≠ optimal</li>
+<li>Register pressure / memory stalls can dominate</li>
+</ul>
+<p>In LLM inference: attention kernels are often <strong>memory-bound</strong>, so occupancy alone is misleading.</p>
+<hr />
+<h2 id="3-memory-throughput">3) Memory throughput<a class="headerlink" href="#3-memory-throughput" title="Permanent link">&para;</a></h2>
+<p><strong>Definition:</strong> rate at which data moves between:</p>
+<ul>
+<li>HBM ↔ SM</li>
+<li>L2 ↔ registers</li>
+</ul>
+<p>Measured in GB/s or TB/s.</p>
+<p>Why it matters — LLMs are often:</p>
+<blockquote>
+<p><strong>memory bandwidth bound, not compute bound</strong></p>
+</blockquote>
+<p>Example: you're waiting for KV cache reads, not FLOPs.</p>
+<hr />
+<h2 id="4-heartbeat-counters">4) Heartbeat counters<a class="headerlink" href="#4-heartbeat-counters" title="Permanent link">&para;</a></h2>
+<p>Not a strict CUDA term — systems-level telemetry.</p>
+<p><strong>Meaning:</strong> periodic signals showing:</p>
+<ul>
+<li>GPU alive</li>
+<li>workload progressing</li>
+<li>no deadlocks</li>
+</ul>
+<p>Used in distributed inference systems and schedulers (Ray, Kubernetes GPU operators).</p>
+<div class="highlight"><pre><span></span><code>GPU node → &quot;I&#39;m alive, batch 42 processing, latency 12ms&quot;
+</code></pre></div>
+<hr />
+<h2 id="5-gpu-kernel-introspection">5) GPU kernel introspection<a class="headerlink" href="#5-gpu-kernel-introspection" title="Permanent link">&para;</a></h2>
+<p>Deep inspection of:</p>
+<ul>
+<li>execution time per kernel</li>
+<li>memory access patterns</li>
+<li>warp efficiency</li>
+<li>stalls (memory / sync / dependency)</li>
+</ul>
+<p>Tools:</p>
+<ul>
+<li>NVIDIA Nsight Systems</li>
+<li>NVIDIA Nsight Compute</li>
+</ul>
+<p>Outputs: timeline, stall reasons, achieved occupancy, memory utilization.</p>
+<hr />
+<h2 id="6-apm-application-performance-monitoring">6) APM (Application Performance Monitoring)<a class="headerlink" href="#6-apm-application-performance-monitoring" title="Permanent link">&para;</a></h2>
+<p>System-level monitoring: latency, throughput, error rates, GPU utilization.</p>
+<p>Examples: Datadog, Prometheus.</p>
+<p>APM ≠ kernel-level:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System</td>
+<td>APM</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>Nsight</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>custom metrics</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-warp-stalls">7) Warp stalls<a class="headerlink" href="#7-warp-stalls" title="Permanent link">&para;</a></h2>
+<p>GPU threads execute in <strong>warps (32 threads)</strong>. A stall = waiting.</p>
+<p>Types:</p>
+<ul>
+<li>memory stall</li>
+<li>execution dependency stall</li>
+<li>barrier stall</li>
+</ul>
+<p>Adjacent term — <strong>RDMA verbs</strong>: low-level networking ops (InfiniBand) used in multi-node inference. Different layer, same "infra plumbing" family.</p>
+<hr />
+<h2 id="8-first-principles-bottleneck-stack">8) First-principles bottleneck stack<a class="headerlink" href="#8-first-principles-bottleneck-stack" title="Permanent link">&para;</a></h2>
+<p>Inference bottlenecks come from:</p>
+<div class="highlight"><pre><span></span><code>Model graph (PyTorch / HF Transformers)
+   ↓
+Compiler (torch.compile → Inductor / Triton / TensorRT)
+   ↓
+CUDA kernels (GEMM, attention, layernorm, KV ops)
+   ↓
+SM execution (occupancy, warps)
+   ↓
+Memory system (HBM bandwidth, KV cache traffic)
+   ↓
+Serving runtime (batching, KV cache mgmt, routing — §9)
+   ↓
+Cluster / networking (TP/PP collectives, RDMA)
+</code></pre></div>
+<p>Metrics map:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Metric</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>execution time</td>
+</tr>
+<tr>
+<td>SM</td>
+<td>occupancy</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>throughput, KV traffic</td>
+</tr>
+<tr>
+<td>Warp</td>
+<td>stall reasons</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td>TTFT, ITL, cache hit rate</td>
+</tr>
+<tr>
+<td>System</td>
+<td>APM</td>
+</tr>
+<tr>
+<td>Cluster</td>
+<td>heartbeat, collective time</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-llm-serving-runtime-prefill-decode-kv-cache-routing">9) LLM serving runtime — prefill, decode, KV cache, routing<a class="headerlink" href="#9-llm-serving-runtime-prefill-decode-kv-cache-routing" title="Permanent link">&para;</a></h2>
+<p>Once kernels and compilers are decent, the next frontier is <strong>above</strong> the compiler layer: how a serving runtime keeps many GPUs busy across many concurrent users while managing KV cache, batching, and cross-GPU work. This is where <strong>vLLM</strong>, <strong>TensorRT-LLM</strong>, and <strong>NVIDIA Dynamo</strong> live.</p>
+<blockquote>
+<p><strong>Disambiguation.</strong> <strong>NVIDIA Dynamo</strong> (LLM serving framework) is a completely separate project from <strong>TorchDynamo</strong> (the PyTorch graph-capture layer in §1). Same name, different layer — NVIDIA Dynamo sits at the serving runtime layer, TorchDynamo sits at the compiler layer.</p>
+</blockquote>
+<h3 id="91-the-4-layer-mental-model">9.1) The 4-layer mental model<a class="headerlink" href="#91-the-4-layer-mental-model" title="Permanent link">&para;</a></h3>
+<p>"PyTorch compiles my model and runs it" is too coarse for LLM inference. The accurate layering is four distinct jobs:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Job</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Authoring</td>
+<td>define model semantics</td>
+<td>Python, HF Transformers, PyTorch</td>
+</tr>
+<tr>
+<td>2. Compiler</td>
+<td>capture + lower graphs into optimized code</td>
+<td><code>torch.compile</code>, TorchDynamo, Inductor, Triton, TensorRT</td>
+</tr>
+<tr>
+<td>3. Kernels</td>
+<td>actual GPU work units</td>
+<td>CUDA kernels, cuBLAS GEMM, FlashAttention</td>
+</tr>
+<tr>
+<td>4. Serving runtime</td>
+<td>batch, schedule, cache, route across users/GPUs</td>
+<td>vLLM, TensorRT-LLM, NVIDIA Dynamo</td>
+</tr>
+</tbody>
+</table>
+<p>Layers 1-3 determine how fast <strong>one token</strong> computes. Layer 4 determines how many <strong>concurrent user tokens</strong> you sustain per GPU — and in production economics, layer 4 usually dominates.</p>
+<h3 id="92-prefill-vs-decode-the-core-asymmetry">9.2) Prefill vs decode — the core asymmetry<a class="headerlink" href="#92-prefill-vs-decode-the-core-asymmetry" title="Permanent link">&para;</a></h3>
+<p>LLM inference has two structurally different phases:</p>
+<ul>
+<li><strong>Prefill</strong> — process the full prompt in parallel, build the initial KV cache. Dense matmuls over all prompt tokens at once. <strong>Compute-bound</strong> (big GEMMs fill the SMs).</li>
+<li><strong>Decode</strong> — generate one token at a time, reusing and extending the KV cache. Each step is a tiny matmul + a huge KV cache read. <strong>Memory-bound</strong> (HBM bandwidth dominates; SMs sit mostly idle).</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Prefill:  [prompt tokens] ──big GEMMs──▶ [initial KV cache]     (compute-bound)
+Decode:   [1 new token] + [huge KV cache read] ──▶ [next token]  (memory-bound)
+</code></pre></div>
+<p>This asymmetry is the root cause of most LLM serving optimizations. Because prefill and decode have <strong>opposite bottlenecks</strong>, co-locating them on the same worker with the same config wastes GPU capacity in both phases.</p>
+<h3 id="93-disaggregated-serving-split-prefill-and-decode">9.3) Disaggregated serving — split prefill and decode<a class="headerlink" href="#93-disaggregated-serving-split-prefill-and-decode" title="Permanent link">&para;</a></h3>
+<p>Run prefill and decode as <strong>separate worker pools</strong>, each scaled and tuned independently (NVIDIA Dynamo's core architectural recommendation).</p>
+<ul>
+<li><strong>Prefill workers</strong> — large batches, optimized for compute density</li>
+<li><strong>Decode workers</strong> — many concurrent streams, optimized for memory bandwidth and KV cache layout</li>
+</ul>
+<p><strong>Performance impact.</strong> Dramatically higher sustained throughput and cleaner TTFT/ITL separation. A co-located worker either underutilizes SMs during decode, or decode traffic blocks prefill and TTFT blows up.</p>
+<p><strong>Power impact.</strong> Decode runs at low arithmetic intensity (mostly memory shuffling), so disaggregation enables per-pool DVFS/power tuning — a decode worker shouldn't burn compute headroom it can't use. Prefill pools can run at max clocks; decode pools can clock down SMs and still hit the same ITL.</p>
+<h3 id="94-kv-cache-why-it-dominates-decode">9.4) KV cache — why it dominates decode<a class="headerlink" href="#94-kv-cache-why-it-dominates-decode" title="Permanent link">&para;</a></h3>
+<p>The <strong>KV cache</strong> stores key/value projections for every token seen so far, so decode steps don't recompute them. Size scales roughly as:</p>
+<div class="highlight"><pre><span></span><code>KV_bytes ≈ 2 · layers · heads · head_dim · seq_len · batch · dtype_bytes
+</code></pre></div>
+<p>For long contexts it rapidly becomes the <strong>largest memory consumer on the GPU — often bigger than the model weights themselves</strong>. Consequences:</p>
+<ul>
+<li>KV cache eats HBM → caps batch size → caps throughput</li>
+<li>KV cache reads dominate decode bandwidth → decode is memory-bound</li>
+<li>KV cache <strong>layout</strong> (contiguous vs paged, fp16 vs fp8, quantized) matters more than kernel micro-optimization</li>
+</ul>
+<h3 id="95-pagedattention-continuous-batching-prefix-caching-vllm">9.5) PagedAttention, continuous batching, prefix caching (vLLM)<a class="headerlink" href="#95-pagedattention-continuous-batching-prefix-caching-vllm" title="Permanent link">&para;</a></h3>
+<p>Three vLLM innovations that reshape KV cache + batching:</p>
+<ul>
+<li><strong>PagedAttention</strong> — instead of allocating KV cache as one contiguous block per request (fragments memory, forces over-allocation), split it into <strong>fixed-size pages</strong> like OS virtual memory. Requests grow their cache page-by-page. Massively cuts fragmentation and unlocks higher effective batch size.</li>
+<li><strong>Continuous batching</strong> (NVIDIA calls it <strong>in-flight batching</strong> in TensorRT-LLM) — instead of waiting for all requests in a batch to finish before admitting new ones, <strong>retire finished sequences and admit new ones every iteration</strong>. Keeps the decode GPU always full.</li>
+<li><strong>Prefix caching</strong> — if a new request shares a prompt prefix with an earlier one (system prompt, few-shot examples, multi-turn conversation), <strong>reuse its cached KV blocks and skip redundant prefill compute</strong>.</li>
+</ul>
+<p><strong>Performance impact.</strong> Order-of-magnitude higher throughput per GPU vs naive static batching. These are the features that made vLLM the default open-source serving runtime.</p>
+<h3 id="96-kv-cache-aware-routing">9.6) KV cache-aware routing<a class="headerlink" href="#96-kv-cache-aware-routing" title="Permanent link">&para;</a></h3>
+<p>When you have many decode workers, each holding different KV state, <strong>routing a request to the worker that already has its relevant KV blocks</strong> beats blind load-balancing. NVIDIA Dynamo's router picks workers using two signals:</p>
+<ul>
+<li><strong>Cache overlap score</strong> — how much of the new request's prefix is already cached on each worker</li>
+<li><strong>Load</strong> — current worker utilization</li>
+</ul>
+<p>Tuning knobs:</p>
+<ul>
+<li><code>kv-overlap-score-weight</code> — increase for <strong>prefill-heavy</strong> workloads (prefix reuse is the big win); decrease for <strong>decode-heavy</strong> workloads (load balance matters more)</li>
+<li><code>router_temperature</code> — near <code>0.0</code> for deterministic "best worker" selection; raise it to inject randomness and avoid saturating one hot worker</li>
+</ul>
+<p><strong>Performance impact.</strong> Skipping redundant prefill on shared prefixes cuts both TTFT and total compute. But it's a <strong>tradeoff</strong> — pushing too hard on cache reuse creates load imbalance, which blows out tail latency. NVIDIA's tuning guidance says to start from defaults, measure <strong>TTFT</strong> and <strong>ITL</strong>, then iteratively adjust.</p>
+<h3 id="97-kv-cache-offloading-across-memory-tiers">9.7) KV cache offloading across memory tiers<a class="headerlink" href="#97-kv-cache-offloading-across-memory-tiers" title="Permanent link">&para;</a></h3>
+<p>When HBM is the bottleneck, move cold KV blocks to cheaper tiers:</p>
+<div class="highlight"><pre><span></span><code>GPU HBM  ←→  host DRAM  ←→  local NVMe  ←→  remote storage
+(fastest, scarcest)                          (slowest, abundant)
+</code></pre></div>
+<p>Lets you support longer contexts and more concurrent users than raw HBM allows. <strong>Performance impact:</strong> TTFT improves for conversations whose cache would otherwise be evicted and recomputed; TCO improves because you fit more users per GPU. <strong>Cost:</strong> offload/reload traffic eats PCIe and interconnect bandwidth, so the eviction policy matters.</p>
+<h3 id="98-tensor-parallelism-tuning">9.8) Tensor parallelism tuning<a class="headerlink" href="#98-tensor-parallelism-tuning" title="Permanent link">&para;</a></h3>
+<p><strong>Tensor parallelism (TP)</strong> splits each weight matrix across multiple GPUs and reduces results via collective ops (all-reduce, all-gather). It's how you fit models bigger than one GPU's memory — and how you get more aggregate HBM bandwidth per forward pass.</p>
+<p>The <strong>optimal TP degree differs between prefill and decode</strong> because their bottlenecks differ:</p>
+<ul>
+<li><strong>Prefill prefers lower TP</strong> — big GEMMs already saturate compute; higher TP adds all-reduce communication overhead not amortized by more work.</li>
+<li><strong>Decode prefers higher TP</strong> — each step is memory-bound, so splitting across more GPUs adds <strong>aggregate HBM bandwidth</strong>, and the small matmul cost is trivial.</li>
+</ul>
+<p>This is a second independent reason to disaggregate prefill and decode: they want different TP shapes.</p>
+<p>NVIDIA Dynamo exposes a <strong>profiler + AIConfigurator + SLA planner</strong> that does <strong>pre-deployment search</strong> over TP degree, worker counts, and parallelization mappings against target TTFT/ITL SLAs. The profiling run can take <strong>2–4 hours</strong> because it systematically tests combinations under load — which tells you how non-trivial this knob is in production. Optimal TP depends on model size, prefill/decode mix, SLA, KV-cache pressure, interconnect topology, and worker count simultaneously.</p>
+<p><strong>Performance impact.</strong> Wrong TP can cost <strong>2–5× throughput</strong> or blow past latency SLAs. Right TP per phase is one of the largest wins available from deployment-time tuning alone.</p>
+<p><strong>Power impact.</strong> Higher TP spreads a memory-bound decode workload over more GPUs, which <strong>lowers per-GPU utilization</strong> — potentially worse perf/W unless you refill the freed capacity with more concurrent streams. This is why high-TP-decode is usually paired with aggressive continuous batching.</p>
+<h3 id="99-where-the-compiler-ends-and-the-runtime-begins">9.9) Where the compiler ends and the runtime begins<a class="headerlink" href="#99-where-the-compiler-ends-and-the-runtime-begins" title="Permanent link">&para;</a></h3>
+<p>Compilers (<code>torch.compile</code>, TensorRT, TensorRT-LLM's engine builder) optimize <strong>one forward pass</strong>: fuse ops, pick kernels, cut launch overhead. They do <strong>not</strong> decide:</p>
+<ul>
+<li>how to batch concurrent requests</li>
+<li>where KV cache blocks live (HBM/DRAM/NVMe)</li>
+<li>which worker handles which request</li>
+<li>how to interleave prefill and decode</li>
+<li>how to reuse cached prefixes across users</li>
+<li>what TP degree to run per phase</li>
+</ul>
+<p>Those are runtime responsibilities. Once kernels are decent, the biggest remaining wins in production LLM serving come from <strong>KV cache policy, batching policy, prefix reuse, routing, and prefill/decode architecture</strong> — not from squeezing another 5% out of a kernel.</p>
+<hr />
+<h2 id="10-what-matters-in-2026-non-obvious-insight">10) What matters in 2026 (non-obvious insight)<a class="headerlink" href="#10-what-matters-in-2026-non-obvious-insight" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Kernel optimization is becoming less important than <strong>data movement + scheduling</strong>.</p>
+</blockquote>
+<p>Why:</p>
+<ul>
+<li>LLM inference = KV cache + batching + routing (§9)</li>
+<li>bottleneck = memory + orchestration, not FLOPs</li>
+</ul>
+<p>The winners are not just better kernels, but better <strong>batching policies</strong>, <strong>KV cache layout</strong>, <strong>prefix reuse</strong>, <strong>prefill/decode disaggregation</strong>, and <strong>cross-GPU routing</strong>. This is where <strong>serving-runtime optimizers</strong> (NVIDIA Dynamo, vLLM, TensorRT-LLM, PerfFlux-style control loops) diverge sharply from <strong>kernel profilers</strong> (Nsight) — they operate at different layers, and in 2026 the serving-runtime layer is where the remaining gains live.</p>
+<hr />
+<h2 id="11-clean-mental-model-glossary">11) Clean mental model (glossary)<a class="headerlink" href="#11-clean-mental-model-glossary" title="Permanent link">&para;</a></h2>
+<p><strong>Compiler stack (§1)</strong></p>
+<ul>
+<li><strong>Kernel</strong> — GPU work unit; a parallel function launched by the host</li>
+<li><strong>Compiler</strong> — graph capture + kernel generator/optimizer</li>
+<li><strong>TorchDynamo</strong> — PyTorch graph capture (Python bytecode → FX/ATen graph)</li>
+<li><strong>Inductor</strong> — PyTorch default backend compiler</li>
+<li><strong>Triton</strong> — GPU kernel codegen language used by Inductor</li>
+<li><strong>Graph break</strong> — Dynamo falls back to eager for untraceable Python</li>
+<li><strong>Eager vs compiled</strong> — op-by-op dispatch vs graph-capture + fused execution</li>
+</ul>
+<p><strong>GPU telemetry (§2–§7)</strong></p>
+<ul>
+<li><strong>Occupancy</strong> — active warps / max warps (utilization proxy)</li>
+<li><strong>Throughput</strong> — HBM ↔ SM data rate (GB/s)</li>
+<li><strong>Warp stall</strong> — threads waiting on memory / dependency / barrier</li>
+<li><strong>Introspection</strong> — per-kernel profiling (Nsight Systems/Compute)</li>
+<li><strong>APM</strong> — system-level monitoring (Datadog, Prometheus)</li>
+<li><strong>Heartbeat</strong> — liveness/progress signal from distributed workers</li>
+</ul>
+<p><strong>Serving runtime (§9)</strong></p>
+<ul>
+<li><strong>Prefill</strong> — prompt processing phase; compute-bound; builds KV cache</li>
+<li><strong>Decode</strong> — token generation phase; memory-bound; reads KV cache</li>
+<li><strong>KV cache</strong> — stored key/value projections; often larger than model weights</li>
+<li><strong>PagedAttention</strong> — fixed-size KV cache pages (vLLM); cuts fragmentation</li>
+<li><strong>Continuous / in-flight batching</strong> — retire + admit requests every iteration</li>
+<li><strong>Prefix caching</strong> — reuse KV blocks across requests sharing a prompt prefix</li>
+<li><strong>Disaggregated serving</strong> — prefill and decode run as separate worker pools</li>
+<li><strong>KV-aware routing</strong> — send request to worker holding its cached prefix</li>
+<li><strong>KV offload</strong> — spill cold KV blocks to DRAM/NVMe/remote storage</li>
+<li><strong>Tensor parallelism (TP)</strong> — split each weight matrix across GPUs; different optimal degree for prefill vs decode</li>
+<li><strong>TTFT</strong> — time to first token (prefill-dominated)</li>
+<li><strong>ITL / TPOT</strong> — inter-token latency / time per output token (decode-dominated)</li>
+<li><strong>NVIDIA Dynamo</strong> — LLM serving framework (≠ TorchDynamo)</li>
+</ul>
+<hr />
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>./inference_engineering.md</code> — deep dive on inference engineering</li>
+<li><code>./gpu_and_datacenter_infrastructure.md</code> — platform / datacenter layer</li>
+<li><code>./high_perf_llm_serving_gpu_tpu.md</code> — operational tuning (NUMA, THP, drivers)</li>
+<li><code>../inference_engineering_commands/gpu_health_checklist.md</code> — operational preflight (nvidia-smi, Nsight, NCCL)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

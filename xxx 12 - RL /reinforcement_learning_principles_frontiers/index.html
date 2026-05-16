@@ -1,0 +1,3548 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/">
+      
+      
+        <link rel="prev" href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/">
+      
+      
+        <link rel="next" href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>RL Principles & Frontiers - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#reinforcement-learning-principles-methods-and-frontiers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RL Principles & Frontiers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Foundations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-environment-interaction-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent-Environment Interaction Loop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#states-observations-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      States, Observations, Actions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewards-returns-value-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rewards, Returns, Value Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-mathematical-formulations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Mathematical Formulations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Mathematical Formulations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-programming-known-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Programming (known model)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-free-q-learning-and-sarsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model-Free: Q-Learning and SARSA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policy-gradient-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policy Gradient Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-approximation-deep-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Function Approximation &amp; Deep RL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-based-vs-model-free" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model-Based vs Model-Free
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Challenges
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Challenges">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploration-vs-exploitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploration vs Exploitation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credit-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credit Assignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rl-variants-advanced-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      RL Variants &amp; Advanced Topics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RL Variants & Advanced Topics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deep-rl-drl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deep RL (DRL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-agent-rl-marl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Agent RL (MARL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inverse-rl-irl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inverse RL (IRL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meta-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Meta-RL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#offline-rl-batch-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Offline RL (Batch RL)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applications
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools &amp; Frameworks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#industry-adoption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Industry Adoption
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenges-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges &amp; Limitations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-directions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Directions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-month-mastery-plan-sections-a-l" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-Month Mastery Plan (Sections A-L)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-Month Mastery Plan (Sections A-L)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plan-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plan Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tooling-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tooling &amp; Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-a-foundations-tabular-rl-weeks-1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section A — Foundations &amp; Tabular RL (Weeks 1-2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-b-deep-value-methods-weeks-3-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section B — Deep Value Methods (Weeks 3-4)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-c-policy-gradients-actor-critics-weeks-5-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section C — Policy Gradients &amp; Actor-Critics (Weeks 5-6)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-d-continuous-control-max-entropy-rl-weeks-7-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section D — Continuous Control &amp; Max-Entropy RL (Weeks 7-8)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-e-exploration-representations-week-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section E — Exploration &amp; Representations (Week 9)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-f-model-based-rl-week-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section F — Model-Based RL (Week 10)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-g-offline-rl-week-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section G — Offline RL (Week 11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-h-safe-rl-week-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section H — Safe RL (Week 12)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-i-multi-agent-game-theory-week-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section I — Multi-Agent &amp; Game Theory (Week 12)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-j-rl-for-llms-ai-alignment-week-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section J — RL for LLMs / AI Alignment (Week 13)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-k-rl-ops-reproducibility-week-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section K — RL Ops &amp; Reproducibility (Week 13)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-l-final-capstone-weeks-13-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section L — Final Capstone (Weeks 13-14)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Foundations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-environment-interaction-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent-Environment Interaction Loop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#states-observations-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      States, Observations, Actions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewards-returns-value-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rewards, Returns, Value Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-mathematical-formulations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Mathematical Formulations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Mathematical Formulations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-programming-known-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Programming (known model)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-free-q-learning-and-sarsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model-Free: Q-Learning and SARSA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policy-gradient-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policy Gradient Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-approximation-deep-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Function Approximation &amp; Deep RL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-based-vs-model-free" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model-Based vs Model-Free
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Challenges
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Challenges">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploration-vs-exploitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploration vs Exploitation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credit-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credit Assignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rl-variants-advanced-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      RL Variants &amp; Advanced Topics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RL Variants & Advanced Topics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deep-rl-drl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deep RL (DRL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-agent-rl-marl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Agent RL (MARL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inverse-rl-irl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inverse RL (IRL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meta-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Meta-RL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#offline-rl-batch-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Offline RL (Batch RL)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applications
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools &amp; Frameworks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#industry-adoption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Industry Adoption
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenges-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges &amp; Limitations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-directions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Directions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-month-mastery-plan-sections-a-l" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-Month Mastery Plan (Sections A-L)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-Month Mastery Plan (Sections A-L)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plan-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plan Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tooling-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tooling &amp; Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-a-foundations-tabular-rl-weeks-1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section A — Foundations &amp; Tabular RL (Weeks 1-2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-b-deep-value-methods-weeks-3-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section B — Deep Value Methods (Weeks 3-4)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-c-policy-gradients-actor-critics-weeks-5-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section C — Policy Gradients &amp; Actor-Critics (Weeks 5-6)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-d-continuous-control-max-entropy-rl-weeks-7-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section D — Continuous Control &amp; Max-Entropy RL (Weeks 7-8)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-e-exploration-representations-week-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section E — Exploration &amp; Representations (Week 9)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-f-model-based-rl-week-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section F — Model-Based RL (Week 10)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-g-offline-rl-week-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section G — Offline RL (Week 11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-h-safe-rl-week-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section H — Safe RL (Week 12)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-i-multi-agent-game-theory-week-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section I — Multi-Agent &amp; Game Theory (Week 12)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-j-rl-for-llms-ai-alignment-week-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section J — RL for LLMs / AI Alignment (Week 13)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-k-rl-ops-reproducibility-week-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section K — RL Ops &amp; Reproducibility (Week 13)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-l-final-capstone-weeks-13-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section L — Final Capstone (Weeks 13-14)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="reinforcement-learning-principles-methods-and-frontiers">Reinforcement Learning: Principles, Methods, and Frontiers<a class="headerlink" href="#reinforcement-learning-principles-methods-and-frontiers" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>Reinforcement learning's central paradox is not exploration versus exploitation — that tension is well-characterized and has mature solutions. The deeper structural problem is that RL's most celebrated successes and its most stubborn failures share the same root cause: the reward signal simultaneously defines the objective, shapes the learning dynamics, and gates the credit assignment pathway. When reward is dense and well-specified, as in board games with binary win/loss outcomes, RL produces superhuman performance. When reward is sparse, misspecified, or requires human judgment, the entire framework strains under a burden it was never designed to carry alone.</p>
+<p>This dual nature of reward explains the field's two most consequential developments. First, <strong>model-based methods</strong> like MuZero and DreamerV3 achieve order-of-magnitude improvements in sample efficiency not primarily because they "plan ahead," but because a learned world model provides a second channel for credit assignment — the agent can attribute outcomes to state transitions rather than relying solely on reward backpropagation through temporal-difference chains. MuZero's ability to reach superhuman play in Go, chess, and Atari without knowing game rules demonstrates that learning the dynamics is strictly more powerful than learning the value function alone, because dynamics implicitly encode reward structure. Second, RLHF resolves reward misspecification by replacing hand-crafted scalar signals with a learned reward model trained on human preference comparisons — effectively outsourcing the hardest part of RL (defining what "good" means) to a supervised learning problem. The fact that InstructGPT, a 1.3B parameter model fine-tuned with RLHF, was preferred over the 175B GPT-3 reveals that alignment through reward modeling can substitute for a 100x increase in model capacity.</p>
+<p>The implication is that RL's frontier is no longer primarily about better optimization algorithms. PPO's clipped surrogate, SAC's entropy regularization, and TD3's twin critics are refinements within a mature optimization paradigm. The binding constraints have shifted to <strong>reward specification</strong> and <strong>sample efficiency</strong> — how to define what the agent should optimize, and how to extract maximum learning from minimal interaction. Offline RL, causal RL, and meta-RL each attack one face of this compound problem: learning without interaction, learning what transfers across tasks, and learning how to learn faster.</p>
+<p>This document maps the full technical landscape from Bellman equations through multi-agent game theory to RLHF-based language model alignment, treating each method not as an isolated algorithm but as a <strong>specific response to the reward-credit-efficiency trilemma</strong>. The accompanying mastery plan structures this progression into 14 weeks of implementation-driven study, ensuring that theoretical understanding is anchored in working code at every stage.</p>
+<h2 id="foundations">Foundations<a class="headerlink" href="#foundations" title="Permanent link">&para;</a></h2>
+<h3 id="agent-environment-interaction-loop">Agent-Environment Interaction Loop<a class="headerlink" href="#agent-environment-interaction-loop" title="Permanent link">&para;</a></h3>
+<p>An <strong>agent</strong> observes state S_t, takes action A_t, receives reward R_{t+1}, and transitions to S_{t+1}. Goal: maximize <strong>cumulative reward</strong> (return). Formally modeled as a <strong>Markov Decision Process (MDP)</strong>: tuple (S, A, P, R, gamma) where P(s'|s,a) is transition probability, R(s,a,s') is reward, gamma in [0,1) is discount factor. <strong>Markov property</strong>: next state depends only on current state and action.</p>
+<h3 id="states-observations-actions">States, Observations, Actions<a class="headerlink" href="#states-observations-actions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>State</strong> S_t: complete environment description (or partial observation O_t in <strong>POMDPs</strong>)</li>
+<li><strong>Action space</strong>: discrete (board games, Atari) or continuous (robot torques)</li>
+<li><strong>Policy</strong> pi: mapping from states to actions — deterministic pi(s)=a or stochastic pi(a|s)</li>
+</ul>
+<h3 id="rewards-returns-value-functions">Rewards, Returns, Value Functions<a class="headerlink" href="#rewards-returns-value-functions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Return</strong> G_t = R_{t+1} + gamma*R_{t+2} + ... = sum(gamma^k * R_{t+k+1})</li>
+<li><strong>State-value function</strong> V^pi(s) = E[G_t | S_t=s] under policy pi</li>
+<li><strong>Action-value function</strong> Q^pi(s,a) = E[G_t | S_t=s, A_t=a] under policy pi</li>
+<li><strong>Bellman equation</strong>: V^pi(s) = sum_a pi(a|s) sum_s' P(s'|s,a)[R(s,a,s') + gamma*V^pi(s')]</li>
+<li><strong>Bellman optimality</strong>: V<em>(s) = max_a sum_s' P(s'|s,a)[R(s,a,s') + gamma</em>V*(s')]</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> If we have Q<em>, an optimal policy is obtained by choosing actions that maximize Q</em>(s,a) in each state (greedy policy).</p>
+</blockquote>
+<hr />
+<h2 id="key-mathematical-formulations">Key Mathematical Formulations<a class="headerlink" href="#key-mathematical-formulations" title="Permanent link">&para;</a></h2>
+<h3 id="dynamic-programming-known-model">Dynamic Programming (known model)<a class="headerlink" href="#dynamic-programming-known-model" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Policy Iteration</strong>: alternate policy evaluation (solve V^pi) and policy improvement (greedy w.r.t. V^pi). Converges to optimal policy</li>
+<li><strong>Value Iteration</strong>: directly apply Bellman optimality updates until convergence, then extract policy</li>
+</ul>
+<h3 id="model-free-q-learning-and-sarsa">Model-Free: Q-Learning and SARSA<a class="headerlink" href="#model-free-q-learning-and-sarsa" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Q-learning</strong> (Watkins 1989): off-policy TD algorithm. Update: Q(s,a) &lt;- Q(s,a) + alpha[r + gamma<em>max_a' Q(s',a') - Q(s,a)]. Can learn Q</em> while following exploratory policy (epsilon-greedy). <strong>TD error</strong> delta = r + gamma*max_a' Q(s',a') - Q(s,a)</li>
+<li><strong>SARSA</strong>: on-policy. Update: Q(s,a) &lt;- Q(s,a) + alpha[r + gamma*Q(s',a') - Q(s,a)] where a' is the action actually taken. Learns Q of the policy being followed — more conservative/safer than Q-learning</li>
+</ul>
+<h3 id="policy-gradient-methods">Policy Gradient Methods<a class="headerlink" href="#policy-gradient-methods" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Directly optimize policy pi_theta(a|s) by gradient ascent on expected return J(theta)</li>
+<li><strong>Policy gradient theorem</strong>: nabla J(theta) = E[nabla log pi_theta(a|s) * Q^pi(s,a)]</li>
+<li><strong>REINFORCE</strong> (Williams 1992): use sampled returns G_t as unbiased estimate. High variance</li>
+<li><strong>Actor-Critic</strong>: actor = policy pi_theta, critic = value function V_w. Critic provides lower-variance advantage estimates</li>
+<li><strong>Advantage Actor-Critic (A2C)</strong>: uses TD error delta_t = r + gamma*V(s_{t+1}) - V(s_t) as advantage estimator</li>
+</ul>
+<h3 id="function-approximation-deep-rl">Function Approximation &amp; Deep RL<a class="headerlink" href="#function-approximation-deep-rl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Replace tables with parameterized functions (neural networks) for Q or pi</li>
+<li><strong>Significance</strong>: (1) handles enormous state spaces, (2) enables generalization, (3) brings efficiency to continuous/high-dimensional domains</li>
+<li><strong>DQN</strong> (DeepMind, 2015): CNN approximates Q-function for Atari from pixels. Key innovations: <strong>experience replay</strong> + <strong>target networks</strong></li>
+<li><strong>Deadly triad</strong>: function approximation + bootstrapping + off-policy can cause instability</li>
+</ul>
+<hr />
+<h2 id="model-based-vs-model-free">Model-Based vs Model-Free<a class="headerlink" href="#model-based-vs-model-free" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Model-Based</th>
+<th>Model-Free</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requires model?</strong></td>
+<td>Yes (given or learned)</td>
+<td>No — learns from trial-and-error</td>
+</tr>
+<tr>
+<td><strong>Sample efficiency</strong></td>
+<td>High — can simulate/plan internally</td>
+<td>Often low — needs many interactions</td>
+</tr>
+<tr>
+<td><strong>Planning</strong></td>
+<td>Multi-step lookahead (search, DP)</td>
+<td>No explicit planning — reactive</td>
+</tr>
+<tr>
+<td><strong>Bias vs variance</strong></td>
+<td>Model bias if inaccurate</td>
+<td>No model bias; higher variance</td>
+</tr>
+<tr>
+<td><strong>Compute cost</strong></td>
+<td>Planning expensive in large spaces</td>
+<td>Heavy training, simpler per-step</td>
+</tr>
+<tr>
+<td><strong>Examples</strong></td>
+<td>AlphaGo/AlphaZero (MCTS), MPC</td>
+<td>DQN, Policy Gradient, locomotion</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Hybrid</strong>: Dyna algorithm (Sutton) — learn model, use for limited lookahead + model-free learning</li>
+<li><strong>MuZero</strong> (DeepMind): learns model implicitly, superhuman in Go/chess/Atari without knowing rules</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> Modern research combines both — model-free policy + model-based planning.</p>
+</blockquote>
+<hr />
+<h2 id="core-challenges">Core Challenges<a class="headerlink" href="#core-challenges" title="Permanent link">&para;</a></h2>
+<h3 id="exploration-vs-exploitation">Exploration vs Exploitation<a class="headerlink" href="#exploration-vs-exploitation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>epsilon-greedy</strong>: explore with probability epsilon, exploit with 1-epsilon</li>
+<li><strong>UCB</strong>: balance estimated mean + exploration bonus</li>
+<li><strong>Thompson Sampling</strong>: sample from posterior over reward distributions</li>
+<li><strong>Intrinsic motivation / curiosity</strong>: reward for visiting novel states</li>
+<li>Hardest in environments with <strong>sparse rewards</strong> — reward shaping and hierarchical RL help</li>
+</ul>
+<h3 id="credit-assignment">Credit Assignment<a class="headerlink" href="#credit-assignment" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Temporal</strong>: which past actions caused the eventual reward? TD errors propagate signal backwards; <strong>eligibility traces</strong> (TD(lambda)) smooth credit assignment</li>
+<li><strong>Structural</strong>: attributing outcomes to network parameters or multi-agent contributions</li>
+<li>Remains hard with long horizons and delayed feedback</li>
+</ul>
+<hr />
+<h2 id="rl-variants-advanced-topics">RL Variants &amp; Advanced Topics<a class="headerlink" href="#rl-variants-advanced-topics" title="Permanent link">&para;</a></h2>
+<h3 id="deep-rl-drl">Deep RL (DRL)<a class="headerlink" href="#deep-rl-drl" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Value-based</strong>: DQN, Double DQN, Dueling DQN</li>
+<li><strong>Policy-based</strong>: DDPG, TRPO, PPO</li>
+<li><strong>Actor-Critic</strong>: A2C/A3C, SAC, TD3</li>
+<li><strong>Games</strong>: AlphaGo (2016, world champion Go), AlphaZero, AlphaStar (StarCraft II), OpenAI Five (Dota 2)</li>
+<li><strong>Robotics</strong>: OpenAI Dactyl — 5-fingered hand solves Rubik's Cube, trained entirely in simulation</li>
+<li><strong>Data center cooling</strong>: Google DeepMind achieved <strong>40% energy reduction</strong>; fully autonomous by 2018, ~30% consistent savings</li>
+</ul>
+<h3 id="multi-agent-rl-marl">Multi-Agent RL (MARL)<a class="headerlink" href="#multi-agent-rl-marl" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Stochastic/Markov Games</strong> with N agents, joint actions, different rewards</li>
+<li><strong>Cooperative</strong>: value factorization (QMIX), shared reward, centralized training + decentralized execution</li>
+<li><strong>Competitive</strong>: Nash equilibria, self-play (AlphaZero, OpenAI Five 5v5 Dota 2)</li>
+<li><strong>Dec-POMDP</strong>: cooperative partial observability — optimally NEXP-hard</li>
+<li>Challenges: non-stationarity, credit assignment among agents, exponential state-action growth</li>
+</ul>
+<h3 id="inverse-rl-irl">Inverse RL (IRL)<a class="headerlink" href="#inverse-rl-irl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Infer <strong>reward function</strong> from expert behavior, then derive policy</li>
+<li><strong>Ng &amp; Russell (2000)</strong>: "the reward function is the most succinct, robust, and transferable definition of the task"</li>
+<li><strong>Maximum Entropy IRL</strong> (Ziebart 2008): expert trajectories exponentially more likely</li>
+<li>Underpins <strong>RLHF</strong> — reward model from human preference judgments</li>
+<li>Applications: autonomous driving, robot objectives, AI safety/alignment</li>
+</ul>
+<h3 id="meta-rl">Meta-RL<a class="headerlink" href="#meta-rl" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>"Learning to learn"</strong>: train on task distribution so agent adapts quickly to new tasks</li>
+<li>Inner loop (solve MDP) + outer loop (optimize learning procedure)</li>
+<li><strong>Recurrent-based</strong>: RNN hidden state implements learning algorithm (RL^2, Wang et al. 2016)</li>
+<li><strong>Gradient-based</strong>: MAML — find initialization that adapts in few gradient steps</li>
+<li>Applications: robotic manipulation, navigation, automated RL algorithm design (<strong>AutoRL</strong>)</li>
+</ul>
+<h3 id="offline-rl-batch-rl">Offline RL (Batch RL)<a class="headerlink" href="#offline-rl-batch-rl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Learn from <strong>fixed dataset</strong> without environment interaction</li>
+<li>For domains where exploration is costly/unsafe: healthcare, autonomous driving</li>
+<li>Key challenge: <strong>distributional shift</strong> — actions outside data have unreliable value estimates</li>
+<li>Solutions: <strong>CQL</strong>, <strong>BCQ</strong> (conservative/pessimistic Q-learning)</li>
+<li>Netflix: modeled recommendation as MDP, used offline RL on logged interactions</li>
+</ul>
+<hr />
+<h2 id="applications">Applications<a class="headerlink" href="#applications" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Key Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Robotics</strong></td>
+<td>Dactyl (Rubik's Cube), locomotion, manipulation, drone navigation. Sim-to-real via domain randomization</td>
+</tr>
+<tr>
+<td><strong>Autonomous vehicles</strong></td>
+<td>Waymo (imitation + RL), motion planning, merging, speed profiles</td>
+</tr>
+<tr>
+<td><strong>Data centers</strong></td>
+<td>Google: 40% cooling energy reduction, fully autonomous by 2018</td>
+</tr>
+<tr>
+<td><strong>Chip design</strong></td>
+<td>Google: RL agent places circuit modules — hours vs weeks, comparable to human experts</td>
+</tr>
+<tr>
+<td><strong>Operations research</strong></td>
+<td>Resource allocation (Alibaba), inventory management, network traffic (5G), supply chain</td>
+</tr>
+<tr>
+<td><strong>Finance &amp; trading</strong></td>
+<td>Portfolio management, optimal execution (J.P. Morgan DeepRL4J, Charles Schwab, Bloomberg)</td>
+</tr>
+<tr>
+<td><strong>Gaming</strong></td>
+<td>AlphaGo/Zero/Star, OpenAI Five, DQN (Atari), procedural content generation, Unity ML-Agents</td>
+</tr>
+<tr>
+<td><strong>Recommenders</strong></td>
+<td>Netflix (slate recommendation via offline RL), YouTube (bandits), advertising (sequential decisions)</td>
+</tr>
+<tr>
+<td><strong>NLP / RLHF</strong></td>
+<td>InstructGPT (preferred over 175B GPT-3), ChatGPT alignment, conversational strategy (XiaoIce)</td>
+</tr>
+<tr>
+<td><strong>Industrial automation</strong></td>
+<td>Siemens/GE/Fanuc/ABB: robotic assembly, process control, PID tuning</td>
+</tr>
+<tr>
+<td><strong>Healthcare</strong></td>
+<td>Treatment planning, dosing strategies, appointment scheduling (research stage)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> RLHF is arguably the most impactful real-world RL application — millions of users interact with RLHF-tuned models daily.</p>
+</blockquote>
+<hr />
+<h2 id="tools-frameworks">Tools &amp; Frameworks<a class="headerlink" href="#tools-frameworks" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Focus</th>
+<th>Key Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gymnasium</strong> (ex-OpenAI Gym)</td>
+<td>Environments</td>
+<td>Standard API (env.step/reset), Atari/Classic Control/MuJoCo</td>
+</tr>
+<tr>
+<td><strong>Stable Baselines3</strong></td>
+<td>Algorithms</td>
+<td>Reliable DQN/PPO/A2C/TD3/SAC. 95% code coverage</td>
+</tr>
+<tr>
+<td><strong>RLib (Ray)</strong></td>
+<td>Scalable/distributed</td>
+<td>Multi-GPU, multi-agent, offline RL. Production-grade</td>
+</tr>
+<tr>
+<td><strong>Dopamine</strong> (Google)</td>
+<td>Research</td>
+<td>Small clean codebase, DQN/Rainbow, reproducibility</td>
+</tr>
+<tr>
+<td><strong>CleanRL</strong></td>
+<td>Learning</td>
+<td>Single-file implementations, minimalist</td>
+</tr>
+<tr>
+<td><strong>Other</strong></td>
+<td>Various</td>
+<td>Acme (DeepMind), Coach (Intel), ML-Agents (Unity), PettingZoo, Spinning Up</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="industry-adoption">Industry Adoption<a class="headerlink" href="#industry-adoption" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Organization</th>
+<th>RL Use Cases</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DeepMind</strong></td>
+<td>AlphaGo/Zero/Star, data center cooling, chip design, chemistry, optics</td>
+</tr>
+<tr>
+<td><strong>OpenAI</strong></td>
+<td>Gym ecosystem, OpenAI Five, Dactyl, RLHF for GPT models</td>
+</tr>
+<tr>
+<td><strong>Netflix/YouTube/ByteDance</strong></td>
+<td>Recommendation as sequential decision, slate optimization</td>
+</tr>
+<tr>
+<td><strong>AV companies</strong></td>
+<td>Waymo, Tesla — imitation + RL for driving policies</td>
+</tr>
+<tr>
+<td><strong>Manufacturing</strong></td>
+<td>Siemens, GE, Fanuc, ABB — process control, robotics</td>
+</tr>
+<tr>
+<td><strong>Finance</strong></td>
+<td>Two Sigma, Citadel, J.P. Morgan — trading, execution</td>
+</tr>
+<tr>
+<td><strong>Startups</strong></td>
+<td>Osaro, Covariant, Micropsi, Powermatix, Modular AI</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="challenges-limitations">Challenges &amp; Limitations<a class="headerlink" href="#challenges-limitations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Challenge</th>
+<th>Mitigations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sample inefficiency</strong></td>
+<td>Model-based RL, transfer learning, meta-RL, offline RL</td>
+</tr>
+<tr>
+<td><strong>Reward hacking</strong></td>
+<td>Reward shaping, RLHF, constrained RL, multi-objective</td>
+</tr>
+<tr>
+<td><strong>Safety</strong></td>
+<td>Safe exploration, safety shields, constrained MDPs, sim-to-real</td>
+</tr>
+<tr>
+<td><strong>Interpretability</strong></td>
+<td>Policy distillation, attention visualization, rule extraction</td>
+</tr>
+<tr>
+<td><strong>Stability / hyperparameter sensitivity</strong></td>
+<td>Target networks, clipping (PPO), multiple seeds</td>
+</tr>
+<tr>
+<td><strong>Non-stationarity</strong></td>
+<td>Online learning, meta-learning, periodic retraining</td>
+</tr>
+<tr>
+<td><strong>Scalability</strong></td>
+<td>Policy gradients for continuous, recurrent networks for POMDPs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="future-directions">Future Directions<a class="headerlink" href="#future-directions" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Hierarchical RL</strong>: options framework, FeUdal networks, goal-conditioned RL — tackle long horizons via temporal abstraction. Notably, hierarchy can also <strong>emerge</strong> from flat RL training: GRPO-trained LLMs exhibit a two-phase dynamic where procedural skill solidifies before strategic reasoning develops, suggesting that temporal abstraction need not be architecturally imposed but can arise from the structure of the optimization landscape itself</li>
+<li><strong>Causal RL</strong>: counterfactual reasoning, causal exploration, better generalization and transfer (Bareinboim et al.)</li>
+<li><strong>Generalist agents</strong>: Gato (DeepMind, 600+ tasks), foundation models as RL policies, language as latent action space</li>
+<li><strong>AutoRL / Meta-learning</strong>: automated algorithm design, hyperparameter tuning, learning to learn</li>
+<li><strong>Integration of paradigms</strong>: imitation + RL, self-supervised + RL, Decision Transformers ("Upside-down RL"), lifelong learning</li>
+<li><strong>Multi-agent co-learning</strong>: cooperative/competitive AI at scale (smart grids, traffic, trading)</li>
+<li><strong>Neuro-symbolic RL</strong>: hierarchical reasoning with symbolic planners + low-level RL execution</li>
+<li><strong>Human alignment</strong>: RLHF scaling, constrained/safe behavior, embedding norms via LLMs</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> RL is heading toward <strong>more general, adaptable, and human-aligned agents</strong> — combining hierarchical planning, causal reasoning, foundation models, and RLHF.</p>
+</blockquote>
+<hr />
+<h2 id="3-month-mastery-plan-sections-a-l">3-Month Mastery Plan (Sections A-L)<a class="headerlink" href="#3-month-mastery-plan-sections-a-l" title="Permanent link">&para;</a></h2>
+<h3 id="plan-configuration">Plan Configuration<a class="headerlink" href="#plan-configuration" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Duration</strong>: ~3 months (~30 sprints of 3 days each), ~15 hours/week</li>
+<li><strong>Compute</strong>: GPU-enabled, cloud OK</li>
+<li><strong>Preferred tools</strong>: <strong>CleanRL</strong> (minimalist single-file) + <strong>Stable-Baselines3 (SB3)</strong> (reliable baselines)</li>
+<li><strong>Math level</strong>: moderate (probability, linear algebra as needed)</li>
+<li><strong>Domains of interest</strong>: games, robotics, finance, LLMs, multi-agent, optimization</li>
+<li><strong>Deliverables</strong>: code notebooks, research-style reports, blog posts, open-source repo contributions</li>
+<li><strong>Assessment</strong>: thorough (quizzes, oral explanations, code reviews) — top 1% understanding</li>
+</ul>
+<h3 id="tooling-setup">Tooling &amp; Setup<a class="headerlink" href="#tooling-setup" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Python 3.10+</strong>, <strong>Gymnasium</strong> (modern Gym fork), <strong>Farama</strong> libraries (MiniGrid, ALE, Procgen, Safety-Gymnasium, PettingZoo)</li>
+<li>SB3 + CleanRL for implementations</li>
+<li><strong>Logging</strong>: TensorBoard + Weights &amp; Biases</li>
+<li><strong>Evaluation</strong>: <strong>rliable</strong> for statistically sound metrics</li>
+<li><strong>Repo structure</strong>: <code>rl-lab/</code> with subfolders <code>algos/</code>, <code>experiments/</code>, <code>envs/</code>, <code>reports/</code></li>
+<li>Pin versions, track random seeds for reproducibility</li>
+</ul>
+<h3 id="section-overview">Section Overview<a class="headerlink" href="#section-overview" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Weeks</th>
+<th>Sprints</th>
+<th>Boss Fight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. Foundations &amp; Tabular RL</strong></td>
+<td>1-2</td>
+<td>A1: Map of MDPs, A2: Dynamic Programmancer, A3: MC vs TD Duel, A4: Bandit Bazaar, A5: Gridmaster 3000</td>
+<td>Gridmaster 3000 — solve GridWorld/MiniGrid with DP/MC/TD</td>
+</tr>
+<tr>
+<td><strong>B. Deep Value Methods</strong></td>
+<td>3-4</td>
+<td>B1: Tables to Tensors (DQN), B2: DQN Upgrades Forge, B3: Generalization Trials, B4: Atari Knight vs Q-Dragon</td>
+<td>Atari Knight — train robust DQN on Atari/Procgen with rliable metrics</td>
+</tr>
+<tr>
+<td><strong>C. Policy Gradients &amp; Actor-Critics</strong></td>
+<td>5-6</td>
+<td>C1: Policy Gladiator (REINFORCE), C2: Advantage Mage (A2C &amp; GAE), C3: Proximal Paladin (PPO), C4: PPO Arena</td>
+<td>PPO Arena — solve challenging control task using PPO</td>
+</tr>
+<tr>
+<td><strong>D. Continuous Control &amp; MaxEnt RL</strong></td>
+<td>7-8</td>
+<td>D1: Deterministic Dungeon (DDPG), D2: Twin Trickster (TD3), D3: Entropy Blacksmith (SAC), D4: Continuous Hydra</td>
+<td>Continuous Hydra — SAC on MuJoCo (Hopper/Quadruped)</td>
+</tr>
+<tr>
+<td><strong>E. Exploration &amp; Representations</strong></td>
+<td>9</td>
+<td>E1: Curiosity Caves (ICM &amp; RND), E2: Rainbow Forge (Distributional &amp; Noisy Nets), E3: Treasure Hunter</td>
+<td>Treasure Hunter — sparse-reward env with intrinsic rewards</td>
+</tr>
+<tr>
+<td><strong>F. Model-Based RL</strong></td>
+<td>10</td>
+<td>F1: Dyna Dojo, F2: World Models Wizard (DreamerV3, MuZero), F3: Time Machine</td>
+<td>Time Machine — DreamerV3 on CartPole Swing-Up</td>
+</tr>
+<tr>
+<td><strong>G. Offline RL</strong></td>
+<td>11</td>
+<td>G1: Replay Necromancer (offline datasets &amp; BC), G2: Conservative Q Sorcery (CQL/IQL)</td>
+<td>Data-Driven Duel — D4RL benchmark, offline only</td>
+</tr>
+<tr>
+<td><strong>H. Safe RL</strong></td>
+<td>12</td>
+<td>H1: Shield of CMDP (constrained MDPs &amp; Lagrange), H2: Safe Explorer (SafeRL)</td>
+<td>Safety Gym Knight — reach goal with ≤N violations</td>
+</tr>
+<tr>
+<td><strong>I. Multi-Agent &amp; Game Theory</strong></td>
+<td>12</td>
+<td>I1: Alliance &amp; Duel (MARL basics, self-play), I2: Cooperation Conundrum (MADDPG)</td>
+<td>Arena of Allies — 2v2 emergent teamwork/competition</td>
+</tr>
+<tr>
+<td><strong>J. RL for LLMs (AI Alignment)</strong></td>
+<td>13</td>
+<td>J1: Language Tamer (RLHF concepts, reward modeling), J2: Direct Preference Alchemy (DPO vs PPO)</td>
+<td>Aligned Dragon — fine-tune small LM with preference feedback</td>
+</tr>
+<tr>
+<td><strong>K. RL Ops &amp; Reproducibility</strong></td>
+<td>13</td>
+<td>K1: Evaluation Gauntlet (rliable, significance, hyperparams)</td>
+<td>Repro Wizard — reproduce SOTA result with proper eval</td>
+</tr>
+<tr>
+<td><strong>L. Final Capstone</strong></td>
+<td>13-14</td>
+<td>Proposal, design, implementation, presentation</td>
+<td>Mastery Capstone — end-to-end project on novel problem</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-a-foundations-tabular-rl-weeks-1-2">Section A — Foundations &amp; Tabular RL (Weeks 1-2)<a class="headerlink" href="#section-a-foundations-tabular-rl-weeks-1-2" title="Permanent link">&para;</a></h3>
+<p><strong>Core ideas</strong>: MDPs, returns, value functions, Bellman equations, dynamic programming, Monte Carlo vs TD learning, eligibility traces, bandit algorithms</p>
+<ul>
+<li><strong>A1 — Map of MDPs (Days 1-3)</strong>: Implement MDP class, compute returns G_t, derive Bellman equations, code 4x4 Gridworld. Resources: Sutton &amp; Barto Ch. 1-3, David Silver Lectures 1-2. Timebox: 6-8 hours</li>
+<li><strong>A2 — Dynamic Programmancer (Days 4-6)</strong>: Policy Iteration and Value Iteration with convergence plots. MiniGrid demo. Resources: Sutton &amp; Barto Ch. 4, Silver Lecture 3. Timebox: 6-8 hours</li>
+<li><strong>A3 — MC vs TD Duel (Days 7-9)</strong>: Every-visit MC, TD(0), SARSA vs Q-learning on CliffWalking, TD(lambda). Resources: Sutton &amp; Barto Ch. 5-7, Silver Lectures 4-5. Timebox: 7-9 hours</li>
+<li><strong>A4 — Bandit Bazaar (Days 10-12)</strong>: k-armed bandit (k=10), epsilon-greedy, UCB1, Thompson Sampling, cumulative regret plots. Resources: Lattimore &amp; Szepesvari Ch. 1-2, 6-7. Timebox: 6-8 hours</li>
+<li><strong>A5 — Boss Fight: Gridmaster 3000 (Days 13-15)</strong>: Tabular RL suite (PI, VI, MC, SARSA, Q-learning, n-step TD, TD(lambda)) on 5x5 Gridworld + MiniGrid levels. Timebox: 8-10 hours</li>
+</ul>
+<p><strong>Assessment Gate A</strong>: Quiz (~7 questions on MDP, discount factor, Bellman, TD vs MC), oral check-in, code review</p>
+<h3 id="section-b-deep-value-methods-weeks-3-4">Section B — Deep Value Methods (Weeks 3-4)<a class="headerlink" href="#section-b-deep-value-methods-weeks-3-4" title="Permanent link">&para;</a></h3>
+<p><strong>Core ideas</strong>: function approximation, deadly triad, DQN + improvements (Double DQN, Dueling, PER), generalization, rliable</p>
+<ul>
+<li><strong>B1 — Tables to Tensors (Days 16-18)</strong>: Minimal DQN on CartPole (&gt;=195) and LunarLander (&gt;200). Compare with SB3. Timebox: 8-10 hours</li>
+<li><strong>B2 — DQN Upgrades Forge (Days 19-21)</strong>: Double DQN, Dueling architecture, Prioritized Experience Replay. Ablation experiment. Timebox: 8-10 hours</li>
+<li><strong>B3 — Generalization Trials (Days 22-24)</strong>: Train on Atari/Procgen with 5+ seeds. Use rliable (IQM, median, 95% CIs). Timebox: 8-10 hours</li>
+<li><strong>B4 — Boss Fight: Atari Knight (Days 25-27)</strong>: Full upgraded DQN on Atari (Pong/Breakout). 3+ seeds, rliable metrics, video. Timebox: 10-12 hours</li>
+</ul>
+<p><strong>Assessment Gate B</strong>: Quiz (~6 questions on Double DQN, target networks, replay buffer)</p>
+<h3 id="section-c-policy-gradients-actor-critics-weeks-5-6">Section C — Policy Gradients &amp; Actor-Critics (Weeks 5-6)<a class="headerlink" href="#section-c-policy-gradients-actor-critics-weeks-5-6" title="Permanent link">&para;</a></h3>
+<p><strong>Core ideas</strong>: policy gradient theorem, REINFORCE, variance reduction, baselines, GAE, A2C/A3C, PPO</p>
+<ul>
+<li><strong>C1 — Policy Gladiator (Days 28-30)</strong>: REINFORCE with baseline + entropy bonus. Timebox: 6-8 hours</li>
+<li><strong>C2 — Advantage Mage (Days 31-33)</strong>: Synchronous A2C, GAE (lambda experiments). Timebox: 7-9 hours</li>
+<li><strong>C3 — Proximal Paladin (Days 34-36)</strong>: PPO — clipped surrogate, advantage normalization, multi-epoch. Timebox: 8-10 hours</li>
+<li><strong>C4 — Boss Fight: PPO Arena (Days 37-39)</strong>: PPO on MuJoCo or Atari. Hyperparameter tuning. Timebox: 8-10 hours</li>
+</ul>
+<p><strong>Assessment Gate C</strong>: Quiz (~8 questions on policy gradient theorem, advantage, PPO clipping)</p>
+<h3 id="section-d-continuous-control-max-entropy-rl-weeks-7-8">Section D — Continuous Control &amp; Max-Entropy RL (Weeks 7-8)<a class="headerlink" href="#section-d-continuous-control-max-entropy-rl-weeks-7-8" title="Permanent link">&para;</a></h3>
+<p><strong>Core ideas</strong>: DPG theorem, DDPG, TD3 (twin critics, delayed updates), SAC (MaxEnt RL, entropy temperature)</p>
+<ul>
+<li><strong>D1 — Deterministic Dungeon (Days 40-42)</strong>: DDPG on Pendulum. Timebox: 6-8 hours</li>
+<li><strong>D2 — Twin Trickster (Days 43-45)</strong>: TD3, compare vs DDPG. Timebox: 6-8 hours</li>
+<li><strong>D3 — Entropy Blacksmith (Days 46-48)</strong>: SAC with auto-tuned alpha. Timebox: 7-9 hours</li>
+<li><strong>D4 — Boss Fight: Continuous Hydra (Days 49-51)</strong>: SAC on MuJoCo. Compare DDPG vs TD3 vs SAC. Timebox: 8-10 hours</li>
+</ul>
+<h3 id="section-e-exploration-representations-week-9">Section E — Exploration &amp; Representations (Week 9)<a class="headerlink" href="#section-e-exploration-representations-week-9" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>E1 — Curiosity Caves (Days 52-54)</strong>: ICM and RND for exploration bonuses</li>
+<li><strong>E2 — Rainbow Forge (Days 55-57)</strong>: Distributional RL (C51) and Noisy Nets</li>
+<li><strong>E3 — Boss Fight: Treasure Hunter (Days 58-60)</strong>: Solve sparse-reward env with intrinsic rewards</li>
+</ul>
+<h3 id="section-f-model-based-rl-week-10">Section F — Model-Based RL (Week 10)<a class="headerlink" href="#section-f-model-based-rl-week-10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>F1 — Dyna Dojo (Days 61-63)</strong>: Model-based planning, Dyna architecture</li>
+<li><strong>F2 — World Models Wizard (Days 64-66)</strong>: DreamerV3, MuZero concepts</li>
+<li><strong>F3 — Boss Fight: Time Machine (Days 67-69)</strong>: DreamerV3 on CartPole Swing-Up</li>
+</ul>
+<h3 id="section-g-offline-rl-week-11">Section G — Offline RL (Week 11)<a class="headerlink" href="#section-g-offline-rl-week-11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>G1 — Replay Necromancer (Days 70-72)</strong>: Offline datasets, behavioral cloning, D4RL</li>
+<li><strong>G2 — Conservative Q Sorcery (Days 73-75)</strong>: CQL, IQL algorithms</li>
+<li><strong>Boss Fight: Data-Driven Duel</strong>: High score on D4RL benchmark, offline only</li>
+</ul>
+<h3 id="section-h-safe-rl-week-12">Section H — Safe RL (Week 12)<a class="headerlink" href="#section-h-safe-rl-week-12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>H1 — Shield of CMDP (Days 76-78)</strong>: Constrained MDPs, Lagrange methods</li>
+<li><strong>H2 — Safe Explorer (Days 79-81)</strong>: SafeRL algorithms, Safety-Gymnasium</li>
+<li><strong>Boss Fight: Safety Gym Knight</strong>: Reach goal with ≤N constraint violations</li>
+</ul>
+<h3 id="section-i-multi-agent-game-theory-week-12">Section I — Multi-Agent &amp; Game Theory (Week 12)<a class="headerlink" href="#section-i-multi-agent-game-theory-week-12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>I1 — Alliance &amp; Duel (Days 82-84)</strong>: MARL basics, self-play, independent Q-learning</li>
+<li><strong>I2 — Cooperation Conundrum (Days 85-87)</strong>: MADDPG, PettingZoo</li>
+<li><strong>Boss Fight: Arena of Allies</strong>: 2v2 emergent teamwork/competition</li>
+</ul>
+<h3 id="section-j-rl-for-llms-ai-alignment-week-13">Section J — RL for LLMs / AI Alignment (Week 13)<a class="headerlink" href="#section-j-rl-for-llms-ai-alignment-week-13" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>J1 — Language Tamer (Days 88-90)</strong>: RLHF concepts, reward modeling, PPO for LM fine-tuning. Also covers <strong>GRPO</strong> (Group Relative Policy Optimization), which reveals a striking two-phase training dynamic: during the first phase the model corrects procedural and execution errors (syntax, arithmetic, step fidelity), then in the second phase the bottleneck shifts to strategic planning — choosing the right approach before executing it. This emergent hierarchy in reasoning (arxiv 2509.03646) demonstrates that RL training does not improve all capabilities uniformly; instead, low-level competence consolidates first, creating the foundation on which higher-order reasoning can then develop</li>
+<li><strong>J2 — Direct Preference Alchemy (Days 91-93)</strong>: DPO vs PPO comparison</li>
+<li><strong>Boss Fight: Aligned Dragon</strong>: Fine-tune small LM with preference feedback</li>
+</ul>
+<h3 id="section-k-rl-ops-reproducibility-week-13">Section K — RL Ops &amp; Reproducibility (Week 13)<a class="headerlink" href="#section-k-rl-ops-reproducibility-week-13" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>K1 — Evaluation Gauntlet</strong>: rliable metrics, statistical significance, hyperparameter sensitivity</li>
+<li><strong>Boss Fight: Repro Wizard</strong>: Reproduce published SOTA result with proper evaluation</li>
+</ul>
+<h3 id="section-l-final-capstone-weeks-13-14">Section L — Final Capstone (Weeks 13-14)<a class="headerlink" href="#section-l-final-capstone-weeks-13-14" title="Permanent link">&para;</a></h3>
+<p>Choose domain (games, robotics, finance, NLP) and apply advanced RL to a novel problem. Deliverables: proposal, design, implementation, presentation, code release.</p>
+<blockquote>
+<p><strong>Key:</strong> The capstone proves mastery — apply everything from tabular foundations through advanced techniques to a real problem, with rigorous evaluation and clear communication.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

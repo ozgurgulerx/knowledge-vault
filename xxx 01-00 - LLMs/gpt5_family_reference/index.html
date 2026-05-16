@@ -1,0 +1,3444 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2001-00%20-%20LLMs/gpt5_family_reference/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>GPT-5 Family Reference - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gpt-5-family-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GPT-5 Family Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Opening Briefing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gpt-54-model-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPT-5.4 Model Report
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GPT-5.4 Model Report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-surface" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Surface
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#release-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Release Timeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture &amp; Training
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmarks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmark-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmark Definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vision-computer-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vision &amp; Computer Use
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpt-family-model-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPT Family Model Comparison
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpt-54-mini-and-nano" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPT-5.4 Mini and Nano
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#early-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Early Feedback
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pricing-economics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pricing &amp; Economics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pricing & Economics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#token-pricing-per-1m-tokens-standard-tier" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Pricing (per 1M tokens, standard tier)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-related-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tool-Related Costs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rate-limits-gpt-54-long-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rate Limits (gpt-5.4, Long Context)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-build-patterns-for-gpt-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      15 Build Patterns for GPT-5
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15 Build Patterns for GPT-5">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pattern-codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pattern Codex
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selected-pattern-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selected Pattern Details
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#costlatency-tuning-cheatsheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost/Latency Tuning Cheatsheet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-checklist-gpt-4x-to-gpt-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Checklist (GPT-4.x to GPT-5)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reliability-observability-runbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reliability &amp; Observability Runbook
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reliability & Observability Runbook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rate-limiting-backoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rate Limiting &amp; Backoff
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idempotency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Idempotency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timeouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeouts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circuit-breakers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Circuit Breakers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputoutput-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input/Output Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logging-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logging &amp; Tracing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-metrics-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Metrics &amp; Alerts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pii-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      PII &amp; Privacy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failover" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failover
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guardrails-on-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guardrails on Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safety-known-failure-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety &amp; Known Failure Modes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anti-Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#90-day-adoption-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      90-Day Adoption Plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="90-Day Adoption Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sprint-1-foundational-integration-days-1-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sprint 1: Foundational Integration (Days 1-30)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sprint-2-scale-out-beta-days-31-60" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sprint 2: Scale-Out &amp; Beta (Days 31-60)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sprint-3-hardening-days-61-90" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sprint 3: Hardening (Days 61-90)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#developer-integration-quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Developer Integration Quick Start
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Developer Integration Quick Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#best-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Defaults
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Engineering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdks-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDKs &amp; Operations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpt-5-family-source-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPT-5 Family Source URLs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GPT-5 Family Source URLs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#official-openai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Official (OpenAI)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmark-papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmark Papers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="gpt-5-family-reference">GPT-5 Family Reference<a class="headerlink" href="#gpt-5-family-reference" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>GPT-5.4 is not primarily a smarter language model. It is an <strong>agent runtime disguised as a model release</strong>. The March 2026 convergence of frontier coding capabilities (from GPT-5.3-Codex) with native computer use, tool search, and a million-token context window signals that OpenAI has stopped optimizing for the "best answer to a question" and started optimizing for "best executor of a multi-step workflow." The benchmark gains confirm this: OSWorld-Verified jumped from 47.3% to 75.0% between GPT-5.2 and GPT-5.4, while GPQA Diamond moved only 0.4 points. The capability frontier has shifted from reasoning about text to operating on environments.</p>
+<p>Two architectural decisions reveal the underlying trade-offs. First, the <code>reasoning.effort</code> parameter creates a hard fork in the model's behavior: at <code>none</code>, you get a conventional LLM with full sampling controls (temperature, top_p, logprobs), but at any higher setting, those controls are disabled entirely and reasoning tokens — invisible via the API — are billed as output tokens at $15 per million. This means every production deployment must treat reasoning effort as a cost-multiplier knob with no intermediate observability. Second, the 1,050,000-token context window carries a <strong>pricing discontinuity at 272K tokens</strong> that doubles input cost and adds 50% to output cost for the entire session, not just the overage. Combined with documented performance degradation on graph-reasoning tasks in the 256K-1M range, the million-token window is better understood as an agent state buffer with compaction than as a faithful long-context reader.</p>
+<p>These two facts together produce a counterintuitive implication: the most cost-effective and reliable GPT-5.4 deployments will use less context and less reasoning, not more. The optimal pattern is a multi-model cascade — nano for routing and extraction at one twenty-fifth the cost, the full model with targeted RAG retrieval rather than blind context stuffing, and reasoning effort dialed to the minimum that passes evaluation. Prompt caching (90% discount on cached tokens) and the Batch API (50% discount on async jobs) further reward architectures that treat the model as an orchestrated component rather than a monolithic brain.</p>
+<p>This reference consolidates the GPT-5 family's API surface, benchmark data, pricing mechanics, fifteen build patterns, and production runbook into a single operational document. The operating claim throughout is that <strong>GPT-5.4 demands systems engineering, not prompt engineering</strong> — the returns come from how you compose the model into toolchains, manage its cost envelope, and constrain its agent loops, not from crafting a better system message.</p>
+<h3 id="gpt-54-model-report">GPT-5.4 Model Report<a class="headerlink" href="#gpt-54-model-report" title="Permanent link">&para;</a></h3>
+<h4 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h4>
+<p><strong>GPT-5.4</strong> (API: <code>gpt-5.4</code>) released <strong>5 March 2026</strong> across ChatGPT, the API, and Codex. Higher-compute variant: <strong>GPT-5.4 Pro</strong> (<code>gpt-5.4-pro</code>). OpenAI has not disclosed parameter count, exact architecture, training compute, or data mixture. GPT-5.4 (xhigh) returns OpenAI to <strong>#1 (tied) on the Artificial Analysis Intelligence Index</strong> alongside Gemini 3.1 Pro Preview (score 57, up from 51 for GPT-5.2 xhigh). GPT-5.4-xhigh also claims <strong>#1 on LiveBench</strong>. The model uses <strong>47% fewer tokens</strong> than GPT-5.2 for equivalent tasks.</p>
+<h4 id="api-surface">API Surface<a class="headerlink" href="#api-surface" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Spec</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Context window</strong></td>
+<td>1,050,000 tokens</td>
+</tr>
+<tr>
+<td><strong>Max output</strong></td>
+<td>128,000 tokens</td>
+</tr>
+<tr>
+<td><strong>Knowledge cutoff</strong></td>
+<td>31 Aug 2025</td>
+</tr>
+<tr>
+<td><strong>Modalities</strong></td>
+<td>text + image in; text out (no audio/video)</td>
+</tr>
+<tr>
+<td><strong>Reasoning control</strong></td>
+<td><code>reasoning.effort</code>: <code>none</code> (default), <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code></td>
+</tr>
+<tr>
+<td><strong>Snapshots</strong></td>
+<td><code>gpt-5.4</code>, <code>gpt-5.4-2026-03-05</code></td>
+</tr>
+<tr>
+<td><strong>Fine-tuning</strong></td>
+<td>Not supported (distillation supported)</td>
+</tr>
+<tr>
+<td><strong>Tools</strong></td>
+<td>web search, file search, image gen, code interpreter, hosted shell, apply patch, skills, <strong>computer use</strong>, MCP, <strong>tool search</strong> (Responses API)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> <code>temperature</code>, <code>top_p</code>, and <code>logprobs</code> are <strong>only supported when <code>reasoning.effort</code> is <code>none</code></strong>. Higher reasoning settings raise an error.</p>
+</blockquote>
+<h4 id="release-timeline">Release Timeline<a class="headerlink" href="#release-timeline" title="Permanent link">&para;</a></h4>
+<pre class="mermaid"><code>timeline
+    title GPT-5 family milestones
+    2025-08-07 : GPT-5 + system card
+    2025-12-11 : GPT-5.2 system card update
+    2026-03-05 : GPT-5.4 + GPT-5.4 Pro released</code></pre>
+<h4 id="architecture-training">Architecture &amp; Training<a class="headerlink" href="#architecture-training" title="Permanent link">&para;</a></h4>
+<p>No architecture paper published. RL-trained reasoning; exact recipe undisclosed. First general GPT-5 model with mitigations for "High capability in Cybersecurity."</p>
+<p><strong>Mental model</strong>: GPT-5.4 is designed for <strong>agent loops</strong>: reason -&gt; call tools -&gt; operate GUIs from screenshots -&gt; compress/maintain long state.</p>
+<pre class="mermaid"><code>flowchart TD
+  U[User task] --&gt; M[GPT-5.4 response step]
+  M --&gt;|tool decision| TC{Tool call?}
+  TC --&gt;|no| A[Final answer]
+  TC --&gt;|yes: computer_call| CUA[computer_call actions]
+  CUA --&gt; ENV[Harness executes UI actions]
+  ENV --&gt; SS[Capture screenshot]
+  SS --&gt; M
+  TC --&gt;|yes: web/file/tools| TOOL[Tool outputs]
+  TOOL --&gt; M</code></pre>
+<h4 id="benchmarks">Benchmarks<a class="headerlink" href="#benchmarks" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Eval</th>
+<th style="text-align: right;">GPT-5.4</th>
+<th style="text-align: right;">GPT-5.2</th>
+<th style="text-align: right;">GPT-5.3-Codex</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Knowledge work</strong></td>
+<td>GDPval (win/tie)</td>
+<td style="text-align: right;">83.0%</td>
+<td style="text-align: right;">70.9%</td>
+<td style="text-align: right;">70.9%</td>
+<td>44 occupations</td>
+</tr>
+<tr>
+<td><strong>Agentic coding</strong></td>
+<td>SWE-Bench Pro (Public)</td>
+<td style="text-align: right;">57.7%</td>
+<td style="text-align: right;">55.6%</td>
+<td style="text-align: right;">56.8%</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>GUI agent</strong></td>
+<td>OSWorld-Verified</td>
+<td style="text-align: right;">75.0%</td>
+<td style="text-align: right;">47.3%</td>
+<td style="text-align: right;">74.0%</td>
+<td>Surpasses human baseline (72.4%)</td>
+</tr>
+<tr>
+<td><strong>Tool use</strong></td>
+<td>BrowseComp</td>
+<td style="text-align: right;">82.7%</td>
+<td style="text-align: right;">65.8%</td>
+<td style="text-align: right;">--</td>
+<td>Pro: 89.3%</td>
+</tr>
+<tr>
+<td><strong>Physics reasoning</strong></td>
+<td>CritPt</td>
+<td style="text-align: right;">30.0% (Pro)</td>
+<td style="text-align: right;">--</td>
+<td style="text-align: right;">--</td>
+<td>+10 pts; triples best Nov '25 score (9%); run cost &gt;$1k</td>
+</tr>
+<tr>
+<td><strong>Tax</strong></td>
+<td>TaxCalcBench</td>
+<td style="text-align: right;">56.86%</td>
+<td style="text-align: right;">--</td>
+<td style="text-align: right;">--</td>
+<td>Surpasses Opus 4.6 (52.94%)</td>
+</tr>
+<tr>
+<td><strong>Agentic terminal</strong></td>
+<td>TerminalBench Hard</td>
+<td style="text-align: right;">strong</td>
+<td style="text-align: right;">--</td>
+<td style="text-align: right;">--</td>
+<td>Agentic coding / terminal use</td>
+</tr>
+<tr>
+<td><strong>Multimodal</strong></td>
+<td>MMMU-Pro (no tools)</td>
+<td style="text-align: right;">81.2%</td>
+<td style="text-align: right;">79.5%</td>
+<td style="text-align: right;">--</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Science QA</strong></td>
+<td>GPQA Diamond</td>
+<td style="text-align: right;">92.8%</td>
+<td style="text-align: right;">92.4%</td>
+<td style="text-align: right;">--</td>
+<td>198 questions</td>
+</tr>
+<tr>
+<td><strong>Maths</strong></td>
+<td>FrontierMath T1-3</td>
+<td style="text-align: right;">47.6%</td>
+<td style="text-align: right;">40.7%</td>
+<td style="text-align: right;">--</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Long-context performance is <strong>non-uniform</strong> -- sharp drop on Graphwalks BFS at 256K-1M range. "1M context" is a capacity claim, not a quality guarantee. Higher hallucination rate flagged by Artificial Analysis, driven by higher attempt rate.</p>
+</blockquote>
+<h4 id="benchmark-definitions">Benchmark Definitions<a class="headerlink" href="#benchmark-definitions" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th>What It Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SWE-Bench Pro</strong></td>
+<td>1,865 long-horizon SW engineering problems; contamination-resistant</td>
+</tr>
+<tr>
+<td><strong>OSWorld-Verified</strong></td>
+<td>Real computer environment tasks across OSes</td>
+</tr>
+<tr>
+<td><strong>MMMU-Pro</strong></td>
+<td>Multimodal reasoning; filters text-only-answerable Qs</td>
+</tr>
+<tr>
+<td><strong>GPQA Diamond</strong></td>
+<td>198 graduate-level "Google-proof" MCQs</td>
+</tr>
+<tr>
+<td><strong>FrontierMath</strong></td>
+<td>Expert-crafted hard maths across modern mathematics</td>
+</tr>
+<tr>
+<td><strong>GraphWalks</strong></td>
+<td>Long-context graph reasoning (BFS, parent queries)</td>
+</tr>
+<tr>
+<td><strong>OpenAI MRCR v2</strong></td>
+<td>Multiple "needles" hidden in long context</td>
+</tr>
+<tr>
+<td><strong>CritPt</strong></td>
+<td>Physics reasoning problems</td>
+</tr>
+<tr>
+<td><strong>TaxCalcBench</strong></td>
+<td>Tax return accuracy (perfect returns)</td>
+</tr>
+<tr>
+<td><strong>TerminalBench Hard</strong></td>
+<td>Agentic coding and terminal use tasks</td>
+</tr>
+<tr>
+<td><strong>LiveBench</strong></td>
+<td>Continuously updated multi-domain benchmark</td>
+</tr>
+</tbody>
+</table>
+<h4 id="vision-computer-use">Vision &amp; Computer Use<a class="headerlink" href="#vision-computer-use" title="Permanent link">&para;</a></h4>
+<p>Multimodality = <strong>vision input tuned for UI control</strong>, not general omni-model.</p>
+<ul>
+<li><code>high</code>: up to 2,500 patches / 2048px max dimension</li>
+<li><code>original</code>: up to 10,000 patches / 6000px (recommended for computer use, OCR, click accuracy)</li>
+<li><strong>Harness shapes</strong>: built-in tool, custom harness, code-execution</li>
+<li>Requirements: <strong>isolation</strong> and <strong>confirmation</strong></li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> Use <code>detail: "original"</code> on screenshots for best click accuracy. Run in isolated environment, treat page content as untrusted input.</p>
+</blockquote>
+<h4 id="gpt-family-model-comparison">GPT Family Model Comparison<a class="headerlink" href="#gpt-family-model-comparison" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">Context</th>
+<th style="text-align: right;">Output cap</th>
+<th>Reasoning</th>
+<th>Notable features</th>
+<th>Price (in/out per 1M)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GPT-5.4</strong></td>
+<td style="text-align: right;">1,050,000</td>
+<td style="text-align: right;">128,000</td>
+<td><code>none..xhigh</code></td>
+<td>computer use + tool search</td>
+<td>$2.50 / $15.00</td>
+</tr>
+<tr>
+<td><strong>GPT-5.2</strong></td>
+<td style="text-align: right;">400,000</td>
+<td style="text-align: right;">128,000</td>
+<td><code>minimal..high</code></td>
+<td>--</td>
+<td>$1.75 / $14.00</td>
+</tr>
+<tr>
+<td><strong>GPT-5</strong></td>
+<td style="text-align: right;">400,000</td>
+<td style="text-align: right;">128,000</td>
+<td><code>minimal..high</code></td>
+<td>no computer use / no tool search</td>
+<td>$1.25 / $10.00</td>
+</tr>
+<tr>
+<td><strong>GPT-5.4 mini</strong></td>
+<td style="text-align: right;">400,000</td>
+<td style="text-align: right;">—</td>
+<td><code>none..xhigh</code></td>
+<td>coding, computer use, multimodal, subagents</td>
+<td>$0.75 / $4.50</td>
+</tr>
+<tr>
+<td><strong>GPT-5.4 nano</strong></td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td>—</td>
+<td>lightweight tasks</td>
+<td>above prior nano tiers</td>
+</tr>
+<tr>
+<td><strong>GPT-4o</strong></td>
+<td style="text-align: right;">128,000</td>
+<td style="text-align: right;">16,384</td>
+<td>none</td>
+<td>general tool calling</td>
+<td>$2.50 / $10.00</td>
+</tr>
+<tr>
+<td><strong>GPT-4</strong></td>
+<td style="text-align: right;">8,192</td>
+<td style="text-align: right;">8,192</td>
+<td>none</td>
+<td>legacy chat completions</td>
+<td>$30.00 / $60.00</td>
+</tr>
+</tbody>
+</table>
+<h4 id="gpt-54-mini-and-nano">GPT-5.4 Mini and Nano<a class="headerlink" href="#gpt-54-mini-and-nano" title="Permanent link">&para;</a></h4>
+<p>OpenAI launched <strong>GPT-5.4 mini</strong> and <strong>GPT-5.4 nano</strong> across API, ChatGPT, and Codex, positioning them as its most capable small models. GPT-5.4 mini is <strong>more than 2x faster than GPT-5 mini</strong>, targets coding, computer use, multimodal understanding, and subagent workloads, and offers a <strong>400k context window</strong> in the API. OpenAI claims mini approaches larger GPT-5.4 performance on SWE-Bench Pro and OSWorld-Verified while using only <strong>30% of GPT-5.4 Codex quota</strong>, making it the new default for background coding workflows and subagent fan-out (@OpenAIDevs, Jun 2026).</p>
+<p>Pricing is <strong>$0.75/M input and $4.50/M output</strong> for mini, with nano priced above prior nano tiers — continuing OpenAI's pattern of better performance at higher per-tier price points (@scaling01, Jun 2026). Third-party evals were mixed: Mercor's APEX-Agents reported <strong>24.5% Pass@1</strong> for mini with xhigh reasoning, while BullshitBench placed the new small models relatively low on resistance to false-premise and jargon traps. Developers immediately highlighted mini's utility for subagents in Codex, computer-use workloads, and external products such as Windsurf.</p>
+<h4 id="early-feedback">Early Feedback<a class="headerlink" href="#early-feedback" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Mercor</strong>: "the best model we've ever tried" -- APEX-Agents benchmark, long-horizon deliverables</li>
+<li><strong>Harvey</strong>: "sets a new bar" for document-heavy legal work; BigLaw Bench 91%</li>
+<li><strong>Zapier</strong>: "outstanding coding assistant" -- fewer iterations, faster completion</li>
+<li><strong>Mainstay</strong>: autonomous coding + improved adherence to project conventions</li>
+</ul>
+<p>Early reporting emphasises <strong>workplace tooling</strong> and partnerships for financial/workflow contexts -- targeting "knowledge work in situ."</p>
+<p><strong>Arena (Chatbot Arena):</strong> GPT-5.4 High entering top 10 with large gains in creative writing and "longer query" categories; math performance roughly flat vs GPT-5.2-High.</p>
+<p><strong>Coding caveat:</strong> GPT-5.4 Codex appears weaker for coding than GPT-5.3 Codex per developer reports.</p>
+<p><strong>Cost vs GPT-5.2:</strong> ~28% higher benchmark run cost ($2.50/$15 vs $1.75/$14 per 1M input/output tokens). Context window expanded from 400K (GPT-5.2) to ~1.05M tokens.</p>
+<p><strong>Strengths:</strong> CritPt (physics reasoning) and TerminalBench Hard (agentic coding/terminal use).</p>
+<h3 id="pricing-economics">Pricing &amp; Economics<a class="headerlink" href="#pricing-economics" title="Permanent link">&para;</a></h3>
+<h4 id="token-pricing-per-1m-tokens-standard-tier">Token Pricing (per 1M tokens, standard tier)<a class="headerlink" href="#token-pricing-per-1m-tokens-standard-tier" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">Input (&lt;272K)</th>
+<th style="text-align: right;">Cached Input</th>
+<th style="text-align: right;">Output</th>
+<th style="text-align: right;">Input (&gt;272K)</th>
+<th style="text-align: right;">Output (&gt;272K)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>gpt-5.4</strong></td>
+<td style="text-align: right;">$2.50</td>
+<td style="text-align: right;">$0.25</td>
+<td style="text-align: right;">$15.00</td>
+<td style="text-align: right;">$5.00</td>
+<td style="text-align: right;">$22.50</td>
+</tr>
+<tr>
+<td><strong>gpt-5.4-pro</strong></td>
+<td style="text-align: right;">$30.00</td>
+<td style="text-align: right;">--</td>
+<td style="text-align: right;">$180.00</td>
+<td style="text-align: right;">$60.00</td>
+<td style="text-align: right;">$270.00</td>
+</tr>
+<tr>
+<td><strong>gpt-5</strong></td>
+<td style="text-align: right;">$1.25</td>
+<td style="text-align: right;">$0.125 (90% off)</td>
+<td style="text-align: right;">$10.00</td>
+<td style="text-align: right;">--</td>
+<td style="text-align: right;">--</td>
+</tr>
+<tr>
+<td><strong>gpt-5-mini</strong></td>
+<td style="text-align: right;">~5x cheaper</td>
+<td style="text-align: right;">--</td>
+<td style="text-align: right;">~5x cheaper</td>
+<td style="text-align: right;">--</td>
+<td style="text-align: right;">--</td>
+</tr>
+<tr>
+<td><strong>gpt-5-nano</strong></td>
+<td style="text-align: right;">~25x cheaper</td>
+<td style="text-align: right;">--</td>
+<td style="text-align: right;">~25x cheaper</td>
+<td style="text-align: right;">--</td>
+<td style="text-align: right;">--</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Prompts with <strong>&gt;272K input tokens</strong> trigger <strong>2x input + 1.5x output pricing for the full session</strong>. Regional processing adds 10% uplift. <strong>Reasoning tokens billed as output tokens</strong> (invisible via API). Prompt caching is <strong>automatic</strong> -- cached tokens 90% cheaper. Structure prompts with constant sections at the start.</p>
+</blockquote>
+<h4 id="tool-related-costs">Tool-Related Costs<a class="headerlink" href="#tool-related-costs" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Web search:</strong> $10 / 1k calls + search content tokens at model input rate</li>
+<li><strong>File search:</strong> $2.50 / 1k calls + $0.10 / GB-day storage (1GB free)</li>
+<li><strong>Code interpreter / hosted shell:</strong> container usage fees; billing changes 31 March 2026 to per-20-min sessions</li>
+</ul>
+<h4 id="cost-examples">Cost Examples<a class="headerlink" href="#cost-examples" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th style="text-align: right;">Input tokens</th>
+<th style="text-align: right;">Output tokens</th>
+<th style="text-align: right;">Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Typical chat/task</td>
+<td style="text-align: right;">10k</td>
+<td style="text-align: right;">2k</td>
+<td style="text-align: right;">~$0.055</td>
+</tr>
+<tr>
+<td>Large doc synthesis (&lt;272K)</td>
+<td style="text-align: right;">200k</td>
+<td style="text-align: right;">8k</td>
+<td style="text-align: right;">~$0.62</td>
+</tr>
+<tr>
+<td>Very large context (&gt;272K)</td>
+<td style="text-align: right;">400k</td>
+<td style="text-align: right;">20k</td>
+<td style="text-align: right;">~$2.45</td>
+</tr>
+</tbody>
+</table>
+<h4 id="rate-limits-gpt-54-long-context">Rate Limits (gpt-5.4, Long Context)<a class="headerlink" href="#rate-limits-gpt-54-long-context" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Tier 1:</strong> 500 RPM / 500K TPM</li>
+<li><strong>Tier 5:</strong> 15,000 RPM / 40M TPM</li>
+</ul>
+<h3 id="15-build-patterns-for-gpt-5">15 Build Patterns for GPT-5<a class="headerlink" href="#15-build-patterns-for-gpt-5" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Core principles: schema-first, safety-first.</strong> GPT-5 supports parallel function calls, built-in tools, <code>reasoning_effort</code>, <code>verbosity</code> control, and constrained decoding (100% JSON compliance in strict mode).</p>
+</blockquote>
+<h4 id="pattern-codex">Pattern Codex<a class="headerlink" href="#pattern-codex" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Pattern</th>
+<th>Use Case</th>
+<th>Key Features</th>
+<th>Latency (p95)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Structured JSON API</strong></td>
+<td>Deterministic data extraction</td>
+<td><code>strict=true</code>, JSON Schema, constrained decoding</td>
+<td>~300-800ms</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Direct Tool Calling (Single)</strong></td>
+<td>Single external API call</td>
+<td><code>function_call</code>, Tools API</td>
+<td>~500ms + external</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Tool-Using Agent (Multi-step)</strong></td>
+<td>Complex multi-step, multiple APIs</td>
+<td>Agents SDK, <code>reasoning_effort</code> high, parallel tools</td>
+<td>1-15s</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>RAG</strong></td>
+<td>QA over proprietary knowledge</td>
+<td>Embeddings, long context, optional <code>search</code> tool</td>
+<td>~700ms</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Streaming Chatbot UX</strong></td>
+<td>Real-time conversational UI</td>
+<td><code>stream=True</code>, SSE/WebSockets</td>
+<td>~100-300ms TTFT</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Batch Processing Pipeline</strong></td>
+<td>Offline large-scale jobs (10k+)</td>
+<td><strong>Batch API</strong> (50% savings), <code>gpt-5-nano</code></td>
+<td>Up to 24h</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Complex Data Transformation</strong></td>
+<td>Text-to-code, log parsing, SQL gen</td>
+<td>CFG grammar, high <code>reasoning_effort</code></td>
+<td>1-5s</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Multimodal Assistant</strong></td>
+<td>Image/audio I/O</td>
+<td>GPT-5 Vision, Whisper, DALL-E</td>
+<td>~1-10s</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Orchestration via Middleware</strong></td>
+<td>GPT-5 as pipeline step</td>
+<td>Functions in workflows, CoT prompting</td>
+<td>Varies</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Evaluation &amp; Moderation</strong></td>
+<td>Quality/safety checks</td>
+<td><code>score</code> function, Moderation API</td>
+<td>~500ms added</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Multi-tenant SaaS</strong></td>
+<td>Per-tenant chatbot/analytics</td>
+<td>Feature store, per-tenant prompts/quotas</td>
+<td>Base pattern</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Multi-model Cascade</strong></td>
+<td>Cost/latency optimization</td>
+<td><code>gpt-5</code> + <code>mini</code> + <code>nano</code>, reasoning routing</td>
+<td>0.3-1.3s</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Schema-First API</strong></td>
+<td>SQL gen, classification (no human loop)</td>
+<td>JSON mode, zero-shot/few-shot</td>
+<td>~400ms</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>Content Generation + Moderation</strong></td>
+<td>Blogs, marketing with guardrails</td>
+<td>System message, <code>verbosity</code>, Moderation API</td>
+<td>2-5s</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>Personalized Assistant (Memory)</strong></td>
+<td>Long-term user personalization</td>
+<td>Conversation history, vector store for episodic memory</td>
+<td>Slightly higher</td>
+</tr>
+</tbody>
+</table>
+<h4 id="selected-pattern-details">Selected Pattern Details<a class="headerlink" href="#selected-pattern-details" title="Permanent link">&para;</a></h4>
+<p><strong>Pattern 1 -- Structured Outputs</strong>: Use <code>response_format</code> with <code>json_schema</code> + <code>strict: true</code>. Strict mode = 100% conformity. Always validate with JSON parser as backup. Log valid JSON rate (should be ~100%).</p>
+<p><strong>Pattern 3 -- Multi-Tool Agent</strong>: ~500 tokens/step x ~5 steps = ~2500 tokens (~$0.025/session). Guardrails: max step count (5-10), timeout, sentinel prompt to prevent infinite loops. Use mini for intermediate steps.</p>
+<p><strong>Pattern 4 -- RAG</strong>: Two variants: (a) orchestrator-driven (app retrieves, stuffs prompt); (b) GPT-driven via <code>search_documents</code> function call. Embedding ~$0.0004/query. RAG more cost-effective than blindly using 272k context.</p>
+<p><strong>Pattern 6 -- Batch</strong>: <strong>50% cost reduction</strong> on tokens. Break very long jobs into 10k-task batches. Assign IDs for idempotency.</p>
+<p><strong>Pattern 12 -- Multi-model Cascade</strong>: Route easy queries to nano, hard queries to full gpt-5. Significant savings if fallback is rare.</p>
+<h3 id="costlatency-tuning-cheatsheet">Cost/Latency Tuning Cheatsheet<a class="headerlink" href="#costlatency-tuning-cheatsheet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tactic</th>
+<th>Latency Effect</th>
+<th>Cost Effect</th>
+<th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Prompt caching</strong></td>
+<td>Slightly faster</td>
+<td><strong>90% off cached tokens</strong></td>
+<td>Static system messages, repeated instructions</td>
+</tr>
+<tr>
+<td><strong>Response caching</strong></td>
+<td>Near-zero (DB lookup)</td>
+<td>Near-zero for hits</td>
+<td>FAQ bots, repeated queries</td>
+</tr>
+<tr>
+<td><strong>Multi-model cascade</strong></td>
+<td>Improves avg</td>
+<td>Significant savings</td>
+<td>Easy queries to nano, hard to gpt-5</td>
+</tr>
+<tr>
+<td><strong>Early exit / heuristics</strong></td>
+<td>Huge (skip model call)</td>
+<td>Full cost saved</td>
+<td>Predictable queries</td>
+</tr>
+<tr>
+<td><strong>Streaming</strong></td>
+<td>Perceived latency improves</td>
+<td>No cost change</td>
+<td>User-facing chat</td>
+</tr>
+<tr>
+<td><strong>Parallelizing subtasks</strong></td>
+<td>max(subtask) not sum</td>
+<td>Unchanged</td>
+<td>Independent subtasks</td>
+</tr>
+<tr>
+<td><strong>Batch API</strong></td>
+<td>Up to 24h async</td>
+<td><strong>50% off tokens</strong></td>
+<td>Nightly processing</td>
+</tr>
+<tr>
+<td><strong>Reduce output</strong> (<code>verbosity=low</code>)</td>
+<td>Faster</td>
+<td>Lower</td>
+<td>Concise answers preferred</td>
+</tr>
+<tr>
+<td><strong>Lower model tier</strong> (<code>gpt-5-nano</code>)</td>
+<td>Sub-500ms</td>
+<td><strong>~1/25 cost</strong></td>
+<td>High volume, slight quality trade-off</td>
+</tr>
+<tr>
+<td><strong>Dynamic max_tokens</strong></td>
+<td>Avoids runaway</td>
+<td>Hard cap saves cost</td>
+<td>Known expected length</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Combine tactics: cache aggressively, route simple queries to cheaper models, stream for UX, batch offline tasks.</p>
+</blockquote>
+<h3 id="migration-checklist-gpt-4x-to-gpt-5">Migration Checklist (GPT-4.x to GPT-5)<a class="headerlink" href="#migration-checklist-gpt-4x-to-gpt-5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Model endpoint</strong></td>
+<td>Update to <code>gpt-5</code>. Three sizes: <code>gpt-5</code>, <code>gpt-5-mini</code>, <code>gpt-5-nano</code></td>
+</tr>
+<tr>
+<td><strong>New parameters</strong></td>
+<td><code>verbosity</code> (low/medium/high), <code>reasoning_effort</code> (minimal to high)</td>
+</tr>
+<tr>
+<td><strong>Function calling</strong></td>
+<td>Syntax mostly same. Ensure <code>strict</code> usage. Remove manual JSON hacks.</td>
+</tr>
+<tr>
+<td><strong>Output differences</strong></td>
+<td>GPT-5 more verbose/expert-level by default. Test and adjust <code>verbosity</code>.</td>
+</tr>
+<tr>
+<td><strong>Structured outputs</strong></td>
+<td>Switch to <code>response_format</code> with <code>json_schema</code> + <code>strict: true</code></td>
+</tr>
+<tr>
+<td><strong>Context length</strong></td>
+<td>272k tokens (vs GPT-4's 8k/32k). Re-evaluate chunking logic.</td>
+</tr>
+<tr>
+<td><strong>Cost</strong></td>
+<td>$1.25/1M in ($0.125 cached), $10/1M out. Use mini/nano for heavy users.</td>
+</tr>
+<tr>
+<td><strong>Quality/regression tests</strong></td>
+<td>Run existing eval suite on GPT-5. Verify tool use behavior.</td>
+</tr>
+<tr>
+<td><strong>Safety</strong></td>
+<td>Less prone to jailbreaks, more honest. Fewer erroneous refusals.</td>
+</tr>
+<tr>
+<td><strong>Prompt adjustments</strong></td>
+<td>Highly steerable. Simplify overly complex constructions.</td>
+</tr>
+<tr>
+<td><strong>Parallel calls</strong></td>
+<td>Handle possible array of function calls if model suggests concurrency.</td>
+</tr>
+<tr>
+<td><strong>Batch API</strong></td>
+<td>Consider migrating manual batching for 50% savings.</td>
+</tr>
+<tr>
+<td><strong>Client library</strong></td>
+<td>Upgrade OpenAI SDK to latest (supports <code>OpenAI.Agent</code> etc.)</td>
+</tr>
+<tr>
+<td><strong>Rollout</strong></td>
+<td>Phased: test -&gt; shadow -&gt; 5% canary -&gt; 25% -&gt; 50% -&gt; 100%. Keep GPT-4 fallback.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reliability-observability-runbook">Reliability &amp; Observability Runbook<a class="headerlink" href="#reliability-observability-runbook" title="Permanent link">&para;</a></h3>
+<h4 id="rate-limiting-backoff">Rate Limiting &amp; Backoff<a class="headerlink" href="#rate-limiting-backoff" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Client-side rate limiting per OpenAI quota. Exponential backoff with jitter on HTTP 429 (1s, then 2s). Max retry 2-3.</li>
+</ul>
+<h4 id="idempotency">Idempotency<a class="headerlink" href="#idempotency" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Hash user request as key. Store request IDs.</li>
+</ul>
+<h4 id="timeouts">Timeouts<a class="headerlink" href="#timeouts" title="Permanent link">&para;</a></h4>
+<ul>
+<li>~30s for GPT-5 reasoning, shorter for mini. Wrap tool calls with timeouts.</li>
+</ul>
+<h4 id="circuit-breakers">Circuit Breakers<a class="headerlink" href="#circuit-breakers" title="Permanent link">&para;</a></h4>
+<ul>
+<li>External API fails 5x in a row -&gt; stop calling. Switch to degraded mode for OpenAI errors.</li>
+</ul>
+<h4 id="inputoutput-validation">Input/Output Validation<a class="headerlink" href="#inputoutput-validation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enforce max length. Sanitize control characters. Always <code>try/except</code> JSON parsing. Verify categories in expected set. Use Pydantic/type guards.</li>
+</ul>
+<h4 id="logging-tracing">Logging &amp; Tracing<a class="headerlink" href="#logging-tracing" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Log every request: timestamp, model, input/output length. Correlation/trace ID per user request. Integrate with OpenTelemetry/Datadog.</li>
+</ul>
+<h4 id="key-metrics-alerts">Key Metrics &amp; Alerts<a class="headerlink" href="#key-metrics-alerts" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Latency</strong>: p50, p95. Alert if p95 exceeds threshold.</li>
+<li><strong>Error rates</strong>: API errors, tool errors, function call errors. Alert if &gt; X%.</li>
+<li><strong>Token usage</strong>: per request and per day. Spot anomalies.</li>
+<li><strong>Function call counts</strong>: alert if suddenly spikes (model looping).</li>
+<li><strong>Structured output parse failures</strong>: model regression signal.</li>
+<li><strong>Content filter triggers</strong>: monitor moderation flag increase.</li>
+</ul>
+<h4 id="pii-privacy">PII &amp; Privacy<a class="headerlink" href="#pii-privacy" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Mask/remove PII in logs. Respect Zero Data Retention mode. Ensure deletion propagates to vector stores.</li>
+</ul>
+<h4 id="failover">Failover<a class="headerlink" href="#failover" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Route critical requests to a backup provider or smaller local model. Maintain multiple model versions behind config abstraction.</li>
+</ul>
+<h4 id="guardrails-on-tools">Guardrails on Tools<a class="headerlink" href="#guardrails-on-tools" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Require confirmation for sensitive actions. Strict scopes per user. Limit repeated calls (e.g., max 2 send_email per session).</li>
+</ul>
+<h3 id="safety-known-failure-modes">Safety &amp; Known Failure Modes<a class="headerlink" href="#safety-known-failure-modes" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Tool routing errors early in session</strong> -- tool selection less reliable with thin context; use explicit prompting</li>
+<li><strong>Incomplete execution on long-horizon tasks</strong> -- model stops after partial coverage unless completion rules explicit</li>
+<li><strong>Prompt injection via untrusted UI content</strong> -- design confirmation/consent policies for risky actions</li>
+<li><strong>Vision limitations</strong> -- approximate counting, no metadata processing, CAPTCHAs blocked</li>
+<li><strong>Long-context degradation</strong> -- sharp performance drop on some tasks in 256K-1M range</li>
+</ol>
+<p><strong>Mitigation patterns</strong>: confirmation at point of risk, explicit output contracts + "definition of done", lowest effective reasoning effort, isolated computer-use environment (sandbox browser/VM).</p>
+<h3 id="anti-patterns">Anti-Patterns<a class="headerlink" href="#anti-patterns" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>No schema validation</strong> -- relying on model output without JSON parsing/validation</li>
+<li><strong>Unbounded agent loops</strong> -- no step limit or timeout on multi-tool agents</li>
+<li><strong>No fallback plan</strong> -- single point of failure on OpenAI API</li>
+<li><strong>Ignoring cost</strong> -- using full GPT-5 for trivial tasks where nano suffices</li>
+<li><strong>Skipping evals</strong> -- no regression tests when changing prompts or models</li>
+<li><strong>Over-filtering</strong> -- overly strict moderation causing legitimate refusals</li>
+<li><strong>Blind context stuffing</strong> -- sending 272k tokens when RAG with targeted retrieval is more effective</li>
+<li><strong>No observability</strong> -- no logging, no metrics, no alerts</li>
+</ol>
+<h3 id="90-day-adoption-plan">90-Day Adoption Plan<a class="headerlink" href="#90-day-adoption-plan" title="Permanent link">&para;</a></h3>
+<h4 id="sprint-1-foundational-integration-days-1-30">Sprint 1: Foundational Integration (Days 1-30)<a class="headerlink" href="#sprint-1-foundational-integration-days-1-30" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Week 1</strong>: Identify use cases, get API access, update SDKs, team training</li>
+<li><strong>Week 1-2</strong>: Prototype structured outputs (strict mode), test function calling, benchmark latency vs GPT-4</li>
+<li><strong>Week 2</strong>: Logging/tracing setup, monitoring dashboards, vector store if RAG needed, compliance review</li>
+<li><strong>Week 3</strong>: Inventory all GPT usage, update prompts, config flags for GPT-4/5 toggle</li>
+<li><strong>Week 4</strong>: Internal QA, run eval suite (GPT-5 vs GPT-4), fix regressions</li>
+</ul>
+<h4 id="sprint-2-scale-out-beta-days-31-60">Sprint 2: Scale-Out &amp; Beta (Days 31-60)<a class="headerlink" href="#sprint-2-scale-out-beta-days-31-60" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Week 5</strong>: Canary release (5%), monitor dashboards, ensure fallback</li>
+<li><strong>Week 6</strong>: Analyze canary data, implement streaming/mini routing, deploy caching, load test</li>
+<li><strong>Week 7-8</strong>: Increase rollout 25% -&gt; 50% -&gt; 100%, monitor cost and support tickets</li>
+</ul>
+<h4 id="sprint-3-hardening-days-61-90">Sprint 3: Hardening (Days 61-90)<a class="headerlink" href="#sprint-3-hardening-days-61-90" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Week 9</strong>: Security/compliance audit, moderation log review</li>
+<li><strong>Week 10</strong>: Simulate failures, 2x peak load tests, auto-failover to GPT-4</li>
+<li><strong>Week 11-12</strong>: Pilot multimodal, add new tools, expose <code>verbosity</code>/<code>reasoning_effort</code> to users</li>
+<li><strong>End</strong>: Retrospective, document learnings, plan next 90 days</li>
+</ul>
+<h3 id="developer-integration-quick-start">Developer Integration Quick Start<a class="headerlink" href="#developer-integration-quick-start" title="Permanent link">&para;</a></h3>
+<h4 id="best-defaults">Best Defaults<a class="headerlink" href="#best-defaults" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Use the Responses API</strong> for agentic workflows -- better chain-of-thought handling, reduces reasoning tokens</li>
+<li><strong>Choose <code>reasoning.effort</code> by task</strong>: <code>none</code> for routing/extraction; <code>low/medium</code> for multi-step reasoning; <code>high/xhigh</code> only when evals show wins</li>
+<li><strong>Sampling controls require <code>effort=none</code></strong> -- otherwise control via output contracts</li>
+</ol>
+<h4 id="prompt-engineering">Prompt Engineering<a class="headerlink" href="#prompt-engineering" title="Permanent link">&para;</a></h4>
+<p>GPT-5.4 responds best to <strong>"contract-style" prompting</strong> -- treat as workflow executor.</p>
+<ul>
+<li>Clamp output length and format via output contracts</li>
+<li>Force persistence -- require completion until end state verified</li>
+<li>Tool preambles -- prompt model to explain why it's calling a tool (boosts accuracy)</li>
+</ul>
+<h4 id="sdks-operations">SDKs &amp; Operations<a class="headerlink" href="#sdks-operations" title="Permanent link">&para;</a></h4>
+<ul>
+<li>JS/TS, Python, .NET, Java, Go</li>
+<li>Rate-limit aware retries/backoff</li>
+<li>Background mode for Pro and tool-heavy workflows</li>
+<li>Snapshot pinning (<code>gpt-5.4-2026-03-05</code>) for regulated workflows</li>
+</ul>
+<h3 id="gpt-5-family-source-urls">GPT-5 Family Source URLs<a class="headerlink" href="#gpt-5-family-source-urls" title="Permanent link">&para;</a></h3>
+<h4 id="official-openai">Official (OpenAI)<a class="headerlink" href="#official-openai" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Launch post: https://openai.com/index/introducing-gpt-5-4/</li>
+<li>Model spec (5.4): https://developers.openai.com/api/docs/models/gpt-5.4</li>
+<li>Model spec (Pro): https://developers.openai.com/api/docs/models/gpt-5.4-pro</li>
+<li>System card: https://deploymentsafety.openai.com/gpt-5-4-thinking</li>
+<li>"Using GPT-5.4" guide: https://developers.openai.com/api/docs/guides/latest-model/</li>
+<li>Computer use guide: https://developers.openai.com/api/docs/guides/tools-computer-use</li>
+<li>Vision guide: https://developers.openai.com/api/docs/guides/images-vision/</li>
+<li>Pricing: https://developers.openai.com/api/docs/pricing</li>
+</ul>
+<h4 id="benchmark-papers">Benchmark Papers<a class="headerlink" href="#benchmark-papers" title="Permanent link">&para;</a></h4>
+<ul>
+<li>SWE-Bench Pro: https://arxiv.org/abs/2509.16941</li>
+<li>OSWorld: https://arxiv.org/abs/2404.07972</li>
+<li>MMMU-Pro: https://arxiv.org/abs/2409.02813</li>
+<li>GPQA: https://arxiv.org/abs/2311.12022</li>
+<li>FrontierMath: https://arxiv.org/abs/2411.04872</li>
+<li>Humanity's Last Exam: https://arxiv.org/abs/2501.14249</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

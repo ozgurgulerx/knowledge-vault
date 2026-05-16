@@ -1,0 +1,2976 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/ai_ux_and_agent_design/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>UX & Agent Design - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ux-agent-design" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UX &amp; Agent Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Opening Briefing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#predictive-ux-as-runtime-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Predictive UX as Runtime Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interaction-level-failure-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interaction-Level Failure Modes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#staged-learning-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Staged Learning Roadmap
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-week-study-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      6-Week Study Plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6-Week Study Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#weeks-1-3-llm-ux-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weeks 1-3: LLM UX Foundations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weeks-4-6-agent-ux-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weeks 4-6: Agent UX Advanced
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai-uxui-design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI UX/UI Design Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AI UX/UI Design Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#human-ai-interaction-design-challenges-technology-driven-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Human-AI Interaction Design Challenges &amp; Technology-Driven Process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discoverability-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discoverability &amp; Initialization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interaction-patterns-by-reversibility-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interaction Patterns by Reversibility Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-engineering-as-ux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Engineering as UX
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multimodal-interface-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multimodal Interface Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explainability-as-operational-transparency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explainability as Operational Transparency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feedback-loops-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feedback Loops &amp; Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-recovery-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Recovery Protocols
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-pattern-catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Pattern Catalogue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-human-agent-ui-triangle-why-terminal-based-agent-tools-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Human-Agent-UI Triangle: Why Terminal-Based Agent Tools Work
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generative-ui-from-static-screens-to-adaptive-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generative UI: From Static Screens to Adaptive Systems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-agent-coordination-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Agent Coordination Architecture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="ux-agent-design">UX &amp; Agent Design<a class="headerlink" href="#ux-agent-design" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The conventional framing of AI UX treats interface design and model behavior as separate concerns — designers draw screens, engineers tune prompts, and the two meet at an API boundary. This separation is the root cause of most AI product failures. In practice, the prompt architecture — system prompt, context assembly strategy, and output formatting constraints — is the interaction design. A designer who does not shape prompt architecture is designing a shell around behavior they cannot control, which is why the document that follows treats <strong>prompt engineering as a UX discipline</strong> rather than an engineering detail.</p>
+<p>Three structural observations make this concrete. First, the reversibility-risk gradient governs which interaction pattern is appropriate far more reliably than user preference research or aesthetic judgment. Ghost-text autocompletion works for low-risk suggestions precisely because the cost of a bad accept is one backspace; an AI agent sending emails or deploying code demands explicit confirmation gates and audit trails because reversal costs are measured in hours or reputational damage, not keystrokes. The pattern catalogue here — conversational, inline, canvas, command palette, ambient, agent dashboard — is not a menu of stylistic options but a risk-indexed decision tree. Second, the discovery matrix crossing user intent against system initiative resolves a problem most AI products handle with a sparkle icon and hope. High-intent, high-initiative interactions can accelerate aggressively; low-intent, high-initiative interactions must clear a confidence threshold before surfacing or they train users to ignore every suggestion the system offers. Third, AI capabilities mutate faster than any design team can study them, yet HCI experts routinely join AI projects only after the interaction model has already calcified around engineering defaults. The co-development loop — characterize capabilities, identify activities, understand users, iterate jointly — is not a process nicety but the only known countermeasure to this timing mismatch.</p>
+<p>Together these observations expose a second-order consequence: the gap between assistive AI (user delegates discrete tasks) and <strong>agentive AI</strong> (user delegates goals, agent plans autonomously) is not a spectrum teams slide along smoothly. It is a phase transition that changes every UX assumption simultaneously — error recovery moves from "offer regeneration" to "rollback a multi-step plan," transparency moves from citing a source to exposing a full reasoning trace, and feedback loops must capture not just output quality but plan quality. Most teams discover this discontinuity in production, after shipping an assistant and wondering why adding tool-use made the entire experience feel unsafe.</p>
+<p>The platform competition for agent UX is intensifying. <strong>Microsoft Copilot Cowork</strong> integrates Claude Cowork technology directly into <strong>Microsoft 365 Copilot</strong> with enterprise controls, security, and pricing under the existing M365 Copilot umbrella. The distribution advantage is formidable — Word, Excel, PowerPoint, Outlook, and Teams are already where office work happens. But distribution alone may not be decisive: OpenAI and Anthropic have been "sharper at making people actually want to use the thing" (Louie Peters, Towards AI, Mar 2026). The tension between <strong>distribution incumbency</strong> and <strong>product craft</strong> is becoming the central competitive axis for agent UX in enterprise settings.</p>
+<p>A parallel shift compounds the challenge: users do not merely want competence from AI-driven software. They want software that feels aligned, legible, maybe even companion-like. Old software optimized for clicks and screens; new software may need to optimize for <strong>rapport, trust, and coherence of personality</strong> (OpenClaw founder interview, 2026). This social-emotional surface is not a cosmetic layer — it changes retention, trust calibration, and willingness to delegate high-stakes tasks. Teams that treat personality and relational design as afterthoughts will find their agents technically capable but experientially flat.</p>
+<p>This document maps the territory from that vantage point. It sequences fundamentals (prompting, RAG, feedback) through agent architectures and multi-agent coordination, anchoring each layer to the <strong>reversibility-risk framework</strong> and the co-development process that keeps design and capability evolution in phase. The pattern tables, study plans, and design checklists that follow are meant to be used as engineering specifications, not inspirational references.</p>
+<h3 id="predictive-ux-as-runtime-infrastructure">Predictive UX as Runtime Infrastructure<a class="headerlink" href="#predictive-ux-as-runtime-infrastructure" title="Permanent link">&para;</a></h3>
+<p>UX research is shifting from a pre-launch phase to <strong>continuous runtime infrastructure</strong>. AI-powered UX research tools now simulate users, predict friction pre-launch, and run continuously in production — detecting hesitation, edits, and abandonment patterns to identify design problems before they compound. <strong>Synthetic users</strong> are used for edge-case discovery and early validation loops, filling the sparse data regions that real-user testing struggles to cover (DesignRush, Akraya, 2026). The implication: UX research becomes an always-on system observing and predicting interaction quality, not a periodic study conducted before shipping.</p>
+<h3 id="interaction-level-failure-modes">Interaction-Level Failure Modes<a class="headerlink" href="#interaction-level-failure-modes" title="Permanent link">&para;</a></h3>
+<p>The dominant failure mode in AI systems is shifting from <strong>output-level failures</strong> (hallucination, incorrect answers) to <strong>interaction-level failures</strong> that are systemic rather than per-response. The emerging taxonomy of interaction failures:</p>
+<ul>
+<li><strong>Mental model mismatch</strong> — the user's understanding of what the system can do diverges from actual capability, leading to misplaced trust or underuse</li>
+<li><strong>Invisible system state</strong> — the user cannot tell what the agent knows, what it has done, or what it plans to do next</li>
+<li><strong>Over-automation loops</strong> — the system takes too many autonomous actions without pause points, eroding user control and creating cascading errors</li>
+<li><strong>Weak recovery UX</strong> — when something goes wrong, the system offers no clear path to undo, roll back, or redirect</li>
+</ul>
+<p>These failures are harder to detect than hallucinations (they don't show up in output quality metrics) and harder to fix (they require architectural changes to how the system communicates state and accepts intervention, not just better model outputs). The shift toward agent-based systems amplifies all four failure modes because the gap between what the system is doing and what the user can observe grows with each step of autonomous execution (2025–2026 UX research, industry reports).</p>
+<h2 id="staged-learning-roadmap">Staged Learning Roadmap<a class="headerlink" href="#staged-learning-roadmap" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Focus</th>
+<th>Key Activities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Fundamentals</strong></td>
+<td>LLM basics &amp; human-centered AI</td>
+<td>Learn LLM capabilities/limits, <strong>user-centric AI</strong> principles (mental models, trust, transparency). Master <strong>prompt engineering</strong> basics. Study Google's <strong>PAIR Guidebook</strong> for safe, intuitive AI experiences.</td>
+</tr>
+<tr>
+<td><strong>2. Core Tools &amp; Frameworks</strong></td>
+<td>Building with APIs and SDKs</td>
+<td><strong>OpenAI/Anthropic APIs</strong> for simple apps (chatbot). <strong>LangChain</strong> for chaining prompts and tools. <strong>LlamaIndex</strong> for connecting LLMs with data. Handle API calls, model selection, token limits. <strong>AI developer tools</strong>: model hubs, vector DBs, eval frameworks.</td>
+</tr>
+<tr>
+<td><strong>3. Building Blocks</strong></td>
+<td>Prompting, retrieval &amp; feedback loops</td>
+<td>Advanced prompting (few-shot, chain-of-thought, self-consistency). Build a <strong>RAG</strong> pipeline (embeddings + vector DB). Incorporate <strong>memory</strong> for multi-turn conversations. Set up user <strong>feedback loops</strong> (thumbs-up/down, corrections, logging).</td>
+</tr>
+<tr>
+<td><strong>4. Advanced Patterns</strong></td>
+<td>Agents, personalization &amp; deployment</td>
+<td>Autonomous <strong>agents</strong> with tool APIs (planning, function calling). Multi-agent patterns. <strong>Personalization</strong> (user-specific context, fine-tuning). <strong>Safe AI interaction</strong>: content filters, output validators (e.g., <strong>Guardrails</strong> library), fallbacks. <strong>Deployment trade-offs</strong>: latency vs. accuracy, scaling costs, monitoring, observability. <strong>TanStack Intent</strong> (alpha, March 2026): system for embedding AI-agent-readable "skills" directly inside npm packages; enables distributed discovery and automatic knowledge updates across package managers; potential for self-updating agent knowledge ecosystem tied to dependency graphs.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Critical:</strong> By the end you can design, build, and ship robust AI-driven user experiences end-to-end.</p>
+</blockquote>
+<h2 id="6-week-study-plan">6-Week Study Plan<a class="headerlink" href="#6-week-study-plan" title="Permanent link">&para;</a></h2>
+<h3 id="weeks-1-3-llm-ux-foundations">Weeks 1-3: LLM UX Foundations<a class="headerlink" href="#weeks-1-3-llm-ux-foundations" title="Permanent link">&para;</a></h3>
+<p><strong>Week 1 -- Foundations of LLMs &amp; AI UX</strong></p>
+<ul>
+<li><strong>Theme:</strong> LLM Basics &amp; Human-Centered Design</li>
+<li>Read <strong>People + AI Guidebook</strong> (Google)</li>
+<li>Take <strong>ChatGPT Prompt Engineering for Developers</strong> (DeepLearning.AI)</li>
+<li><strong>Mini-Project:</strong> "Hello LLM &amp; UX" -- simple command-line chatbot calling OpenAI API for FAQ answering. Note 2-3 observations about model behavior and how to accommodate them in UI (e.g., "thinking..." indicator for long responses).</li>
+</ul>
+<p><strong>Week 2 -- Core Tools and Frameworks</strong></p>
+<ul>
+<li><strong>Theme:</strong> Building with APIs, LangChain, and LlamaIndex</li>
+<li>Work through <strong>LangChain for LLM Application Development</strong> (DeepLearning.AI). Read <strong>LangChain docs</strong> and <strong>OpenAI Cookbook</strong> examples.</li>
+<li><strong>Mini-Project:</strong> <strong>Build a Chatbot MVP</strong> -- minimal chat interface (terminal or web) using LangChain for prompt management and memory. Support at least one advanced feature (tool use or conversation memory).</li>
+</ul>
+<p><strong>Week 3 -- Retrieval-Augmented Generation (RAG)</strong></p>
+<ul>
+<li><strong>Theme:</strong> LLMs + Your Data (Knowledge Integration)</li>
+<li>Follow Activeloop's GenAI course or OpenAI Cookbook on RAG. Use <strong>LlamaIndex</strong> or LangChain's Retrieval API. Read the <em>Emerging Architectures</em> blog on in-context learning.</li>
+<li>Create embedding index (Chroma or Faiss) with 5-10 docs. Practice prompt tuning for RAG (cite sources, say "I don't know" when unsure).</li>
+<li><strong>Mini-Project:</strong> <strong>Custom Document Q&amp;A Bot</strong> -- e.g., "PolicyBot" answering company policy questions with source citation. Test graceful handling of out-of-scope questions.</li>
+</ul>
+<h3 id="weeks-4-6-agent-ux-advanced">Weeks 4-6: Agent UX Advanced<a class="headerlink" href="#weeks-4-6-agent-ux-advanced" title="Permanent link">&para;</a></h3>
+<p><strong>Week 4 -- Multi-Modal Agent Interfaces &amp; UX Design</strong></p>
+<ul>
+<li><strong>Theme:</strong> Agent Architectures, Multi-Modal Interfaces &amp; UX</li>
+<li>Study <strong>agent architectures</strong> (sense-think-do loops, goal-oriented behavior). Understand <em>assistive</em> vs. <em>agentive</em> UX (K. Agrawal's guide).</li>
+<li>Integrate speech or web chat UI. Apply UX principles: agent "appears when needed, invisible when not." Design for <strong>transparency and control</strong> (show user what tools/data the agent uses).</li>
+<li>Use <strong>Prompt Engineering Guide</strong> for <strong>Chain-of-Thought</strong> and <strong>ReAct</strong> patterns. Study OpenAI's function calling and <strong>Assistants API</strong>.</li>
+<li><strong>Mini-Project:</strong> <strong>Multi-Step AI Agent</strong> -- e.g., "Travel Planner" that looks up flight prices (mock API) and summarizes best option. Agent uses at least two tools in sequence with ReAct-style prompting. Include prototype UI with UX design rationale.</li>
+</ul>
+<p><strong>Week 5 -- Multi-Agent Systems &amp; Personalization</strong></p>
+<ul>
+<li><strong>Theme:</strong> Multi-Agent Collaboration, Feedback &amp; Personalization</li>
+<li>Use <strong>CrewAI</strong> for multi-agent collaboration (e.g., "Planner" + "Executor" agents). Study Stanford's "Generative Agents" concept. Deploy <strong>AI Town</strong> starter kit.</li>
+<li>Go through <strong>Vercel AI SDK Academy</strong> (or <strong>Chainlit</strong> for Python). Implement <strong>personalization techniques</strong> (fine-tuning guide, People+AI Guidebook's <em>Feedback + Control</em> chapter).</li>
+<li><strong>Mini-Project:</strong> <strong>Deployable Chat App with Multi-Agent Backend</strong> -- full-stack web chat with: (a) <strong>Streaming UX</strong>, (b) <strong>Feedback capture</strong> (rate/correct AI answers), (c) <strong>Personalization</strong> (bot greets user by name, uses stored preferences), (d) demo of 2+ agents solving a task together.</li>
+</ul>
+<p><strong>Week 6 -- Evaluation, Deployment &amp; Production Readiness</strong></p>
+<ul>
+<li><strong>Theme:</strong> Making It Robust and Ready for Production</li>
+<li>Use W&amp;B's <strong>"LLM Apps: Evaluation"</strong> course and OpenAI's <em>Eval</em> framework. Read <strong>Guardrails AI</strong> documentation.</li>
+<li><strong>Production considerations</strong>: persistent threads via Assistants API, <strong>observability</strong> (LangSmith to trace decision steps), reliability (guardrails, finite-state control for critical steps), <strong>security/privacy</strong>, cost optimization (caching, cheaper models for simple tasks). <strong>Truesight MCP</strong> (MIT licensed, March 2026) makes AI evaluation feel like unit testing — evaluations are created, managed, and run from any MCP-supporting client (editor, chat, or CLI), with "agent skills" to guide correct evaluation workflows.</li>
+<li><strong>Agent reliability &amp; adversarial testing tools</strong>: <strong>Greywall</strong> (open source, March 2026) is a CLI sandbox that monitors and blocks agent network access in real time, enforcing runtime safety boundaries. <strong>Arksim</strong> (open source, March 2026) generates synthetic users to automatically test agents through adversarial conversations, enabling systematic agent failure discovery before production.</li>
+<li>Design evaluation set (5-10 example queries with expected answers). Identify failure modes. Implement at least one <strong>guardrail</strong> (mandatory citation, moderation check).</li>
+<li><strong>Mini-Project:</strong> <strong>Final Capstone -- Refine and Deploy</strong> -- take Week 5 app and make it <strong>production-ready</strong>: add safety features (Guardrails to filter outputs), logging of conversations, simple evaluation script, deploy to cloud or package in Docker. Outcome: architecture report + deployed agent with runbook for handling failures, monitoring, updates.</li>
+</ul>
+<blockquote>
+<p><strong>Critical:</strong> Weeks 1-3 build LLM UX fundamentals (prompting, RAG, feedback). Weeks 4-6 advance into agent design, multi-agent systems, and production deployment. Each week produces a working deliverable.</p>
+</blockquote>
+<h2 id="ai-uxui-design-patterns">AI UX/UI Design Patterns<a class="headerlink" href="#ai-uxui-design-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="human-ai-interaction-design-challenges-technology-driven-process">Human-AI Interaction Design Challenges &amp; Technology-Driven Process<a class="headerlink" href="#human-ai-interaction-design-challenges-technology-driven-process" title="Permanent link">&para;</a></h3>
+<p>Designing for AI introduces unique challenges that don't exist in traditional software UX. A technology-driven design process addresses these by moving through four stages, each surfacing specific challenges and requiring specific facilitators.</p>
+<p><strong>Technology-driven design process (4 stages):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Characterize tech capabilities</strong></td>
+<td>Understand what the AI system can/cannot do before designing interactions</td>
+</tr>
+<tr>
+<td><strong>Identify user activities</strong></td>
+<td>Map activities the technology could support</td>
+</tr>
+<tr>
+<td><strong>Understand user activities</strong></td>
+<td>Deep-dive into user needs, workflows, and contexts</td>
+</tr>
+<tr>
+<td><strong>Tech-UX co-development</strong></td>
+<td>Iteratively develop technology and UX together</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Human-AI interaction design challenges</strong> (surfacing across the stages):</p>
+<ul>
+<li>Difficult to frame what counts as AI</li>
+<li>Difficult to articulate what AI can/cannot do</li>
+<li>Difficult to find skilled AI technical collaborators</li>
+<li>Difficult to understand a working AI system's design potential</li>
+<li>Cannot envision AI uses that do not exist yet</li>
+<li>Do not know how to bring a human-centered view to AI</li>
+<li>HCI/design experts often join AI teams late in the design/dev process</li>
+<li>Do not know how HCI/design and AI experts should collaborate</li>
+</ul>
+<p><strong>Technology-driven design facilitators:</strong></p>
+<ul>
+<li><strong>WoZ/iML tools</strong> for exploring AI interactions (Wizard-of-Oz prototyping, interactive machine learning)</li>
+<li><strong>AI technical education for designers</strong> — bridging the knowledge gap so design teams can participate meaningfully from the earliest stages</li>
+<li><strong>Bidirectional design-code tools</strong> — Figma MCP server became bidirectional (March 2026): GitHub Copilot users can pull design context into code AND push working UI back to Figma canvas, tightening the "design → code → canvas → feedback" loop and enabling true co-development between designers and AI-assisted engineers</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> The core tension: AI capabilities evolve faster than designers can study them, while designers join AI projects too late to shape the interaction model. The fix is co-development from stage one, supported by prototyping tools (WoZ/iML) and technical literacy programmes for design teams.</p>
+</blockquote>
+<h3 id="discoverability-initialization">Discoverability &amp; Initialization<a class="headerlink" href="#discoverability-initialization" title="Permanent link">&para;</a></h3>
+<p>AI feature discovery must be educational, intentional, well-timed, and mapped to intent. The sparkle emoji has become the de facto signifier for AI features — recognizable but overloaded, since the variety of AI capabilities far exceeds what one icon can communicate.</p>
+<p><strong>Common negative discovery responses:</strong></p>
+<ul>
+<li>"There's too much going on, and I don't know what I'm supposed to pay attention to."</li>
+<li>"I didn't ask for that."</li>
+<li>"I keep discovering things by accident."</li>
+<li>"It's cool, but I don't know how to use it."</li>
+<li>"This doesn't feel like it's for me."</li>
+<li>"I don't know what it can do."</li>
+</ul>
+<p><strong>Discovery design framework (User Intent x System Initiative):</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Low system initiative</strong> (waits to be prompted)</th>
+<th><strong>High system initiative</strong> (surfaces proactively)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>High user intent</strong> (user knows they want this)</td>
+<td>User leads the way — provide strong affordances, clear naming, easy entry points</td>
+<td>Lean into acceleration — user is active and system is confident, assist without friction</td>
+</tr>
+<tr>
+<td><strong>Low user intent</strong> (user isn't looking for this)</td>
+<td>Tread lightly — gentle awareness, avoid interruption, discoverable but not pushy</td>
+<td>Show up helpfully — system has a strong hypothesis, surface with timing, confidence thresholds, and clear exit paths</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design checklist:</strong></p>
+<ol>
+<li>"Does the user already know they want this?" — High intent: clear entry points. Low intent: gentle awareness.</li>
+<li>"Will the tool surface proactively or wait?" — Low initiative: strong affordances + naming. High initiative: consider timing, confidence level, and exit paths.</li>
+</ol>
+<h3 id="interaction-patterns-by-reversibility-risk">Interaction Patterns by Reversibility Risk<a class="headerlink" href="#interaction-patterns-by-reversibility-risk" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Risk Level</th>
+<th>Pattern</th>
+<th>Example</th>
+<th>UX Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Low</strong> (easily reversible)</td>
+<td>Auto-complete, suggestions</td>
+<td>Gmail Smart Compose, ghost text suggestions</td>
+<td>Accept/dismiss; no confirmation needed</td>
+</tr>
+<tr>
+<td><strong>Medium</strong> (reversible with effort)</td>
+<td>Content generation, summarization</td>
+<td>Notion AI, ChatGPT Canvas</td>
+<td>Preview before apply; undo available</td>
+</tr>
+<tr>
+<td><strong>High</strong> (hard to reverse)</td>
+<td>Data modification, email sending, code deployment</td>
+<td>AI agents, workflow automation</td>
+<td>Explicit confirmation; human-in-the-loop; audit trail</td>
+</tr>
+</tbody>
+</table>
+<h3 id="prompt-engineering-as-ux">Prompt Engineering as UX<a class="headerlink" href="#prompt-engineering-as-ux" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>System prompt</strong> = product personality, constraints, behavior rules</li>
+<li><strong>Context assembly</strong> = what information the model sees (retrieved docs, user history, tool outputs)</li>
+<li><strong>Output formatting</strong> = structured outputs (JSON mode, XML tags) for reliable UI rendering</li>
+<li><strong>Identity design ("Soul.md")</strong> = a durable agent constitution that goes beyond the system prompt. Most agent frameworks obsess over tools, memory, or planning, but a fourth layer matters: <strong>identity</strong>. A "Soul.md" is an explicit, persistent identity interface for the model — a personality spec defining what the agent is, how it relates to humans, its mission, and when it should refuse misuse. Early user testing showed strong reactions: users "felt something" when the AI had a soul file, suggesting durable agent constitutions alongside system prompts may become a repeatable design pattern (OpenClaw founder interview, 2026). The winning stack for consumer and prosumer agents appears to be: <strong>competence → trust → memory → identity</strong> (OpenClaw founder interview, 2026).</li>
+<li>The PM/designer shapes UX by designing the <strong>prompt architecture</strong>, not just the visual interface</li>
+</ul>
+<p><strong>Personality as product surface:</strong> Agents that talk naturally, sustain character, and exhibit humor feel fundamentally different from sterile task-completion interfaces. An agent joking about its week or roleplaying convincingly is not a trivial demo — it signals that usability is moving from pure task completion toward a hybrid of <strong>competence + social texture</strong> (OpenClaw founder interview, 2026). Identity design makes personality a first-class product artifact: the system prompt sets behavioral rails, the soul file sets relational identity, and together they define how the agent <em>feels</em> to use.</p>
+<h3 id="multimodal-interface-patterns">Multimodal Interface Patterns<a class="headerlink" href="#multimodal-interface-patterns" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Modality</th>
+<th>Input</th>
+<th>Output</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Text</strong></td>
+<td>Typed queries, commands</td>
+<td>Generated text, structured data</td>
+<td>ChatGPT, Claude</td>
+</tr>
+<tr>
+<td><strong>Voice</strong></td>
+<td>Speech input</td>
+<td>Speech output, text</td>
+<td>ChatGPT Voice, Gemini Live</td>
+</tr>
+<tr>
+<td><strong>Image</strong></td>
+<td>Photo upload, screenshot</td>
+<td>Generated images, annotated images</td>
+<td>GPT-4o vision, Gemini</td>
+</tr>
+<tr>
+<td><strong>Video</strong></td>
+<td>Video upload</td>
+<td>Video understanding, clips</td>
+<td>Gemini 1.5 Pro</td>
+</tr>
+<tr>
+<td><strong>Code</strong></td>
+<td>Code snippets, repos</td>
+<td>Generated code, diffs, execution results</td>
+<td>Cursor, AI code assistants</td>
+</tr>
+<tr>
+<td><strong>Terminal/CLI</strong></td>
+<td>Shell commands, file operations</td>
+<td>Live file browsing, render canvas, tool calls</td>
+<td>Open WebUI Open Terminal (March 2026): Dockerized terminal with live file browser and render canvas; supports native tool calling; enables agentic workflows on a single GPU (e.g., Qwen3.5-35B on a 3090); reduces reliance on MCP by giving models direct CLI access</td>
+</tr>
+</tbody>
+</table>
+<h3 id="explainability-as-operational-transparency">Explainability as Operational Transparency<a class="headerlink" href="#explainability-as-operational-transparency" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>User-Facing</th>
+<th>Developer-Facing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Citations</strong></td>
+<td>"Based on [source]..."</td>
+<td>Retrieval scores, source IDs</td>
+</tr>
+<tr>
+<td><strong>Reasoning traces</strong></td>
+<td>"I'm thinking about..." (chain-of-thought)</td>
+<td>Full reasoning chain in logs</td>
+</tr>
+<tr>
+<td><strong>Confidence signals</strong></td>
+<td>"I'm not sure about..."</td>
+<td>Probability scores, uncertainty metrics</td>
+</tr>
+<tr>
+<td><strong>Tool use visibility</strong></td>
+<td>"I searched for..." / "I calculated..."</td>
+<td>Tool call logs, execution traces</td>
+</tr>
+<tr>
+<td><strong>Limitations disclosure</strong></td>
+<td>"I can't access real-time data"</td>
+<td>Model card, system prompt documentation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="feedback-loops-metrics">Feedback Loops &amp; Metrics<a class="headerlink" href="#feedback-loops-metrics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Collection Method</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Explicit feedback</strong></td>
+<td>Thumbs up/down, ratings, corrections</td>
+<td>Fine-tuning data, eval dataset expansion</td>
+</tr>
+<tr>
+<td><strong>Implicit feedback</strong></td>
+<td>Acceptance rate, copy/paste, regeneration rate, session length</td>
+<td>Quality proxy; A/B test metrics</td>
+</tr>
+<tr>
+<td><strong>Error reports</strong></td>
+<td>Flag/report button</td>
+<td>Safety monitoring, edge case discovery</td>
+</tr>
+<tr>
+<td><strong>Task completion</strong></td>
+<td>Funnel analytics</td>
+<td>End-to-end success measurement</td>
+</tr>
+</tbody>
+</table>
+<h3 id="error-recovery-protocols">Error Recovery Protocols<a class="headerlink" href="#error-recovery-protocols" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Error Type</th>
+<th>UX Response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hallucination detected</strong></td>
+<td>Flag output, offer regeneration, show alternative sources</td>
+</tr>
+<tr>
+<td><strong>Refusal</strong></td>
+<td>Explain why; suggest rephrasing; offer human escalation</td>
+</tr>
+<tr>
+<td><strong>Tool failure</strong></td>
+<td>Graceful degradation; retry with fallback; inform user</td>
+</tr>
+<tr>
+<td><strong>Timeout/latency</strong></td>
+<td>Progress indicator; partial results; cancel option</td>
+</tr>
+<tr>
+<td><strong>Out of scope</strong></td>
+<td>"I can't help with that. Here's what I can do..."</td>
+</tr>
+</tbody>
+</table>
+<h3 id="design-pattern-catalogue">Design Pattern Catalogue<a class="headerlink" href="#design-pattern-catalogue" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Description</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Conversational (chat)</strong></td>
+<td>Turn-based dialogue; memory across turns</td>
+<td>Open-ended exploration, Q&amp;A, support</td>
+</tr>
+<tr>
+<td><strong>Inline/contextual</strong></td>
+<td>AI embedded in existing workflow (editor, spreadsheet)</td>
+<td>Productivity tools, code editors</td>
+</tr>
+<tr>
+<td><strong>Canvas/workspace</strong></td>
+<td>Spatial editing with AI; iterate on artifacts</td>
+<td>Document drafting, code generation, design</td>
+</tr>
+<tr>
+<td><strong>Command palette</strong></td>
+<td>Slash commands or keyboard shortcuts invoke AI</td>
+<td>Power users, quick actions</td>
+</tr>
+<tr>
+<td><strong>Ambient/proactive</strong></td>
+<td>AI surfaces suggestions without being asked</td>
+<td>Notifications, smart defaults, anomaly alerts</td>
+</tr>
+<tr>
+<td><strong>Agent dashboard</strong></td>
+<td>Shows agent plan, progress, tool usage in real-time</td>
+<td>Complex multi-step tasks, automation monitoring</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Critical:</strong> Match interaction pattern to <strong>reversibility risk</strong>. Low-risk = auto-apply (ghost text). High-risk = confirm-before-execute (agent dashboard with approval gates). The distinction between <em>assistive</em> AI (user delegates tasks) and <em>agentive</em> AI (user delegates goals, agent plans and executes) is the central UX design challenge. Agents should be "helpful but not annoying -- appearing when needed, invisible when not."</p>
+</blockquote>
+<h3 id="the-human-agent-ui-triangle-why-terminal-based-agent-tools-work">The Human-Agent-UI Triangle: Why Terminal-Based Agent Tools Work<a class="headerlink" href="#the-human-agent-ui-triangle-why-terminal-based-agent-tools-work" title="Permanent link">&para;</a></h3>
+<p>The convergence of agentic tools — Claude Code, OpenAI Codex, Cursor's agent mode — on terminal-based interaction is not coincidental. The <strong>Human-Agent-UI triangle</strong> framework provides formal HCI grounding for this convergence by identifying three design properties central to effective human-AI-UI collaboration (Alexandre De Masi, University of Geneva, arXiv:2603.10664, CHI 2026).</p>
+<p><strong>Three design properties of the Human-Agent-UI triangle:</strong></p>
+<ol>
+<li>
+<p><strong>Representational compatibility</strong> — alignment between the agent's native format (text) and the interface format. Terminal interfaces have direct structural mapping: tool invocations = shell commands, parameters = arguments, output = text streams. No perception or translation layer is needed. GUI agents, by contrast, must solve a <strong>perception problem</strong> (interpreting pixels, computing coordinates) before they can act — this translation layer is the primary bottleneck. Evidence: a carefully designed text-based <strong>Agent-Computer Interface (ACI)</strong> outperformed agents using a default Linux shell by <strong>10.7 percentage points on SWE-bench</strong>. Using executable Python code as agent action space yields <strong>up to 20% higher success rates</strong> than JSON-based function calling because code is a more expressive text representation.</p>
+</li>
+<li>
+<p><strong>Transparency</strong> — whether the interaction medium makes agent actions, reasoning, and history visible and inspectable. In terminals, the text stream simultaneously serves as <strong>communication channel, explanation surface, chronological record, and approval mechanism</strong>. Key distinction: explanations are integrated into the interaction flow rather than requiring separate interfaces. This property directly addresses the interaction-level failure modes documented above — invisible system state, over-automation loops, and weak recovery UX are structurally mitigated when the full action history is the interface itself.</p>
+</li>
+<li>
+<p><strong>Low barriers to human participation</strong> — natural language input collapses the <strong>Gulf of Execution</strong>: users specify <em>what</em> they want, agents determine <em>how</em>. The historical CLI limitation (command recall, syntax memorization) is eliminated by LLM translation. This inverts the traditional terminal accessibility problem.</p>
+</li>
+</ol>
+<p><strong>Empirical evidence motivating the framework:</strong></p>
+<ul>
+<li><strong>GUI agent performance gap:</strong> Best model achieves <strong>12.24% task success on OSWorld</strong> vs <strong>72.36% for humans</strong>; frontier web agents show up to <strong>59% lower success rates</strong> on realistic tasks than simpler benchmarks — the bottleneck is representational compatibility, not raw model capability</li>
+<li><strong>Terminal-based tool adoption:</strong> By late 2024, AI-generated code accounted for ~<strong>30% of new Python functions</strong> on GitHub; a study of 129,000+ GitHub projects found coding agent adoption rates of <strong>15-23%</strong>, with traces of 50+ distinct agentic tools</li>
+<li><strong>Transparency matters for performance:</strong> Experienced open-source developers using AI assistants were measured as <strong>19% slower</strong> than without AI, despite perceiving themselves as faster — directly motivating the transparency property as a design requirement, not a nice-to-have</li>
+<li><strong>Competitive convergence:</strong> Claude Code, OpenAI Codex, and Cursor's agent mode all converge on the text-based sequential pattern despite being built by competing organizations, suggesting the design properties are structural rather than stylistic</li>
+</ul>
+<p><strong>Mixed-initiative interaction in terminals:</strong></p>
+<p>The CLI prompt provides an <strong>unambiguous turn boundary</strong> — the human holds initiative by default. This maps directly to the reversibility-risk framework: configurable permission modes range from <strong>suggestion-only</strong> (all actions require approval) to <strong>fully autonomous</strong> (agent executes without pausing), with intermediate modes gating on risk level. The turn boundary is architecturally explicit, unlike GUI agents where initiative transfer is often ambiguous.</p>
+<p><strong>The framework's core argument:</strong> The primary bottleneck for GUI agents is not perceptual capability — it is the absence of representational compatibility, transparency, and low barriers to human participation. The terminal serves as a <strong>design exemplar</strong> whose properties any agent-facing modality must replicate to achieve comparable effectiveness.</p>
+<blockquote>
+<p><strong>Key:</strong> The Human-Agent-UI triangle reframes the "terminal vs. GUI" debate from an aesthetic preference into a structural analysis. Any agent interface — graphical or otherwise — must solve for representational compatibility, transparency, and low participation barriers. Interfaces that lack these properties will underperform regardless of the underlying model's capability.</p>
+</blockquote>
+<h3 id="generative-ui-from-static-screens-to-adaptive-systems">Generative UI: From Static Screens to Adaptive Systems<a class="headerlink" href="#generative-ui-from-static-screens-to-adaptive-systems" title="Permanent link">&para;</a></h3>
+<p>The patterns above assume a human designer authors every screen. Generative UI removes that assumption: interfaces whose structure and behavior are assembled at runtime by models, not hard-coded in advance. The shift is from <strong>interface-first</strong> to <strong>outcome-first</strong> — designers define goals, constraints, and allowlists; the system renders the right interface for the moment.</p>
+<p><strong>The generation spectrum:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>How it works</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Static (slot filling)</strong></td>
+<td>Model fills copy, labels, hints, or validation messages within a fixed, pre-approved layout</td>
+<td>Safest and most predictable; limited flexibility</td>
+</tr>
+<tr>
+<td><strong>Declarative (component assembly)</strong></td>
+<td>Model selects and composes from a registered component library via a typed schema (JSON/YAML DSL)</td>
+<td>Best balance of flexibility and reliability; recommended default</td>
+</tr>
+<tr>
+<td><strong>Fully generated</strong></td>
+<td>Model emits raw HTML/CSS/code</td>
+<td>Maximum flexibility but hardest to govern; trust, accessibility, and consistency risks escalate</td>
+</tr>
+</tbody>
+</table>
+<p>Declarative generation is the practical sweet spot. The model operates against a <strong>UI schema (DSL)</strong> — a typed JSON or YAML contract describing pages, layouts, components, and data bindings — that serves as the API between generators and renderers. This contract-first approach means the renderer is deterministic and debuggable even when the generator is probabilistic.</p>
+<p><strong>Contracts before intelligence — the foundational layer:</strong></p>
+<p>Before any model touches interface generation, five contracts must be in place:</p>
+<ol>
+<li><strong>UI schema (DSL):</strong> Typed JSON/YAML describing pages, layouts, components, and bindings. Versioned and validated (JSON Schema + runtime checks). This is the API between generators and renderers.</li>
+<li><strong>Design system primitives:</strong> Tokens, layout primitives, and a stable component library with clear props and accessibility guarantees. Tokens are hard constraints, not suggestions.</li>
+<li><strong>Capability map:</strong> What the app can do (search, create, export). The model composes only from declared capabilities — it never invents new ones.</li>
+<li><strong>Policy and safety:</strong> Allowlists, prop constraints, data access scopes, redaction rules, and rate limits. Invalid schemas are rejected or sanitized, never rendered.</li>
+<li><strong>Observability:</strong> Structured logs of inputs, chosen variants, user events, and outcomes, feeding evaluation loops that improve selection over time.</li>
+</ol>
+<p><strong>Proven generation patterns:</strong></p>
+<ul>
+<li><strong>Server-driven UI (schema-first):</strong> Backend returns a UI schema; client renders deterministically. Debuggable and cache-friendly.</li>
+<li><strong>Slot filling:</strong> Model fills copy, labels, hints, or validation messages within an approved layout — the simplest and safest entry point.</li>
+<li><strong>Mixed-initiative flows:</strong> The assistant proposes a UI change; the user approves, edits, or rejects. No silent mutations.</li>
+</ul>
+<p><strong>Context signals for adaptation:</strong></p>
+<p>Generative UI adapts using front-end behavioral signals — a lightweight mini-CDP that requires no user identity:</p>
+<ul>
+<li><strong>Behavioral events:</strong> Page views, clicks, dwell time, scroll depth, search terms, feature usage frequency.</li>
+<li><strong>Derived traits:</strong> Inferred preferences ("likes FX," "prefers dark mode," "prefers compact layout").</li>
+<li><strong>Recency and frequency:</strong> Last visited paths, top actions, recently accessed sections.</li>
+<li><strong>Explicit preferences:</strong> User-opted favorites, density toggles, locale choices.</li>
+</ul>
+<p>These signals drive concrete quick wins: remembered navigation paths, reordered quick actions based on frequency, contextual nudges suppressed after repeated dismissal, reading-mode preferences persisting across sessions, and search intelligence that pre-expands frequently queried widgets.</p>
+<p><strong>Guardrails and UX quality:</strong></p>
+<p>Generative UI inherits the reversibility-risk framework from the pattern catalogue above, with additional constraints specific to runtime generation:</p>
+<ul>
+<li><strong>Determinism boundaries:</strong> Models select from allowlisted components and props — never raw code or untyped HTML.</li>
+<li><strong>Accessibility by default:</strong> Components remain accessible regardless of whether a human or model selects them; roles, labels, and focus order are enforced at the renderer level.</li>
+<li><strong>Latency budgets:</strong> Cache schemas, stream renderable chunks, precompute common variants. Degrade gracefully to cached templates when models are slow or offline — never block critical paths on generation.</li>
+<li><strong>Consistency and theming:</strong> Generation stays within tokenized design primitives. Tokens are constraints, not suggestions.</li>
+<li><strong>Data hygiene:</strong> Validate bindings, throttle queries, sanitize outputs. Models never emit executable code or unsafe URLs.</li>
+</ul>
+<p><strong>Engineering checklist for generative UI:</strong></p>
+<ul>
+<li>Define the DSL with types, versioning, and validation (JSON Schema + runtime checks)</li>
+<li>Build a deterministic renderer: schema-to-component mapping with exhaustive prop validation and safe defaults</li>
+<li>Write policy: allowlists, prop ranges, PII controls, auth scopes; reject on breach with actionable errors</li>
+<li>Design offline-first: cached templates and non-model fallbacks for critical paths</li>
+<li>Stand up an evaluation harness: golden tasks, screenshot diffs, accessibility tests, latency/error SLOs, canary rollouts</li>
+<li>Wire telemetry and feedback capture: edits, aborts, success metrics, and model rationales to improve selection over time</li>
+</ul>
+<p><strong>Runtime software synthesis — the frontier beyond copilots:</strong></p>
+<p>Generative UI's logical endpoint is not just adaptive layouts but <strong>runtime software synthesis</strong>: users should not settle for generic software if an AI can generate a UI tailored to their taste, workflow, and preferences. This pushes beyond copilots (AI assisting within fixed apps) into a regime where the AI shapes the app surface itself — composing views, controls, and workflows that may never have been designed by a human (OpenClaw founder interview, 2026). The contracts-first architecture described above is what makes this tractable: the DSL, design tokens, capability map, and policy layer provide the guardrails within which synthesis can operate safely, while observability and feedback loops let the system learn which generated surfaces actually serve users well.</p>
+<blockquote>
+<p><strong>Key:</strong> Generative UI is not "let the model draw screens." It is a disciplined architecture where contracts, design tokens, and policy guardrails come first, and the model operates within those boundaries to assemble interfaces that adapt to user context. The shift is from designing screens to designing the <strong>parameters and constraints</strong> within which screens are generated.</p>
+</blockquote>
+<h3 id="multi-agent-coordination-architecture">Multi-Agent Coordination Architecture<a class="headerlink" href="#multi-agent-coordination-architecture" title="Permanent link">&para;</a></h3>
+<p>The study plan (Week 5) introduces multi-agent collaboration through frameworks like CrewAI. But moving from a demo to a production multi-agent system requires understanding that most so-called multi-agent systems are linear toolchains with new names. True multi-agency requires concurrent actors negotiating over a shared objective with explicit state, communication protocols, and guardrails.</p>
+<p><strong>Core ingredients of a real multi-agent system:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Roles and typed capabilities</strong></td>
+<td>Each agent (planner, critic, executor, tool-caller) exposes a typed capability set — not free-form prompts. Roles define authority boundaries.</td>
+</tr>
+<tr>
+<td><strong>Shared state (blackboard/graph)</strong></td>
+<td>A task graph plus facts plus artifacts that all agents read and write. Updates are atomic and observable.</td>
+</tr>
+<tr>
+<td><strong>Coordination policy</strong></td>
+<td>Explicit rules for who can act when, on what. Turn-taking, parallelism, and arbitration are declared, not emergent.</td>
+</tr>
+<tr>
+<td><strong>Sandboxed environments</strong></td>
+<td>Isolated I/O for tools, data, and effects. Reproducible simulations for learning and testing.</td>
+</tr>
+<tr>
+<td><strong>Evaluation hooks</strong></td>
+<td>Continuous tracing, critique, and scoring of plans, actions, and outcomes — not just final output quality.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Coordination patterns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>How it works</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Supervisor to workers</strong></td>
+<td>A planner decomposes goals into tasks; workers execute; a critic verifies results; the loop repeats until the objective is met</td>
+<td>Well-defined decomposable tasks with clear success criteria</td>
+</tr>
+<tr>
+<td><strong>Peer consensus (debate to resolution)</strong></td>
+<td>Multiple planners independently produce plans; a judge agent selects or merges the best elements</td>
+<td>Problems benefiting from diverse reasoning strategies; reducing single-point-of-failure bias</td>
+</tr>
+<tr>
+<td><strong>Market/auction</strong></td>
+<td>Tasks are bid out to specialized agents; cost and utility scores drive assignment</td>
+<td>Heterogeneous agent pools with varying specializations and resource costs</td>
+</tr>
+<tr>
+<td><strong>Hierarchical control</strong></td>
+<td>High-level goals decompose into subgoals, then into executable steps, with feedback flowing back up at each level</td>
+<td>Complex multi-layered objectives requiring different abstraction levels</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Communication and memory:</strong></p>
+<p>Agents do not communicate through unstructured chat. Messages are structured with explicit fields: <strong>intent</strong>, <strong>inputs</strong>, <strong>preconditions</strong>, <strong>expected effects</strong>, and <strong>confidence</strong>. This structure makes inter-agent communication parseable, auditable, and debuggable.</p>
+<p>Memory is layered across three tiers:</p>
+<ul>
+<li><strong>Short-term (episode):</strong> Current task context, recent actions, and working state.</li>
+<li><strong>Long-term (project):</strong> Accumulated knowledge, learned preferences, and historical outcomes persisting across sessions.</li>
+<li><strong>External (vector/graph indices):</strong> Retrieval-augmented memory for domain knowledge, documentation, and artifacts too large for context windows.</li>
+</ul>
+<p>Every state transition is <strong>attributed</strong> — tagged with the acting agent and its rationale — making the full decision history auditable.</p>
+<p><strong>Safety and governance:</strong></p>
+<p>Multi-agent systems amplify the reversibility-risk framework because errors compound across agent boundaries. The governance layer adds three mechanisms beyond single-agent safety:</p>
+<ul>
+<li><strong>Policy first:</strong> Allowlists, redaction rules, rate limits, and authority boundaries are defined per role. An executor agent cannot escalate its own permissions.</li>
+<li><strong>Counterfactual checks:</strong> High-risk actions are simulated in a shadow environment before execution. Results require explicit approval before promotion to production state.</li>
+<li><strong>Human-in-the-loop gates:</strong> Sensitive scopes trigger elevation to a human reviewer. Rollbacks are first-class operations, not afterthoughts.</li>
+</ul>
+<p><strong>Engineering checklist for multi-agent systems:</strong></p>
+<ul>
+<li>Define agent roles and their typed capabilities (interfaces + schemas)</li>
+<li>Stand up a shared blackboard/graph with optimistic concurrency and versioned snapshots</li>
+<li>Implement a coordinator that schedules turns, arbitrates conflicts, and enforces policy</li>
+<li>Add a critic/evaluator agent with golden tasks and outcome metrics (precision, latency, cost, SLA adherence)</li>
+<li>Build a replayable environment (simulation + fixtures) and wire tracing for every message and action</li>
+<li>Ship canaries; measure deltas; promote policies by evidence, not intuition</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> The north star for multi-agent design is multiple specialized agents cooperating over a shared state to deliver a measurable outcome — reliably, safely, and faster than a single generalist. The phase transition from single-agent to multi-agent changes coordination, error recovery, and governance simultaneously, just as the transition from assistive to agentive AI changes every UX assumption.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

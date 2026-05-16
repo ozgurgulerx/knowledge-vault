@@ -1,0 +1,2817 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/research/world_models/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>World Models: Efficient Representations for Prediction, Planning & Causal Reasoning - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#world-models-efficient-representations-for-prediction-planning-causal-reasoning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              World Models: Efficient Representations for Prediction, Planning &amp; Causal Reasoning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-world-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is a World Model?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pixel-world-models-vs-latentsymbolic-world-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pixel World Models vs Latent/Symbolic World Models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pixel World Models vs Latent/Symbolic World Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pixel-world-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pixel World Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latentsymbolic-world-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latent/Symbolic World Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparison Table
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-case-for-abstraction-cognitive-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Case for Abstraction &amp; Cognitive Tools
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Case for Abstraction & Cognitive Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#humans-dont-process-the-full-visual-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      Humans Don't Process the Full Visual Field
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language-math-and-code-as-cognitive-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Language, Math, and Code as Cognitive Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-manninglecun-divide" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Manning–LeCun Divide
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-implication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Implication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-the-critical-bottleneck" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data: The Critical Bottleneck
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data: The Critical Bottleneck">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-action-conditioning-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Action-Conditioning Gap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synthetic-worlds-via-software-abstractions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synthetic Worlds via Software Abstractions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physical-ai-infrastructure-the-platform-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Physical AI Infrastructure: The Platform Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-commercial-flywheel" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Commercial Flywheel
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles-for-efficient-world-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Principles for Efficient World Models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#five-categories-of-world-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Five Categories of World Models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Five Categories of World Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-jepa-joint-embedding-predictive-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. JEPA — Joint Embedding Predictive Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-spatial-intelligence-3d-world-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Spatial Intelligence — 3D World Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-learned-simulation-generative-video-latent-space-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Learned Simulation — Generative Video + Latent-Space RL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-physical-ai-infrastructure-simulation-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Physical AI Infrastructure — Simulation Platform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-active-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Active Inference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#landscape-key-players" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landscape &amp; Key Players
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Landscape & Key Players">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moonlake-game-engine-bootstrapping-neural-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moonlake: Game Engine Bootstrapping + Neural Rendering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluating-world-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluating World Models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluating World Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#open-research-directions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open Research Directions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="world-models-efficient-representations-for-prediction-planning-causal-reasoning">World Models: Efficient Representations for Prediction, Planning &amp; Causal Reasoning<a class="headerlink" href="#world-models-efficient-representations-for-prediction-planning-causal-reasoning" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The central tension in world model research is between <strong>visual fidelity and causal accuracy</strong>. Pixel-based world models (Sora, Genie 3) produce visually impressive video but fail to capture the causal structure of environments — solid objects float through walls, steering inputs don't reliably produce the correct vehicle dynamics, and physical consistency degrades over long horizons. These models approximate P(o' | o, a) over raw observations rather than learning the underlying transition function P(s' | s, a) over latent states. The result is high compute cost, poor action conditioning, and representations that are unsuitable for planning.</p>
+<p>The alternative — and the thesis advanced by Moonlake (Manning, Goodfellow, Sun) — is that efficient world models should prioritize <strong>causal structure and semantic abstraction</strong> over pixel-level reconstruction. The reasoning: a disproportionately large share of economically valuable tasks does not require high-resolution visual simulation. Humans routinely plan and act using partial observations, language-level descriptions, and abstracted object models. The bottleneck is not visual quality but <strong>action-conditioned data</strong>: massive video datasets exist (YouTube-scale) but almost none capture the mapping from actions to consequences. Synthetic worlds built via software abstractions — especially interactive media like games — offer the most data-efficient and commercially sustainable path to collecting this data at scale.</p>
+<p>Despite broad agreement that world models matter — <strong>AMI Labs</strong> (LeCun) raised $1.03B and <strong>World Labs</strong> (Fei-Fei Li) raised $1B — almost nobody means the same thing by the term. At least five distinct categories of world model research have emerged, each solving a different sub-problem: <strong>JEPA</strong> compresses physical understanding into latent space, <strong>spatial intelligence</strong> reconstructs explicit 3D structure, <strong>learned simulation</strong> trains agents through generated experience, <strong>physical AI infrastructure</strong> provides the platform layer, and <strong>active inference</strong> offers a fundamentally different computational theory rooted in neuroscience. These approaches are complementary rather than competing, and the lines between them will blur fast.</p>
+<p>This document covers the formalization, design principles, data challenges, and research landscape for world models, with emphasis on the efficiency argument for abstraction over pixel fidelity.</p>
+<hr />
+<h2 id="what-is-a-world-model">What is a World Model?<a class="headerlink" href="#what-is-a-world-model" title="Permanent link">&para;</a></h2>
+<p>A world model is a learned representation of how an environment works — its dynamics, physics, and causal structure — enabling an agent to <strong>predict, plan, and reason</strong> without directly interacting with the real world.</p>
+<p><strong>Formal definition (POMDP framework):</strong></p>
+<ul>
+<li>The environment is modeled as a <strong>Partially Observable Markov Decision Process</strong> (POMDP)</li>
+<li>The world model approximates the <strong>transition function</strong>: P(s' | s, a) — predicting the next state s' given current state s and action a</li>
+<li>The agent never has direct access to the true state s; it receives only a <strong>partial observation</strong> o of s</li>
+<li>With a world model, an agent can perform <strong>mental simulation</strong> — evaluating action consequences internally rather than through costly real-world interaction</li>
+</ul>
+<p><strong>Key distinction from pattern recognition:</strong> World models capture how actions lead to consequences over time (causal reasoning), not just how objects and phenomena co-occur (correlation). A person yelling at someone may make them unhappy; an unhappy person does not cause someone else to start yelling. The directionality matters.</p>
+<p><strong>Relationship to model-based RL:</strong> World models are the core component of model-based reinforcement learning. The Dyna architecture (Sutton) uses a learned model for simulated planning alongside model-free learning. MuZero learns an implicit world model to achieve superhuman performance without knowing game rules. DreamerV3 learns in a latent world model entirely from imagination. See: <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/">RL doc — Model-Based RL section</a>.</p>
+<hr />
+<h2 id="pixel-world-models-vs-latentsymbolic-world-models">Pixel World Models vs Latent/Symbolic World Models<a class="headerlink" href="#pixel-world-models-vs-latentsymbolic-world-models" title="Permanent link">&para;</a></h2>
+<h3 id="pixel-world-models">Pixel World Models<a class="headerlink" href="#pixel-world-models" title="Permanent link">&para;</a></h3>
+<p>Pixel world models operate directly on raw sensory observations, modeling P(o' | o, a) — predicting future video frames given current frames and actions.</p>
+<p><strong>Examples:</strong> Sora (OpenAI), Genie 3 (Google DeepMind), various video prediction models.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li>High visual fidelity — compelling for video production and entertainment</li>
+<li>Can convey rich sensory information (movement, texture, spatial layout)</li>
+<li>Leverage massive existing video datasets</li>
+</ul>
+<p><strong>Weaknesses:</strong></p>
+<ul>
+<li><strong>Lack causal grounding</strong> — visually plausible outputs may be physically impossible (objects passing through solid walls, floating mid-air)</li>
+<li><strong>Computationally expensive</strong> — modeling every pixel wastes capacity on decision-irrelevant detail</li>
+<li><strong>Poor long-horizon coherence</strong> — physical/spatial consistency degrades over extended sequences</li>
+<li><strong>Not action-conditioned</strong> — most are trained on passive video without action labels</li>
+<li>Research evidence of limitations: "Are Video Generation Models World Simulators?" and "From Generative Engines to Actionable Simulators" both document fundamental gaps</li>
+</ul>
+<p><strong>Genie 3 as case study:</strong> Despite impressive visuals, Genie 3 demonstrates the concrete limits of pixel-based world models — <strong>terrain clipping</strong> (objects passing through surfaces), <strong>non-interactivity</strong> (single player only, no physics or object interactions beyond the player character), and a <strong>maximum immersion window of ~60 seconds</strong> before coherence degrades. These are not engineering bugs but structural consequences of predicting pixels without an underlying causal model (Latent Space pod, Fan-yun Sun &amp; Chris Manning, Apr 2026).</p>
+<p>LeCun's critique sharpens this concern: does pixel-correct generation actually equal physics understanding, or is it merely pattern-matching appearance? <strong>JEPA</strong> (see below) was designed as a direct response to this question, abandoning pixel reconstruction entirely in favor of latent-space prediction.</p>
+<h3 id="latentsymbolic-world-models">Latent/Symbolic World Models<a class="headerlink" href="#latentsymbolic-world-models" title="Permanent link">&para;</a></h3>
+<p>These models learn compact, structured representations of the world state and operate on those abstractions rather than raw pixels.</p>
+<p><strong>Examples:</strong> DreamerV3 (Hafner et al.), MuZero (DeepMind), text/code-based world models, Moonlake's approach, V-JEPA 2 (AMI Labs).</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li><strong>Causal structure preservation</strong> — representations encode relationships, not just appearances</li>
+<li><strong>Compute and data efficient</strong> — compact representations require less capacity</li>
+<li><strong>Long-horizon prediction</strong> — abstracted states are easier to propagate forward accurately</li>
+<li><strong>Planning-suitable</strong> — can be integrated with search and planning algorithms directly</li>
+</ul>
+<p><strong>Weaknesses:</strong></p>
+<ul>
+<li>May lose perceptual detail relevant to some tasks</li>
+<li>Require design decisions about what to abstract (task-dependent)</li>
+</ul>
+<h3 id="comparison-table">Comparison Table<a class="headerlink" href="#comparison-table" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Pixel World Models</th>
+<th>Latent/Symbolic World Models</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fidelity</strong></td>
+<td>High visual quality</td>
+<td>Lower perceptual detail, higher structural accuracy</td>
+</tr>
+<tr>
+<td><strong>Causal accuracy</strong></td>
+<td>Weak — correlational, not causal</td>
+<td>Strong — models transitions and consequences</td>
+</tr>
+<tr>
+<td><strong>Compute cost</strong></td>
+<td>Very high (full-resolution generation)</td>
+<td>Much lower (compact state space)</td>
+</tr>
+<tr>
+<td><strong>Data requirements</strong></td>
+<td>Massive video data (but lacks actions)</td>
+<td>Less data needed; synthetic data viable</td>
+</tr>
+<tr>
+<td><strong>Long-horizon coherence</strong></td>
+<td>Degrades significantly</td>
+<td>Maintains consistency</td>
+</tr>
+<tr>
+<td><strong>Planning suitability</strong></td>
+<td>Poor — no direct interface for action selection</td>
+<td>Strong — designed for decision-making</td>
+</tr>
+<tr>
+<td><strong>Action conditioning</strong></td>
+<td>Rarely available in training data</td>
+<td>Core design requirement</td>
+</tr>
+<tr>
+<td><strong>Commercial applications</strong></td>
+<td>Video production, entertainment</td>
+<td>Robotics, game AI, autonomous systems, general agents</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="the-case-for-abstraction-cognitive-tools">The Case for Abstraction &amp; Cognitive Tools<a class="headerlink" href="#the-case-for-abstraction-cognitive-tools" title="Permanent link">&para;</a></h2>
+<h3 id="humans-dont-process-the-full-visual-field">Humans Don't Process the Full Visual Field<a class="headerlink" href="#humans-dont-process-the-full-visual-field" title="Permanent link">&para;</a></h3>
+<p>Experiments show humans process visual input in a <strong>top-down, task-directed</strong> way. We don't reconstruct a pixel-perfect internal image — we extract task-relevant features and reason over abstracted object-level representations. People with significant sensory limitations can perform nearly all real-world tasks. For most purposes, a few words ("the car's tires squealed as it cornered sharply") are sufficient for understanding and planning.</p>
+<h3 id="language-math-and-code-as-cognitive-tools">Language, Math, and Code as Cognitive Tools<a class="headerlink" href="#language-math-and-code-as-cognitive-tools" title="Permanent link">&para;</a></h3>
+<p>The unique advantage humans hold over other species that also build internal world models (even crows plan and achieve goals) is the development of <strong>cognitive tools</strong>:</p>
+<ul>
+<li><strong>Natural language</strong> — enables efficient causal abstraction and communication</li>
+<li><strong>Mathematics</strong> — formal representation of quantitative relationships</li>
+<li><strong>Programming languages</strong> — precise, executable specifications of processes</li>
+</ul>
+<p>These tools enable:</p>
+<ol>
+<li><strong>Efficient abstraction</strong> — represent complex causal chains compactly</li>
+<li><strong>Focused representational capacity</strong> — model only decision-relevant aspects of the world</li>
+<li><strong>Communication</strong> — share and coordinate world models across agents/humans</li>
+<li><strong>Long-horizon reasoning</strong> — compact representations support prediction over extended timescales and extensive memory of earlier events</li>
+</ol>
+<h3 id="the-manninglecun-divide">The Manning–LeCun Divide<a class="headerlink" href="#the-manninglecun-divide" title="Permanent link">&para;</a></h3>
+<p>Chris Manning frames the disagreement with LeCun as fundamentally about the role of language in intelligence. LeCun views language as a "low bit-rate communication mechanism" — far inferior to the high bit-rate video stream entering through the eyes — and argues that intelligence is fundamentally visual. Manning counters with an evolutionary argument: chimpanzees have comparable vision systems, better short-term memory, and can build primitive tools, yet humans are vastly ahead in world understanding and planning. The differentiator was the development of <strong>language as a cognitive tool</strong> — what philosopher Dan Dennett calls the first in a lineage of self-built cognitive tools (followed by mathematics, programming languages, etc.) that enable extended causal reasoning chains impossible through perception alone (Latent Space pod, Chris Manning, Apr 2026).</p>
+<p>This has direct implications for world model architecture: JEPA's commitment to latent-space prediction without symbolic structure may miss the representational layer that made human cognition qualitatively different from other primate cognition. Manning argues that the weights of a transformer model can themselves function as a "joint representation" (addressing LeCun's objection that autoregressive models lack joint embeddings), and that symbolic/language representations should be first-class components of world models rather than afterthoughts.</p>
+<h3 id="design-implication">Design Implication<a class="headerlink" href="#design-implication" title="Permanent link">&para;</a></h3>
+<p>Rather than trying to represent the world entirely through raw sensory information, world models should leverage semantic abstractions in the same way that code generation models manipulate programming language code — operating on structured, meaningful representations rather than raw signals.</p>
+<hr />
+<h2 id="data-the-critical-bottleneck">Data: The Critical Bottleneck<a class="headerlink" href="#data-the-critical-bottleneck" title="Permanent link">&para;</a></h2>
+<h3 id="the-action-conditioning-gap">The Action-Conditioning Gap<a class="headerlink" href="#the-action-conditioning-gap" title="Permanent link">&para;</a></h3>
+<p>The fundamental data problem for world models is not quantity but <strong>structure</strong>:</p>
+<ul>
+<li><strong>Massive video data exists</strong> — YouTube and similar platforms provide enormous volumes of visual data</li>
+<li><strong>Almost none of it is action-conditioned</strong> — there is very little data that captures the mapping from actions to consequences</li>
+<li>Without action labels, models learn correlations between observations but not the causal effects of interventions</li>
+</ul>
+<h3 id="synthetic-worlds-via-software-abstractions">Synthetic Worlds via Software Abstractions<a class="headerlink" href="#synthetic-worlds-via-software-abstractions" title="Permanent link">&para;</a></h3>
+<p>The most data- and compute-efficient path to action-conditioned training data is building <strong>diverse synthetic worlds</strong> using software abstractions:</p>
+<ul>
+<li>Software environments provide <strong>exact action-state mappings</strong> — every input produces a known, recordable consequence</li>
+<li>Abstractions (code, symbolic representations) allow building diverse environments efficiently</li>
+<li>Scalable interface for data collection: <strong>keyboard and mouse</strong> as the action interface, with the computer as the environment</li>
+</ul>
+<h3 id="physical-ai-infrastructure-the-platform-layer">Physical AI Infrastructure: The Platform Layer<a class="headerlink" href="#physical-ai-infrastructure-the-platform-layer" title="Permanent link">&para;</a></h3>
+<p>An alternative to building synthetic worlds from scratch is constructing the <strong>platform infrastructure</strong> that enables everyone else to create and use world models at scale. <strong>NVIDIA Cosmos</strong> (NVIDIA, Jan 2025) exemplifies this strategy, providing a full stack from data curation through deployment rather than a single world model. Cosmos curated <strong>20 million hours of real-world video</strong> — covering driving, industrial, robotics, and human activity — compressed into 9,000 trillion pre-training tokens, with a pipeline that processes 20M hours in 14 days on Blackwell GPUs versus over 3 years on CPUs.</p>
+<p>The architecture spans two complementary model families: <strong>diffusion-based</strong> models operating on continuous latent tokens and <strong>autoregressive transformer</strong> models operating on discretized tokens. On top of these sit three product families: <strong>Predict</strong> for video forecasting, <strong>Transfer</strong> for sim-to-real domain adaptation, and <strong>Reason</strong> for chain-of-thought inference over physical scenes (NVIDIA, GTC Mar 2025). Cosmos also includes a <strong>visual tokenizer</strong> achieving 8x better compression than prior approaches and integrates with NeMo for training and NIM for deployment.</p>
+<h3 id="the-commercial-flywheel">The Commercial Flywheel<a class="headerlink" href="#the-commercial-flywheel" title="Permanent link">&para;</a></h3>
+<p>A commercially self-sustaining data creation path is critical for long-term success. The pattern has repeated across AI subfields:</p>
+<table>
+<thead>
+<tr>
+<th>Historical precedent</th>
+<th>Commercial incentive</th>
+<th>Data created</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IMUs</strong></td>
+<td>Smartphones (consumer electronics)</td>
+<td>Massive motion/orientation datasets</td>
+</tr>
+<tr>
+<td><strong>LLMs</strong></td>
+<td>NLP applications (search, assistants)</td>
+<td>Internet-scale text corpora</td>
+</tr>
+<tr>
+<td><strong>World models</strong> (proposed)</td>
+<td>Interactive media / games</td>
+<td>Action-conditioned interaction data</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why games and interactive media:</strong></p>
+<ul>
+<li><strong>Clear engagement incentives</strong> — entertainment drives voluntary, sustained interaction</li>
+<li><strong>Scalable interface</strong> — keyboard and mouse provide fine-grained action recording</li>
+<li><strong>Natural data accrual</strong> — data is created as a byproduct of normal user activity</li>
+<li><strong>Symbolic representations</strong> are more suitable for effective, fine-grained human control — being the interface through which humans express intent enables an effective data flywheel involving both actions and observations</li>
+<li>Path toward models that can generate environments to train and control embodied agents in both virtual and real worlds, with emerging signs of such generalization</li>
+<li><strong>Early commercial validation:</strong> Moonlake demonstrated a working beta at <strong>GDC 2026</strong> with a wide variety of creator-built worlds, and launched a <strong>$30,000 Creator Cup</strong> to incentivize diverse world creation — directly seeding the action-to-observation flywheel (Latent Space pod, Apr 2026)</li>
+</ul>
+<hr />
+<h2 id="design-principles-for-efficient-world-models">Design Principles for Efficient World Models<a class="headerlink" href="#design-principles-for-efficient-world-models" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Design the world model based on the policy you aim to learn.</strong> The representation should serve the decision-making task, not be a general-purpose simulator. Different policies require different levels of fidelity and abstraction.</p>
+</li>
+<li>
+<p><strong>Employ abstractions and tools to focus on what matters.</strong> Use language, code, and symbolic representations to direct model capacity toward decision-relevant aspects of the world, rather than reconstructing every sensory detail.</p>
+</li>
+<li>
+<p><strong>Prioritize causal properties over visual fidelity:</strong></p>
+</li>
+<li><strong>Spatial and physical state consistency</strong> maintained over long time periods</li>
+<li><strong>Accurate action consequences</strong> — the world evolving in response to actions must reflect true causal relationships</li>
+<li>
+<p><strong>Long-horizon coherence</strong> — predictions must remain consistent and useful over extended sequences</p>
+</li>
+<li>
+<p><strong>Action conditioning is non-negotiable.</strong> A world model that cannot predict the consequences of actions is a video generator, not a planning tool.</p>
+</li>
+<li>
+<p><strong>Optimize for data and compute efficiency.</strong> Compact representations enable training with less data and faster inference — both critical for practical deployment.</p>
+</li>
+<li>
+<p><strong>The symbolic–diffusion boundary is fluid, not fixed.</strong> Every world model implicitly draws a line between what is handled by symbolic/code priors (physics engines, game logic, state machines) and what is handled by learned pixel priors (diffusion models, neural renderers). This boundary should be <strong>task-dependent and actively managed</strong> — shifted toward more symbolic representation when causal accuracy, long-horizon consistency, or interactivity matters most, and toward more pixel priors when visual fidelity or creative expressiveness is the priority. Moonlake reports adjusting this boundary across model iterations based on customer requirements and newly acquired domain knowledge (Latent Space pod, Fan-yun Sun, Apr 2026).</p>
+</li>
+</ol>
+<hr />
+<h2 id="five-categories-of-world-models">Five Categories of World Models<a class="headerlink" href="#five-categories-of-world-models" title="Permanent link">&para;</a></h2>
+<p>The world model landscape has fragmented into at least five distinct research programs. Each category addresses a different sub-problem, and understanding the taxonomy clarifies what "world model" means in any given context.</p>
+<h3 id="1-jepa-joint-embedding-predictive-architecture">1. JEPA — Joint Embedding Predictive Architecture<a class="headerlink" href="#1-jepa-joint-embedding-predictive-architecture" title="Permanent link">&para;</a></h3>
+<p><strong>AMI Labs</strong> (LeCun) built its $1.03B thesis on a single bet: pixel reconstruction is an inefficient way to learn physical understanding, and prediction should happen in a learned <strong>latent space</strong> instead. <strong>JEPA</strong> trains an encoder that maps video patches to abstract representations, then a predictor forecasts masked regions in that representation space — never in pixel space. This sidesteps the enormous computational cost of generating full-resolution frames while forcing the model to capture semantic and physical structure.</p>
+<p><strong>V-JEPA 2</strong> (AMI Labs, 2025) is a 1.2B-parameter model pre-trained on over 1 million hours of video via <strong>self-supervised masked prediction</strong>, requiring no labels or text supervision. The headline result is <strong>data efficiency in robotics</strong>: just 62 hours of robot data from the DROID dataset produces an action-conditioned world model supporting <strong>zero-shot planning</strong> — the robot generates candidate action sequences, rolls them forward through the world model, and picks the trajectory that best matches a goal image. This works on unseen objects and environments. AMI Labs is targeting healthcare and robotics first, though its CEO notes commercial products could be years away.</p>
+<h3 id="2-spatial-intelligence-3d-world-models">2. Spatial Intelligence — 3D World Models<a class="headerlink" href="#2-spatial-intelligence-3d-world-models" title="Permanent link">&para;</a></h3>
+<p>Where JEPA abstracts away pixels into latent vectors, <strong>World Labs</strong> (Fei-Fei Li, 2024) argues that true understanding requires explicit <strong>spatial structure</strong> — geometry, depth, object persistence, and the ability to synthesize novel viewpoints. The $1B thesis is that temporal prediction alone is insufficient; the world is three-dimensional, and models must represent it as such.</p>
+<p>World Labs' product <strong>Marble</strong> generates <strong>persistent 3D environments</strong> from images, text, video, or 3D layouts. "Persistent" here means actual 3D scenes with spatial coherence — not linear frame sequences — where users can orbit the camera, edit individual objects, and export meshes. The approach builds on the lineage of <strong>NeRFs</strong> and <strong>3D Gaussian Splatting</strong> but pushes toward generation of novel scenes rather than reconstruction of observed ones. The core challenge remains maintaining physical plausibility across generated worlds that never existed in reality.</p>
+<h3 id="3-learned-simulation-generative-video-latent-space-rl">3. Learned Simulation — Generative Video + Latent-Space RL<a class="headerlink" href="#3-learned-simulation-generative-video-latent-space-rl" title="Permanent link">&para;</a></h3>
+<p>Two research lineages are converging here: <strong>generative video models</strong> that simulate interactive worlds, and <strong>RL agents</strong> that train entirely in imagination. On the generative side, <strong>Genie 3</strong> (Google DeepMind, 2025) takes a text prompt and produces a navigable environment at 24fps and 720p resolution with consistency spanning approximately one minute, using autoregressive generation conditioned on user actions. <strong>Runway GWM-1</strong> (Runway, 2025), built on the Gen-4.5 backbone, splits into Worlds, Robotics, and Avatars product lines.</p>
+<p>On the imagination-RL side, <strong>DreamerV3</strong> (Hafner et al., DeepMind, 2023) was the first AI to collect diamonds in Minecraft without any human data. Its successor <strong>Dreamer 4</strong> (DeepMind, 2025) achieves the same feat <strong>purely offline</strong> with no environment interaction, using a transformer-based architecture that replaces the earlier recurrent design. Dreamer 4 introduces <strong>shortcut forcing</strong> — collapsing 64 typical diffusion steps to just 4 noisy-to-clean steps — enabling real-time inference on a single H100. The convergence is now tangible: Dreamer 4 is playable by humans interactively, while Genie 3 is being used to train DeepMind's <strong>SIMA</strong> agents.</p>
+<h3 id="4-physical-ai-infrastructure-simulation-platform">4. Physical AI Infrastructure — Simulation Platform<a class="headerlink" href="#4-physical-ai-infrastructure-simulation-platform" title="Permanent link">&para;</a></h3>
+<p><strong>NVIDIA Cosmos</strong> (NVIDIA, CES Jan 2025) takes the <strong>picks-and-shovels</strong> strategy: rather than building a single world model, build the platform everyone else uses. The full stack spans data curation (20M hours video processed in 14 days on Blackwell), a visual tokenizer with 8x better compression, training via NeMo, and deployment via NIM, all pre-trained on 9,000 trillion tokens from 20M hours of real-world video covering driving, industrial, robotics, and human activity. Two architecture families — <strong>diffusion-based</strong> (continuous latent tokens) and <strong>autoregressive transformer</strong> (discretized tokens) — support three model families: <strong>Predict</strong> (video forecasting), <strong>Transfer</strong> (sim-to-real), and <strong>Reason</strong> (chain-of-thought over physical scenes, added GTC Mar 2025). The bet is that world models will follow the same pattern as LLMs: the platform provider captures the most durable value.</p>
+<h3 id="5-active-inference">5. Active Inference<a class="headerlink" href="#5-active-inference" title="Permanent link">&para;</a></h3>
+<p><strong>VERSES AI</strong> (Karl Friston, 2025) is the outlier — rooted in <strong>computational neuroscience</strong> rather than deep learning. The core framework is the <strong>Free Energy Principle</strong>: agents minimize <strong>variational free energy</strong> (a proxy for surprise) rather than maximizing reward. This produces a natural exploration drive — the agent is drawn to uncertain situations because resolving uncertainty reduces free energy, eliminating the need for engineered exploration bonuses.</p>
+<p>The <strong>AXIOM architecture</strong> implements this via structured generative models with discrete objects (typed attributes and relations), performing <strong>Bayesian inference via message passing</strong> rather than gradient descent. This yields three properties rare in deep learning: <strong>interpretability</strong> (the model's beliefs are inspectable), <strong>compositionality</strong> (new object types can be added without retraining), and extreme <strong>data efficiency</strong>. In robotics, AXIOM uses a hierarchical multi-agent setup where each robot joint is its own active inference agent, adapting in real time without retraining. The commercial product <strong>Genius</strong> (VERSES AI, Apr 2025) is competitive with RL baselines using orders of magnitude less data.</p>
+<hr />
+<h2 id="landscape-key-players">Landscape &amp; Key Players<a class="headerlink" href="#landscape-key-players" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Category</th>
+<th>Approach</th>
+<th>Key Contributions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AMI Labs</strong> (LeCun)</td>
+<td>JEPA</td>
+<td>Latent-space prediction, no pixel reconstruction</td>
+<td>V-JEPA 2 (1.2B params, 1M+ hrs video); 62-hr robot data → zero-shot planning</td>
+</tr>
+<tr>
+<td><strong>World Labs</strong> (Fei-Fei Li)</td>
+<td>Spatial Intelligence</td>
+<td>Explicit 3D structure, persistent scenes</td>
+<td>Marble: 3D environment generation from images/text/video</td>
+</tr>
+<tr>
+<td><strong>DeepMind</strong></td>
+<td>Learned Simulation</td>
+<td>Generative worlds + latent imagination RL</td>
+<td>Genie 3 (interactive 3D), DreamerV3/V4 (imagination RL), MuZero, SIMA agents</td>
+</tr>
+<tr>
+<td><strong>Runway</strong></td>
+<td>Learned Simulation</td>
+<td>Generative video as interactive simulation</td>
+<td>GWM-1 (Worlds/Robotics/Avatars), built on Gen-4.5</td>
+</tr>
+<tr>
+<td><strong>NVIDIA</strong></td>
+<td>Infrastructure</td>
+<td>Platform for world model training and deployment</td>
+<td>Cosmos: data curation, tokenizer, training, deployment; 9K trillion tokens</td>
+</tr>
+<tr>
+<td><strong>VERSES AI</strong> (Friston)</td>
+<td>Active Inference</td>
+<td>Free Energy Principle, Bayesian message passing</td>
+<td>AXIOM architecture; Genius product (Apr 2025)</td>
+</tr>
+<tr>
+<td><strong>Moonlake</strong> (Manning, Goodfellow, Sun)</td>
+<td>Latent/Symbolic</td>
+<td>Abstraction-first, game engine bootstrapping, two-model arch (reasoning + Rie renderer)</td>
+<td>Multiplayer interactive worlds, indefinite lifetime, $30K Creator Cup, GDC 2026 beta; see dedicated section below</td>
+</tr>
+<tr>
+<td><strong>OpenAI</strong></td>
+<td>Pixel World Models</td>
+<td>Video generation</td>
+<td>Sora: demonstrates fidelity strengths but causal limitations</td>
+</tr>
+<tr>
+<td><strong>Academic research</strong></td>
+<td>Varied</td>
+<td>Critical evaluation</td>
+<td>"Are Video Generation Models World Simulators?", "From Generative Engines to Actionable Simulators", "Video models are zero-shot learners and reasoners"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="moonlake-game-engine-bootstrapping-neural-rendering">Moonlake: Game Engine Bootstrapping + Neural Rendering<a class="headerlink" href="#moonlake-game-engine-bootstrapping-neural-rendering" title="Permanent link">&para;</a></h3>
+<p><strong>Moonlake AI</strong> (co-founded by Fan-yun Sun, Sharon [prev. worked with Fei-Fei Li], with Chris Manning and Ian Goodfellow) takes a fundamentally different path from every other world model player: rather than learning worlds from video data, Moonlake <strong>bootstraps from game engines</strong> and trains custom agents that use code, physics engines, and symbolic representations as cognitive tools.</p>
+<p><strong>Two-model architecture:</strong></p>
+<ul>
+<li><strong>Multimodal reasoning model</strong> — handles causality, persistency, logic, and determinism. This model operates as an agent that reasons about what matters in a given world (geometry, physics, affordances, symbolic logic, perceptual mappings) and employs game engines, physics simulators, and code as tools to construct and evolve environments. The reasoning traces are detailed and structured — for a bowling game, the model reasons about pin physics, score tracking, reset logic, and the causal chain from ball trajectory to pin fall to score increment.</li>
+<li><strong>Rie</strong> (neural rendering model) — a diffusion model that takes the persistent structured representation from the reasoning model and <strong>restyles it into arbitrary visual styles</strong>, including photorealism. Rie respects the underlying world's persistency and interactivity while transforming only the pixel distribution. Moonlake positions this as the <strong>next paradigm of rendering</strong> — replacing traditional rasterizers and DLSS by providing learned visual priors that can reskin any game world on demand.</li>
+</ul>
+<p><strong>Key differentiators from competing approaches:</strong></p>
+<ul>
+<li><strong>Immediately multiplayer</strong> — the reasoning model can configure multiplayer with persistency databases from a simple prompt, something pixel-based world models cannot do</li>
+<li><strong>Indefinite lifetime</strong> — no 60-second coherence window; worlds persist as long as needed because state is maintained symbolically, not in pixel space</li>
+<li><strong>Deeply interactive</strong> — objects in the world respond to actions with correct causal consequences, not just visual plausibility</li>
+<li><strong>Programmable rendering</strong> — Rie's rendering is part of the gameplay loop, not just a post-process. Game state can trigger render changes (e.g., collecting 10 apples makes your bullets render as apples), enabling novel interaction types impossible with traditional rendering</li>
+</ul>
+<p><strong>Commercial progress:</strong> Product in beta as of GDC 2026 (Game Developers Conference), where Moonlake demonstrated the variety of worlds creators were already building. The <strong>$30,000 Creator Cup</strong> competition is designed to kickstart the data flywheel of actions-to-observations by incentivizing diverse world creation (Latent Space pod, Fan-yun Sun &amp; Chris Manning, Apr 2026).</p>
+<p><strong>Platform vision (3-year):</strong> Users state an end goal ("teach my kids humility", "fine-tune drones for rescue", "make my vacuum robot navigate my office robustly"), and the world model generates a distribution of environments to train and evaluate whatever policy is needed — games as end product, embodied AI as training/eval ground.</p>
+<hr />
+<h2 id="evaluating-world-models">Evaluating World Models<a class="headerlink" href="#evaluating-world-models" title="Permanent link">&para;</a></h2>
+<p>Evaluation of world models remains one of the hardest open problems in the field, paralleling the challenges facing LLM evaluation as tasks move beyond narrow benchmarks.</p>
+<p><strong>The core difficulty:</strong> What constitutes a "good" world model depends entirely on what it is being built for, and the metrics differ fundamentally across use cases:</p>
+<ul>
+<li><strong>Games</strong> — success is measured by <strong>time spent in the world</strong> and whether a game designer can produce what they imagine in a reasonable amount of time</li>
+<li><strong>Embodied AI</strong> — success is measured by <strong>sim-to-real transfer robustness</strong> — how well a policy trained in the generated worlds performs when deployed to the target environment</li>
+<li><strong>Video production</strong> — success is visual fidelity and temporal consistency</li>
+</ul>
+<p><strong>Proxy metrics vs end metrics:</strong> Direct measurement of these end metrics is expensive and slow, so the field relies on proxy metrics — but no established proxy has been validated as predictive of downstream success. This mirrors the LLM evaluation problem: early question-answering benchmarks were easy to construct and measure, but modern LLM use cases (shopping advice, creative writing, complex planning) resist simple benchmarking.</p>
+<p><strong>The visual fidelity trap:</strong> A persistent bias in world model evaluation is toward <strong>visual quality over interactive quality</strong>. A world with stunning graphics but broken physics and no interactivity may score well on visual metrics while being useless for gameplay, training, or planning. Keeping these two axes (visual fidelity vs causal/interactive quality) separate is essential — many successful games have primitive visuals but compelling gameplay mechanics (Chris Manning &amp; Fan-yun Sun, Latent Space pod, Apr 2026).</p>
+<p><strong>Current state:</strong> Evaluation is largely "vibe-based" — people try different world models and decide based on whether the output provides utility for their specific task. Formal benchmarks that capture the full value of interactive, causally consistent worlds do not yet exist.</p>
+<hr />
+<h3 id="open-research-directions">Open Research Directions<a class="headerlink" href="#open-research-directions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Bridging pixel and symbolic</strong>: hybrid models that use pixel input but reason in latent/symbolic space — JEPA and Dreamer V4 both represent progress here, but neither has closed the gap fully</li>
+<li><strong>Sim-to-real transfer</strong>: world models trained in synthetic environments that generalize to physical domains — NVIDIA Cosmos Transfer targets this directly</li>
+<li><strong>Multi-modal integration</strong>: combining language, vision, audio, and tactile modalities in a single world model</li>
+<li><strong>Scalable action-conditioned data collection</strong>: beyond games, creating diverse interactive environments</li>
+<li><strong>World model evaluation</strong>: no validated benchmarks exist for interactive, causally consistent worlds — proxy metrics are unproven and the field relies on qualitative assessment</li>
+<li><strong>Causal representation learning</strong>: discovering causal structure from observational and interventional data</li>
+<li><strong>Deep learning vs. neuroscience paradigms</strong>: whether gradient-based or message-passing inference (active inference) proves more scalable for embodied agents remains unresolved</li>
+<li><strong>3D consistency at generation time</strong>: World Labs' spatial approach and the learned simulation camp will increasingly need to reconcile — generating novel 3D worlds that also obey physics is unsolved</li>
+</ul>
+<hr />
+<h2 id="cross-references">Cross-References<a class="headerlink" href="#cross-references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Reinforcement Learning</strong> — <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/">reinforcement_learning_principles_frontiers.md</a>: POMDP formalization, model-based RL (Dyna, DreamerV3, MuZero), Dec-POMDP, sample efficiency solutions</li>
+<li><strong>Multimodal AI</strong> — multimodal perception, vision-language models, and their relationship to world understanding</li>
+<li><strong>AI Agents</strong> — agent architectures that require world models for planning and acting in environments</li>
+<li><strong>Generative Models</strong> — video generation models (Sora, etc.) as a pixel world model approach; relationship between generation quality and world understanding</li>
+</ul>
+<hr />
+<h2 id="key-references">Key References<a class="headerlink" href="#key-references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Manning, Goodfellow, Sun — "Towards Efficient World Models" (Moonlake, 2025)</li>
+<li>Ha &amp; Schmidhuber — "World Models" (2018) — VAE + RNN world model for RL</li>
+<li>Hafner et al. — DreamerV3 (2023) — general latent imagination RL</li>
+<li>Hafner et al. — Dreamer 4 (DeepMind, 2025) — offline imagination RL, transformer-based, shortcut forcing</li>
+<li>Schrittwieser et al. — MuZero (2020) — learned model, superhuman without rules</li>
+<li>Sutton — Dyna architecture — integrated model-based and model-free learning</li>
+<li>V-JEPA 2 (AMI Labs, 2025) — 1.2B param self-supervised video model, zero-shot robotic planning</li>
+<li>World Labs — Marble (2024–2025) — persistent 3D world generation</li>
+<li>NVIDIA — Cosmos (CES Jan 2025, GTC Mar 2025) — physical AI infrastructure platform</li>
+<li>VERSES AI — AXIOM / Genius (Apr 2025) — active inference for embodied agents</li>
+<li>Genie 3 (Google DeepMind, 2025) — text-to-navigable-environment</li>
+<li>Runway — GWM-1 (2025) — generative world model product line</li>
+<li>"Are Video Generation Models World Simulators?" — critical evaluation of pixel models</li>
+<li>"From Generative Engines to Actionable Simulators: The Imperative of Physical Grounding in World Models"</li>
+<li>"Video models are zero-shot learners and reasoners"</li>
+<li>Latent Space pod — "Moonlake: Causal World Models should be Multimodal, Interactive, and Efficient" with Chris Manning &amp; Fan-yun Sun (Apr 2026)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

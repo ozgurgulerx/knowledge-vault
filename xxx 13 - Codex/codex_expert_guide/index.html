@@ -1,0 +1,2867 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2013%20-%20Codex/codex_expert_guide/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>OpenAI Codex — Architecture, Best Practices, and Deployment Playbook - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openai-codex-architecture-best-practices-and-deployment-playbook" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OpenAI Codex — Architecture, Best Practices, and Deployment Playbook
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-how-codex-is-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture &amp; How Codex Is Built
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prompting-task-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompting &amp; Task Context
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planning-for-complex-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Planning for Complex Tasks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agentsmd-the-repo-constitution" class="md-nav__link">
+    <span class="md-ellipsis">
+      AGENTS.md — The Repo Constitution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AGENTS.md — The Repo Constitution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-signal-agentsmd-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      High-Signal AGENTS.md Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agentsmd-research-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      AGENTS.md Research Findings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration &amp; Consistency
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-review-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing, Review &amp; Quality Gates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing, Review & Quality Gates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#harness-control-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Harness Control Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcp-for-external-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      MCP for External Context
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skills-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skills Ecosystem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skills Ecosystem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Skills
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automations-scheduled-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automations &amp; Scheduled Work
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Session Management
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-and-state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory and State Management
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parallel-worktrees-multi-agent-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parallel Worktrees &amp; Multi-Agent Workflows
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Mistakes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codex-vs-claude-code-positioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex vs Claude Code Positioning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timeline-changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeline &amp; Changelog
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="openai-codex-architecture-best-practices-and-deployment-playbook">OpenAI Codex — Architecture, Best Practices, and Deployment Playbook<a class="headerlink" href="#openai-codex-architecture-best-practices-and-deployment-playbook" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>Codex is OpenAI's agentic coding platform — a command centre for multi-agent coding workflows that reads your codebase, executes code in sandboxed environments, and iterates autonomously toward task completion. The core insight from the highest-leverage Codex users: treat the agent as a <strong>powerful but fallible contributor</strong> and push quality guarantees into the <strong>harness</strong> — explicit repo instructions, hermetic execution, deterministic checks, and automated evaluation loops — rather than relying on "better prompting" alone.</p>
+<p>Codex works best when treated less like a one-off assistant and more like a <strong>teammate you configure and improve over time</strong>. The mental model: start with the right task context, use AGENTS.md for durable guidance, configure Codex to match your workflow, connect external systems with MCP, turn repeated work into skills, and automate stable workflows. The ROI is a direct function of harness quality, not prompt sophistication (OpenAI Codex Best Practices, Mar 2026).</p>
+<p>As of March 2026, Codex has <strong>1M+ weekly active users</strong> (5x growth since January 2026), with 90%+ of Codex's own codebase written by Codex itself — the strongest possible dogfooding signal (Gergely Orosz, Pragmatic Engineer, "How Codex is Built", Mar 2026).</p>
+<hr />
+<h2 id="architecture-how-codex-is-built">Architecture &amp; How Codex Is Built<a class="headerlink" href="#architecture-how-codex-is-built" title="Permanent link">&para;</a></h2>
+<p>Codex is written in <strong>Rust</strong> by a ~30-engineer team, chosen early for performance and memory safety in the sandbox runtime. The agent loop is a <strong>5-step state machine</strong> implementing the ReAct pattern, production-hardened in a compiled language:</p>
+<ol>
+<li><strong>Gather context</strong> from conversation + environment</li>
+<li><strong>Call the model</strong> (GPT-5.3-Codex)</li>
+<li><strong>Parse response</strong> for tool calls</li>
+<li><strong>Execute tool calls</strong> in a Firecracker microVM sandbox</li>
+<li><strong>Loop or return</strong> final response</li>
+</ol>
+<p><strong>GPT-5.3-Codex</strong> is a coding-specialized variant of GPT-5.3, fine-tuned specifically for Codex's agentic workflows — not a generic model, but one optimized for the agent loop's structured tool-call patterns.</p>
+<p><strong>Sandboxing:</strong> Every code execution runs in a <strong>Firecracker microVM</strong> — isolated filesystem (ephemeral, destroyed after session), network restricted to allowlist, per-agent resource limits. This is the production answer to "agent running arbitrary code."</p>
+<p><strong>Parallelism:</strong> 4-8 concurrent agents per user session, each in its own isolated microVM sandbox. Agents cannot interfere with each other.</p>
+<p><strong>Three-tier code review</strong> (Codex's production pattern):</p>
+<ol>
+<li><strong>Automated CI checks</strong> — lint, type, test</li>
+<li><strong>AI-powered review</strong> by a separate model instance checking security, style, and logic (~60% of issues caught before human review)</li>
+<li><strong>Human review</strong> for merges to protected branches</li>
+</ol>
+<p>(Gergely Orosz, Pragmatic Engineer, "How Codex is Built", Mar 2026)</p>
+<hr />
+<h2 id="prompting-task-context">Prompting &amp; Task Context<a class="headerlink" href="#prompting-task-context" title="Permanent link">&para;</a></h2>
+<p>Codex is already strong enough to be useful even when prompts aren't perfect. Clear prompting isn't required to get value, but it makes results more reliable — especially in larger codebases or higher-stakes tasks.</p>
+<p>A good default includes <strong>four elements</strong> in every prompt:</p>
+<ul>
+<li><strong>Goal:</strong> What are you trying to change or build?</li>
+<li><strong>Context:</strong> Which files, folders, docs, examples, or errors matter? Use <code>@</code> mentions to reference specific files</li>
+<li><strong>Constraints:</strong> What standards, architecture, safety requirements, or conventions should Codex follow?</li>
+<li><strong>Done when:</strong> What should be true before the task is complete — tests passing, behavior changing, a bug no longer reproducing?</li>
+</ul>
+<p>This helps Codex stay scoped, make fewer assumptions, and produce work easier to review.</p>
+<p><strong>Reasoning levels</strong> — choose based on task difficulty:</p>
+<ul>
+<li><strong>Low</strong> for faster, well-scoped tasks</li>
+<li><strong>Medium or High</strong> for complex changes or debugging</li>
+<li><strong>Extra High</strong> for long, agentic, reasoning-heavy tasks</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> Speech dictation inside the Codex app provides faster context capture than typing — especially useful for initial brainstorms and requirement capture.</p>
+</blockquote>
+<p>(OpenAI Codex Best Practices, Mar 2026)</p>
+<hr />
+<h2 id="planning-for-complex-tasks">Planning for Complex Tasks<a class="headerlink" href="#planning-for-complex-tasks" title="Permanent link">&para;</a></h2>
+<p>If the task is complex, ambiguous, or hard to describe well, ask Codex to <strong>plan before coding</strong>.</p>
+<p><strong>Three approaches that work well:</strong></p>
+<p><strong>Plan mode</strong> — the easiest and most effective option for most users. Lets Codex gather context, ask clarifying questions, and build a stronger plan before implementation. Toggle with <code>/plan</code> or <code>Shift+Tab</code>.</p>
+<p><strong>Interview mode</strong> — ask Codex to question you first when you have a rough idea but aren't sure how to describe it. Tell it to challenge your assumptions and turn the fuzzy idea into something concrete before writing code.</p>
+<p><strong>PLANS.md template</strong> — for advanced workflows, configure Codex to follow a persistent execution-plan template for longer-running or multi-step work. Plan files survive across sessions and give agents stable context for multi-step work — whereas plan mode context disappears when the session ends.</p>
+<blockquote>
+<p><strong>Key:</strong> Planning is not optional for complex tasks — it prevents expensive agent drift. Persistent plan files beat ephemeral plan mode for anything requiring cross-session continuity.</p>
+</blockquote>
+<p>(OpenAI Codex Best Practices, Mar 2026)</p>
+<hr />
+<h2 id="agentsmd-the-repo-constitution">AGENTS.md — The Repo Constitution<a class="headerlink" href="#agentsmd-the-repo-constitution" title="Permanent link">&para;</a></h2>
+<p>AGENTS.md is an open-format README for agents. It loads into context automatically and is the best place to encode how you and your team want Codex to work in a repository. Codex popularized this as the repo-level instruction standard, and the Feb 2026 arXiv research on AGENTS.md effects was conducted primarily on Codex repos.</p>
+<p><strong>A good AGENTS.md covers:</strong></p>
+<ul>
+<li>Repo layout and important directories</li>
+<li>How to run the project</li>
+<li>Build, test, and lint commands</li>
+<li>Engineering conventions and PR expectations</li>
+<li>Constraints and "do-not" rules</li>
+<li>What "done" means and how to verify work</li>
+</ul>
+<p><strong>Hierarchy:</strong> Global AGENTS.md in <code>~/.codex</code> for personal defaults, repo-level file for shared standards, subdirectory files for local rules. More specific files closer to the current directory win.</p>
+<p><strong>Scaffolding:</strong> The <code>/init</code> slash command scaffolds a starter AGENTS.md — edit the result to match how your team actually builds, tests, reviews, and ships code.</p>
+<p><strong>Sizing discipline:</strong> Keep it practical. A short, accurate AGENTS.md is more useful than a long file full of vague rules. Start with basics, add rules only after you notice repeated mistakes. If AGENTS.md grows too large, keep the main file concise and reference task-specific markdown files for planning, code review, or architecture.</p>
+<p><strong>Retrospective loop:</strong> When Codex makes the same mistake twice, ask it for a retrospective and update AGENTS.md. Guidance stays practical and based on real friction.</p>
+<h3 id="high-signal-agentsmd-template">High-Signal AGENTS.md Template<a class="headerlink" href="#high-signal-agentsmd-template" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code># AGENTS.md
+
+## Contract
+- If you change code, run fastest relevant checks and report results.
+- Prefer small, reviewable diffs; split large work into staged PRs.
+- Never introduce new dependencies without updating lockfiles.
+
+## How to verify
+- Unit tests: `...`
+- Lint/format: `...`
+- Typecheck: `...`
+- Integration tests (only when touching boundaries): `...`
+
+## Repo invariants
+- Public API compatibility rules
+- Security: never log secrets; never broaden network egress; never disable auth checks
+- Performance: no new N+1 queries; no unbounded loops in hot paths
+
+## Code style (only what CI can enforce)
+- Formatter/linter rules that matter
+- Naming conventions that break tooling if violated
+
+## Where to look
+- Architecture: `docs/architecture.md`
+- Key modules: `src/...`, `services/...`
+- Sharp edges: `docs/gotchas.md`
+</code></pre></div>
+<blockquote>
+<p><strong>Key:</strong> AGENTS.md should encode the <strong>minimum runnable contract</strong> for changing code safely — what checks to run, what constraints matter, where sharp edges are. Let discovery happen through tools/tests.</p>
+</blockquote>
+<h3 id="agentsmd-research-findings">AGENTS.md Research Findings<a class="headerlink" href="#agentsmd-research-findings" title="Permanent link">&para;</a></h3>
+<p>Feb 2026 arXiv papers disagree on AGENTS.md effects. Reconciling hypothesis: <strong>AGENTS.md helps when it removes ambiguity and accelerates correct verification, but hurts when it adds irrelevant constraints.</strong></p>
+<ul>
+<li>arXiv 2602.11988 (Feb 12): AGENTS-like context can <em>decrease</em> success rates + increase cost</li>
+<li>arXiv 2601.20404 (Jan 28): Finds runtime and output-token reductions with AGENTS.md</li>
+</ul>
+<p>(OpenAI Codex Best Practices, Mar 2026; arXiv, Feb 2026)</p>
+<hr />
+<h2 id="configuration-consistency">Configuration &amp; Consistency<a class="headerlink" href="#configuration-consistency" title="Permanent link">&para;</a></h2>
+<p>Configuration makes Codex behave consistently across sessions and surfaces — model choice, reasoning effort, sandbox mode, approval policy, profiles, and MCP setup.</p>
+<p><strong>Configuration layers:</strong></p>
+<ul>
+<li><strong>Personal defaults</strong> in <code>~/.codex/config.toml</code> (Settings &gt; Configuration &gt; Open config.toml from the Codex app)</li>
+<li><strong>Repo-specific behavior</strong> in <code>.codex/config.toml</code></li>
+<li><strong>Command-line overrides</strong> for one-off situations (CLI only)</li>
+</ul>
+<p><code>config.toml</code> defines durable preferences: MCP servers, profiles, multi-agent setup, experimental features. Edit directly or ask Codex to update it.</p>
+<p><strong>Two key control knobs:</strong></p>
+<ul>
+<li><strong>Approval mode</strong> — when Codex asks for permission to run a command</li>
+<li><strong>Sandbox mode</strong> — whether Codex can read/write in the directory and which files the agent can access</li>
+</ul>
+<p>The CLI, IDE, and Codex app all share the same configuration layers.</p>
+<blockquote>
+<p><strong>Key:</strong> Configure Codex for your real environment early. Many quality issues are really setup issues — wrong working directory, missing write access, wrong model defaults, or missing tools and connectors. Start with tight permissions, then loosen only for trusted repos or specific workflows once the need is clear.</p>
+</blockquote>
+<p>(OpenAI Codex Best Practices, Mar 2026)</p>
+<hr />
+<h2 id="testing-review-quality-gates">Testing, Review &amp; Quality Gates<a class="headerlink" href="#testing-review-quality-gates" title="Permanent link">&para;</a></h2>
+<p>Don't stop at asking Codex to make a change. Ask it to <strong>create tests, run checks, confirm the result, and review the work</strong> before you accept it. Codex can do this loop — but only if it knows what "good" looks like. That guidance comes from either the prompt or AGENTS.md.</p>
+<p><strong>The verification loop should include:</strong></p>
+<ul>
+<li>Writing or updating tests for the change</li>
+<li>Running the right test suites</li>
+<li>Checking lint, formatting, or type checks</li>
+<li>Confirming the final behavior matches the request</li>
+<li>Reviewing the diff for bugs, regressions, or risky patterns</li>
+</ul>
+<p><strong>Diff panel:</strong> Toggle in the Codex app to directly review changes locally. Click on a specific row to provide feedback fed as context to the next turn.</p>
+<p><strong><code>/review</code> slash command</strong> provides multiple review modes:</p>
+<ul>
+<li>Review against a base branch (PR-style)</li>
+<li>Review uncommitted changes</li>
+<li>Review a specific commit</li>
+<li>Use custom review instructions</li>
+</ul>
+<p>If your team has a <code>code_review.md</code> file referenced from AGENTS.md, Codex follows that guidance during review — a strong pattern for consistency across repositories and contributors.</p>
+<p><strong>GitHub Cloud integration:</strong> Set up Codex to run code reviews on PRs automatically. At OpenAI, <strong>Codex reviews 100% of PRs</strong>. Enable automatic reviews or have Codex reactively review when you <code>@Codex</code>.</p>
+<h3 id="harness-control-pipeline">Harness Control Pipeline<a class="headerlink" href="#harness-control-pipeline" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Task intake -&gt; Plan step (constraints + verification contract)
+  -&gt; Choose execution mode (single agent or worktree fork)
+    -&gt; Apply patch -&gt; Run minimal checks (lint/type/unit)
+      -&gt; Pass? -&gt; Generate summary + artefacts -&gt; Human review -&gt; Merge
+      -&gt; Fail? -&gt; Iterate: diagnose -&gt; patch -&gt; re-run
+        -&gt; Post-merge: add eval case if failure was novel
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>What to Do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Forbid</strong></td>
+<td>Unsafe actions by default; require explicit approvals for exceptions</td>
+</tr>
+<tr>
+<td><strong>Require</strong></td>
+<td>Run AGENTS.md checks at minimum; treat as contract, not suggestion</td>
+</tr>
+<tr>
+<td><strong>Record</strong></td>
+<td>Command logs, diffs, structured JSON outputs for fast human review</td>
+</tr>
+</tbody>
+</table>
+<p>(OpenAI Codex Best Practices, Mar 2026)</p>
+<hr />
+<h2 id="mcp-for-external-context">MCP for External Context<a class="headerlink" href="#mcp-for-external-context" title="Permanent link">&para;</a></h2>
+<p>Use MCP when the context Codex needs lives outside the repo. <strong>Model Context Protocol</strong> is an open standard connecting Codex to external tools and systems — replacing copy-paste of live information into prompts with repeatable integrations.</p>
+<p><strong>Use MCP when:</strong></p>
+<ul>
+<li>The needed context lives outside the repo</li>
+<li>The data changes frequently</li>
+<li>You want Codex to use a tool rather than rely on pasted instructions</li>
+<li>You need a repeatable integration across users or projects</li>
+</ul>
+<p>Codex supports both <strong>STDIO and Streamable HTTP servers</strong> with OAuth. In the Codex App, head to Settings &gt; MCP servers for custom and recommended servers. The CLI uses <code>codex mcp add</code> with a name, URL, and configuration details.</p>
+<blockquote>
+<p><strong>Key:</strong> Add tools only when they unlock a real workflow. Start with one or two tools that clearly remove a manual loop you do often, then expand from there. Don't wire in every tool you use upfront.</p>
+</blockquote>
+<p>(OpenAI Codex Best Practices, Mar 2026)</p>
+<hr />
+<h2 id="skills-ecosystem">Skills Ecosystem<a class="headerlink" href="#skills-ecosystem" title="Permanent link">&para;</a></h2>
+<p>Once a workflow becomes repeatable, package it as a <strong>Skill</strong> (<code>SKILL.md</code> file) with instructions, context, and supporting logic Codex should apply consistently. Skills work across the CLI, IDE extension, and Codex app.</p>
+<p><strong>Design principles:</strong></p>
+<ul>
+<li>Keep each skill scoped to <strong>one job</strong></li>
+<li>Start with 2-3 concrete use cases</li>
+<li>Define clear inputs and outputs</li>
+<li>Write the description so it says what the skill does and when to use it — include trigger phrases a user would actually say</li>
+<li>Start with one representative task, get it working well, then turn it into a skill</li>
+</ul>
+<p><strong>Good candidates for skills:</strong></p>
+<ul>
+<li>Log triage</li>
+<li>Release note drafting</li>
+<li>PR review against a checklist</li>
+<li>Migration planning</li>
+<li>Telemetry or incident summaries</li>
+<li>Standard debugging flows</li>
+</ul>
+<p><strong>Skills architecture:</strong> Skills are folders anchored by <code>SKILL.md</code> with YAML frontmatter for discovery/routing. Full instructions load only when invoked. Framed as enablement for repeatable workflows, scripts/templates, and sandboxed execution.</p>
+<p><strong>Scale:</strong> As of March 2026, Codex maintains <strong>100+ internal skills</strong> covering common workflows (PR creation, bug triage, dependency updates, migration scripts). SkillsBench counted <strong>47,000+ unique skills across 6,300+ repositories</strong> — though almost none have eval harnesses. Most are AI-generated, vibe-checked with a handful of manual runs, then shipped.</p>
+<p><strong>Storage:</strong> Personal skills in <code>$HOME/.agents/skills</code>, shared team skills in <code>.agents/skills</code> inside a repository — especially helpful for onboarding new teammates.</p>
+<p><strong>Tooling:</strong> The <code>$skill-creator</code> skill scaffolds the first version; <code>$skill-installer</code> installs locally. The skill description is the most critical piece — a vague description means unreliable triggering. A description rewrite alone fixed 5 of 7 failures in one case study (Gemini Interactions API skill, 66.7% → 100% pass rate).</p>
+<p><strong>Cross-tool portability:</strong> Vercel's <strong>skills.sh</strong> targets multiple tools, making skills a portable unit across agent surfaces — suggesting "agent capability packaging" may standardize faster than any one vendor's plugin system.</p>
+<h3 id="testing-skills">Testing Skills<a class="headerlink" href="#testing-skills" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key:</strong> Don't ship skills without evals. The skill description is the trigger mechanism — if it's vague, the skill won't trigger reliably.</p>
+</blockquote>
+<p><strong>Grade outcomes, not paths — three dimensions:</strong></p>
+<ol>
+<li><strong>Outcome</strong> — Does it produce a usable result? Code compiles, API returns valid response, document renders</li>
+<li><strong>Style &amp; instructions</strong> — Does the output follow conventions and directives? Right SDK, correct model IDs, naming conventions</li>
+<li><strong>Efficiency</strong> — How much time, tokens, effort? No unnecessary retries, reasonable token count, no command thrashing</li>
+</ol>
+<p><strong>Lightweight eval harness (4 steps):</strong></p>
+<ol>
+<li><strong>Create a prompt set</strong> (10-20 prompts). Include negative tests — prompts where the skill should NOT trigger</li>
+<li><strong>Run the agent and capture output</strong> through the CLI, not a mock</li>
+<li><strong>Write deterministic checks</strong> — small functions (typically regex) returning booleans</li>
+<li><strong>Add LLM-as-judge</strong> (optional) for subjective assessment using structured output schemas</li>
+</ol>
+<p><strong>Best practices:</strong> Use directives not information ("Always use X" &gt; "X is recommended"). Isolate each run. Run 3-5 trials per prompt. Test across harnesses. Graduate passing evals into regression suites. Detect skill retirement by running evals with the skill unloaded.</p>
+<p>(OpenAI Codex Best Practices, Mar 2026)</p>
+<hr />
+<h2 id="automations-scheduled-work">Automations &amp; Scheduled Work<a class="headerlink" href="#automations-scheduled-work" title="Permanent link">&para;</a></h2>
+<p>Once a workflow is stable, schedule Codex to run it in the background. In the Codex app, automations let you choose the project, prompt, cadence, and execution environment.</p>
+<p><strong>Good candidates:</strong></p>
+<ul>
+<li>Summarizing recent commits</li>
+<li>Scanning for likely bugs</li>
+<li>Drafting release notes</li>
+<li>Checking CI failures</li>
+<li>Producing standup summaries</li>
+<li>Running repeatable analysis workflows on a schedule</li>
+</ul>
+<p><strong>Execution environments:</strong> Choose between a dedicated git worktree (isolated) or your local environment.</p>
+<blockquote>
+<p><strong>Key:</strong> Skills define the method, automations define the schedule. If a workflow still needs a lot of steering, turn it into a skill first. Once predictable, automation becomes a force multiplier. Use automations for reflection and maintenance too — review recent sessions, summarize repeated friction, improve prompts and workflow setup over time.</p>
+</blockquote>
+<p>(OpenAI Codex Best Practices, Mar 2026)</p>
+<hr />
+<h2 id="session-management">Session Management<a class="headerlink" href="#session-management" title="Permanent link">&para;</a></h2>
+<p>Codex sessions are working threads that accumulate context, decisions, and actions over time. Managing them well has a big impact on quality.</p>
+<p><strong>Key slash commands:</strong></p>
+<ul>
+<li><code>/experimental</code> — toggle experimental features and add to config.toml</li>
+<li><code>/resume</code> — resume a saved conversation</li>
+<li><code>/fork</code> — create a new thread preserving the original transcript</li>
+<li><code>/compact</code> — summarize earlier context (Codex also auto-compacts)</li>
+<li><code>/agent</code> — switch between active parallel agent threads</li>
+<li><code>/theme</code> — choose syntax highlighting theme</li>
+<li><code>/apps</code> — use ChatGPT apps directly in Codex</li>
+<li><code>/status</code> — inspect current session state</li>
+</ul>
+<p><strong>Thread discipline:</strong> Keep one thread per coherent unit of work. If the work is still part of the same problem, staying in the same thread preserves the reasoning trail. Fork only when the work truly branches.</p>
+<p><strong>Multi-agent offloading:</strong> Use subagents for bounded work — exploration, tests, triage — while keeping the main agent focused on the core problem.</p>
+<p><strong>Compaction:</strong> When conversations exceed context limits, Codex summarizes prior context into a condensed representation — preserving task state, file changes, and test results while discarding conversational filler. Both Codex and Claude Code converge on this pattern as essential for extended agentic sessions.</p>
+<p>(OpenAI Codex Best Practices, Mar 2026)</p>
+<hr />
+<h2 id="memory-and-state-management">Memory and State Management<a class="headerlink" href="#memory-and-state-management" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key:</strong> OpenAI's Jan 2026 cookbook treats memory as a <strong>high-value attack surface</strong> and recommends guardrails at distillation, consolidation, and injection stages.</p>
+</blockquote>
+<p><strong>State-based memory store pattern:</strong></p>
+<ul>
+<li>Structured profile fields + curated memory notes</li>
+<li>Explicit memory distillation during runs</li>
+<li>End-of-run consolidation (dedupe/conflict resolution)</li>
+<li>Deterministic injection as YAML frontmatter + markdown lists</li>
+<li><strong>Precedence:</strong> latest user input &gt; session overrides &gt; global defaults</li>
+</ul>
+<p><strong>Memory commands:</strong> <code>/m_update</code>, <code>/m_drop</code> for explicit memory management; expanded memory-read/metrics pipelines.</p>
+<p><strong>Memory guardrails:</strong> Never store sensitive data; reject instruction-shaped memories; enforce "no invention" during consolidation; wrap in explicit delimiters; treat as advisory, not authoritative.</p>
+<p>(OpenAI Cookbook, Jan 2026)</p>
+<hr />
+<h2 id="parallel-worktrees-multi-agent-workflows">Parallel Worktrees &amp; Multi-Agent Workflows<a class="headerlink" href="#parallel-worktrees-multi-agent-workflows" title="Permanent link">&para;</a></h2>
+<p>Power users cite "do more in parallel" using isolated workspaces as the repeated advantage over "better prompts."</p>
+<p><strong>Codex parallelism:</strong> 4-8 concurrent agents per user session, each in its own Firecracker microVM sandbox. Agents cannot interfere with each other.</p>
+<p><strong>Zack Proser's two-tier workflow:</strong> Queue multiple Codex tasks for maintenance/SDLC grunt work, then spend human focus on hard architectural work using other tools.</p>
+<p><strong>Harness patterns at scale</strong> (1M+ WAU):</p>
+<ul>
+<li><strong>Session continuity</strong> — resume-from-PR/branch, session forking</li>
+<li><strong>Instruction layering</strong> — global vs repo instruction files; override behaviors</li>
+<li><strong>Resource stability under parallelism</strong> — OOM pressure, memory leaks under multiple sessions</li>
+<li><strong>Structured privileges</strong> — permissions history, approvals, read-only shapes, network approvals</li>
+</ul>
+<p><strong>Agent HQ inside GitHub</strong> — two quality-positive workflows:</p>
+<ul>
+<li><strong>PR review + remediation loops:</strong> <code>@codex review</code> → apply fixes in follow-up agent sessions</li>
+<li><strong>Issue-to-PR delegation:</strong> Agent produces patch under normal branch protections, humans review</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> The lesson is not that one tool "wins," but that you <strong>batch the cheap work</strong> and reserve expert attention for the parts the agent still struggles with.</p>
+</blockquote>
+<p>(Zack Proser; Gergely Orosz, Pragmatic Engineer, Mar 2026)</p>
+<hr />
+<h2 id="common-mistakes">Common Mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Overloading prompts with durable rules instead of moving them into AGENTS.md or a skill</li>
+<li>Not letting the agent see its work by omitting build and test command details</li>
+<li>Skipping planning on multi-step and complex tasks</li>
+<li>Giving Codex full permissions before understanding the workflow</li>
+<li>Running live threads on the same files without using git worktrees</li>
+<li>Turning a recurring task into an automation before it's reliable manually</li>
+<li>Treating Codex as something to watch step by step instead of using it in parallel with your own work</li>
+<li>Using one thread per project instead of one thread per task — bloated context, worse results over time</li>
+</ul>
+<p>(OpenAI Codex Best Practices, Mar 2026)</p>
+<hr />
+<h2 id="codex-vs-claude-code-positioning">Codex vs Claude Code Positioning<a class="headerlink" href="#codex-vs-claude-code-positioning" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Codex (OpenAI)</th>
+<th>Claude Code (Anthropic)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mental model</strong></td>
+<td>Command centre for agentic coding — multi-agent workflows with parallel workstreams</td>
+<td>Agentic coding tool — reads codebase, edits, runs commands, integrates terminal/IDE/desktop/browser</td>
+</tr>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>Rust, 5-step ReAct state machine, Firecracker microVM sandbox per agent</td>
+<td>Node.js CLI client, local action execution on user's machine / CI runner</td>
+</tr>
+<tr>
+<td><strong>Model</strong></td>
+<td>GPT-5.3-Codex (coding-specialized fine-tune)</td>
+<td>Claude Opus 4.1 (precision) / Sonnet 4 (1M context, cost-effective)</td>
+</tr>
+<tr>
+<td><strong>Sandboxing</strong></td>
+<td>Firecracker microVM — isolated ephemeral FS, network allowlist, per-agent limits</td>
+<td>Permission system (ask/allow/deny lists); Auto Mode (March 2026)</td>
+</tr>
+<tr>
+<td><strong>Parallelism</strong></td>
+<td>4-8 concurrent agents/session, each in own microVM</td>
+<td>Parallel worktrees; multiple CLI sessions; subagent spawning</td>
+</tr>
+<tr>
+<td><strong>Repo instructions</strong></td>
+<td>AGENTS.md (popularized as the standard; Feb 2026 arXiv research conducted primarily on Codex repos)</td>
+<td>CLAUDE.md — project-level persistent memory and routing</td>
+</tr>
+<tr>
+<td><strong>Skills storage</strong></td>
+<td><code>$HOME/.agents/skills</code> (personal), <code>.agents/skills</code> (repo)</td>
+<td><code>~/.claude/skills/</code> (personal), <code>.claude/skills/</code> (project)</td>
+</tr>
+<tr>
+<td><strong>Dogfooding</strong></td>
+<td>90%+ of Codex's own codebase written by Codex itself</td>
+<td>Internal teams report 3x faster incident debugging</td>
+</tr>
+<tr>
+<td><strong>Scale</strong></td>
+<td>1M+ WAU (March 2026, 5x since Jan 2026)</td>
+<td>Pro/Max/API/Enterprise users across CLI, IDE, GitHub Actions, Slack</td>
+</tr>
+<tr>
+<td><strong>Key differentiator</strong></td>
+<td>Multi-agent parallelism, workstream queuing, Firecracker sandboxing, 100+ internal skills</td>
+<td>Hooks/skills system, MCP extensibility, Slack delegation, Auto Mode</td>
+</tr>
+<tr>
+<td><strong>Shared patterns</strong></td>
+<td>Both: repo constitution files, plan-first, parallel worktrees, quality gates, compaction, skills ecosystems</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Emerging competitors</strong></td>
+<td><strong>T3 Code</strong> (open source, by Theo): agent orchestration atop Codex CLI. <strong>Cursor Automations</strong> (March 2026): persistent always-on AI coding agents</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="timeline-changelog">Timeline &amp; Changelog<a class="headerlink" href="#timeline-changelog" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2025-04-16</strong></td>
+<td>Codex CLI practitioners start documenting usage</td>
+</tr>
+<tr>
+<td><strong>2026-01-05</strong></td>
+<td>OpenAI Cookbook: Context Engineering for Personalization (memory patterns)</td>
+</tr>
+<tr>
+<td><strong>2026-01-28</strong></td>
+<td>arXiv 2601.20404: AGENTS.md reduces runtime and output tokens</td>
+</tr>
+<tr>
+<td><strong>2026-02-04</strong></td>
+<td>GitHub <strong>Agent HQ</strong> public preview: agent picker for Claude/Codex on issues/PRs</td>
+</tr>
+<tr>
+<td><strong>2026-02-10</strong></td>
+<td><strong>Skills API</strong> formalized: SKILL.md packaging, routing, versioning, network posture</td>
+</tr>
+<tr>
+<td><strong>2026-02-12</strong></td>
+<td>arXiv 2602.11988: AGENTS-like context can decrease success rates + increase cost</td>
+</tr>
+<tr>
+<td><strong>2026-02-12</strong></td>
+<td>CLI memory commands (<code>/m_update</code>, <code>/m_drop</code>); Codex app multi-agent collaboration; "Codex-Spark" variant with Cerebras</td>
+</tr>
+<tr>
+<td><strong>2026-02-17</strong></td>
+<td>CLI 0.102/0.103: unified permissions/network approvals, multi-agent role config, co-author attribution</td>
+</tr>
+<tr>
+<td><strong>2026-02-23</strong></td>
+<td>"Building Governed AI Agents" — policies-as-code, guardrails, evals, CI/CD for agent harnesses</td>
+</tr>
+<tr>
+<td><strong>2026-03 (early)</strong></td>
+<td>Pragmatic Engineer publishes "How Codex is Built" — Rust, Firecracker, GPT-5.3-Codex, 1M+ WAU, 90%+ self-generated codebase, three-tier review</td>
+</tr>
+<tr>
+<td><strong>2026-03-05</strong></td>
+<td>OpenAI updated agent prompting guidance for GPT-5.4 API</td>
+</tr>
+<tr>
+<td><strong>2026-03-06</strong></td>
+<td>T3 Code released (open source, by Theo); Cursor Automations announced</td>
+</tr>
+<tr>
+<td><strong>2026-03-12</strong></td>
+<td>OpenAI publishes "Codex Best Practices" guide — prompting, AGENTS.md, config, skills, MCP, automations, session management</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Diffusion pattern:</strong> Official docs → power-user workflows → reusable artefacts (skills, hooks, templates) → team adoption (CI, Slack/Discord, PR review)</p>
+<hr />
+<h2 id="key-references">Key References<a class="headerlink" href="#key-references" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Codex Product Hub</strong></td>
+<td><code>https://openai.com/codex/</code></td>
+</tr>
+<tr>
+<td><strong>Codex Best Practices</strong></td>
+<td><code>https://developers.openai.com/codex/learn/best-practices</code></td>
+</tr>
+<tr>
+<td><strong>Skills Ecosystem (skills.sh)</strong></td>
+<td><code>https://vercel.com/changelog/introducing-skills-the-open-agent-skills-ecosystem</code></td>
+</tr>
+<tr>
+<td><strong>"How Codex is Built" (Pragmatic Engineer)</strong></td>
+<td>March 2026 — Rust architecture, Firecracker, GPT-5.3-Codex, 1M+ WAU</td>
+</tr>
+<tr>
+<td><strong>arXiv 2602.11988</strong></td>
+<td>AGENTS.md effects on agent performance (Feb 2026)</td>
+</tr>
+<tr>
+<td><strong>arXiv 2601.20404</strong></td>
+<td>AGENTS.md runtime/token reduction findings (Jan 2026)</td>
+</tr>
+<tr>
+<td><strong>OpenAI Cookbook</strong></td>
+<td>Context Engineering for Personalization (Jan 2026)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

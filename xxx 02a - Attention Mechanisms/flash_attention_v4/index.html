@@ -1,0 +1,2836 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2002a%20-%20Attention%20Mechanisms/flash_attention_v4/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>FlashAttention-4 - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#flashattention-4" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              FlashAttention-4
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-asymmetric-scaling-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Asymmetric Scaling Problem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Asymmetric Scaling Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-fa3-cannot-simply-run-on-blackwell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why FA3 Cannot Simply Run on Blackwell
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-bottleneck-shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Bottleneck Shift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackwell-architecture-features-exploited" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blackwell Architecture Features Exploited
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Blackwell Architecture Features Exploited">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tensor-memory-tmem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tensor Memory (TMEM)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5th-generation-asynchronous-tensor-cores" class="md-nav__link">
+    <span class="md-ellipsis">
+      5th Generation Asynchronous Tensor Cores
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cta-mma-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-CTA MMA Mode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forward-pass-five-role-warp-specialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward Pass: Five-Role Warp Specialization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Forward Pass: Five-Role Warp Specialization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ping-pong-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ping-Pong Scheduling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-software-emulated-exponential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Software-Emulated Exponential
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conditional-rescaling-threshold-tau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditional Rescaling (Threshold Tau)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backward-pass-innovations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Pass Innovations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backward Pass Innovations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tmem-reuse-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      TMEM Reuse Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cta-backward-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-CTA Backward Mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deterministic-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deterministic Mode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scheduling-and-load-balancing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scheduling and Load Balancing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scheduling and Load Balancing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#longest-processing-time-first-lpt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Longest-Processing-Time-First (LPT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-sequence-length-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variable Sequence Length Sorting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gqamqa-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      GQA/MQA Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-pass-bf16-b200" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward Pass (BF16, B200)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-pass-bf16-b200" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Pass (BF16, B200)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-attention-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Attention Variants
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-cute-dsl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation: CuTe-DSL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flashattention-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      FlashAttention Evolution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ecosystem-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ecosystem Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ecosystem Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pytorch-flexattention-march-5-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      PyTorch FlexAttention (March 5, 2026)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vllm-v0170-march-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      vLLM v0.17.0 (March 2026)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implications-for-inference-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implications for Inference Engineering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implications for Inference Engineering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-fa4-means-for-serving-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      What FA4 Means for Serving Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-broader-lesson-asymmetric-scaling-as-a-design-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Broader Lesson: Asymmetric Scaling as a Design Pattern
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="flashattention-4">FlashAttention-4<a class="headerlink" href="#flashattention-4" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>FlashAttention-4 is the first attention kernel to break the petaflop barrier, achieving <strong>1,613 TFLOP/s</strong> (~71% utilization) on NVIDIA's Blackwell B200 GPU. But the raw number obscures the real contribution: FA4 is a case study in what happens when hardware scaling becomes asymmetric and kernel engineers must redesign algorithms around the bottlenecks that <em>didn't</em> scale, rather than the resources that did.</p>
+<p>The core observation is precise: Blackwell doubled tensor-core throughput from Hopper (~1 PFLOP/s to ~2.25 PFLOP/s BF16), but <strong>shared-memory bandwidth and non-matmul units (SFUs, general ALUs) stayed roughly flat</strong>. This means the softmax exponential — computed on special function units — and shared-memory data movement became the dominant bottlenecks, not the matrix multiplications themselves. FA4's entire design philosophy follows from this single asymmetry: co-design the algorithm and kernel pipeline so that tensor cores, SFUs, FMA units, and memory stages overlap maximally, with no single resource becoming a serialization point.</p>
+<p>Three structural innovations make this concrete. First, a <strong>five-role warp specialization</strong> pipeline with ping-pong scheduling across two query tiles achieves ~94% execution slot utilization by ensuring that while one tile's softmax computes, the other tile's MMA proceeds. Second, a <strong>hybrid software-emulated exponential</strong> distributes the softmax bottleneck across both hardware SFUs and FMA units (via a degree-3 polynomial approximation), breaking the SFU serialization that would otherwise cap throughput at well below petaflop. Third, a <strong>conditional rescaling strategy</strong> with threshold tau reduces numerical-stability rescaling operations by approximately 10x compared to FA3, eliminating a per-iteration tax that compounds across long sequences.</p>
+<p>The result: 1.1–1.3x faster than cuDNN 9.13, 2.1–2.7x faster than Triton implementations, and a generational leap from FA3 (which does not run on Blackwell). FA4 is implemented entirely in <strong>CuTe-DSL</strong> (Python DSL from NVIDIA CUTLASS) rather than C++ templates, cutting compile times 20–30x — a practical shift that makes kernel iteration feasible during development rather than requiring overnight builds.</p>
+<p><strong>Paper:</strong> "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling" (arXiv 2603.05451, March 5, 2026). Authors: Ted Zadouri (Princeton), Markus Hoehnerbach (Meta), Jay Shah (Colfax Research), Timmy Liu (NVIDIA), Vijay Thakkar (Meta/Georgia Tech), Tri Dao (Princeton/Together AI).</p>
+<hr />
+<h2 id="the-asymmetric-scaling-problem">The Asymmetric Scaling Problem<a class="headerlink" href="#the-asymmetric-scaling-problem" title="Permanent link">&para;</a></h2>
+<h3 id="why-fa3-cannot-simply-run-on-blackwell">Why FA3 Cannot Simply Run on Blackwell<a class="headerlink" href="#why-fa3-cannot-simply-run-on-blackwell" title="Permanent link">&para;</a></h3>
+<p>FA3 was designed for Hopper (H100) and does not run on Blackwell. Conversely, FA4 targets Blackwell exclusively. This is not a portability failure — it reflects fundamentally different hardware trade-offs:</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>H100 (Hopper)</th>
+<th>B200 (Blackwell)</th>
+<th>Scaling Factor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BF16 tensor-core throughput</td>
+<td>~1 PFLOP/s</td>
+<td>~2.25 PFLOP/s</td>
+<td>~2.25x</td>
+</tr>
+<tr>
+<td>Shared memory bandwidth</td>
+<td>Baseline</td>
+<td>Baseline</td>
+<td>~1x</td>
+</tr>
+<tr>
+<td>Special Function Units (SFUs)</td>
+<td>Baseline</td>
+<td>Baseline</td>
+<td>~1x</td>
+</tr>
+<tr>
+<td>General-purpose ALUs</td>
+<td>Baseline</td>
+<td>Baseline</td>
+<td>~1x</td>
+</tr>
+<tr>
+<td>TMEM per SM</td>
+<td>—</td>
+<td>256 KB</td>
+<td>New resource</td>
+</tr>
+</tbody>
+</table>
+<p>The consequence: a kernel designed to keep tensor cores busy on Hopper will, on Blackwell, find tensor cores idle waiting for softmax (SFU-bound in forward pass) or shared-memory traffic (backward pass). FA4 attacks both bottlenecks simultaneously.</p>
+<h3 id="the-bottleneck-shift">The Bottleneck Shift<a class="headerlink" href="#the-bottleneck-shift" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Forward pass bottleneck:</strong> The softmax exponential (<code>exp(x)</code>) computed on SFU hardware units. SFUs did not scale with tensor cores, so doubling matmul throughput just means the kernel spends proportionally more time waiting for exponentials.</li>
+<li><strong>Backward pass bottleneck:</strong> Shared memory traffic for the five chained MMAs per iteration. With tensor cores 2.25x faster, shared memory bandwidth becomes the constraining resource.</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> FA4's design philosophy is not "make matmuls faster" — tensor cores are already fast enough. It is "redistribute work away from the bottleneck units (SFUs, shared memory) onto underutilized resources (FMA units, TMEM, 2-CTA tiling)."</p>
+</blockquote>
+<hr />
+<h2 id="blackwell-architecture-features-exploited">Blackwell Architecture Features Exploited<a class="headerlink" href="#blackwell-architecture-features-exploited" title="Permanent link">&para;</a></h2>
+<h3 id="tensor-memory-tmem">Tensor Memory (TMEM)<a class="headerlink" href="#tensor-memory-tmem" title="Permanent link">&para;</a></h3>
+<p>Each of Blackwell's 148 SMs contains <strong>256 KB of warp-synchronous scratchpad storage</strong> directly wired into tensor cores. FA4 stores intermediate accumulators (S, P, dP, dS, dQ) in TMEM rather than registers — dramatically reducing register pressure compared to FA3.</p>
+<h3 id="5th-generation-asynchronous-tensor-cores">5th Generation Asynchronous Tensor Cores<a class="headerlink" href="#5th-generation-asynchronous-tensor-cores" title="Permanent link">&para;</a></h3>
+<p>The <code>tcgen05.mma</code> instruction is <strong>fully asynchronous</strong> and accumulates directly in TMEM. The largest single-CTA tile is <strong>128x256x16</strong> — approximately 2x the area of Hopper's WGMMA atom. This enables larger tiles per operation, reducing iteration count and synchronization overhead.</p>
+<h3 id="2-cta-mma-mode">2-CTA MMA Mode<a class="headerlink" href="#2-cta-mma-mode" title="Permanent link">&para;</a></h3>
+<p>Executes one unified MMA across <strong>paired CTAs in the same cluster</strong>, spanning both TMEM spaces. This enables <strong>256x256x16 tiles</strong> by splitting M and N dimensions. The practical effect: reduced redundant shared-memory traffic and lower per-CTA footprint — critical for the backward pass where shared-memory bandwidth is the bottleneck.</p>
+<hr />
+<h2 id="forward-pass-five-role-warp-specialization">Forward Pass: Five-Role Warp Specialization<a class="headerlink" href="#forward-pass-five-role-warp-specialization" title="Permanent link">&para;</a></h2>
+<p>The forward kernel assigns <strong>five distinct roles</strong> to warp groups, all executing concurrently within each CTA:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Warp Count</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Load warps</strong></td>
+<td>—</td>
+<td>Stream Q tiles into shared memory; orchestrate K/V tile loads from global memory via TMA (Tensor Memory Accelerator)</td>
+</tr>
+<tr>
+<td><strong>MMA warps</strong></td>
+<td>—</td>
+<td>Execute matmuls on tensor cores via <code>tcgen05.mma.cta_group::1</code>; compute unnormalized attention scores; accumulate value-weighted outputs in TMEM</td>
+</tr>
+<tr>
+<td><strong>Softmax warps</strong></td>
+<td>8 (2 warpgroups of 4)</td>
+<td>Compute normalized attention scores with hybrid exponential strategy; synchronized to prevent simultaneous exponential computation competing for SFU resources</td>
+</tr>
+<tr>
+<td><strong>Correction warps</strong></td>
+<td>4</td>
+<td>Monitor scaling factors; conditionally rescale previous outputs only when the max jump exceeds threshold tau — reduces rescaling ~10x vs FA3</td>
+</tr>
+<tr>
+<td><strong>Epilogue warps</strong></td>
+<td>1–2</td>
+<td>Final output storage from shared memory to global memory via TMA</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ping-pong-scheduling">Ping-Pong Scheduling<a class="headerlink" href="#ping-pong-scheduling" title="Permanent link">&para;</a></h3>
+<p>The pipeline processes <strong>two query tiles per CTA</strong> (128 tokens each) in alternating fashion. While one tile's softmax is computing (SFU-bound), the other tile's MMA proceeds (tensor-core-bound). This achieves <strong>~94% execution slot utilization</strong> by ensuring neither resource type waits for the other.</p>
+<h3 id="hybrid-software-emulated-exponential">Hybrid Software-Emulated Exponential<a class="headerlink" href="#hybrid-software-emulated-exponential" title="Permanent link">&para;</a></h3>
+<p>The key innovation for breaking the SFU bottleneck. Rather than relying solely on the hardware <code>MUFU.EX2</code> special function unit:</p>
+<ul>
+<li>Hardware SFU handles a portion of exponential computations</li>
+<li><strong>FMA units execute a degree-3 polynomial approximation</strong> (Horner's method for <code>2^x</code>) for the remaining values</li>
+<li>This distributes the exponential workload across otherwise underutilized FMA compute units</li>
+<li>Maintains <strong>BF16 precision parity</strong> with pure hardware outputs</li>
+</ul>
+<h3 id="conditional-rescaling-threshold-tau">Conditional Rescaling (Threshold Tau)<a class="headerlink" href="#conditional-rescaling-threshold-tau" title="Permanent link">&para;</a></h3>
+<p>In standard online softmax (FA1–FA3), every time the running maximum changes, all previous accumulated outputs must be rescaled. FA4 introduces a <strong>threshold-gated rescaling</strong>: correction warps only trigger rescaling when the max jump exceeds a configurable threshold tau. In practice this eliminates <strong>~90% of rescaling operations</strong> — a significant reduction in non-matmul work that would otherwise serialize on general ALUs.</p>
+<hr />
+<h2 id="backward-pass-innovations">Backward Pass Innovations<a class="headerlink" href="#backward-pass-innovations" title="Permanent link">&para;</a></h2>
+<p>The backward pass chains <strong>five MMAs per iteration</strong> (recomputing S, computing QK^T and PV gradient operations for dQ, dK, dP, dV) plus element-wise softmax. This makes it even more sensitive to the shared-memory bottleneck.</p>
+<h3 id="tmem-reuse-strategy">TMEM Reuse Strategy<a class="headerlink" href="#tmem-reuse-strategy" title="Permanent link">&para;</a></h3>
+<p>Intermediate accumulators share TMEM columns to minimize storage: S and P share one column set; dP, dS, dQ share another. This relieves register pressure that would otherwise force register spills to local memory.</p>
+<h3 id="2-cta-backward-mode">2-CTA Backward Mode<a class="headerlink" href="#2-cta-backward-mode" title="Permanent link">&para;</a></h3>
+<p>Each CTA stages half of operand B, <strong>reducing shared-memory operand-B traffic by ~50%</strong>. DSMEM (distributed shared memory) exchange resolves the dQ reduction-axis mismatch between paired CTAs. This also <strong>halves global atomic reductions</strong> for dQ accumulation — critical for deterministic mode.</p>
+<h3 id="deterministic-mode">Deterministic Mode<a class="headerlink" href="#deterministic-mode" title="Permanent link">&para;</a></h3>
+<p>Serializes global dQ accumulation with semaphore-style locking and memory fencing. Despite the serialization overhead, achieves <strong>85–90% of nondeterministic throughput</strong> through:</p>
+<ul>
+<li>CTA swizzling to improve L2 cache locality</li>
+<li>Shortest-processing-time-first ordering to minimize tail latency from load imbalance</li>
+</ul>
+<hr />
+<h2 id="scheduling-and-load-balancing">Scheduling and Load Balancing<a class="headerlink" href="#scheduling-and-load-balancing" title="Permanent link">&para;</a></h2>
+<h3 id="longest-processing-time-first-lpt">Longest-Processing-Time-First (LPT)<a class="headerlink" href="#longest-processing-time-first-lpt" title="Permanent link">&para;</a></h3>
+<p>Causal masking creates triangular workloads — some CTAs process full tiles while others hit mostly-masked tiles and finish early. FA4 mitigates this load imbalance by reversing mblock iteration order and swizzling batch-heads into L2-sized sections.</p>
+<h3 id="variable-sequence-length-sorting">Variable Sequence Length Sorting<a class="headerlink" href="#variable-sequence-length-sorting" title="Permanent link">&para;</a></h3>
+<p>A preprocessing kernel sorts batches by maximum per-worktile execution time. The sort result is cached to eliminate overhead on subsequent calls with the same batch shape.</p>
+<h3 id="gqamqa-optimization">GQA/MQA Optimization<a class="headerlink" href="#gqamqa-optimization" title="Permanent link">&para;</a></h3>
+<p>For grouped-query and multi-query attention, all query heads sharing a KV head are traversed together, maximizing KV tile reuse in shared memory and reducing redundant global memory loads.</p>
+<hr />
+<h2 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h2>
+<h3 id="forward-pass-bf16-b200">Forward Pass (BF16, B200)<a class="headerlink" href="#forward-pass-bf16-b200" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Comparison</th>
+<th>Speedup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vs cuDNN 9.13</td>
+<td><strong>1.1–1.3x</strong></td>
+</tr>
+<tr>
+<td>vs Triton implementations</td>
+<td><strong>2.1–2.7x</strong></td>
+</tr>
+<tr>
+<td>vs FA2 (at seqlen 32,768)</td>
+<td><strong>3.6x</strong></td>
+</tr>
+<tr>
+<td>vs FA3 (generational, not same GPU)</td>
+<td><strong>~2–3x</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Peak throughput:</strong> 1,613 TFLOP/s (~71% utilization)</li>
+<li><strong>Execution slot utilization:</strong> ~94% via ping-pong warp scheduling</li>
+</ul>
+<h3 id="backward-pass-bf16-b200">Backward Pass (BF16, B200)<a class="headerlink" href="#backward-pass-bf16-b200" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>3.15x faster</strong> than FA2 at sequence length 32,768</li>
+<li>Deterministic mode: <strong>85–90%</strong> the speed of nondeterministic backward</li>
+<li>Consistent outperformance on large sequence lengths</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> FA4 is the first attention kernel to break the petaflop barrier. The 71% utilization figure is notable because attention involves significant non-matmul work (softmax, rescaling, masking) — pure GEMM kernels achieve higher utilization but perform simpler computation.</p>
+</blockquote>
+<hr />
+<h2 id="supported-attention-variants">Supported Attention Variants<a class="headerlink" href="#supported-attention-variants" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Forward</th>
+<th>Backward</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Standard (non-causal)</strong></td>
+<td>Supported</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td><strong>Causal masking</strong></td>
+<td>Supported (with LPT scheduling)</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td><strong>GQA (Grouped-Query Attention)</strong></td>
+<td>Supported</td>
+<td>Not yet supported</td>
+</tr>
+<tr>
+<td><strong>MQA (Multi-Query Attention)</strong></td>
+<td>Supported</td>
+<td>Not yet supported</td>
+</tr>
+<tr>
+<td><strong>Variable sequence length (varlen)</strong></td>
+<td>Supported (with sorting)</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td><strong>DeepSeek V3 config</strong> (192, 128 head dims)</td>
+<td>Tested</td>
+<td>Tested</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Via FlexAttention backend:</strong> sliding window, ALiBi, document masking, soft-capping, and arbitrary custom attention patterns are supported through the PyTorch FlexAttention + FA4 integration.</p>
+<p><strong>Note:</strong> FP8 support is <strong>not present</strong> in FA4. FP8 was a feature of FA3 on Hopper. FA4 focuses exclusively on BF16 on Blackwell.</p>
+<hr />
+<h2 id="implementation-cute-dsl">Implementation: CuTe-DSL<a class="headerlink" href="#implementation-cute-dsl" title="Permanent link">&para;</a></h2>
+<p>FA4 marks a major departure from FA3's C++ CUTLASS template approach. The entire kernel is implemented in <strong>CuTe-DSL</strong>, a Python DSL from the NVIDIA CUTLASS team that lowers directly to PTX:</p>
+<ul>
+<li><strong>20–30x faster compile times</strong> compared to C++ template metaprogramming</li>
+<li>Full low-level control preserved (inline PTX, barrier management, TMEM allocation)</li>
+<li>Python-level expressivity makes kernel development and iteration practical during research cycles</li>
+</ul>
+<p>This is architecturally significant: the compile-time barrier was a real obstacle to kernel experimentation in FA3. CuTe-DSL makes it feasible to iterate on kernel designs in minutes rather than hours.</p>
+<hr />
+<h2 id="flashattention-evolution">FlashAttention Evolution<a class="headerlink" href="#flashattention-evolution" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>FA1 (2022)</th>
+<th>FA2 (2023)</th>
+<th>FA3 (2024)</th>
+<th>FA4 (2026)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Target GPU</strong></td>
+<td>Ampere (A100)</td>
+<td>Ampere/Hopper</td>
+<td>Hopper (H100)</td>
+<td>Blackwell (B200)</td>
+</tr>
+<tr>
+<td><strong>Key innovation</strong></td>
+<td>Tiling + online softmax; fused kernel eliminates O(N^2) HBM reads</td>
+<td>Better work partitioning; 2x speedup over FA1</td>
+<td>Asynchronous WGMMA; FP8 support; Hopper-native pipelining</td>
+<td>Algorithm-kernel co-design for asymmetric scaling; hybrid exponential; 2-CTA mode</td>
+</tr>
+<tr>
+<td><strong>Accumulator storage</strong></td>
+<td>Registers</td>
+<td>Registers</td>
+<td>Registers</td>
+<td>TMEM (256 KB/SM)</td>
+</tr>
+<tr>
+<td><strong>Tile size</strong></td>
+<td>Small</td>
+<td>Medium</td>
+<td>64x128</td>
+<td>128x128 (up to 256x256 in 2-CTA)</td>
+</tr>
+<tr>
+<td><strong>Implementation</strong></td>
+<td>CUDA C++</td>
+<td>CUDA C++</td>
+<td>C++ (CUTLASS templates)</td>
+<td>CuTe-DSL (Python)</td>
+</tr>
+<tr>
+<td><strong>FP8 support</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No (BF16 only)</td>
+</tr>
+<tr>
+<td><strong>Peak TFLOP/s</strong></td>
+<td>—</td>
+<td>—</td>
+<td>~600–800 (H100)</td>
+<td>1,613 (B200)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ecosystem-integration">Ecosystem Integration<a class="headerlink" href="#ecosystem-integration" title="Permanent link">&para;</a></h2>
+<h3 id="pytorch-flexattention-march-5-2026">PyTorch FlexAttention (March 5, 2026)<a class="headerlink" href="#pytorch-flexattention-march-5-2026" title="Permanent link">&para;</a></h3>
+<p>FA4 is available as a <strong>backend for FlexAttention</strong> on Hopper and Blackwell GPUs:</p>
+<ul>
+<li>Set <code>kernel_options={"BACKEND": "FLASH"}</code> to activate</li>
+<li>PyTorch auto-generates CuTeDSL score/mask modification functions and JIT-instantiates FA4</li>
+<li><strong>1.2x to 3.2x speedup</strong> over the Triton FlexAttention backend on compute-bound workloads</li>
+<li>Supports custom attention patterns (ALiBi, sliding window, document masking, soft-capping, arbitrary combinations)</li>
+<li>Requires recent PyTorch nightly + FlashAttention main branch</li>
+</ul>
+<h3 id="vllm-v0170-march-2026">vLLM v0.17.0 (March 2026)<a class="headerlink" href="#vllm-v0170-march-2026" title="Permanent link">&para;</a></h3>
+<ul>
+<li>FA4 backend integrated via PR #32974</li>
+<li>Release includes 699 commits from 272 contributors</li>
+<li>Also includes PyTorch 2.10.0 upgrade</li>
+<li>Benefits Hopper and Blackwell GPU deployments</li>
+</ul>
+<h3 id="code">Code<a class="headerlink" href="#code" title="Permanent link">&para;</a></h3>
+<p>Open source: <code>https://github.com/Dao-AILab/flash-attention/tree/main/flash_attn/cute</code></p>
+<hr />
+<h2 id="implications-for-inference-engineering">Implications for Inference Engineering<a class="headerlink" href="#implications-for-inference-engineering" title="Permanent link">&para;</a></h2>
+<h3 id="what-fa4-means-for-serving-infrastructure">What FA4 Means for Serving Infrastructure<a class="headerlink" href="#what-fa4-means-for-serving-infrastructure" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Blackwell ROI case strengthened:</strong> FA4's 71% utilization on B200 vs FA3's ~35–40% on H100 means Blackwell GPUs deliver significantly more useful attention throughput per dollar — but only with FA4-enabled serving stacks (vLLM v0.17+)</li>
+<li><strong>Long-context serving becomes cheaper:</strong> The 3.6x speedup over FA2 at 32K sequence lengths directly reduces per-token latency for long-context workloads, making 128K+ context windows more economically viable</li>
+<li><strong>Prefill phase acceleration:</strong> Attention is compute-bound during prefill; FA4's petaflop throughput primarily benefits TTFT (time to first token) for long prompts</li>
+<li><strong>Backward pass matters for fine-tuning:</strong> The 3.15x backward speedup over FA2 reduces fine-tuning cost on Blackwell hardware, making on-device adaptation more practical</li>
+</ol>
+<h3 id="the-broader-lesson-asymmetric-scaling-as-a-design-pattern">The Broader Lesson: Asymmetric Scaling as a Design Pattern<a class="headerlink" href="#the-broader-lesson-asymmetric-scaling-as-a-design-pattern" title="Permanent link">&para;</a></h3>
+<p>FA4 demonstrates a pattern that will recur in future hardware generations: when one resource scales faster than others, the kernel must be redesigned around the <em>lagging</em> resources, not the fast ones. This implies that attention kernel engineering is not a solved problem — each new GPU architecture will likely require a new FlashAttention variant tailored to its specific asymmetries.</p>
+<blockquote>
+<p><strong>Key:</strong> FA4 is not just "FA3 on new hardware." It is a ground-up redesign driven by the insight that Blackwell's tensor cores are no longer the bottleneck. The algorithm-kernel co-design methodology — identifying which hardware resources constrain throughput and redistributing work away from them — is the transferable contribution, applicable beyond attention to any memory- or compute-asymmetric kernel.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

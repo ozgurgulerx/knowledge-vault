@@ -1,0 +1,4006 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/">
+      
+      
+        <link rel="prev" href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/">
+      
+      
+        <link rel="next" href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>RAG Knowledge Memory Guide - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#recent-methods-for-building-chatbots-with-context-engineering-agentic-retrieval-memory-and-graph-context" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RAG Knowledge Memory Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-engineering-and-orchestration-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Engineering and Orchestration Foundations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context Engineering and Orchestration Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-context-actually-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Context Actually Is
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimal-effective-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minimal Effective Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-trends" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architectural Trends
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context-compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Compression
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-and-context-interoperability-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tool and Context Interoperability: MCP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retrieval-augmented-generation-and-agentic-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval-Augmented Generation and Agentic Retrieval
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Retrieval-Augmented Generation and Agentic Retrieval">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rag-pipeline-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG Pipeline Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-retrieval-routing-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Retrieval Routing Criteria
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#embeddings-and-vector-index-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Embeddings and Vector Index Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#knowledge-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-baseline-rag-breaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where Baseline RAG Breaks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieval-strategies-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval Strategies Comparison
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agentic-retrieval-as-rag-with-a-decision-maker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agentic Retrieval as "RAG with a Decision-Maker"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-ai-search-agentic-retrieval-as-a-managed-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azure AI Search: Agentic Retrieval as a Managed Service
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-systems-for-chatbots-and-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Systems for Chatbots and Agents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#graph-based-context-and-knowledge-graph-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph-Based Context and Knowledge Graph Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Graph-Based Context and Knowledge Graph Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#graph-rag-implementation-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph RAG Implementation Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphrag-as-a-reference-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      GraphRAG as a Reference Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neo4j-centric-graphrag-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Neo4j-Centric GraphRAG Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph-integration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph Integration Patterns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-engineering-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Engineering Deep Dive
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context Engineering Deep Dive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compaction-vs-summarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compaction vs Summarization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#share-context-by-communicating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Share Context by Communicating
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context-processing-by-data-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Processing by Data Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-the-toolset-small" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep the Toolset Small
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-as-tool-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent-as-Tool Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hierarchical-agent-design-and-state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hierarchical Agent Design and State Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context-engineering-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Engineering Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context-engineering-as-product-category" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Engineering as Product Category
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-engineering-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Engineering Techniques
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-source-ecosystem-and-repository-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open-Source Ecosystem and Repository Evaluation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Open-Source Ecosystem and Repository Evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rag-app-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG / App Frameworks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-orchestration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Orchestration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Layers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Databases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#knowledge-graph-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge Graph &amp; Evaluation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommended Architectures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommended Architectures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-lightweight-chatbot-with-short-term-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Lightweight Chatbot with Short-Term Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rag-based-assistant-with-persistent-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. RAG-Based Assistant with Persistent Memory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-multi-agent-system-with-graph-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Multi-Agent System with Graph Context
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-coordination-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Coordination Patterns
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-primary-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Primary Links
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Primary Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Papers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#official-docs-project-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Official Docs / Project Pages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-open-source-repos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Open-Source Repos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-engineering-and-orchestration-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Engineering and Orchestration Foundations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context Engineering and Orchestration Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-context-actually-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Context Actually Is
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimal-effective-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minimal Effective Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-trends" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architectural Trends
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context-compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Compression
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-and-context-interoperability-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tool and Context Interoperability: MCP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retrieval-augmented-generation-and-agentic-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval-Augmented Generation and Agentic Retrieval
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Retrieval-Augmented Generation and Agentic Retrieval">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rag-pipeline-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG Pipeline Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-retrieval-routing-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Retrieval Routing Criteria
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#embeddings-and-vector-index-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Embeddings and Vector Index Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#knowledge-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-baseline-rag-breaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where Baseline RAG Breaks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieval-strategies-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval Strategies Comparison
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agentic-retrieval-as-rag-with-a-decision-maker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agentic Retrieval as "RAG with a Decision-Maker"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-ai-search-agentic-retrieval-as-a-managed-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azure AI Search: Agentic Retrieval as a Managed Service
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-systems-for-chatbots-and-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Systems for Chatbots and Agents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#graph-based-context-and-knowledge-graph-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph-Based Context and Knowledge Graph Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Graph-Based Context and Knowledge Graph Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#graph-rag-implementation-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph RAG Implementation Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphrag-as-a-reference-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      GraphRAG as a Reference Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neo4j-centric-graphrag-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Neo4j-Centric GraphRAG Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph-integration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph Integration Patterns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-engineering-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Engineering Deep Dive
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context Engineering Deep Dive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compaction-vs-summarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compaction vs Summarization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#share-context-by-communicating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Share Context by Communicating
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context-processing-by-data-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Processing by Data Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-the-toolset-small" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep the Toolset Small
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-as-tool-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent-as-Tool Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hierarchical-agent-design-and-state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hierarchical Agent Design and State Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context-engineering-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Engineering Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context-engineering-as-product-category" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context Engineering as Product Category
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-engineering-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Engineering Techniques
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-source-ecosystem-and-repository-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open-Source Ecosystem and Repository Evaluation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Open-Source Ecosystem and Repository Evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rag-app-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG / App Frameworks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-orchestration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Orchestration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Layers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Databases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#knowledge-graph-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge Graph &amp; Evaluation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommended Architectures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommended Architectures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-lightweight-chatbot-with-short-term-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Lightweight Chatbot with Short-Term Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rag-based-assistant-with-persistent-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. RAG-Based Assistant with Persistent Memory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-multi-agent-system-with-graph-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Multi-Agent System with Graph Context
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-coordination-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Coordination Patterns
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-primary-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Primary Links
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Primary Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Papers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#official-docs-project-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Official Docs / Project Pages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-open-source-repos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Open-Source Repos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="recent-methods-for-building-chatbots-with-context-engineering-agentic-retrieval-memory-and-graph-context">Recent Methods for Building Chatbots with Context Engineering, Agentic Retrieval, Memory, and Graph Context<a class="headerlink" href="#recent-methods-for-building-chatbots-with-context-engineering-agentic-retrieval-memory-and-graph-context" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The defining bottleneck in production chatbot systems is not the language model — it is the 128k-token window that the model conditions on and the engineering required to fill it correctly. Most teams treat retrieval as a solved preprocessing step: chunk documents, embed them, fetch the top-k nearest neighbors, and concatenate. That mental model is roughly where web search was before link analysis. The shift documented here is from passive retrieval to <strong>retrieval as a learned, multi-step policy</strong> — one where the model itself participates in deciding whether to retrieve, what granularity to operate at, and when to stop. Self-RAG introduces reflection tokens that let the generator critique its own grounding mid-sequence; A-RAG exposes retrieval interfaces at four granularities (document, summary, passage, chunk) and delegates strategy selection to an agent planner. The trade-off is sharp: on benchmarks requiring multi-hop reasoning, agentic retrieval dominates, but for high-volume single-hop lookups, hybrid dense-plus-sparse search with a cross-encoder reranker remains cheaper by an order of magnitude in latency and token spend.</p>
+<p>Memory systems reveal a parallel architectural insight. Long-term memory is not storage — it is <strong>context precomputation</strong>. Every memory architecture in this space, from Letta's OS-style tiered cache to Zep's temporal knowledge graph to A-MEM's Zettelkasten-inspired note network, answers the same question: given a future prompt whose content is unknown today, what derived artifacts should be materialized now so that the right 4k–8k tokens can be hydrated into a 128k window at query time? The engineering consequence is that memory design is inseparable from retrieval policy design. Compaction (moving raw data to external storage and keeping handles) is reversible and should be the default; summarization is irreversible and should be applied only when signal-to-noise is the binding constraint, not token count alone. Getting this ordering wrong is the single most common cause of what practitioners call context rot — the gradual burial of true constraints under accumulated low-value tokens.</p>
+<p>Graph-based augmentation, particularly GraphRAG's community-summary architecture, addresses a real gap: corpus-level sensemaking and multi-hop questions that no single chunk can answer. But the critical evaluation literature — notably "GraphRAG under Fire" (2025) — demonstrates that graph indexing adds substantial cost and latency without accuracy gains when the query distribution is already well-served by chunk retrieval. The decision boundary is structural: if queries require relationship traversal, temporal reasoning, or thematic synthesis across hundreds of documents, graph indexing amortizes. If they do not, it is overhead.</p>
+<p>The operating claim of this document is that <strong>production-grade context assembly is a compiler problem, not a search problem</strong>. The system must parse heterogeneous sources, optimize token allocation under budget constraints, route queries through the cheapest policy that meets a reliability target, and persist derived artifacts for future reuse. The sections that follow lay out the components of that compiler — from compression and routing primitives through memory tiering to graph indexing — with concrete architecture patterns, framework mappings, and the failure modes that distinguish paper designs from deployed systems.</p>
+<h2 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
+<p>Surveys practical approaches (2023-2026) for building production chatbots that stay grounded, handle long horizons, and scale across four pillars: <strong>context engineering</strong>, <strong>agentic retrieval</strong>, <strong>memory systems</strong>, and <strong>graph-based context / knowledge graphs</strong>.</p>
+<p>The headline shift: from "big prompt + top-k vector search" toward <strong>explicit, controllable pipelines</strong> that <em>assemble</em>, <em>compress</em>, <em>route</em>, and <em>persist</em> context -- often with the model participating in decisions (agentic retrieval, agentic memory) rather than passively consuming retrieved text.</p>
+<p>Two other major shifts:</p>
+<ul>
+<li><strong>Graph-first augmentations</strong> for "connect-the-dots" questions and corpus-level sensemaking (<strong>GraphRAG</strong>: LLM-extracted entity graphs, hierarchical community detection, pre-generated community summaries). Indexing is expensive; only amortises when the corpus is reused heavily.</li>
+<li><strong>Structured memory layers</strong>: OS-inspired tiering (<strong>MemGPT/Letta</strong>), temporal knowledge-graph memory (<strong>Zep/Graphiti</strong>), agentic memory evolution (<strong>A-MEM</strong>). These treat context window as a scarce cache with machinery for <em>what to remember</em>, <em>how to update it</em>, <em>how to retrieve it fast</em>.</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> The open-source ecosystem now reflects these patterns: frameworks emphasise explicit orchestration graphs (LangGraph), agent workflow primitives (OpenAI Agents SDK, CrewAI, smolagents), strong retrieval abstractions (Haystack, LangChain, LlamaIndex), and specialised storage layers (Qdrant, Milvus, Weaviate, Chroma, pgvector; Neo4j for graphs). <strong>Model Context Protocol (MCP)</strong> has emerged as a standardised "context/tool bus" but expands the attack surface and needs careful sandboxing.</p>
+</blockquote>
+<hr />
+<h2 id="context-engineering-and-orchestration-foundations">Context Engineering and Orchestration Foundations<a class="headerlink" href="#context-engineering-and-orchestration-foundations" title="Permanent link">&para;</a></h2>
+<h3 id="what-context-actually-is">What Context Actually Is<a class="headerlink" href="#what-context-actually-is" title="Permanent link">&para;</a></h3>
+<p>The model can only condition on <strong>tokens in its current context window</strong> — formally, it computes p(next tokens | context). "Context" is not just the prompt; it is the union of four categories of information fed to the LLM at inference time:</p>
+<ol>
+<li><strong>Instructions</strong> — the system prompt and any task-specific directives (prompt engineering lives here)</li>
+<li><strong>Retrieved facts</strong> — documents, SQL results, knowledge-graph triples, API responses (RAG lives here)</li>
+<li><strong>Conversation history</strong> — prior turns, scratchpad, evolving state</li>
+<li><strong>Tool outputs</strong> — function-call results, code execution traces, agent sub-task returns</li>
+</ol>
+<p>Context engineering is the discipline of optimising all four categories together. Where <strong>prompt engineering</strong> focuses on crafting instruction text, context engineering architects the entire information flow — data, tools, memory, ranking, and budgets. It is a strict superset: prompt engineering and RAG are both sub-problems of context engineering.</p>
+<h3 id="minimal-effective-context">Minimal Effective Context<a class="headerlink" href="#minimal-effective-context" title="Permanent link">&para;</a></h3>
+<p>The core design principle is not "how do I stuff more in?" but rather:</p>
+<blockquote>
+<p>Given this step, <strong>what is the smallest context the model needs to take the correct next action?</strong></p>
+</blockquote>
+<p>If the context is too short, the model is blind — missing key facts or instructions. If too long or noisy, important bits get diluted, cost explodes, and behaviour becomes unstable. The goal is the <strong>minimal effective context</strong> at every step.</p>
+<p>This principle is especially acute in the enterprise, where giant <strong>context windows</strong> create the illusion that retrieval is solved. In practice, a knowledge worker may have millions of documents nominally available, yet the model's useful <strong>token budget</strong> for any single task remains tiny. The bottleneck is not window size — it is <strong>context engineering</strong>: the quality of search, the discipline of <strong>ranking</strong>, the rigor of <strong>retrieval filtering</strong>, and the judgment of when to stop searching versus keep exploring. Messy, permissioned, sprawling enterprise data remains messy even as models grow smarter; the context window does not clean the data for you (Aaron Levie, Box, Mar 2026).</p>
+<blockquote>
+<p><strong>Key:</strong> The winning companies may not be the ones with the most data — they may be the ones that can produce the <strong>smallest, cleanest, highest-authority context slice</strong> per task (Aaron Levie, Box, Mar 2026).</p>
+</blockquote>
+<h3 id="architectural-trends">Architectural Trends<a class="headerlink" href="#architectural-trends" title="Permanent link">&para;</a></h3>
+<p>Everything else must be <em>selected, shaped, and injected</em>. Modern chatbot quality is a function of a <strong>context assembly pipeline</strong>: ingestion -&gt; indexing -&gt; retrieval/routing -&gt; compression/structuring -&gt; prompt composition -&gt; generation -&gt; logging/evaluation.</p>
+<p><strong>Key architectural trends:</strong></p>
+<ul>
+<li>Moving from implicit prompt concatenation to <strong>explicit state machines or graphs</strong>. LangGraph models applications as graphs with <strong>state</strong> (short-term memory) checkpointed per thread -- enabling replay, time-travel, and HITL patterns.</li>
+<li><strong>Haystack's modular pipelines</strong>: retrievers, routers, memory layers, tools, evaluators, generators -- each stage individually testable and replaceable. Debugging production assistants requires inspecting intermediate artefacts (retrieved passages, routing decisions, tool calls), not just final answers.</li>
+</ul>
+<h3 id="context-compression">Context Compression<a class="headerlink" href="#context-compression" title="Permanent link">&para;</a></h3>
+<p><strong>Compression</strong> is a top-leverage technique because token budgets dominate both failure modes (irrelevant context causing hallucinations) and cost/latency.</p>
+<table>
+<thead>
+<tr>
+<th>Compression Type</th>
+<th>How It Works</th>
+<th>Best For</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Query-aware contextual compression</strong> (post-retrieval)</td>
+<td>Retrieve broadly, then compress/filter retrieved docs conditioned on query and conversation state (LangChain <strong>DocumentCompressor/ContextualCompressionRetriever</strong>)</td>
+<td>Token-budgeted prompts; noisy corpora</td>
+<td>Extra LLM call; may "compress away" the critical sentence</td>
+</tr>
+<tr>
+<td><strong>Prompt compression</strong> (pre-generation, model-driven)</td>
+<td><strong>LLMLingua / LongLLMLingua</strong> -- compress prompts to fit budgets while keeping salient tokens</td>
+<td>Large fixed scaffolding (policies, product manuals, user profiles)</td>
+<td>May drop "small" constraints governing correctness (date ranges, safety constraints, edge cases)</td>
+</tr>
+<tr>
+<td><strong>Contextual compression with guarantees</strong> (emerging)</td>
+<td>Compression models optimized for <strong>bounded information loss</strong> and <strong>answer-preservation guarantees</strong> (probabilistic) — the compressed context provably retains the information needed to produce the correct answer above a target probability threshold</td>
+<td>Production systems needing aggressive context pruning with safety bounds</td>
+<td>Still early; guarantees are probabilistic, not absolute; calibration required per domain</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> The emergence of compression with formal guarantees changes the risk calculus for aggressive pruning in production. Previously, any compression risked silently dropping the critical sentence. Bounded-loss compression models make it possible to set an explicit <strong>information retention target</strong> (e.g., 95% answer preservation probability) and prune everything below that threshold, making aggressive context reduction safer and auditable (arXiv, 2025–2026).</p>
+</blockquote>
+<h3 id="tool-and-context-interoperability-mcp">Tool and Context Interoperability: MCP<a class="headerlink" href="#tool-and-context-interoperability-mcp" title="Permanent link">&para;</a></h3>
+<p><strong>Model Context Protocol (MCP)</strong> by Anthropic standardises how applications expose tools, data sources, and context to LLM hosts/clients. MCP externalises tool schemas and data connectors into "servers," letting agents reuse a growing ecosystem of integrations.</p>
+<blockquote>
+<p><strong>Key:</strong> MCP-style connectivity introduces security risk if file paths, shell tools, or git operations are exposed too broadly. Production designs should treat tool layers as <strong>untrusted</strong> and enforce boundaries via <strong>sandboxing/ACLs</strong> rather than hoping the model will self-restrict.</p>
+</blockquote>
+<hr />
+<h2 id="retrieval-augmented-generation-and-agentic-retrieval">Retrieval-Augmented Generation and Agentic Retrieval<a class="headerlink" href="#retrieval-augmented-generation-and-agentic-retrieval" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Dedicated document:</strong> <a href="../../xxx%2003c%20-%20RAG/rag_guide/">RAG Guide</a> — full coverage of RAG pipelines, retrieval strategies, agentic retrieval, Azure AI Search, Graph RAG, vector databases, and the open-source ecosystem. See also <a href="../../xxx%2003c%20-%20RAG/rag_evals/">RAG Evals &amp; Production Engineering</a> for the three-layer evaluation framework.</p>
+</blockquote>
+<h3 id="rag-pipeline-checklist">RAG Pipeline Checklist<a class="headerlink" href="#rag-pipeline-checklist" title="Permanent link">&para;</a></h3>
+<p>Use when domain knowledge is too large or dynamic to fit in context windows and correctness matters.</p>
+<blockquote>
+<p><strong>Key -- RAG 2.0 Architecture Sketch:</strong></p>
+<div class="highlight"><pre><span></span><code>Ingest -&gt; Chunk -&gt; Enrich (entities, tables) -&gt; Index
+               ↓                      ↑
+           Policies &lt;- Query -&gt; Retrieve -&gt; Compose -&gt; Evals
+</code></pre></div>
+<p><strong>Key -- RAG 2.0 Pipeline Checklist:</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Ground-truth set covering key intents</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Chunking with structure awareness (headings, tables)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Enrichment: entities, citations, table extraction</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Retrieval policies + diversity (filters, recency)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Compose with citations and abstain behavior</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Good/Better/Best: naive vector search -&gt; hybrid retrieval + citations + abstain -&gt; structured enrichments, policies, evaluators per intent</li>
+</ul>
+<p><strong>Common pitfalls:</strong></p>
+<ul>
+<li>Over-chunking without semantic boundaries (headings, paragraph breaks) destroys coherence</li>
+<li>Unenriched tables and figures lead to hallucinated facts — always extract and annotate them during ingestion</li>
+<li>Missing retrieval policies (filters, recency, diversity) cause the system to surface stale or redundant passages</li>
+</ul>
+<p><strong>Key -- Citations Eval Snippet:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">gold</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">citation_present</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span> <span class="ow">and</span> <span class="n">contains</span><span class="p">(</span><span class="n">gold</span><span class="p">,</span> <span class="n">answer</span><span class="p">))</span>
+</code></pre></div>
+</blockquote>
+<h3 id="hybrid-retrieval-routing-criteria">Hybrid Retrieval Routing Criteria<a class="headerlink" href="#hybrid-retrieval-routing-criteria" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key -- Hybrid RAG Routing Checklist:</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Define routing criteria by query intent (keyword, dense, graph)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Instrument retrieval choices and outcomes</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add evals per route (e.g., factuality, coverage)</li>
+<li>Pitfall: unclear selection policies lead to inconsistent results; over-fetching drives up latency and cost</li>
+</ul>
+</blockquote>
+<h3 id="embeddings-and-vector-index-selection">Embeddings and Vector Index Selection<a class="headerlink" href="#embeddings-and-vector-index-selection" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key -- Embeddings &amp; Vector Databases:</strong></p>
+<ul>
+<li><strong>Index selection</strong>: HNSW (fast approximate, high memory), IVF (lower memory, needs tuning), flat (exact, small datasets only)</li>
+<li><strong>Metadata filtering</strong>: combine vector similarity with structured filters (date, source, entity type) to improve precision</li>
+<li><strong>Embedding drift</strong>: monitor embedding model changes; re-index when switching models or after significant corpus shifts</li>
+<li>Choose domain-specific embedding models when general-purpose models underperform on jargon-heavy corpora</li>
+</ul>
+</blockquote>
+<p><strong>MUVERA (March 2026):</strong> Compresses <strong>multi-vector retrieval</strong> (late interaction) into <strong>fixed-dimensional encodings</strong>, reporting ~70% memory reduction and much smaller <strong>HNSW graphs</strong> at some recall/query-throughput cost. Reinforces a key finding: <strong>single-vector retrieval degrades significantly on harder out-of-distribution settings</strong>, and late-interaction methods remain stronger there — MUVERA offers a practical middle ground by approximating late-interaction quality in a single-vector-compatible index format (victorialslocum, lateinteraction, Mar 2026).</p>
+<h3 id="knowledge-lifecycle">Knowledge Lifecycle<a class="headerlink" href="#knowledge-lifecycle" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key -- Knowledge Freshness &amp; Contracts:</strong></p>
+<ul>
+<li>Define <strong>freshness SLAs</strong> per knowledge source (e.g., financial data: daily; policy docs: on-change)</li>
+<li>Establish <strong>knowledge contracts</strong>: required evidence types, provenance metadata, versioning policy</li>
+<li>Implement entity resolution and canonicalization to prevent duplicate/conflicting knowledge entries</li>
+</ul>
+</blockquote>
+<h3 id="where-baseline-rag-breaks">Where Baseline RAG Breaks<a class="headerlink" href="#where-baseline-rag-breaks" title="Permanent link">&para;</a></h3>
+<p>Baseline RAG (chunk + embed + top-k vector similarity -&gt; stuff into prompt) has two structural limitations:</p>
+<ol>
+<li><strong>Multi-hop / "connect-the-dots" questions</strong>: required evidence distributed across documents; no single chunk is semantically similar enough</li>
+<li><strong>Global sensemaking questions</strong>: corpus-level themes, structure, or narratives; retrieving a few chunks cannot represent "the dataset"</li>
+</ol>
+<p>A third limitation surfaces in agentic contexts: static RAG goes stale, and even dynamic RAG that refreshes data still struggles with semantic ambiguity and operational context. For example, "Apple" in a Slack corpus could mean the company or a literal apple — similarity retrieval alone cannot reliably disambiguate for enterprise reasoning (Cognee demo, 2026). The fix is not better RAG but a <strong>memory layer above RAG</strong>: structured, evolving, graph-assisted memory that disambiguates through ontology and relational context rather than embedding distance alone. See <a href="../agent_memory_systems/">Agent Memory Systems</a> for the full architecture spectrum, including Cognee's graph-memory approach and domain-scoped agent memory patterns.</p>
+<p><strong>GraphRAG</strong> is explicitly motivated by these failure modes, contrasting baseline RAG with graph-based indexing and community summaries for both local entity reasoning and global summarisation.</p>
+<h3 id="retrieval-strategies-comparison">Retrieval Strategies Comparison<a class="headerlink" href="#retrieval-strategies-comparison" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>What It Does</th>
+<th>Best For</th>
+<th>Latency &amp; Cost</th>
+<th>Common Failure Modes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dense top-k vector search</strong></td>
+<td>Retrieve semantically similar chunks</td>
+<td>Narrow questions; factual lookup</td>
+<td>Low (1 query + top-k fetch)</td>
+<td>Misses multi-hop evidence; retrieves "nearby but wrong" snippets</td>
+</tr>
+<tr>
+<td><strong>Hybrid (dense + sparse) + fusion</strong></td>
+<td>Combine lexical matching (BM25) and dense similarity; fuse rankings (RRF)</td>
+<td>High-precision QA; jargon and exact terms</td>
+<td>Moderate (two retrievals + fusion)</td>
+<td>Redundant/near-duplicate passages; needs reranking/filtering</td>
+</tr>
+<tr>
+<td><strong>Query rewriting / "multi-query" retrieval</strong></td>
+<td>Generate multiple paraphrases/sub-questions; retrieve per query and merge</td>
+<td>Recall-heavy domains; ambiguous queries</td>
+<td>Higher (multiple retrieval calls)</td>
+<td>Drifts into off-topic queries; increases noise without reranking</td>
+</tr>
+<tr>
+<td><strong>Reranking</strong> (cross-encoder / LLM-as-reranker)</td>
+<td>Re-score candidate passages using a stronger model</td>
+<td>Reducing hallucinations; improving grounding</td>
+<td>Moderate-high (additional inference)</td>
+<td>Overfits to superficial cues; adds cost and tail latency</td>
+</tr>
+<tr>
+<td><strong>Contextual compression</strong></td>
+<td>Compress/filter retrieved docs using query context</td>
+<td>Token-budgeted prompts; noisy corpora</td>
+<td>Moderate (extra compression pass)</td>
+<td>Drops the key sentence; compresses away provenance</td>
+</tr>
+<tr>
+<td><strong>Hierarchical retrieval (RAPTOR)</strong></td>
+<td>Build tree of clustered summaries; retrieve both local chunks and higher-level summaries</td>
+<td>Long documents; "what's the gist + details" queries</td>
+<td>Higher at indexing time; query-time moderate</td>
+<td>Summary drift accumulates; indexing complexity; tuning needed</td>
+</tr>
+<tr>
+<td><strong>Self-reflective adaptive RAG (Self-RAG)</strong></td>
+<td>Model decides when to retrieve and critiques/improves its answer using retrieved evidence</td>
+<td>High-stakes QA; reducing unsupported claims</td>
+<td>High (iterative loops)</td>
+<td>Loop instability; extra tokens and calls; requires careful stopping criteria</td>
+</tr>
+<tr>
+<td><strong>Tool-based agentic retrieval (A-RAG)</strong></td>
+<td>Provide retrieval tools at multiple granularities; agent plans retrieval strategy</td>
+<td>Complex tasks requiring targeted evidence navigation</td>
+<td>High (planning + multiple tool calls)</td>
+<td>Planning errors and tool misuse; expensive for simple queries</td>
+</tr>
+<tr>
+<td><strong>GraphRAG local search</strong></td>
+<td>Start from relevant entities; fan out to neighbours/claims/text units</td>
+<td>Entity-centric questions, relationship queries</td>
+<td>Moderate (graph traversal + context assembly)</td>
+<td>Entity extraction/linking errors; graph maintenance overhead</td>
+</tr>
+<tr>
+<td><strong>GraphRAG global search</strong></td>
+<td>Use community summaries to answer corpus-level "themes"</td>
+<td>Dataset summarisation; exploratory sensemaking</td>
+<td>Moderate at query time (many partial answers + synthesis)</td>
+<td>High indexing cost; summaries can be stale or overly generic</td>
+</tr>
+</tbody>
+</table>
+<h3 id="agentic-retrieval-as-rag-with-a-decision-maker">Agentic Retrieval as "RAG with a Decision-Maker"<a class="headerlink" href="#agentic-retrieval-as-rag-with-a-decision-maker" title="Permanent link">&para;</a></h3>
+<p>Two newer directions encode a shared design principle: <strong>retrieval is not a single step -- it is a policy</strong>.</p>
+<ul>
+<li><strong>Self-RAG</strong>: model-driven mechanism to <em>decide whether to retrieve</em> and <em>self-critique</em> answers with retrieval evidence. Dynamically invokes retrieval and reflection when needed. In production: implement strict budgets and stopping rules.</li>
+<li><strong>A-RAG</strong>: frames agentic retrieval as a toolkit of retrieval interfaces across granularities (whole documents, summaries, passages, raw chunks) plus agent planning. Strong performance on agentic QA benchmarks but inherently trades throughput for reasoning depth.</li>
+</ul>
+<p>A frequently underrated dimension of agentic retrieval is <strong>knowing when to stop searching</strong>. Enterprise retrieval is fundamentally an <strong>explore/exploit judgment problem</strong>, not merely a retrieval problem. The model must decide whether to keep digging through additional sources, retry queries with different formulations, or admit that the answer may not exist in the available corpus. Systems that lack explicit <strong>stopping criteria</strong> and <strong>retrieval budgets</strong> tend to either give up too early — missing evidence that one more hop would have surfaced — or spiral into redundant searches that burn tokens without improving answer quality (Aaron Levie, Box, Mar 2026).</p>
+<blockquote>
+<p><strong>Key:</strong> If you expect <strong>high query volume with mostly simple lookup</strong>, baseline/hybrid RAG plus reranking typically dominates on cost. If you expect <strong>lower volume with complex multi-step investigations</strong>, agentic retrieval policies can be worth it -- especially if you cache intermediate artefacts across sessions. In either regime, design explicit <strong>stopping policies</strong> — the model needs a disciplined signal for when further retrieval is unlikely to improve the answer (Aaron Levie, Box, Mar 2026).</p>
+</blockquote>
+<h3 id="azure-ai-search-agentic-retrieval-as-a-managed-service">Azure AI Search: Agentic Retrieval as a Managed Service<a class="headerlink" href="#azure-ai-search-agentic-retrieval-as-a-managed-service" title="Permanent link">&para;</a></h3>
+<p>Azure AI Search ships <strong>agentic retrieval</strong> (public preview, <code>2025-11-01-preview</code> API) — implementing the agentic retrieval pattern described above as a fully managed, three-layer pipeline on top of existing search indexes.</p>
+<p><strong>Architecture — 3 layers:</strong></p>
+<ol>
+<li><strong>Knowledge Source</strong> — a thin wrapper around a search index (or blob storage, OneLake, SharePoint, web) that sets retrieval defaults: which fields to search, filters, reranking config.</li>
+<li><strong>Knowledge Base</strong> — the orchestrator. Connects one or more knowledge sources to an LLM deployment. Drives query planning, subquery execution, and result synthesis.</li>
+<li><strong>LLM (Azure OpenAI)</strong> — decomposes complex/multi-hop queries into focused subqueries, corrects spelling, incorporates chat history. Supported models: <code>gpt-4o</code>, <code>gpt-4o-mini</code>, <code>gpt-4.1</code> family, <code>gpt-5</code> family.</li>
+</ol>
+<p><strong>Workflow:</strong></p>
+<div class="highlight"><pre><span></span><code>App/Agent → Knowledge Base (retrieve) → LLM query planning
+                                             ↓
+                                       N subqueries (parallel)
+                                             ↓
+                                 Hybrid search + semantic reranking per subquery
+                                             ↓
+                                       Merged 3-part response:
+                                         1. Grounding data (merged content)
+                                         2. Source references (citations)
+                                         3. Activity plan (execution details)
+</code></pre></div>
+<p><strong>Output modes and reasoning effort:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Options</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Output mode</strong></td>
+<td><code>AnswerSynthesis</code> (LLM formulates answer with citations) · <code>ExtractedData</code> (raw results for downstream processing)</td>
+<td>Synthesis adds latency + tokens but gives ready-to-use answers</td>
+</tr>
+<tr>
+<td><strong>Retrieval reasoning effort</strong></td>
+<td><code>minimal</code> (no LLM, intents only) · <code>low</code> (default — LLM query planning + synthesis) · <code>medium</code> (aggressive expansion, iterative search)</td>
+<td>Higher effort = better multi-hop recall, higher cost/latency</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Prerequisites:</strong> semantic ranker enabled on the search service, an Azure OpenAI deployment with a supported model, RBAC roles (Search Service Contributor to manage, Search Index Data Reader to query, Cognitive Services User on the OpenAI resource for the search service's managed identity).</p>
+<p><strong>Agent integration via MCP:</strong> A knowledge base exposes an MCP endpoint at <code>{search-endpoint}/knowledgebases/{kb-name}/mcp?api-version=2025-11-01-preview</code>. Agents connect to it as a <code>RemoteTool</code> project connection and use <code>MCPTool</code> with <code>allowed_tools=["knowledge_base_retrieve"]</code> — the agent automatically calls the KB tool when user queries match.</p>
+<p><strong>Cost model:</strong> Token-based billing for agentic reasoning tokens (50M free tokens/month on Free tier) plus standard Azure OpenAI pay-as-you-go for query planning and answer synthesis. Example: 2,000 retrievals × 3 subqueries avg ≈ $4.32 total.</p>
+<blockquote>
+<p><strong>Key:</strong> Agentic retrieval is a good fit when you already have Azure AI Search indexes and want multi-hop, spelling-tolerant, chat-history-aware retrieval without building the orchestration yourself. The main trade-off is added latency from the LLM query planning layer. For high-throughput simple lookups, stick with direct hybrid search + semantic reranking. For complex investigative queries at moderate volume, the managed agentic pipeline saves significant engineering effort.</p>
+</blockquote>
+<hr />
+<h2 id="memory-systems-for-chatbots-and-agents">Memory Systems for Chatbots and Agents<a class="headerlink" href="#memory-systems-for-chatbots-and-agents" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Dedicated document:</strong> <a href="../agent_memory_systems/">Agent Memory Systems</a> — full coverage of memory architectures (9 patterns compared), update edges, forgetting, compaction vs summarization, stateful agent platforms (Letta, Zep, Supermemory), evaluation dimensions, and design checklist.</p>
+</blockquote>
+<p>Memory is the complement to retrieval: where retrieval finds relevant external context at query time, memory <strong>precomputes and materializes</strong> derived artifacts (profiles, timelines, entity graphs) so the right tokens are ready before the query arrives. The key engineering insight is that long-term memory is <strong>context precomputation</strong>, not storage. See the dedicated document for architecture patterns, the compaction-vs-summarization ordering rule, and the emerging structured-evolving-state paradigm.</p>
+<p>A <strong>memory-layered RAG</strong> architecture is solidifying as the standard unified memory stack across agents and RAG systems, formalizing the tiering that frameworks like Letta and Zep implement into four explicit layers:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Name</th>
+<th>Function</th>
+<th>Latency</th>
+<th>Persistence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L1</strong></td>
+<td>Cache (exact + semantic)</td>
+<td>Semantic dedup of repeated/similar queries; serves cached answers and retrieval sets</td>
+<td>Sub-ms</td>
+<td>Session or TTL-based</td>
+</tr>
+<tr>
+<td><strong>L2</strong></td>
+<td>Short-term session memory</td>
+<td>Conversation history, scratchpad, evolving task state</td>
+<td>Low</td>
+<td>Per-session</td>
+</tr>
+<tr>
+<td><strong>L3</strong></td>
+<td>Vector retrieval</td>
+<td>Dense/sparse/hybrid search over indexed corpora</td>
+<td>Moderate</td>
+<td>Persistent</td>
+</tr>
+<tr>
+<td><strong>L4</strong></td>
+<td>Graph / structured sources</td>
+<td>Knowledge graphs, relational DBs, typed entity stores</td>
+<td>Variable</td>
+<td>Persistent</td>
+</tr>
+</tbody>
+</table>
+<p>Each layer acts as a <strong>cache miss fallback</strong> for the layer above: L1 misses promote to L2, L2 misses trigger L3 retrieval, and L3 gaps escalate to L4 graph traversal or structured queries. The architecture unifies what were previously separate concerns (caching, conversation management, retrieval, knowledge graphs) into a single coherent memory hierarchy with explicit promotion/demotion policies (arXiv, 2025–2026).</p>
+<hr />
+<h2 id="graph-based-context-and-knowledge-graph-integration">Graph-Based Context and Knowledge Graph Integration<a class="headerlink" href="#graph-based-context-and-knowledge-graph-integration" title="Permanent link">&para;</a></h2>
+<p>Graph-based context preserves <strong>structure</strong> that pure embeddings erase: entities, relations, communities, timelines, and provenance.</p>
+<h3 id="graph-rag-implementation-checklist">Graph RAG Implementation Checklist<a class="headerlink" href="#graph-rag-implementation-checklist" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key -- Graph RAG Checklist:</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Define entity/edge schema (node types, relationship types, required properties)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Extraction evals on representative corpus (measure NER/RE precision)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Hybrid retrieve: graph paths + text chunks</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Good/Better/Best: simple entity linking -&gt; typed relations and path constraints -&gt; learned policies + feedback loops</li>
+<li>Architecture: <code>Text -&gt; NER/RE -&gt; Triples -&gt; Graph DB; Query (entities/paths) -&gt; Retrieve -&gt; Compose -&gt; Evals</code></li>
+</ul>
+<p><strong>Key -- Graph Path Coverage Eval:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">path_coverage</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">graph_paths</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">required_edge</span> <span class="ow">in</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">graph_paths</span><span class="p">)</span>
+</code></pre></div>
+</blockquote>
+<h3 id="graphrag-as-a-reference-design">GraphRAG as a Reference Design<a class="headerlink" href="#graphrag-as-a-reference-design" title="Permanent link">&para;</a></h3>
+<p>GraphRAG (From Local to Global): builds entity graph from source documents -&gt; partitions into communities (hierarchical clustering) -&gt; generates bottom-up community summaries -&gt; answers questions via (i) <strong>global search</strong> over community summaries or (ii) <strong>local search</strong> around query-relevant entities and neighbours. A <strong>"DRIFT" mode</strong> combines local search with community context.</p>
+<blockquote>
+<p><strong>Key:</strong> Indexing can be expensive. GraphRAG behaves like an <strong>offline compilation step</strong> plus a query-time "decoding" step. Defaults may underperform on your domain without tuning. The upstream repo explicitly warns about indexing cost.</p>
+</blockquote>
+<h3 id="neo4j-centric-graphrag-patterns">Neo4j-Centric GraphRAG Patterns<a class="headerlink" href="#neo4j-centric-graphrag-patterns" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Neo4j GraphRAG package for Python</strong>: knowledge graph creation from unstructured text, retrievers spanning graph search, vector search, and hybrid retrieval patterns</li>
+<li><strong>Neo4j LLM Knowledge Graph Builder</strong> (open source): transform PDFs/docs/web pages into a Neo4j knowledge graph using LLM extraction, facilitating graph queries and graph-enhanced RAG</li>
+<li><strong>Neo4j Labs "agent memory"</strong>: stores short-term conversation context, entity-extracted persistent knowledge, and reasoning traces -- essentially "memory as a context graph"</li>
+</ul>
+<h3 id="graph-integration-patterns">Graph Integration Patterns<a class="headerlink" href="#graph-integration-patterns" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>How It Works</th>
+<th>Where It Wins</th>
+<th>Where It Loses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Offline KG + query-time subgraph hydration</strong></td>
+<td>Extract entities/relations; store graph; retrieve ego-net/community reports and attach as context</td>
+<td>Multi-hop reasoning; entity-centric analytics; provenance</td>
+<td>High ingestion cost; entity resolution; schema drift</td>
+</tr>
+<tr>
+<td><strong>Community summaries (GraphRAG global search)</strong></td>
+<td>Cluster graph; pre-summarise communities; answer "themes" via summary composition</td>
+<td>Corpus-level questions; investigative sensemaking</td>
+<td>Expensive indexing; summaries can be generic/stale</td>
+</tr>
+<tr>
+<td><strong>Graph traversal to enrich vector results</strong></td>
+<td>Retrieve seed passages/entities then expand neighbours/claims/timelines</td>
+<td>Connecting retrieved snippets; relationship questions</td>
+<td>Over-expansion can flood context; needs strong budget controls</td>
+</tr>
+<tr>
+<td><strong>Temporal KG memory</strong></td>
+<td>Persist evolving facts as time-stamped nodes/edges; retrieve "what was true when"</td>
+<td>Long-lived assistants; business data changes; temporal reasoning</td>
+<td>Harder ops; requires change detection/invalidation policy</td>
+</tr>
+<tr>
+<td><strong>Graph extraction on-demand</strong></td>
+<td>Build/update small local graph per session/task; discard afterwards</td>
+<td>Ad-hoc investigations; privacy constraints</td>
+<td>Repeated build cost; inconsistent linking across sessions</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key:</strong> Graph augmentation is not automatically better than high-quality hybrid retrieval + reranking. "GraphRAG under Fire" (2025) is a critical evaluation showing the graph can add cost/latency without accuracy gains if the task is already well-served by chunk retrieval. Use graphs when queries <strong>need structure</strong> (relations, temporal constraints, corpus-level themes), not as a default.</p>
+</blockquote>
+<hr />
+<h2 id="context-engineering-deep-dive">Context Engineering Deep Dive<a class="headerlink" href="#context-engineering-deep-dive" title="Permanent link">&para;</a></h2>
+<h3 id="compaction-vs-summarization">Compaction vs Summarization<a class="headerlink" href="#compaction-vs-summarization" title="Permanent link">&para;</a></h3>
+<p>These are the two primary tools for fighting <strong>context rot</strong> — when appended history, partial summaries, and stale instructions accumulate so much junk that the <em>true</em> constraints and goals are buried, and the model starts following accidental patterns instead of the intended specification. Context rot has a particularly insidious variant in agentic systems: <strong>agents can keep repeating known-bad paths</strong> because old mistakes remain in-context. If a retrieval attempt returned irrelevant results or a tool call failed, those traces linger in the window and can cause the model to revisit the same dead ends. Actively <strong>pruning bad context</strong> — removing or demoting failed retrieval results, superseded plans, and error traces — is as important as adding good context. This is a practical reason why <strong>memory management</strong> matters even within a single session, not only across sessions (Aaron Levie, Box, Mar 2026).</p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th><strong>Context Compaction</strong></th>
+<th><strong>Context Summarization</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Info source</td>
+<td>Raw history, code, docs</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>What you keep in prompt</td>
+<td><strong>Handles / IDs / small structs</strong></td>
+<td><strong>Short textual / JSON summary</strong></td>
+</tr>
+<tr>
+<td>Reversibility</td>
+<td>Yes (via tools / DB)</td>
+<td>No (you lose detail)</td>
+</tr>
+<tr>
+<td>Where full info lives</td>
+<td>Outside model (FS, DB, tools, vector store)</td>
+<td>Nowhere accessible unless you also store raw data</td>
+</tr>
+<tr>
+<td>Goal</td>
+<td>Reduce prompt size, keep exact info available when needed</td>
+<td>Improve signal-to-noise, keep only what matters conceptually</td>
+</tr>
+<tr>
+<td>Typical operations</td>
+<td>"Save file", "store message", "index doc" then reference</td>
+<td>"Summarize last N turns/docs into K tokens and drop raw text"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Compaction in practice</strong> means replacing large blobs with references (<code>file://</code>, <code>doc_id</code>, <code>memory_key</code>) that the model can resolve via tools. Example: instead of stuffing 2k lines of code into every turn, keep a one-line note and expose a <code>read_file</code> tool. <strong>Summarization in practice</strong> means rewriting 10k tokens into 300 tokens of distilled meaning — a bullet list of key facts, or a state JSON like <code>{ goals: [...], decisions: [...], open_questions: [...] }</code>. The original detail is lost unless you also store the raw data separately.</p>
+<blockquote>
+<p><strong>Key -- Practical Heuristic:</strong></p>
+<ol>
+<li><strong>Apply compaction first</strong> (default): move code, long docs, old turns to external storage; keep short references + tools to fetch on demand</li>
+<li><strong>Apply summarization when</strong>: you only care about state not wording, you're hitting context rot even with compaction, or you want a stable small "world state" object</li>
+<li><strong>Design-wise</strong>: compaction = design of your state &amp; storage layer; summarization = design of your state update function</li>
+</ol>
+</blockquote>
+<p>A useful abstraction is a <code>ContextManager</code> with two methods: <code>compact(state, raw_events) -&gt; state, external_refs</code> and <code>summarize(state, history) -&gt; state_summary</code>. This separates the two concerns cleanly and can be dropped into any agent harness.</p>
+<h3 id="share-context-by-communicating">Share Context by Communicating<a class="headerlink" href="#share-context-by-communicating" title="Permanent link">&para;</a></h3>
+<p>A corollary of minimal effective context: <strong>you are the compiler</strong>, not the model. Do not outsource the job of deciding relevance by throwing a 100-page PDF into the prompt and hoping the model figures out what matters. Instead, pre-process the raw material, extract constraints and goals, and narrate the relevant slice explicitly.</p>
+<p>In agent setups this means tools should return <strong>structured summaries and highlights</strong>, not raw full text. Prompts should feed those summaries plus a clear instruction: "Given these 3 bullet summaries, decide the next action." The principle: <strong>share context by communicating</strong> (tell the model what matters about the artefacts) rather than <strong>communicate by sharing context</strong> (dump everything and hope).</p>
+<h3 id="context-processing-by-data-type">Context Processing by Data Type<a class="headerlink" href="#context-processing-by-data-type" title="Permanent link">&para;</a></h3>
+<p>When assembling context from heterogeneous sources, the data type determines the processing strategy. A counterintuitive but important asymmetry underlies all of this work: <strong>reading enterprise data correctly is harder than writing new content</strong>. Generation is relatively straightforward once the model has good context, but retrieval requires finding the right facts inside huge, messy, <strong>permissioned</strong> corpora — navigating access controls, resolving conflicting versions, and distinguishing authoritative sources from stale duplicates. Teams that invest heavily in generation quality while underinvesting in <strong>retrieval quality</strong> have the equation backwards (Aaron Levie, Box, Mar 2026).</p>
+<ul>
+<li><strong>Unstructured data</strong> (video, audio, long-form text): summarise aggressively to avoid flooding the window, but preserve full detail when correctness demands it (e.g., legal documents). Even with expanding context windows, costs remain per-token.</li>
+<li><strong>Semi-structured data</strong> (JSON, XML): strip keys and values the model does not need. Messy JSON with irrelevant fields increases hallucination risk and wastes budget.</li>
+<li><strong>Structured data</strong> (SQL tables, CSVs): never inject raw rows. Use aggregate queries with WHERE clauses to surface only what the model needs. Balancing relevance and completeness across these data types is the central challenge.</li>
+</ul>
+<h3 id="keep-the-toolset-small">Keep the Toolset Small<a class="headerlink" href="#keep-the-toolset-small" title="Permanent link">&para;</a></h3>
+<p>Every tool exposed to an agent is extra surface area for failure, extra tokens (tool descriptions consume context), and extra branching entropy — the model must decide among N options, and large tool menus cause decision paralysis and erratic tool selection. Tools are context too; they live in the prompt and in the model's decision space.</p>
+<p>The corollary: do not give one agent 20 tools "just in case." Instead, <strong>compose systems</strong>: a top-level router agent with 2-4 broad capabilities, each of which may internally orchestrate more tools, but the LLM interface stays small per step.</p>
+<h3 id="agent-as-tool-pattern">Agent-as-Tool Pattern<a class="headerlink" href="#agent-as-tool-pattern" title="Permanent link">&para;</a></h3>
+<p>The natural extension of "fewer tools is better" is to make <strong>agents themselves callable as tools</strong> with typed schemas.</p>
+<blockquote>
+<p><strong>Key -- Agent-as-Tool Pattern:</strong>
+Define sub-agents with narrow responsibilities and expose each as a single tool with a clean typed schema:</p>
+<ul>
+<li><code>research_agent</code>: <code>{ query: string, depth: "shallow" | "deep" }</code> -&gt; <code>{ findings: Finding[], confidence: number }</code></li>
+<li><code>planner_agent</code>: <code>{ goal: string, constraints: Constraint[] }</code> -&gt; <code>{ steps: Step[], risks: Risk[] }</code></li>
+</ul>
+<p>Benefits: top-level prompt only needs one-line descriptions; internal complexity lives inside the tool's sub-calls; you're <strong>factoring context</strong> (global = small capabilities + task state; local = big and specialized per agent-tool).</p>
+</blockquote>
+<h3 id="hierarchical-agent-design-and-state-management">Hierarchical Agent Design and State Management<a class="headerlink" href="#hierarchical-agent-design-and-state-management" title="Permanent link">&para;</a></h3>
+<p>Production agent systems benefit from <strong>hierarchical composition</strong>: a top-level agent owns 3-5 tools, each of which may itself be an agent with its own micro-tools. This keeps context small at every level while allowing deep specialization internally.</p>
+<p>Supporting practices:</p>
+<ul>
+<li><strong>Explicit state objects</strong>: maintain <code>conversation_state</code>, <code>project_state</code>, <code>memory_state</code> as first-class structures rather than relying on the model to reverse-engineer state from prose.</li>
+<li><strong>Scheduled compaction</strong>: after N turns or N tokens, rewrite history into summary. Do not wait for the window to overflow.</li>
+<li><strong>Schemas everywhere</strong>: JSON tool responses, typed fields, small enums. Avoid free-text where structured values are expected.</li>
+<li><strong>Separate user-visible text from machine-visible state</strong>: the LLM should condition on a clean <code>state = {...}</code> object, not a soup of conversation prose.</li>
+</ul>
+<h3 id="context-engineering-checklist">Context Engineering Checklist<a class="headerlink" href="#context-engineering-checklist" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key -- Actionable Checklist:</strong></p>
+<ol>
+<li>Stop auto-appending everything. Maintain a <code>state</code> object and periodically summarize.</li>
+<li>Design "next-step context" as a function: what does the model minimally need to decide the next action?</li>
+<li>Shrink tools, deepen systems. Fewer tools per agent; more layering/composition between agents.</li>
+<li>Promote good sub-agents to first-class tools with strict schemas.</li>
+<li>Narrate relevance to the model. Don't just share documents -- tell the model what matters for this step.</li>
+</ol>
+</blockquote>
+<h3 id="context-engineering-as-product-category">Context Engineering as Product Category<a class="headerlink" href="#context-engineering-as-product-category" title="Permanent link">&para;</a></h3>
+<p><strong>Context engineering as successor to prompt engineering (March 2026):</strong> LlamaIndex explicitly frames <strong>context engineering</strong> as the successor to prompt engineering, with <strong>structured parsing/extraction</strong> as a core lever — the quality of what goes into the context window matters more than how you phrase the instruction around it. Hugging Face now serves <strong>Markdown paper views</strong> to agents and has a <strong>Paper Pages</strong> skill for searching and reading papers more token-efficiently, reflecting a broader ecosystem shift: tools are being redesigned around the assumption that agents, not humans, are the primary consumers of technical content (Clement Delangue, Niels Rogge, AINews, Mar 2026).</p>
+<h3 id="prompt-engineering-techniques">Prompt Engineering Techniques<a class="headerlink" href="#prompt-engineering-techniques" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key -- Advanced Prompt Techniques:</strong></p>
+<ul>
+<li><strong>Meta-prompting</strong>: use an LLM to generate or refine prompts for another LLM call; enables self-improving prompt pipelines</li>
+<li><strong>Prompt compression</strong>: techniques like LLMLingua / LongLLMLingua to compress prompts while preserving salient tokens; useful for large fixed scaffolding (policies, product manuals)</li>
+<li>System prompt architecture, few-shot exemplar selection, chain-of-thought prompting, structured output schemas, prompt templating and versioning</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="open-source-ecosystem-and-repository-evaluation">Open-Source Ecosystem and Repository Evaluation<a class="headerlink" href="#open-source-ecosystem-and-repository-evaluation" title="Permanent link">&para;</a></h2>
+<h3 id="rag-app-frameworks">RAG / App Frameworks<a class="headerlink" href="#rag-app-frameworks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Repository</th>
+<th>Language</th>
+<th>License</th>
+<th>Key Components</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAG / app framework</td>
+<td><strong>LangChain</strong></td>
+<td>Python + JS/TS</td>
+<td>MIT</td>
+<td>Retrieval abstractions (vector, self-query, multi-vector), context compression, agent/tool patterns, adapter ecosystem</td>
+</tr>
+<tr>
+<td>RAG / app framework</td>
+<td><strong>LlamaIndex</strong></td>
+<td>Python</td>
+<td>MIT</td>
+<td>"Index your data" core; orchestration, connectors, ingestion pipelines, pipeline building</td>
+</tr>
+<tr>
+<td>RAG / orchestration framework</td>
+<td><strong>Haystack</strong> (deepset)</td>
+<td>Python</td>
+<td>Apache-2.0</td>
+<td>Modular pipeline model; retrievers, routers, memory &amp; branching; agentic pipelines; production-oriented (traceable)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="agent-orchestration">Agent Orchestration<a class="headerlink" href="#agent-orchestration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Repository</th>
+<th>Language</th>
+<th>License</th>
+<th>Key Components</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent orchestration (graph workflows)</td>
+<td><strong>LangGraph</strong></td>
+<td>Python</td>
+<td>MIT</td>
+<td>Graph-based agent workflows; thread-level checkpointing; persistent stores for long-term memory; supports replay via checkpoints; time travel</td>
+</tr>
+<tr>
+<td>Agent orchestration (lightweight)</td>
+<td><strong>OpenAI Agents SDK</strong></td>
+<td>Python</td>
+<td>MIT</td>
+<td>Primitives: agents, handoffs, traces; for multi-step workflows; minimal abstractions; positioned as production-ready upgrade from Swarm</td>
+</tr>
+<tr>
+<td>Agent orchestration (educational)</td>
+<td><strong>Swarm</strong> (OpenAI)</td>
+<td>Python</td>
+<td>MIT</td>
+<td>Two primitives: agents and handoffs; designed for controllable, testable coordination; useful for learning patterns, not for heavy production</td>
+</tr>
+<tr>
+<td>Agent orchestration (role-based)</td>
+<td><strong>CrewAI</strong></td>
+<td>Python</td>
+<td>MIT</td>
+<td>"Crew" role-playing, task decomposition and collaboration pattern; integrates many tools/LLMs; via agent abstraction</td>
+</tr>
+<tr>
+<td>Agent framework (code-first)</td>
+<td><strong>smolagents</strong> (Hugging Face)</td>
+<td>Python</td>
+<td>Apache-2.0</td>
+<td>"Agents that think in code"; minimal abstractions; good for controlled loops and execution</td>
+</tr>
+</tbody>
+</table>
+<h3 id="memory-layers">Memory Layers<a class="headerlink" href="#memory-layers" title="Permanent link">&para;</a></h3>
+<p>See <a href="../agent_memory_systems/">Agent Memory Systems</a> for full coverage. Key repos: <strong>Letta</strong> (Apache-2.0, OS-style stateful agents), <strong>Graphiti/Zep</strong> (Apache-2.0, temporal KG), <strong>Supermemory</strong> (update edges, cache-aware injection).</p>
+<h3 id="vector-databases">Vector Databases<a class="headerlink" href="#vector-databases" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Language</th>
+<th>License</th>
+<th>Key Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Qdrant</strong></td>
+<td>Rust</td>
+<td>Apache-2.0</td>
+<td>Vector + payload filtering; performance benchmarks published; used as store for memory patterns</td>
+</tr>
+<tr>
+<td><strong>Milvus</strong></td>
+<td>Go (+ C++)</td>
+<td>Apache-2.0</td>
+<td>Distributed vector DB; supports large-scale retrieval; cloud-native; typical enterprise workloads</td>
+</tr>
+<tr>
+<td><strong>Weaviate</strong></td>
+<td>Go (engine)</td>
+<td>BSD-3-Clause</td>
+<td>Vector + structured filtering; modular; "module" system for model-based extensions</td>
+</tr>
+<tr>
+<td><strong>Chroma</strong></td>
+<td>Rust (+ clients)</td>
+<td>Apache-2.0</td>
+<td>Embedded with client/server modes; supports retrieval + filtering; used for "memory" apps</td>
+</tr>
+<tr>
+<td><strong>pgvector</strong></td>
+<td>C</td>
+<td>PostgreSQL License</td>
+<td>Vector search in Postgres; for "keep vectors close to data"; transactional; semantic + simple queries</td>
+</tr>
+</tbody>
+</table>
+<h3 id="knowledge-graph-evaluation">Knowledge Graph &amp; Evaluation<a class="headerlink" href="#knowledge-graph-evaluation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Repository</th>
+<th>Language</th>
+<th>License</th>
+<th>Key Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Knowledge-graph tooling</td>
+<td><strong>Neo4j LLM Graph Builder</strong></td>
+<td>Python (app stack)</td>
+<td>Apache-2.0</td>
+<td>Transform unstructured data into Neo4j KG; supports ingestion from multiple sources; feeds into GraphRAG workflows</td>
+</tr>
+<tr>
+<td>Graph RAG SDK</td>
+<td><strong>Neo4j GraphRAG for Python</strong></td>
+<td>Python (package)</td>
+<td>Apache-2.0</td>
+<td>KG creation pipeline + retrievers (graph/vector/hybrid); designed for production GraphRAG patterns with Neo4j</td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td><strong>RAGAS</strong></td>
+<td>Python</td>
+<td>Apache-2.0</td>
+<td>Reference low-annotation evaluation for RAG pipelines; integrates across common frameworks; supports test set generation</td>
+</tr>
+<tr>
+<td>Tool/context protocol</td>
+<td><strong>MCP Python SDK</strong></td>
+<td>Python</td>
+<td>MIT</td>
+<td>SDK for building MCP servers/clients; used to integrate tools and context sources; standardised protocol</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="recommended-architectures">Recommended Architectures<a class="headerlink" href="#recommended-architectures" title="Permanent link">&para;</a></h2>
+<p>Three archetypes from lightweight to heavy-duty. Guiding principle: choose <strong>minimum complexity</strong> that achieves your reliability target under realistic latency/cost constraints.</p>
+<h3 id="1-lightweight-chatbot-with-short-term-context">1. Lightweight Chatbot with Short-Term Context<a class="headerlink" href="#1-lightweight-chatbot-with-short-term-context" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> Conversational UX, small workflows, low latency. Avoid heavy retrieval unless needed.</p>
+<p><strong>Key patterns.</strong> Short-term state in an orchestrator; bounded conversation window; (optional) incremental summaries.</p>
+<div class="highlight"><pre><span></span><code>flowchart TD
+  U[User message] --&gt; G[Guardrails / validation]
+  G --&gt; S[Session state: last N turns]
+  S --&gt; P[Prompt composer]
+  P --&gt; LLM[LLM call]
+  LLM --&gt; R[Response]
+  R --&gt; S
+  R --&gt; Log[Tracing + metrics]
+</code></pre></div>
+<p><strong>Implementation notes.</strong> If you adopt an execution-graph orchestrator, persist short-term state as thread checkpoints for debug and replay. LangGraph explicitly models short-term memory as thread-scoped state via checkpoints, enabling HITL and fault tolerance.</p>
+<p><strong>Suggested stacks.</strong> Python: LangGraph or Haystack pipelines; TypeScript/JS: LangChain.js or MCP clients if you need tool integrations.</p>
+<h3 id="2-rag-based-assistant-with-persistent-memory">2. RAG-Based Assistant with Persistent Memory<a class="headerlink" href="#2-rag-based-assistant-with-persistent-memory" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> "Ask my documents" + personalisation across sessions. Medium complexity, production value.</p>
+<p><strong>Key patterns.</strong> Hybrid retrieval + reranking; query-aware contextual compression; explicit separation of immutable logs vs derived memory artefacts; evaluation harness (RAGAS) as part of CI.</p>
+<div class="highlight"><pre><span></span><code>flowchart TD
+  U[User message] --&gt; C[Classifier / router]
+  C --&gt;|needs knowledge| Q[Query rewriting / expansion]
+  Q --&gt; R1[Retriever: hybrid dense+sparse]
+  R1 --&gt; RR[Reranker]
+  RR --&gt; CC[Contextual compression]
+  CC --&gt; PC[Prompt composer]
+  PC --&gt; LLM[LLM]
+  LLM --&gt; A[Answer + citations]
+  A --&gt; MLog[Append to event log]
+  MLog --&gt; MDer[Async memory distillation]
+  MDer --&gt; VDB[Vector store / document store]
+  MDer --&gt; Prof[Structured user/profile memory]
+  A --&gt; Eval[Offline eval / monitoring]
+</code></pre></div>
+<p><strong>Implementation notes.</strong> Two persistence layers minimum:</p>
+<ol>
+<li><strong>Document knowledge store</strong> (vector DB or pgvector) for RAG grounding</li>
+<li><strong>Memory store</strong> for user-specific facts/preferences and summaries. LangGraph explicitly distinguishes short-term checkpoint state from long-term store namespaces; Letta similarly persists all messages and supports pinned memory blocks.</li>
+</ol>
+<p><strong>Repo mappings.</strong> Framework: LangChain / LlamaIndex / Haystack. Retrieval store: Qdrant / Milvus / Weaviate / Chroma / pgvector. Evaluation: RAGAS. Memory: Letta (OS-style) or LangGraph store.</p>
+<h3 id="3-multi-agent-system-with-graph-context">3. Multi-Agent System with Graph Context<a class="headerlink" href="#3-multi-agent-system-with-graph-context" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> Complex investigations, multi-step workflows, evolving enterprise knowledge, strong provenance. Highest complexity, highest upside.</p>
+<p><strong>Key patterns.</strong> Multi-agent orchestration (handoffs or workflow graphs); graph-based indexing (GraphRAG) or graph database (Neo4j GraphRAG); temporal/relational memory when facts change; strict budgets and sandboxing.</p>
+<div class="highlight"><pre><span></span><code>flowchart TD
+  U[User goal] --&gt; Orchestrator[Workflow graph / agent router]
+  Orchestrator --&gt; Planner[Planner / coordinator agent]
+  Planner --&gt;|subtask| Spec1[Specialist agent: retrieval]
+  Planner --&gt;|subtask| Spec2[Specialist agent: reasoning]
+  Planner --&gt;|subtask| Spec3[Specialist agent: tools]
+  Spec1 --&gt; KG[Graph index / Neo4j]
+  Spec1 --&gt; VDB[Vector DB]
+  KG --&gt; SubG[Subgraph + community reports]
+  VDB --&gt; Chunks[Relevant chunks]
+  SubG --&gt; Context[Context builder]
+  Chunks --&gt; Context
+  Context --&gt; Synth[Final synthesis agent]
+  Synth --&gt; Answer[Answer + provenance]
+  Answer --&gt; Memory[Update memory graph + logs]
+  Answer --&gt; HITL[Optional human review]
+</code></pre></div>
+<p><strong>Implementation notes.</strong> GraphRAG's official process: entity/relationship extraction -&gt; community hierarchy (Leiden clustering) -&gt; bottom-up summaries -&gt; query modes (global/local/DRIFT). Treat indexing as an offline batch job and amortise across many queries; the upstream repo warns about indexing cost.</p>
+<p>For graph database-backed approaches, Neo4j's GraphRAG package offers first-party retrievers for graph + vector patterns, and Neo4j Labs shows how "context graphs" can encode short-term, long-term, and reasoning memory.</p>
+<p>For agent orchestration, OpenAI Agents SDK provides a small set of multi-agent primitives.</p>
+<hr />
+<h2 id="agent-coordination-patterns">Agent Coordination Patterns<a class="headerlink" href="#agent-coordination-patterns" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Single agent + tools (ReAct style)</strong></td>
+<td>Simple; fewer moving parts</td>
+<td>Harder to modularise; brittle for long tasks</td>
+<td>Tool-using chatbots, short workflows</td>
+</tr>
+<tr>
+<td><strong>Planner-executor</strong></td>
+<td>Better decomposition and controllability</td>
+<td>More calls; coordinator errors</td>
+<td>Medium complexity workflows</td>
+</tr>
+<tr>
+<td><strong>Multi-agent with handoffs</strong></td>
+<td>Clear ownership; parallel work</td>
+<td>Coordination overhead; consistency issues</td>
+<td>Research, large tasks, specialist roles</td>
+</tr>
+<tr>
+<td><strong>Graph-based workflow orchestration</strong></td>
+<td>Deterministic control, checkpointing, HITL</td>
+<td>Upfront engineering; learning curve</td>
+<td>Production systems needing reliability</td>
+</tr>
+<tr>
+<td><strong>Protocol-based tool ecosystem (MCP)</strong></td>
+<td>Reusable integrations; decouples tool servers</td>
+<td>Bigger attack surface; needs strict sandboxing</td>
+<td>Enterprises with many data/tools</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="key-primary-links">Key Primary Links<a class="headerlink" href="#key-primary-links" title="Permanent link">&para;</a></h2>
+<h3 id="core-papers">Core Papers<a class="headerlink" href="#core-papers" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>arxiv.org/abs/2507.13334</code> -- A Survey of Context Engineering for Large Language Models</li>
+<li><code>arxiv.org/abs/2404.16130</code> -- GraphRAG: From Local to Global</li>
+<li><code>arxiv.org/abs/2501.13956</code> -- Zep: Temporal Knowledge Graph Architecture for Agent Memory</li>
+<li><code>arxiv.org/abs/2502.12110</code> -- A-MEM: Agentic Memory for LLM Agents</li>
+<li><code>arxiv.org/abs/2309.15217</code> -- RAGAS evaluation</li>
+<li><code>huggingface.co/papers/2401.18059</code> -- RAPTOR</li>
+<li><code>arxiv.org/abs/2310.11511</code> -- MemoryBank</li>
+<li><code>arxiv.org/abs/2404.13501</code> -- Survey on memory mechanisms of LLMs/agents</li>
+<li><code>arxiv.org/abs/2310.11578</code> -- Self-RAG</li>
+<li><code>arxiv.org/abs/2507.02931</code> -- Agentic RAG survey</li>
+<li><code>arxiv.org/abs/2502.05014</code> -- A-RAG</li>
+</ul>
+<h3 id="official-docs-project-pages">Official Docs / Project Pages<a class="headerlink" href="#official-docs-project-pages" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>promptingguide.ai/guides/context-engineering-guide</code> -- Context Engineering for LLMs guide</li>
+<li><code>modelcontextprotocol.io/</code> -- MCP site</li>
+<li><code>openai.github.io/openai-agents-python/</code> -- OpenAI Agents SDK docs</li>
+<li><code>docs.langchain.com/oss/python/langgraph/add-memory</code> -- LangGraph memory</li>
+<li><code>neo4j.com/developer/genai-ecosystem/graphrag-python/</code> -- Neo4j GraphRAG</li>
+<li><code>learn.microsoft.com/en-us/azure/search/agentic-retrieval-overview</code> -- Azure AI Search Agentic Retrieval</li>
+<li><code>learn.microsoft.com/en-us/azure/search/agentic-retrieval-how-to-create-knowledge-base</code> -- Create a Knowledge Base</li>
+<li><code>learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/tools/knowledge-retrieval</code> -- Connect Agents to Agentic Retrieval</li>
+</ul>
+<h3 id="key-open-source-repos">Key Open-Source Repos<a class="headerlink" href="#key-open-source-repos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>github.com/langchain-ai/langchain</code> | <code>github.com/langchain-ai/langgraph</code></li>
+<li><code>github.com/run-llama/llama_index</code> | <code>github.com/deepset-ai/haystack</code></li>
+<li><code>github.com/openai/openai-agents-python</code> | <code>github.com/crewAIInc/crewAI</code></li>
+<li><code>github.com/huggingface/smolagents</code> | <code>github.com/letta-ai/letta</code></li>
+<li><code>github.com/getzep/graphiti</code></li>
+<li><code>github.com/qdrant/qdrant</code> | <code>github.com/milvus-io/milvus</code></li>
+<li><code>github.com/weaviate/weaviate</code> | <code>github.com/chroma-core/chroma</code></li>
+<li><code>github.com/pgvector/pgvector</code> | <code>github.com/neo4j-labs/llm-graph-builder</code></li>
+<li><code>github.com/neo4j/neo4j-graphrag-python</code> | <code>github.com/vibrantlabsai/ragas</code></li>
+<li><code>github.com/modelcontextprotocol/python-sdk</code></li>
+<li><code>github.com/Azure-Samples/azure-search-python-samples/tree/main/Quickstart-Agentic-Retrieval</code></li>
+<li><code>github.com/Azure-Samples/azure-search-python-samples/tree/main/agentic-retrieval-pipeline-example</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

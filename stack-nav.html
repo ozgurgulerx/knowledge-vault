@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stack Nav</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0e0e10;
+    --surface: #16161a;
+    --surface-hover: #1c1c22;
+    --surface-active: #22222a;
+    --border: #2a2a32;
+    --border-subtle: #1e1e26;
+    --text: #f4f3f1;
+    --text-secondary: #a8a6b0;
+    --text-tertiary: #7d7a88;
+    --accent: #d4a843;
+    --accent-dim: rgba(212, 168, 67, 0.12);
+    --accent-glow: rgba(212, 168, 67, 0.06);
+    --folder-icon: #d4a843;
+    --file-md: #7c9cba;
+    --file-pdf: #c4645c;
+    --file-pptx: #c47a4a;
+    --file-other: #8b8994;
+    --radius: 8px;
+    --sidebar-width: 340px;
+    --transition-push: 320ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: #08080a;
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 128px;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .sidebar {
+    width: var(--sidebar-width);
+    height: 90vh;
+    max-height: 700px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.02),
+      0 20px 60px rgba(0,0,0,0.5),
+      0 0 120px var(--accent-glow);
+  }
+
+  /* Search */
+  .search-container {
+    padding: 16px 16px 0;
+    flex-shrink: 0;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    padding: 0 12px;
+    height: 36px;
+    transition: border-color 200ms, box-shadow 200ms;
+  }
+
+  .search-box:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+  }
+
+  .search-box svg {
+    width: 14px;
+    height: 14px;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+
+  .search-box input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+  }
+
+  .search-box input::placeholder { color: var(--text-tertiary); }
+
+  .search-shortcut {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-tertiary);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    flex-shrink: 0;
+  }
+
+  /* Recents */
+  .recents-strip {
+    padding: 12px 16px 0;
+    flex-shrink: 0;
+  }
+
+  .recents-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+  }
+
+  .recents-row {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .recents-row::-webkit-scrollbar { display: none; }
+
+  .recent-chip {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 150ms;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .recent-chip:hover {
+    background: var(--surface-hover);
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .recent-chip .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb-bar {
+    padding: 12px 16px 0;
+    flex-shrink: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .breadcrumb::-webkit-scrollbar { display: none; }
+
+  .breadcrumb-seg {
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 3px;
+    white-space: nowrap;
+    transition: color 150ms, background 150ms;
+  }
+
+  .breadcrumb-seg:hover {
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .breadcrumb-seg.active {
+    color: var(--text);
+    cursor: default;
+  }
+  .breadcrumb-seg.active:hover { background: none; color: var(--text); }
+
+  .breadcrumb-sep {
+    color: var(--text-tertiary);
+    opacity: 0.4;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 12px 16px 0;
+    flex-shrink: 0;
+  }
+
+  /* Card stack viewport */
+  .stack-viewport {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .stack-card {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 8px 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+    will-change: transform, opacity;
+  }
+
+  .stack-card::-webkit-scrollbar { width: 4px; }
+  .stack-card::-webkit-scrollbar-track { background: transparent; }
+  .stack-card::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* Push/pop animations */
+  .stack-card.entering-right {
+    animation: slideInRight var(--transition-push) forwards;
+  }
+  .stack-card.exiting-left {
+    animation: slideOutLeft var(--transition-push) forwards;
+  }
+  .stack-card.entering-left {
+    animation: slideInLeft var(--transition-push) forwards;
+  }
+  .stack-card.exiting-right {
+    animation: slideOutRight var(--transition-push) forwards;
+  }
+
+  @keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0.5; }
+    to   { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideOutLeft {
+    from { transform: translateX(0); opacity: 1; }
+    to   { transform: translateX(-30%); opacity: 0; }
+  }
+  @keyframes slideInLeft {
+    from { transform: translateX(-30%); opacity: 0.5; }
+    to   { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideOutRight {
+    from { transform: translateX(0); opacity: 1; }
+    to   { transform: translateX(100%); opacity: 0; }
+  }
+
+  /* List items */
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: background 120ms;
+    position: relative;
+  }
+
+  .nav-item:hover { background: var(--surface-hover); }
+  .nav-item:active { background: var(--surface-active); }
+
+  .nav-item.selected {
+    background: var(--accent-dim);
+  }
+  .nav-item.selected::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--accent);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .nav-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+
+  .nav-icon.folder {
+    background: var(--accent-dim);
+    color: var(--folder-icon);
+  }
+
+  .nav-icon.file-md {
+    background: rgba(124, 156, 186, 0.1);
+    color: var(--file-md);
+  }
+
+  .nav-icon.file-pdf {
+    background: rgba(196, 100, 92, 0.1);
+    color: var(--file-pdf);
+  }
+
+  .nav-icon.file-pptx {
+    background: rgba(196, 122, 74, 0.1);
+    color: var(--file-pptx);
+  }
+
+  .nav-icon.file-other {
+    background: rgba(139, 137, 148, 0.08);
+    color: var(--file-other);
+  }
+
+  .nav-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .nav-details {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .nav-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+  }
+
+  .nav-meta {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 1px;
+  }
+
+  .nav-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-tertiary);
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1px 7px;
+    flex-shrink: 0;
+  }
+
+  .nav-chevron {
+    color: var(--text-tertiary);
+    opacity: 0;
+    transition: opacity 150ms;
+    flex-shrink: 0;
+  }
+  .nav-item:hover .nav-chevron { opacity: 1; }
+
+  /* Search results */
+  .search-results {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    padding: 8px 0;
+    background: var(--bg);
+    z-index: 10;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .search-group-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    padding: 10px 16px 4px;
+  }
+
+  .search-empty {
+    text-align: center;
+    padding: 40px 16px;
+    color: var(--text-tertiary);
+    font-size: 13px;
+  }
+
+  .search-empty-icon {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 8px;
+    opacity: 0.4;
+  }
+
+  /* Item stagger animation */
+  .nav-item {
+    animation: fadeUp 250ms ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Footer */
+  .sidebar-footer {
+    padding: 10px 16px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .footer-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-tertiary);
+  }
+
+  .footer-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="search-container">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Search files..." autocomplete="off" />
+      <span class="search-shortcut" id="shortcutHint"></span>
+    </div>
+  </div>
+
+  <div class="recents-strip" id="recentsStrip" style="display:none;">
+    <div class="recents-label">Recent</div>
+    <div class="recents-row" id="recentsRow"></div>
+  </div>
+
+  <div class="breadcrumb-bar">
+    <div class="breadcrumb" id="breadcrumb"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="stack-viewport" id="stackViewport"></div>
+
+  <div class="sidebar-footer">
+    <span class="footer-count" id="footerCount"></span>
+    <div class="footer-dot"></div>
+  </div>
+</div>
+
+<script>
+// All data is hardcoded - no external/user input flows into DOM rendering.
+// The escHtml function below is a defense-in-depth measure for the static dataset.
+
+const DATA = {
+  name: "useful",
+  type: "folder",
+  children: [
+    { name: "ai_tools", type: "folder", children: [
+      { name: "2603_figma.md", type: "file", modified: "2026-03-03" },
+    ]},
+    { name: "atlas", type: "folder", children: [
+      { name: "atlas_healthy_snacks_turkey.md", type: "file", modified: "2026-02-18" },
+      { name: "atlas_learning_and_school_path.md", type: "file", modified: "2026-02-20" },
+      { name: "healthy_parenting_attitudes.md", type: "file", modified: "2026-02-15" },
+      { name: "knowledge_graph.md", type: "file", modified: "2026-02-22" },
+    ]},
+    { name: "books", type: "folder", children: [
+      { name: "Build_a_Reasoning_Model_(From_Scratch)_v5_MEAP-2.pdf", type: "file", modified: "2026-01-10" },
+      { name: "design-of-everyday-things.png", type: "file", modified: "2025-12-05" },
+      { name: "Don Norman's Work on Design.pdf", type: "file", modified: "2025-11-20" },
+      { name: "Essential_GraphRAG.pdf", type: "file", modified: "2026-02-01" },
+      { name: "The_RLHF_Book_v1_MEAP.pdf", type: "file", modified: "2026-01-15" },
+    ]},
+    { name: "graph atlas", type: "folder", children: [
+      { name: "gcp_partner_playbook.md", type: "file", modified: "2026-02-28" },
+      { name: "knowledge_graph.md", type: "file", modified: "2026-03-01" },
+      { name: "turkey_ai_strategy_and_execution.md", type: "file", modified: "2026-02-25" },
+    ]},
+    { name: "investing", type: "folder", children: [
+      { name: "260306_ai_investing.md", type: "file", modified: "2026-03-06" },
+    ]},
+    { name: "01 AI Governance", type: "folder", children: [
+      { name: "AI_Governance_GenAI.pptx", type: "file", modified: "2026-01-20" },
+      { name: "AI_Governance_Stories.pptx", type: "file", modified: "2026-01-18" },
+      { name: "AI Governance in the Microsoft Stack.pdf", type: "file", modified: "2026-01-22" },
+      { name: "genai_governance_control_plane.pptx", type: "file", modified: "2026-02-10" },
+      { name: "AI Governance Bible.pptx", type: "file", modified: "2026-02-12" },
+    ]},
+    { name: "00 General Talk Points", type: "folder", children: [
+      { name: "ai_strategy_and_market_intelligence.md", type: "file", modified: "2026-03-02" },
+      { name: "knowledge_graph.md", type: "file", modified: "2026-03-03" },
+    ]},
+    { name: "01 Generative AI + LLMs", type: "folder", children: [
+      { name: "gpt5_family_reference.md", type: "file", modified: "2026-03-07" },
+      { name: "llm_interview_preparation.md", type: "file", modified: "2026-03-07" },
+      { name: "llm_knowledge_graph_taxonomy.md", type: "file", modified: "2026-03-07" },
+      { name: "llm_landscape_and_trends.md", type: "file", modified: "2026-03-07" },
+    ]},
+    { name: "02 Systems & Inference Eng", type: "folder", children: [
+      { name: "250821_multiuser_b2c_architecture.md", type: "file", modified: "2025-08-21" },
+      { name: "gpu_and_datacenter_infrastructure.md", type: "file", modified: "2026-03-07" },
+      { name: "high_perf_llm_serving_gpu_tpu.md", type: "file", modified: "2026-03-07" },
+      { name: "inference_engineering.md", type: "file", modified: "2026-03-07" },
+      { name: "knowledge_graph.md", type: "file", modified: "2026-02-20" },
+    ]},
+    { name: "03 Agents & Tools", type: "folder", children: [
+      { name: "main.md", type: "file", modified: "2026-02-28" },
+    ]},
+    { name: "03 RAG, Knowledge, Memory", type: "folder", children: [
+      { name: "graph_data_models.md", type: "file", modified: "2026-03-07" },
+      { name: "knowledge_graph.md", type: "file", modified: "2026-02-25" },
+      { name: "rag_knowledge_memory_guide.md", type: "file", modified: "2026-03-02" },
+    ]},
+    { name: "04 AI Evals + GenAI Ops", type: "folder", children: [
+      { name: "knowledge_graph.md", type: "file", modified: "2026-02-18" },
+      { name: "llm_evaluation_and_evalops.md", type: "file", modified: "2026-02-20" },
+    ]},
+    { name: "05 AI Products + UX", type: "folder", children: [
+      { name: "ai_engineering_practices.md", type: "file", modified: "2026-03-07" },
+      { name: "ai_gamification_and_learning.md", type: "file", modified: "2026-03-07" },
+      { name: "ai_portfolio_and_roi.md", type: "file", modified: "2026-03-07" },
+      { name: "ai_product_management.md", type: "file", modified: "2026-03-07" },
+      { name: "ai_resources_and_design_practice.md", type: "file", modified: "2026-03-07" },
+      { name: "ai_ux_and_agent_design.md", type: "file", modified: "2026-03-07" },
+    ]},
+    { name: "06 AI Security", type: "folder", children: [
+      { name: "251201_ai_security_resources.md", type: "file", modified: "2025-12-01" },
+      { name: "knowledge_graph.md", type: "file", modified: "2025-12-05" },
+    ]},
+    { name: "07 AI Governance", type: "folder", children: [
+      { name: "2602 AI_Governance_Microsoft_Stack_GenAI.pptx", type: "file", modified: "2026-02-15" },
+      { name: "genai_governance_control_plane.pptx", type: "file", modified: "2026-02-20" },
+      { name: "AI Governance Bible.pptx", type: "file", modified: "2026-02-25" },
+    ]},
+    { name: "08 Data & Knowledge Eng", type: "folder", children: [
+      { name: "data_knowledge_engineering.md", type: "file", modified: "2026-02-28" },
+      { name: "knowledge_graph.md", type: "file", modified: "2026-03-01" },
+    ]},
+    { name: "09 Multimodal + Real-time", type: "folder", children: [
+      { name: "knowledge_graph.md", type: "file", modified: "2026-02-14" },
+      { name: "multimodal_and_realtime.md", type: "file", modified: "2026-02-16" },
+    ]},
+    { name: "10 AI Safety & Alignment", type: "folder", children: [
+      { name: "ai_safety_and_alignment.md", type: "file", modified: "2026-02-10" },
+      { name: "knowledge_graph.md", type: "file", modified: "2026-02-12" },
+    ]},
+    { name: "11 Quantum Computing", type: "folder", children: [
+      { name: "primer_quantum_ml.md", type: "file", modified: "2026-01-20" },
+    ]},
+    { name: "12 Reinforcement Learning", type: "folder", children: [
+      { name: "reinforcement_learning_principles_frontiers.md", type: "file", modified: "2026-02-05" },
+    ]},
+    { name: "13 ClaudeCode & Codex", type: "folder", children: [
+      { name: "claude_code_expert_guide.md", type: "file", modified: "2026-03-05" },
+      { name: "spec_driven_programming.md", type: "file", modified: "2026-03-07" },
+      { name: "subagents_and_skills.md", type: "file", modified: "2026-03-07" },
+    ]},
+    { name: "14 New & Emerging AI", type: "folder", children: [
+      { name: "generative_optimisation.md", type: "file", modified: "2026-03-06" },
+    ]},
+    { name: "250305_A_GEO.md", type: "file", modified: "2025-03-05" },
+    { name: "250305_O_GEO.md", type: "file", modified: "2025-03-05" },
+    { name: "260305_O_design_at_the_times_of_AI.md", type: "file", modified: "2026-03-05" },
+    { name: "startups", type: "folder", children: [
+      { name: "startup-differentiation.md", type: "file", modified: "2026-02-20" },
+    ]},
+    { name: "index.md", type: "file", modified: "2026-03-01" },
+    { name: "260302_federated_retrieval_for_agentic_AI.pdf", type: "file", modified: "2026-03-02" },
+  ]
+};
+
+// State
+let pathStack = [];
+let selectedFile = null;
+let recents = JSON.parse(localStorage.getItem('stacknav_recents') || '[]');
+
+// Set shortcut hint text safely
+document.getElementById('shortcutHint').textContent = '\u2318K';
+
+// Helpers
+function escHtml(s) {
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.textContent;
+}
+
+function getExt(name) {
+  const m = name.match(/\.(\w+)$/);
+  return m ? m[1].toLowerCase() : '';
+}
+
+function getFileClass(name) {
+  const ext = getExt(name);
+  if (ext === 'md') return 'file-md';
+  if (ext === 'pdf') return 'file-pdf';
+  if (['pptx', 'ppt'].includes(ext)) return 'file-pptx';
+  return 'file-other';
+}
+
+function createSvg(paths) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2');
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
+  paths.forEach(d => {
+    if (d.startsWith('M') || d.startsWith('m')) {
+      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p.setAttribute('d', d);
+      svg.appendChild(p);
+    } else if (d.startsWith('rect:')) {
+      const parts = d.replace('rect:', '').split(',');
+      const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      r.setAttribute('x', parts[0]); r.setAttribute('y', parts[1]);
+      r.setAttribute('width', parts[2]); r.setAttribute('height', parts[3]);
+      if (parts[4]) r.setAttribute('rx', parts[4]);
+      svg.appendChild(r);
+    } else if (d.startsWith('circle:')) {
+      const parts = d.replace('circle:', '').split(',');
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', parts[0]); c.setAttribute('cy', parts[1]); c.setAttribute('r', parts[2]);
+      svg.appendChild(c);
+    } else if (d.startsWith('line:')) {
+      const parts = d.replace('line:', '').split(',');
+      const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      l.setAttribute('x1', parts[0]); l.setAttribute('y1', parts[1]);
+      l.setAttribute('x2', parts[2]); l.setAttribute('y2', parts[3]);
+      svg.appendChild(l);
+    } else if (d.startsWith('polyline:')) {
+      const pts = d.replace('polyline:', '');
+      const pl = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+      pl.setAttribute('points', pts);
+      svg.appendChild(pl);
+    }
+  });
+  return svg;
+}
+
+const ICONS = {
+  folder: ['M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z'],
+  md: ['M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z', 'polyline:14 2 14 8 20 8', 'line:16,13,8,13', 'line:16,17,8,17'],
+  pdf: ['M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z', 'polyline:14 2 14 8 20 8'],
+  pptx: ['rect:2,3,20,14,2', 'line:8,21,16,21', 'line:12,17,12,21'],
+  other: ['M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z', 'polyline:13 2 13 9 20 9'],
+  chevron: ['polyline:9 18 15 12 9 6'],
+};
+
+function getIconPaths(name) {
+  const ext = getExt(name);
+  if (ext === 'md') return ICONS.md;
+  if (ext === 'pdf') return ICONS.pdf;
+  if (['pptx', 'ppt'].includes(ext)) return ICONS.pptx;
+  return ICONS.other;
+}
+
+function formatDate(d) {
+  if (!d) return '';
+  const date = new Date(d);
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return months[date.getMonth()] + ' ' + date.getDate();
+}
+
+function sortItems(items) {
+  return [...items].sort((a, b) => {
+    if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
+    return a.name.localeCompare(b.name);
+  });
+}
+
+function getCurrentFolder() {
+  let node = DATA;
+  for (const seg of pathStack) {
+    node = node.children.find(c => c.name === seg && c.type === 'folder');
+    if (!node) return DATA;
+  }
+  return node;
+}
+
+function countItems(folder) {
+  return (folder.children || []).length;
+}
+
+function getDisplayName(name) {
+  return name.replace(/\.\w+$/, '').replace(/_/g, ' ');
+}
+
+// Breadcrumb
+function renderBreadcrumb() {
+  const el = document.getElementById('breadcrumb');
+  el.replaceChildren();
+  const segs = ['useful', ...pathStack];
+  segs.forEach((s, i) => {
+    if (i > 0) {
+      const sep = document.createElement('span');
+      sep.className = 'breadcrumb-sep';
+      sep.textContent = '/';
+      el.appendChild(sep);
+    }
+    const span = document.createElement('span');
+    const isLast = i === segs.length - 1;
+    span.className = isLast ? 'breadcrumb-seg active' : 'breadcrumb-seg';
+    span.textContent = s;
+    if (!isLast) {
+      span.addEventListener('click', () => popTo(i));
+    }
+    el.appendChild(span);
+  });
+}
+
+// Build a nav item DOM element
+function createNavItem(item, index) {
+  const row = document.createElement('div');
+  row.className = 'nav-item';
+  if (item.type === 'file' && selectedFile === item.name) row.classList.add('selected');
+  row.style.animationDelay = (index * 25) + 'ms';
+  row.dataset.name = item.name;
+  row.dataset.type = item.type;
+
+  const icon = document.createElement('div');
+  icon.className = 'nav-icon ' + (item.type === 'folder' ? 'folder' : getFileClass(item.name));
+  icon.appendChild(createSvg(item.type === 'folder' ? ICONS.folder : getIconPaths(item.name)));
+  row.appendChild(icon);
+
+  const details = document.createElement('div');
+  details.className = 'nav-details';
+  const nameEl = document.createElement('div');
+  nameEl.className = 'nav-name';
+  nameEl.textContent = item.name;
+  details.appendChild(nameEl);
+  if (item.type === 'file' && item.modified) {
+    const meta = document.createElement('div');
+    meta.className = 'nav-meta';
+    meta.textContent = formatDate(item.modified);
+    details.appendChild(meta);
+  }
+  row.appendChild(details);
+
+  if (item.type === 'folder') {
+    const badge = document.createElement('span');
+    badge.className = 'nav-badge';
+    badge.textContent = countItems(item);
+    row.appendChild(badge);
+
+    const chev = document.createElement('span');
+    chev.className = 'nav-chevron';
+    chev.appendChild(createSvg(ICONS.chevron));
+    chev.querySelector('svg').setAttribute('width', '14');
+    chev.querySelector('svg').setAttribute('height', '14');
+    row.appendChild(chev);
+  }
+
+  row.addEventListener('click', () => {
+    if (item.type === 'folder') pushFolder(item.name);
+    else selectFile(item.name);
+  });
+
+  return row;
+}
+
+// Render card
+function renderCard(direction) {
+  const viewport = document.getElementById('stackViewport');
+  const folder = getCurrentFolder();
+  const items = sortItems(folder.children || []);
+
+  // Remove search results if visible
+  const sr = viewport.querySelector('.search-results');
+  if (sr) sr.remove();
+
+  const oldCard = viewport.querySelector('.stack-card:not(.exiting-left):not(.exiting-right)');
+
+  const card = document.createElement('div');
+  card.className = 'stack-card';
+  if (direction) card.classList.add(direction === 'push' ? 'entering-right' : 'entering-left');
+
+  if (items.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'search-empty';
+    const emptyIcon = document.createElement('span');
+    emptyIcon.className = 'search-empty-icon';
+    emptyIcon.textContent = '\uD83D\uDCC2';
+    empty.appendChild(emptyIcon);
+    empty.appendChild(document.createTextNode('Empty folder'));
+    card.appendChild(empty);
+  } else {
+    items.forEach((item, i) => card.appendChild(createNavItem(item, i)));
+  }
+
+  viewport.appendChild(card);
+
+  if (oldCard && direction) {
+    oldCard.classList.add(direction === 'push' ? 'exiting-left' : 'exiting-right');
+    oldCard.addEventListener('animationend', () => oldCard.remove());
+  } else if (oldCard) {
+    oldCard.remove();
+  }
+
+  updateFooter(items);
+}
+
+function updateFooter(items) {
+  const folders = items.filter(i => i.type === 'folder').length;
+  const files = items.filter(i => i.type === 'file').length;
+  const parts = [];
+  if (folders) parts.push(folders + ' folder' + (folders > 1 ? 's' : ''));
+  if (files) parts.push(files + ' file' + (files > 1 ? 's' : ''));
+  document.getElementById('footerCount').textContent = parts.join(' \u00b7 ') || 'empty';
+}
+
+// Navigation
+function pushFolder(name) {
+  pathStack.push(name);
+  renderBreadcrumb();
+  renderCard('push');
+}
+
+function popTo(depth) {
+  if (depth >= pathStack.length) return;
+  pathStack = pathStack.slice(0, depth);
+  renderBreadcrumb();
+  renderCard('pop');
+}
+
+function selectFile(name) {
+  selectedFile = name;
+  addRecent(name);
+  document.querySelectorAll('.stack-card .nav-item').forEach(el => {
+    el.classList.toggle('selected', el.dataset.name === name);
+  });
+}
+
+// Recents
+function addRecent(name) {
+  recents = recents.filter(r => r !== name);
+  recents.unshift(name);
+  recents = recents.slice(0, 5);
+  localStorage.setItem('stacknav_recents', JSON.stringify(recents));
+  renderRecents();
+}
+
+function renderRecents() {
+  const strip = document.getElementById('recentsStrip');
+  const row = document.getElementById('recentsRow');
+  if (recents.length === 0) { strip.style.display = 'none'; return; }
+  strip.style.display = 'block';
+  row.replaceChildren();
+
+  const dotColors = { md: 'var(--file-md)', pdf: 'var(--file-pdf)', pptx: 'var(--file-pptx)', ppt: 'var(--file-pptx)' };
+
+  recents.forEach(name => {
+    const chip = document.createElement('div');
+    chip.className = 'recent-chip';
+    chip.title = name;
+    chip.dataset.name = name;
+
+    const dot = document.createElement('span');
+    dot.className = 'dot';
+    const ext = getExt(name);
+    dot.style.background = dotColors[ext] || 'var(--file-other)';
+    chip.appendChild(dot);
+
+    chip.appendChild(document.createTextNode(getDisplayName(name)));
+
+    chip.addEventListener('click', () => {
+      const loc = findFile(name);
+      if (loc) {
+        pathStack = loc.path;
+        renderBreadcrumb();
+        renderCard(null);
+        selectFile(name);
+      }
+    });
+
+    row.appendChild(chip);
+  });
+}
+
+function findFile(name, node, path) {
+  node = node || DATA;
+  path = path || [];
+  for (const child of (node.children || [])) {
+    if (child.type === 'file' && child.name === name) return { path: [...path] };
+    if (child.type === 'folder') {
+      const r = findFile(name, child, [...path, child.name]);
+      if (r) return r;
+    }
+  }
+  return null;
+}
+
+// Search
+function getAllFiles(node, path) {
+  const results = [];
+  for (const child of (node.children || [])) {
+    if (child.type === 'file') {
+      results.push({ name: child.name, modified: child.modified, folder: path.join(' / ') || 'root', path: [...path] });
+    }
+    if (child.type === 'folder') {
+      results.push(...getAllFiles(child, [...path, child.name]));
+    }
+  }
+  return results;
+}
+
+function fuzzyMatch(query, text) {
+  const q = query.toLowerCase();
+  const t = text.toLowerCase();
+  if (t.includes(q)) return true;
+  let qi = 0;
+  for (let ti = 0; ti < t.length && qi < q.length; ti++) {
+    if (t[ti] === q[qi]) qi++;
+  }
+  return qi === q.length;
+}
+
+function renderSearch(query) {
+  const viewport = document.getElementById('stackViewport');
+  let sr = viewport.querySelector('.search-results');
+  if (!query) {
+    if (sr) sr.remove();
+    return;
+  }
+
+  const allFiles = getAllFiles(DATA, []);
+  const matches = allFiles.filter(f => fuzzyMatch(query, f.name));
+
+  // Group by folder
+  const groups = {};
+  matches.forEach(f => {
+    const key = f.folder || 'root';
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(f);
+  });
+
+  if (!sr) {
+    sr = document.createElement('div');
+    sr.className = 'search-results';
+    viewport.appendChild(sr);
+  }
+
+  sr.replaceChildren();
+
+  if (matches.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'search-empty';
+    const emptyIcon = document.createElement('span');
+    emptyIcon.className = 'search-empty-icon';
+    emptyIcon.textContent = '\uD83D\uDD0D';
+    empty.appendChild(emptyIcon);
+    empty.appendChild(document.createTextNode('No results for "' + query + '"'));
+    sr.appendChild(empty);
+    return;
+  }
+
+  let idx = 0;
+  for (const [folder, files] of Object.entries(groups)) {
+    const label = document.createElement('div');
+    label.className = 'search-group-label';
+    label.textContent = folder;
+    sr.appendChild(label);
+
+    files.forEach(f => {
+      const row = document.createElement('div');
+      row.className = 'nav-item';
+      row.style.animationDelay = (idx * 20) + 'ms';
+      row.dataset.name = f.name;
+
+      const icon = document.createElement('div');
+      icon.className = 'nav-icon ' + getFileClass(f.name);
+      icon.appendChild(createSvg(getIconPaths(f.name)));
+      row.appendChild(icon);
+
+      const details = document.createElement('div');
+      details.className = 'nav-details';
+      const nameEl = document.createElement('div');
+      nameEl.className = 'nav-name';
+      nameEl.textContent = f.name;
+      details.appendChild(nameEl);
+      const meta = document.createElement('div');
+      meta.className = 'nav-meta';
+      meta.textContent = formatDate(f.modified);
+      details.appendChild(meta);
+      row.appendChild(details);
+
+      row.addEventListener('click', () => {
+        pathStack = f.path;
+        document.getElementById('searchInput').value = '';
+        renderBreadcrumb();
+        renderCard(null);
+        selectFile(f.name);
+        sr.remove();
+      });
+
+      sr.appendChild(row);
+      idx++;
+    });
+  }
+
+  document.getElementById('footerCount').textContent = matches.length + ' result' + (matches.length !== 1 ? 's' : '');
+}
+
+// Init
+renderBreadcrumb();
+renderCard(null);
+renderRecents();
+
+// Search input
+const searchInput = document.getElementById('searchInput');
+let searchTimeout;
+searchInput.addEventListener('input', () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => renderSearch(searchInput.value.trim()), 150);
+});
+
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    searchInput.value = '';
+    searchInput.blur();
+    renderSearch('');
+  }
+});
+
+// Cmd+K shortcut
+document.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    searchInput.focus();
+    searchInput.select();
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2430 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2001-06%20-%20LLM%20Reasoning/llm_reasoning_and_inference_scaling/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>LLM Reasoning & Inference-Time Scaling - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#llm-reasoning-inference-time-scaling" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LLM Reasoning &amp; Inference-Time Scaling
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reasoning-as-search-selection-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reasoning as Search + Selection + Verification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifiable-rewards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifiable Rewards
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inference-time-compute-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inference-Time Compute Scaling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hybrid-reasoning-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Reasoning Controls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-refinement-self-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-Refinement &amp; Self-Consistency
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reasoning-economics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reasoning Economics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-model-intelligence-to-system-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Model Intelligence to System Intelligence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="From Model Intelligence to System Intelligence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-study-scaffolded-mathematical-discovery-bubeck-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Case Study: Scaffolded Mathematical Discovery (Bubeck, 2025)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-pattern-matters-beyond-mathematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why This Pattern Matters Beyond Mathematics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai-for-frontier-mathematics-the-erdos-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI for Frontier Mathematics: The Erdős Experiment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AI for Frontier Mathematics: The Erdős Experiment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#breadth-vs-depth-the-waterline-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breadth vs Depth: The Waterline Model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idea-generation-cost-near-zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      Idea Generation Cost → Near Zero
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-as-trustworthy-co-author-2023-prediction-confirmed" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI as Trustworthy Co-Author (2023 Prediction Confirmed)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="llm-reasoning-inference-time-scaling">LLM Reasoning &amp; Inference-Time Scaling<a class="headerlink" href="#llm-reasoning-inference-time-scaling" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>See also:</strong> <a href="../../xxx%2001-01%20-%20LLM%20Landscape%20and%20Trends/llm_landscape_and_trends/">LLM Landscape &amp; Trends</a> | <a href="../../xxx%2001-04%20-%20LLM%20Post-training/post_training_and_inference_time_techniques/">Post-Training &amp; Inference-Time Techniques</a> | <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/">LLM Evaluation &amp; EvalOps</a></p>
+</blockquote>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>For years the dominant strategy in large language models was straightforward: make the model bigger, train it longer, feed it more data, and watch benchmarks climb. Scaling laws told a clean story — performance improved as a power law of parameter count and training tokens. That story is no longer the primary one. The field's center of gravity has shifted from <strong>training-time scale to inference-time compute</strong>, and with it, the definition of what it means for a model to be "intelligent" has changed in practical, measurable ways.</p>
+<p>The evidence arrived from multiple directions at once. OpenAI's o-series models demonstrated that a mid-sized model given room to reason at inference could outperform a larger model forced to answer in a single forward pass. Google's Gemini 2.5 Flash shipped a controllable thinking budget that let callers dial reasoning depth per request. Anthropic introduced an effort parameter on Claude Sonnet 4.6 that smoothly trades latency for solution quality. Qwen3 integrated thinking and non-thinking modes behind a single API surface. These are not parallel experiments — they are <strong>convergent engineering decisions</strong> made independently by teams with different architectures, training pipelines, and customer bases. When five major vendors arrive at the same design pattern within the same product cycle, the underlying signal is structural, not stylistic.</p>
+<p>What makes this shift consequential is the economics. Training compute is centralized and sunk: you spend hundreds of millions of dollars once, and every user gets the same model. Inference compute is selective and task-aware. A routine classification request can run on a fast path at minimal cost, while a complex multi-step reasoning problem can be allocated ten or fifty times more compute — branching, verifying, revising — because the value of a correct answer justifies the spend. Intelligence becomes <strong>elastic</strong>, priced per decision rather than amortized across a fleet. This reframes the cost conversation entirely: the relevant question is no longer "how big is the model" but "how much thinking does this particular problem deserve."</p>
+<p>The implications propagate into system design, evaluation, and procurement. Benchmarks that measure single-pass accuracy undercount models designed for iterative refinement. Latency SLAs must accommodate variable reasoning depth. Cost models must account for per-request compute variance that can span an order of magnitude. And the research agenda itself has pivoted: the frontier problems are no longer primarily about architecture search or dataset curation, but about reward design, verification, search strategies, and the control surfaces that let users and systems govern how much reasoning happens and when.</p>
+<h2 id="reasoning-as-search-selection-verification">Reasoning as Search + Selection + Verification<a class="headerlink" href="#reasoning-as-search-selection-verification" title="Permanent link">&para;</a></h2>
+<p>The most productive way to understand modern reasoning models is not "the model thinks harder" but rather: reasoning quality is a function of <strong>search</strong>, <strong>selection</strong>, and <strong>verification</strong>.</p>
+<p><strong>Search</strong> is the generation of candidate reasoning paths. A model that samples a single chain of thought is performing minimal search. A model that generates dozens of candidate paths — branching at decision points, exploring alternative decompositions — is performing broad search. The quality ceiling is set by whether the correct path exists anywhere in the candidate set.</p>
+<p><strong>Selection</strong> is the mechanism for choosing among candidates. Majority voting (self-consistency) is the simplest selection strategy. Learned verifiers that score candidate solutions are more powerful. Process reward models that evaluate intermediate reasoning steps, not just final answers, are more powerful still. Selection quality determines how reliably the system surfaces the best path from its search.</p>
+<p><strong>Verification</strong> is the ability to check whether a candidate answer is correct. In domains with objective ground truth — code that compiles and passes tests, math with known answers, logic with checkable proofs — verification is cheap and reliable. In open-ended domains, verification is expensive, noisy, or unavailable. The strength of the verification signal is the single largest determinant of how much value inference-time compute can deliver.</p>
+<p>This framing clarifies why reasoning models work spectacularly in some domains and modestly in others. It is not a property of the model — it is a property of the verification landscape.</p>
+<h2 id="verifiable-rewards">Verifiable Rewards<a class="headerlink" href="#verifiable-rewards" title="Permanent link">&para;</a></h2>
+<p>The structural breakthrough that enabled reasoning-optimized models is the verifiable reward paradigm. The pattern is simple:</p>
+<ol>
+<li>Generate a candidate output (often with chain-of-thought).</li>
+<li>Verify the output against an objective criterion.</li>
+<li>Assign a reward based on verification.</li>
+<li>Reinforce the behaviors — reasoning patterns, decomposition strategies, tool use decisions — that led to verified-correct outputs.</li>
+</ol>
+<p>This closes a tight optimization loop that does not require human preference labels for every training example. The model learns <em>how to reason</em> by being rewarded for <em>getting checkable answers right</em>.</p>
+<p><strong>Domains where verifiable rewards work well:</strong></p>
+<ul>
+<li><strong>Code</strong>: tests pass or fail, compilation succeeds or fails, outputs match expected values.</li>
+<li><strong>Mathematics</strong>: numerical answers are correct or incorrect, proofs can be mechanically checked.</li>
+<li><strong>Logic and constraint satisfaction</strong>: solutions either satisfy all constraints or they do not.</li>
+<li><strong>Structured data tasks</strong>: outputs conform to schemas, queries return expected results, transformations are invertible.</li>
+</ul>
+<p><strong>Domains where verifiable rewards are weak:</strong></p>
+<ul>
+<li>Open-ended writing, where "quality" is subjective and multidimensional.</li>
+<li>Strategic planning, where outcomes depend on execution over long time horizons.</li>
+<li>Ambiguous judgment calls, where reasonable experts disagree on the correct answer.</li>
+</ul>
+<p><strong>The research frontier</strong> is extending verification into softer domains. Current approaches include: using simulators and environment feedback as proxy verifiers, defining executable constraints that partial solutions must satisfy, employing tool-mediated validation (e.g., running generated SQL against a database to check plausibility), constructing structured rubrics scored by stronger judge models, and decomposing fuzzy tasks into sub-tasks with more checkable outputs. Progress here directly expands the set of problems where inference-time compute yields reliable gains.</p>
+<h2 id="inference-time-compute-scaling">Inference-Time Compute Scaling<a class="headerlink" href="#inference-time-compute-scaling" title="Permanent link">&para;</a></h2>
+<p>The core pattern is: more compute at inference yields better solution quality, with diminishing but real returns across a wide operating range.</p>
+<p>Inference compute is spent on multiple mechanisms:</p>
+<ul>
+<li><strong>Best-of-N generation</strong>: produce N candidate solutions, select the best.</li>
+<li><strong>Branch exploration</strong>: at key decision points, explore multiple paths before committing.</li>
+<li><strong>Verifier passes</strong>: run a separate model or check to score candidates.</li>
+<li><strong>Self-consistency</strong>: sample multiple reasoning chains and aggregate answers.</li>
+<li><strong>Revision loops</strong>: generate, critique, and revise iteratively.</li>
+<li><strong>Tool execution</strong>: call external tools (code interpreters, search, calculators) and incorporate results.</li>
+</ul>
+<p>The critical economic insight is the difference between training compute and inference compute. Training compute is <strong>centralized and sunk</strong> — it is spent once, up front, and amortized across all requests. Inference compute is <strong>selective and task-aware</strong> — it can be allocated per-request based on problem difficulty, user tier, risk tolerance, or value of a correct answer.</p>
+<p>This makes intelligence elastic. A provider can offer the same underlying model at multiple price-quality points, not by training separate models, but by varying how much inference compute each request consumes. A simple factual lookup gets a fast, cheap single-pass answer. A complex legal analysis gets extended reasoning with multiple verification passes. The model is the same; the compute envelope is different.</p>
+<p>The scaling curves are not linear. Early inference compute (moving from one pass to a few passes) typically yields large quality gains. Returns diminish as compute increases, but the curve flattens slowly enough that 10x to 50x inference compute budgets remain cost-effective for high-value problems. The exact shape depends heavily on domain — problems with strong verification signals show steeper, more sustained scaling.</p>
+<h2 id="hybrid-reasoning-controls">Hybrid Reasoning Controls<a class="headerlink" href="#hybrid-reasoning-controls" title="Permanent link">&para;</a></h2>
+<p>Every major model vendor has converged on the same design pattern: explicit, user-controllable reasoning effort. This is the strongest cross-vendor convergence signal in the current period and it signals that adaptive inference compute is moving from research novelty to standard infrastructure.</p>
+<p><strong>GPT-5 (OpenAI):</strong> A router selects between fast and thinking models based on query complexity. The system automatically allocates more reasoning compute to harder problems, with API-level controls for callers who want to override the default.</p>
+<p><strong>Gemini 2.5 Flash (Google):</strong> Ships a controllable thinking budget parameter. Callers specify how much reasoning compute the model should allocate, enabling smooth tradeoffs between latency, cost, and answer quality within a single model deployment.</p>
+<p><strong>Claude Sonnet 4.6 (Anthropic):</strong> Introduces an effort parameter alongside multiple thinking modes. The API exposes a continuous quality-latency knob, allowing callers to specify reasoning depth from minimal to extended based on task requirements.</p>
+<p><strong>gpt-oss (open-source, community):</strong> Trains explicit low, medium, and high reasoning levels into open-weight models, demonstrating smooth test-time scaling. Shows that the pattern is not proprietary — it can be replicated with public training recipes.</p>
+<p><strong>Qwen3 (Alibaba):</strong> Integrates thinking and non-thinking modes within a single model, with a thinking budget mechanism that governs how many reasoning tokens the model generates before producing a final answer.</p>
+<p><strong>llama.cpp (open-source inference):</strong> Introduced a true reasoning budget feature using a sampler mechanism that counts tokens during the reasoning phase and terminates generation when the budget is reached (r/LocalLlama, Mar 2026). The implementation exposes an HTTP API field (<code>thinking_budget_tokens</code>) and a CLI argument (<code>--reasoning-budget</code>). Initial tests on Qwen3 9B showed that hard budget enforcement dropped HumanEval from 94% to 78%, but adding <code>--reasoning-budget-message</code> — a prompt injected to tell the model to wrap up its reasoning — recovered scores to 89%. Practical testing with Qwen3.5 35B Q5 demonstrated the speed/quality tradeoff clearly: unlimited budget produced correct answers but took 83 seconds of overthinking, while a 1000-token budget completed in 18 seconds and still passed quality tests. A proposed enhancement would gradually increase the logit bias for the end-of-think token (e.g., linear 0.1% per token) to help the model conclude naturally rather than face an abrupt cutoff. This signals that practical inference-time compute budgeting is becoming a first-class feature in open-source inference engines, enabling callers to make explicit speed/quality tradeoffs at serving time.</p>
+<p>The convergence is notable because these implementations differ in architecture, training methodology, and deployment context, yet arrive at the same abstraction: a per-request knob that controls how much the model reasons. This is the interface the market is standardizing on.</p>
+<h2 id="self-refinement-self-consistency">Self-Refinement &amp; Self-Consistency<a class="headerlink" href="#self-refinement-self-consistency" title="Permanent link">&para;</a></h2>
+<p>Self-refinement and self-consistency are complementary patterns for improving output quality at inference time, each with distinct mechanics and failure modes.</p>
+<p><strong>Self-consistency</strong> samples multiple independent reasoning paths for the same problem, then aggregates — typically by majority vote on the final answer. It is effective when the correct reasoning path appears in some but not all samples. The cost scales linearly with the number of samples. It is a search-and-select pattern: broaden the candidate set, then use agreement as a proxy for correctness.</p>
+<p><strong>Self-refinement</strong> follows a generate-critique-revise loop. The model produces an initial answer, evaluates it (often with explicit critique prompting), identifies weaknesses, and produces a revised answer. Iterated, this becomes a refinement chain. It is effective when the model can reliably detect its own errors — which is often true for format violations, logical inconsistencies, and constraint violations, but less reliable for subtle factual errors or deep reasoning mistakes.</p>
+<p><strong>Reflection loops</strong> are a more structured variant: the model explicitly inspects its failure modes, enumerates what could go wrong, and adjusts its approach before finalizing. This is most valuable in multi-step problems where early errors compound.</p>
+<p><strong>The bounded search principle</strong> is critical. The right mental model for all of these patterns is bounded search with correction, not infinite introspection. Unbounded reflection creates three failure modes: latency and cost blowups as the model generates ever-longer reasoning chains, circular self-justification where the model convinces itself a wrong answer is correct through increasingly elaborate rationalization, and diminishing returns as each successive revision yields smaller improvements. Well-designed systems cap reasoning depth, use external verification signals to terminate early when confidence is high, and treat the thinking budget as a hard resource constraint rather than an open-ended invitation to deliberate.</p>
+<h2 id="reasoning-economics">Reasoning Economics<a class="headerlink" href="#reasoning-economics" title="Permanent link">&para;</a></h2>
+<p>The thinking budget is emerging as the <strong>primary quality knob</strong> in production LLM systems — more impactful than model selection for many workloads.</p>
+<p><strong>When to spend more inference compute:</strong></p>
+<ul>
+<li>The problem is high-value: legal analysis, medical reasoning, financial modeling, where the cost of an error dwarfs the cost of additional compute.</li>
+<li>The problem has verifiable structure: code generation, math, constraint satisfaction — domains where additional reasoning reliably converts to quality.</li>
+<li>The problem is novel or adversarial: out-of-distribution inputs where single-pass answers are unreliable.</li>
+<li>The user or system can tolerate latency: batch processing, async workflows, non-interactive analysis.</li>
+</ul>
+<p><strong>When to spend less:</strong></p>
+<ul>
+<li>The problem is routine and well-covered by training data: simple classification, extraction, formatting.</li>
+<li>Latency is the binding constraint: real-time chat, autocomplete, streaming UI.</li>
+<li>Verification signals are weak: open-ended creative tasks where more reasoning does not reliably improve quality.</li>
+<li>The cost-quality curve has flattened: after a few passes, additional compute yields negligible improvement.</li>
+</ul>
+<p><strong>Cost-quality curves</strong> vary by domain and model. In code generation, moving from 1 to 8 samples with best-of-N selection can improve pass rates by 20-40 percentage points on hard benchmarks. In open-ended writing, the same compute multiplier may yield marginal or no improvement. Understanding the shape of the cost-quality curve for your specific workload is essential for setting thinking budgets effectively.</p>
+<p><strong>Practical implications for system design:</strong></p>
+<ul>
+<li>Build routing layers that classify incoming requests by difficulty and allocate reasoning budgets accordingly.</li>
+<li>Instrument cost-quality curves empirically for your workloads — do not assume the benchmark curves transfer.</li>
+<li>Treat the thinking budget as a first-class configuration parameter, exposed in APIs and tunable per use case.</li>
+<li>Monitor for diminishing returns: if your p50 request gets the same answer with 2x and 10x compute, you are overspending.</li>
+</ul>
+<h2 id="from-model-intelligence-to-system-intelligence">From Model Intelligence to System Intelligence<a class="headerlink" href="#from-model-intelligence-to-system-intelligence" title="Permanent link">&para;</a></h2>
+<p>The frontier of reasoning capability is shifting from what a single model can do in one pass to what a <strong>model embedded in scaffolding</strong> can discover over extended compute. The relevant unit is no longer the base model alone — it is the model inside a search / critique / verification / memory architecture, with enough compute and the right staging of the task. The formula becoming visible:</p>
+<p><strong>base model x scaffolding x task decomposition x test-time compute</strong></p>
+<h3 id="case-study-scaffolded-mathematical-discovery-bubeck-2025">Case Study: Scaffolded Mathematical Discovery (Bubeck, 2025)<a class="headerlink" href="#case-study-scaffolded-mathematical-discovery-bubeck-2025" title="Permanent link">&para;</a></h3>
+<p>Sebastien Bubeck presented a case where an agentic system solved a combinatorics conjecture that had been open for roughly a decade — an inequality on 5-vertex tree subgraph densities (star, path, and Y-shaped trees in the edge-density vs subgraph-density feasible region). Plain GPT-5 could not solve it directly from a clean prompt.</p>
+<p><strong>The methodology that worked:</strong></p>
+<ol>
+<li><strong>Curriculum-shaped attack</strong> — instead of prompting the hard conjecture directly, the system first solved an easier related problem whose solution was already known. The successful proof was fed back in-context before asking for the harder generalization.</li>
+<li><strong>Agentic scaffold</strong> — multiple agent roles: some propose ideas, some execute, some verify, some merge branches.</li>
+<li><strong>Long sequential compute</strong> — roughly two days of sequential reasoning time for the precursor problem.</li>
+<li><strong>Verification-integrated search</strong> — the system produced a proof, not just an answer.</li>
+</ol>
+<p>The proof hinged on a <strong>"miraculous identity" on trees</strong> that Bubeck and other domain experts did not recognize or have in hand. This is the critical signal: not merely proof completion, but the surfacing of a structural identity humans around the problem did not already possess.</p>
+<h3 id="why-this-pattern-matters-beyond-mathematics">Why This Pattern Matters Beyond Mathematics<a class="headerlink" href="#why-this-pattern-matters-beyond-mathematics" title="Permanent link">&para;</a></h3>
+<p><strong>Curriculum staging</strong> reframes how to attack hard problems with LLMs. Don't ask the hardest version first — bootstrap through adjacent solved problems, carry the successful reasoning artifacts forward as in-context examples, then generalize. This is a systematic alternative to prompt engineering.</p>
+<p><strong>Insight localization</strong> is a new meta-research direction. When the system writes millions of tokens and "dozens of books" worth of intermediate material, the scientific question becomes: where exactly did the insight happen, and can we detect that automatically? This converts long reasoning traces from waste into research artifacts.</p>
+<p><strong>System intelligence, not model intelligence</strong> — the winning pattern is not smarter models but <strong>research-grade orchestration</strong>: staged subproblems, verifiers, branch management, context injection from solved precursor tasks, and selective reuse of intermediate artifacts. The biggest moat may end up being the orchestration methodology for discovery, not the model itself.</p>
+<blockquote>
+<p><strong>Key:</strong> Hard research tasks are becoming computationally attackable. The winning pattern is scaffolded multi-agent search, not one-shot prompting. "Insight" may become something we can study as an artifact inside long reasoning traces. The frontier is shifting from "can a model answer?" to "can a system discover?"</p>
+</blockquote>
+<h2 id="ai-for-frontier-mathematics-the-erdos-experiment">AI for Frontier Mathematics: The Erdős Experiment<a class="headerlink" href="#ai-for-frontier-mathematics-the-erdos-experiment" title="Permanent link">&para;</a></h2>
+<p>The clearest empirical window into where AI reasoning actually stands on frontier research tasks comes from the Erdős problems — a collection of ~1,100 open problems posed by Paul Erdős, many unsolved for decades. As of March 2026, AI tools have solved approximately <strong>50 of these problems</strong>, which is impressive but has reached a visible <strong>plateau</strong>: pure AI one-shot solutions dominated for about a month, then stopped entirely. Three separate attempts to have frontier models attack every remaining problem simultaneously produced no further purely autonomous solutions (Terence Tao, Dwarkesh Podcast, Mar 2026).</p>
+<p>The key empirical finding: on any given problem, systematic sweeps show AI tools have a success rate of roughly <strong>1–2%</strong>. The 50 solved problems look dramatic because AI buys scale — you can attempt all problems simultaneously and broadcast the winners on social media. But the per-problem success rate is modest. Almost all AI-solved Erdős problems were ones with <strong>basically no prior literature</strong> — Erdős posed them, a few people tried them casually, nobody wrote anything up. The median AI solution combines one obscure technique with another result from the literature in a way no human had tried because no human had given the problem sustained attention (Terence Tao, Mar 2026).</p>
+<h3 id="breadth-vs-depth-the-waterline-model">Breadth vs Depth: The Waterline Model<a class="headerlink" href="#breadth-vs-depth-the-waterline-model" title="Permanent link">&para;</a></h3>
+<p>Tao frames the current state with an analogy: AI tools are <strong>"jumping machines that can jump two meters in the air, higher than any human"</strong> — they can reach the tops of walls that are below a certain height. Once set loose, they find and clear all the low walls. But they can't jump a little, reach a handhold, stay there, pull others up, and then jump from there. <strong>Cumulative partial progress — the core of human research — is still missing.</strong> AIs either succeed or fail; they are "really bad at creating partial progress or identifying intermediate stages that you should focus on first."</p>
+<p>The complementary insight: AI excels at <strong>breadth</strong> (filling every problem at a given difficulty waterline), while human experts excel at <strong>depth</strong> (building up cumulatively from partial results). The current scientific paradigm is optimized for depth because that's what humans can do. Science needs to be <strong>redesigned for breadth-first exploration</strong> — using broad, moderately competent AIs to map out new fields and make all the easy observations, then identifying "islands of difficulty" for human experts to work on (Terence Tao, Mar 2026).</p>
+<h3 id="idea-generation-cost-near-zero">Idea Generation Cost → Near Zero<a class="headerlink" href="#idea-generation-cost-near-zero" title="Permanent link">&para;</a></h3>
+<p>Tao argues that <strong>AI has driven the cost of idea generation down to almost zero</strong>, analogous to how the internet drove communication costs to zero. This does not create abundance by itself — it shifts the bottleneck. The scarce resource is now <strong>verification, validation, and evaluation at scale</strong>. Journals are already overwhelmed by AI-generated submissions. For each individual paper, scientific consensus takes years of debate; when AI generates thousands of candidate theories daily, the existing peer review system breaks down entirely. New structures for assessing scientific progress at scale are needed and do not yet exist (Terence Tao, Mar 2026).</p>
+<h3 id="ai-as-trustworthy-co-author-2023-prediction-confirmed">AI as Trustworthy Co-Author (2023 Prediction Confirmed)<a class="headerlink" href="#ai-as-trustworthy-co-author-2023-prediction-confirmed" title="Permanent link">&para;</a></h3>
+<p>Tao's 2023 prediction that AI would function as a "trustworthy co-author if used correctly" by 2026 has been validated. His current assessment: papers he writes today would take <strong>5× longer without AI assistance</strong> — but this is almost entirely on <strong>auxiliary tasks</strong> (literature search, numerics, code, plots, reformatting). The core of mathematical problem-solving — the hardest part of a math problem — still uses pen and paper. AI has made papers <strong>"richer and broader, but not deeper."</strong> The distinction Tao draws between "artificial cleverness" (trial-and-error at scale, pattern matching, brute force) and "artificial intelligence" (cumulative progress, adaptive strategy refinement, building on partial results interactively) remains the binding limitation (Terence Tao, Dwarkesh Podcast, Mar 2026).</p>
+<blockquote>
+<p><strong>Key:</strong> The selection bias in AI research results is severe — broadcasting winners from massive parallel sweeps creates an inflated perception of capability. The honest per-problem success rate is ~1–2%. The real structural contribution of AI to research is not depth but breadth: the ability to attempt every problem at a given difficulty level simultaneously and clear the backlog of under-explored problems where existing techniques suffice but no human had tried.</p>
+</blockquote>
+<h2 id="cross-references">Cross-References<a class="headerlink" href="#cross-references" title="Permanent link">&para;</a></h2>
+<p>For <strong>technique-level implementation details</strong> — chain-of-thought prompting, analogical prompting, tree-of-thought, step-back prompting, and other inference-time methods — see <a href="../../xxx%2001-04%20-%20LLM%20Post-training/post_training_and_inference_time_techniques/">Post-Training &amp; Inference-Time Techniques</a>.</p>
+<p>For the <strong>broader landscape context</strong> — model releases, capability trends, training paradigms, and market dynamics — see <a href="../../xxx%2001-01%20-%20LLM%20Landscape%20and%20Trends/llm_landscape_and_trends/">LLM Landscape &amp; Trends</a>.</p>
+<p>For <strong>evaluation frameworks</strong> that measure reasoning quality, including process-level evaluation and reasoning benchmarks — see <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/">LLM Evaluation &amp; EvalOps</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

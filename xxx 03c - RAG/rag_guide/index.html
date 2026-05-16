@@ -1,0 +1,3365 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2003c%20-%20RAG/rag_guide/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Retrieval-Augmented Generation (RAG) - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#retrieval-augmented-generation-rag" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Retrieval-Augmented Generation (RAG)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rag-pipeline-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG Pipeline Checklist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hybrid-retrieval-routing-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Retrieval Routing Criteria
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#embeddings-and-vector-index-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Embeddings and Vector Index Selection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-vector-vs-multi-vector-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single-Vector vs Multi-Vector Retrieval
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Single-Vector vs Multi-Vector Retrieval">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-vector-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single-Vector Retrieval
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-vector-late-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Vector Late Interaction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-multi-vector-wins-on-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Multi-Vector Wins on Quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-three-retrieval-model-regimes" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Three Retrieval Model Regimes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colbert-the-reference-late-interaction-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      ColBERT: The Reference Late-Interaction Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colpali-late-interaction-for-visual-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      ColPali: Late Interaction for Visual Documents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#late-interaction-for-code-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Late Interaction for Code Retrieval
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-the-real-constraint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infrastructure: The Real Constraint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-which" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Use Which
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knowledge-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge Lifecycle
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Knowledge Lifecycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retrieval-flywheel-self-expanding-knowledge-bases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval Flywheel: Self-Expanding Knowledge Bases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-baseline-rag-breaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where Baseline RAG Breaks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Where Baseline RAG Breaks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#structure-preserving-retrieval-element-level-storage-and-top-down-pruning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure-Preserving Retrieval: Element-Level Storage and Top-Down Pruning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document-parsing-tooling-apr-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Parsing Tooling (Apr 2026)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retrieval-strategies-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval Strategies Comparison
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agentic-retrieval-as-rag-with-a-decision-maker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agentic Retrieval as "RAG with a Decision-Maker"
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Agentic Retrieval as "RAG with a Decision-Maker"">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agents-multiply-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agents Multiply Retrieval
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieval-as-truth-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval as Truth Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieval-economics-as-product-governor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval Economics as Product Governor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieval-conditioned-reasoning-rcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval-Conditioned Reasoning (RCR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieval-augmented-planning-rap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval-Augmented Planning (RAP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contrastive-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contrastive RAG
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-index-rag-federated-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Index RAG (Federated Retrieval)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixture-of-retrievers-mor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixture-of-Retrievers (MoR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-stage-reasoning-pipelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Stage Reasoning Pipelines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#budget-aware-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Budget-Aware RAG
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entropy-aware-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entropy-Aware Retrieval
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emerging-retrieval-primitives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Emerging Retrieval Primitives
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-rewriting-and-reranking-the-underrated-levers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Rewriting and Reranking: The Underrated Levers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-ai-search-agentic-retrieval-as-a-managed-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azure AI Search: Agentic Retrieval as a Managed Service
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#graph-based-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph-Based RAG
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Graph-Based RAG">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#graph-rag-implementation-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph RAG Implementation Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphrag-as-a-reference-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      GraphRAG as a Reference Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph-integration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph Integration Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphrag-gnn-fusion-graph-neural-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      GraphRAG + GNN Fusion (Graph Neural Retrieval)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hyperbolic-embeddings-for-graphrag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hyperbolic Embeddings for GraphRAG
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#signals-worth-watching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Signals Worth Watching
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-source-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open-Source Ecosystem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Open-Source Ecosystem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rag-app-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG / App Frameworks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Databases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph-rag-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph RAG &amp; Evaluation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emerging-infra-aggregators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Emerging Infra &amp; Aggregators
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Links
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Papers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#official-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Official Docs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-open-source-repos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Open-Source Repos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="retrieval-augmented-generation-rag">Retrieval-Augmented Generation (RAG)<a class="headerlink" href="#retrieval-augmented-generation-rag" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>See also:</strong> <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/">Context Engineering &amp; Memory</a> | <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/agent_memory_systems/">Agent Memory Systems</a> | <a href="../rag_evals/">RAG Evals &amp; Production Engineering</a> | <a href="../xxx 15 - Graph/knowledge_graph_rag.md">Knowledge Graph RAG</a></p>
+</blockquote>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The shift in RAG is from passive retrieval to <strong>retrieval as a learned, multi-step policy</strong> — one where the model itself participates in deciding whether to retrieve, what granularity to operate at, and when to stop. Self-RAG introduces reflection tokens that let the generator critique its own grounding mid-sequence; A-RAG exposes retrieval interfaces at four granularities (document, summary, passage, chunk) and delegates strategy selection to an agent planner. The trade-off is sharp: on benchmarks requiring multi-hop reasoning, agentic retrieval dominates, but for high-volume single-hop lookups, hybrid dense-plus-sparse search with a cross-encoder reranker remains cheaper by an order of magnitude in latency and token spend.</p>
+<p>RAG stacks are evolving from simple retrieval pipelines into <strong>full knowledge orchestration layers</strong> — combining routing, multi-granularity retrieval, graph traversal, memory integration, and evaluation into unified architectures. The distinction between "RAG system" and "context engineering platform" is collapsing. Single-shot RAG is effectively obsolete for complex tasks; the emerging default is <strong>multi-stage reasoning pipelines</strong> with planner-driven query expansion, multi-retriever fanout, fusion/rerank, reasoning, and critique loops.</p>
+<p>Three newer directions are accelerating this shift. <strong>Self-Reflective RAG (SR-RAG)</strong> introduces closed-loop retrieval refinement — retrieve, reason, critique, re-retrieve — reducing hallucinations in long-tail and multi-hop queries by making retrieval iterative rather than single-pass. <strong>Mixture-of-Retrievers (MoR)</strong> replaces static hybrid search with multiple specialised retrievers (dense, sparse, graph, domain-specific) combined via learned or query-conditioned gating — similar to MoE but for retrieval, improving robustness across heterogeneous corpora. <strong>GraphRAG + GNN fusion</strong> integrates graph neural networks directly into retrieval scoring via message passing, making retrieval structure-aware rather than relying on post-hoc graph traversal; early benchmarks outperform static KG embeddings (arXiv, 2025–2026).</p>
+<p>Early evidence now suggests RAG performance follows <strong>scaling behavior analogous to LLMs</strong> — but the scaling axis that matters is <strong>retrieval diversity, not depth</strong>. More diverse retrieval sources outperform deeper top-k from a single source, marginal gains drop sharply after ~20–40 chunks, and retrieval diversity matters more than raw similarity scores (arXiv, 2025–2026 on RAG scaling). The implication is to stop over-optimizing top-k and instead focus on <strong>source heterogeneity and retrieval diversity</strong>.</p>
+<p>A parallel shift is reshaping the retrieval layer itself: the argument is no longer mainly about which embedding model is best, but about <strong>whether retrieval should collapse a document into one vector at all</strong>. Single-vector retrieval (one embedding per document, one cosine score) is operationally clean but compresses away fine-grained relevance signals — entities, table cells, figure captions, layout cues. Multi-vector late-interaction architectures like <strong>ColBERT</strong> preserve token-level embeddings and score them with MaxSim, substantially outperforming single-vector retrieval on out-of-domain, long-context, and multimodal benchmarks (OpenReview, "Random Sparse Embeddings Unlock Billion-Scale Late Interaction Retrieval", 2026). The blocker is no longer theory; it is <strong>index/storage/latency engineering</strong> — and that infra is now catching up.</p>
+<p>An emerging frontier bypasses explicit index lookup entirely: <strong>latent retrieval</strong> explores whether models can implicitly retrieve knowledge from compressed latent stores — a hybrid between fine-tuning and RAG that reduces latency dramatically by avoiding vector DB calls altogether. This is still experimental but promising for edge deployments where retrieval infrastructure is a constraint (arXiv, 2025–2026 on latent retrieval).</p>
+<hr />
+<h2 id="rag-pipeline-checklist">RAG Pipeline Checklist<a class="headerlink" href="#rag-pipeline-checklist" title="Permanent link">&para;</a></h2>
+<p>Use when domain knowledge is too large or dynamic to fit in context windows and correctness matters.</p>
+<blockquote>
+<p><strong>Key -- RAG 2.0 Architecture Sketch:</strong></p>
+<div class="highlight"><pre><span></span><code>Ingest -&gt; Chunk -&gt; Enrich (entities, tables) -&gt; Index
+               ↓                      ↑
+           Policies &lt;- Query -&gt; Retrieve -&gt; Compose -&gt; Evals
+</code></pre></div>
+<p><strong>Key -- RAG 2.0 Pipeline Checklist:</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Ground-truth set covering key intents</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Chunking with structure awareness (headings, tables)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Enrichment: entities, citations, table extraction</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Retrieval policies + diversity (filters, recency)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Compose with citations and abstain behavior</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Good/Better/Best: naive vector search -&gt; hybrid retrieval + citations + abstain -&gt; structured enrichments, policies, evaluators per intent</li>
+</ul>
+<p><strong>Common pitfalls:</strong></p>
+<ul>
+<li>Over-chunking without semantic boundaries (headings, paragraph breaks) destroys coherence</li>
+<li>Unenriched tables and figures lead to hallucinated facts — always extract and annotate them during ingestion</li>
+<li>Missing retrieval policies (filters, recency, diversity) cause the system to surface stale or redundant passages</li>
+</ul>
+<p><strong>Key -- Citations Eval Snippet:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">gold</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">citation_present</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span> <span class="ow">and</span> <span class="n">contains</span><span class="p">(</span><span class="n">gold</span><span class="p">,</span> <span class="n">answer</span><span class="p">))</span>
+</code></pre></div>
+</blockquote>
+<hr />
+<h2 id="hybrid-retrieval-routing-criteria">Hybrid Retrieval Routing Criteria<a class="headerlink" href="#hybrid-retrieval-routing-criteria" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key -- Hybrid RAG Routing Checklist:</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Define routing criteria by query intent (keyword, dense, graph)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Instrument retrieval choices and outcomes</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add evals per route (e.g., factuality, coverage)</li>
+<li>Pitfall: unclear selection policies lead to inconsistent results; over-fetching drives up latency and cost</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="embeddings-and-vector-index-selection">Embeddings and Vector Index Selection<a class="headerlink" href="#embeddings-and-vector-index-selection" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key -- Embeddings &amp; Vector Databases:</strong></p>
+<ul>
+<li><strong>Index selection</strong>: HNSW (fast approximate, high memory), IVF (lower memory, needs tuning), flat (exact, small datasets only)</li>
+<li><strong>Metadata filtering</strong>: combine vector similarity with structured filters (date, source, entity type) to improve precision</li>
+<li><strong>Embedding drift</strong>: monitor embedding model changes; re-index when switching models or after significant corpus shifts</li>
+<li>Choose domain-specific embedding models when general-purpose models underperform on jargon-heavy corpora</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="single-vector-vs-multi-vector-retrieval">Single-Vector vs Multi-Vector Retrieval<a class="headerlink" href="#single-vector-vs-multi-vector-retrieval" title="Permanent link">&para;</a></h2>
+<p>The retrieval paradigm question is shifting from "which embedding model?" to <strong>"should retrieval collapse a document into one vector at all?"</strong> This is an architectural choice with deep implications for quality, cost, and infrastructure.</p>
+<h3 id="single-vector-retrieval">Single-Vector Retrieval<a class="headerlink" href="#single-vector-retrieval" title="Permanent link">&para;</a></h3>
+<p>Turn the whole query into one embedding, turn the whole document into one embedding, score with one cosine or dot product. Operationally clean: tiny index, simple ANN search, cheap storage, fast serving, easy database integration. This is why most production RAG stacks adopted it first.</p>
+<p><strong>Gemini Embedding 2</strong> (public preview, March 10, 2026) is the newest strong version of this paradigm: a unified multimodal embedding space across text, images, video, audio, and documents with 3072 dimensions by default (Google, Mar 2026). A good single-vector model, but still architecturally constrained by single-vector compression.</p>
+<h3 id="multi-vector-late-interaction">Multi-Vector Late Interaction<a class="headerlink" href="#multi-vector-late-interaction" title="Permanent link">&para;</a></h3>
+<p>Keep <strong>many vectors</strong> per query and per document — usually token-level or patch-level. Score with a richer interaction rule, typically <strong>MaxSim</strong>: each query token finds its best match in the document, and scores are summed.</p>
+<p>$$\text{MaxSim}(Q,D) = \sum_{q \in Q} \max_{d \in D} \text{sim}(q, d)$$</p>
+<p>This is much closer to attention-like matching than "summary vector vs summary vector." Late interaction is a practical middle ground between cheap dual-encoder retrieval and expensive cross-encoder reranking (OpenReview, "Random Sparse Embeddings Unlock Billion-Scale Late Interaction Retrieval", 2026).</p>
+<h3 id="why-multi-vector-wins-on-quality">Why Multi-Vector Wins on Quality<a class="headerlink" href="#why-multi-vector-wins-on-quality" title="Permanent link">&para;</a></h3>
+<p>One vector is a <strong>brutal bottleneck</strong> for long or visually rich documents containing many distinct relevance signals — entities, relations, rare terms, table cells, figure captions, layout cues, local evidence scattered across the page. Retrieval quality is bounded by how much semantic structure survives compression.</p>
+<p>Late-interaction models avoid this by representing queries and documents as <strong>sets of contextualized token embeddings</strong>. The recent TopK/OpenReview work demonstrates substantial outperformance over single-vector retrieval in out-of-domain, long-context, and multimodal settings (OpenReview, 2026). The most striking evidence yet: <strong>Reason-ModernColBERT</strong>, a 150M-parameter late-interaction model, pushed the hard BrowseComp-Plus deep-research benchmark to near <strong>90% solved</strong>, outperforming systems up to <strong>54× larger</strong> on reasoning-intensive retrieval. Multiple follow-ups from the late-interaction community argue this is not a one-off but a systematic signal that multi-vector approaches dominate dense single-vector approaches in reasoning-intensive search (@antoine_chaffin, @lateinteraction, Latent Space AINews, Mar 2026).</p>
+<blockquote>
+<p><strong>Key:</strong> Do not confuse a stronger embedding model with a stronger retrieval paradigm. A single-vector baseline can improve, but it is still bottlenecked by single-vector compression. <strong>Interaction beats premature compression when compute allows it.</strong></p>
+</blockquote>
+<h3 id="the-three-retrieval-model-regimes">The Three Retrieval Model Regimes<a class="headerlink" href="#the-three-retrieval-model-regimes" title="Permanent link">&para;</a></h3>
+<p>Retrieval models fall into three architectural regimes, each trading off efficiency against matching fidelity:</p>
+<ol>
+<li><strong>Single-vector bi-encoder</strong> — Encode the entire query and entire document into one vector each, compare with a single similarity score. Fastest, simplest, cheapest storage, but compresses away fine-grained detail. This is the dominant production paradigm today.</li>
+<li><strong>Cross-encoder</strong> — Feed query and document together through the same model with full token-to-token attention, producing one relevance score. Most accurate but too expensive for first-stage retrieval at scale — practically restricted to reranking a small candidate set.</li>
+<li><strong>Late interaction (ColBERT)</strong> — Encode query tokens and document tokens separately, retaining a vector per token. Interaction happens after encoding, during scoring. This preserves fine-grained token-level matching while still allowing document-side precomputation and indexing (Khattab &amp; Zaharia, 2020).</li>
+</ol>
+<p>The late interaction regime occupies a practical middle ground: it avoids the information collapse of single-vector models and the scaling impossibility of cross-encoders.</p>
+<h3 id="colbert-the-reference-late-interaction-architecture">ColBERT: The Reference Late-Interaction Architecture<a class="headerlink" href="#colbert-the-reference-late-interaction-architecture" title="Permanent link">&para;</a></h3>
+<p><strong>ColBERT</strong> represents passages as token-level embeddings and scores them with scalable MaxSim operators. Token-level late interaction lets it surpass single-vector models while still scaling to large corpora (ColBERT, Stanford, SIGIR 2020 / TACL 2021 / NeurIPS 2021 / NAACL 2022 / CIKM 2022 / ACL 2023 / EMNLP 2023).</p>
+<p>Omar Khattab's analogy: single-vector retrieval is like compressing meaning too early (LSTM-style), while ColBERT-style retrieval preserves fine-grained structure and compares it later (Transformer-style). The analogy points to the right structural insight — more local interaction survives when you defer compression.</p>
+<p><strong>Core mechanism — MaxSim scoring:</strong> For each query token, find the best-matching document token (maximum similarity), then sum these best matches across all query tokens. This preserves token-level identity so that multi-facet queries (e.g., "british steel plant safety inspection") match each aspect independently rather than averaging into one blended vector. Critically, the token embeddings are contextualized — "apple" in "apple quarterly revenue" gets a different representation than "apple" in "apple harvest" — so MaxSim performs contextual token matching, not naive lexical overlap.</p>
+<p><strong>Tradeoffs against other regimes:</strong></p>
+<ul>
+<li><em>Gains over single-vector:</em> Better multi-facet query handling, less information collapse, substantially stronger on out-of-domain and long-context benchmarks.</li>
+<li><em>Gains over cross-encoder:</em> Document-side embeddings can be precomputed and indexed, making it viable for first-stage retrieval rather than reranking only.</li>
+<li><em>Costs:</em> One document becomes many vectors, causing storage blow-up and requiring more complex indexing and serving infrastructure. MaxSim keeps only the best match per query token, making it less expressive than full cross-encoder attention.</li>
+<li>ColBERTv2 addressed the storage problem with residual compression, achieving roughly 6-10x space reduction while also improving training supervision (Santhanam et al., 2022).</li>
+</ul>
+<p><strong>Where ColBERT shines:</strong> Short precise queries against documents containing multiple distinct concepts, cases where token-level detail matters for retrieval quality, and pipelines where retrieval quality before generation is critical.</p>
+<p><strong>Where it struggles:</strong> Storage cost at very large corpus scale, engineering complexity of multi-vector indexing, and the inherent expressiveness ceiling of MaxSim relative to full cross-attention.</p>
+<p><strong>Reason-ModernColBERT</strong> (LightOn, 149M params) demonstrates that late interaction dominates even the hardest agentic search benchmarks. On <strong>BrowseComp-Plus</strong> — a fixed-corpus version of OpenAI's BrowseComp with ~100,000 human-verified documents and 830 queries each designed to take a human 2+ hours — it reaches <strong>87.59% accuracy</strong> (+7.59 over previous best), <strong>83.52% recall</strong>, and <strong>7.46 calibration error</strong>, leading every metric simultaneously while being <strong>54x smaller</strong> than competing 8B retrievers like Qwen3-Embed-8B and using <strong>fewer search calls</strong> (13.27 vs 21+). The base model (GTE-ModernColBERT-v1) already outperforms Qwen3-Embed-8B on several configurations before reasoning-specific fine-tuning — the late-interaction architecture does most of the heavy lifting on its own (LightOn, "The Bloated Retriever Era Is Over," Mar 2026).</p>
+<p>A key finding for agentic pipelines: ColBERT's token-level relevance signals serve as a <strong>decision scaffold for the LLM</strong>. Adding a single <code>get_document(id)</code> function — letting the LLM read ColBERT's fine-grained scores and request full documents selectively — jumped accuracy from 79.52% to 87.59% while reducing search calls from 19.31 to 13.27. No reranking model, no chunk oracle. The LLM has enough evidence from token-level matching to make informed read-or-skip decisions before committing to a full document read.</p>
+<h3 id="colpali-late-interaction-for-visual-documents">ColPali: Late Interaction for Visual Documents<a class="headerlink" href="#colpali-late-interaction-for-visual-documents" title="Permanent link">&para;</a></h3>
+<p><strong>ColPali</strong> applies multi-vector late interaction to <strong>visual document retrieval</strong>. Instead of OCR-first pipelines that flatten a PDF into extracted text, ColPali embeds the page image itself into a multi-vector representation and uses late interaction to match query tokens against document-page representations. This setup largely outperforms modern document retrieval pipelines for visually rich documents while being simpler and end-to-end trainable (arXiv 2407.01449).</p>
+<p>This matters because for PDFs, forms, tables, slides, screenshots, invoices, engineering diagrams, and mixed-layout content, the "one vector for the whole page" move is especially lossy.</p>
+<h3 id="late-interaction-for-code-retrieval">Late Interaction for Code Retrieval<a class="headerlink" href="#late-interaction-for-code-retrieval" title="Permanent link">&para;</a></h3>
+<p><strong>LateOn-Code</strong> and <strong>ColGrep</strong> extend late interaction to <strong>code retrieval</strong>, topping the MTEB Code leaderboard and winning 70% of head-to-head comparisons against grep in coding agents — with models as small as <strong>17M parameters</strong>. ColGrep provides semantic code search for terminals and coding agents, while <strong>PyLate</strong> offers training/fine-tuning infrastructure for late-interaction models and <strong>NextPlaid</strong> serves as a local-first multi-vector database. The pattern is consistent: late interaction delivers SOTA results wherever agents need to search — reasoning-intensive documents, codebases, and multi-step research — with dramatically fewer parameters than dense alternatives (LightOn, Mar 2026).</p>
+<h3 id="infrastructure-the-real-constraint">Infrastructure: The Real Constraint<a class="headerlink" href="#infrastructure-the-real-constraint" title="Permanent link">&para;</a></h3>
+<p>Multi-vector retrieval stores and scores many vectors per item — far more vectors per document, heavier indexing, larger memory footprint, more expensive query-time scoring. The infra challenge is the whole game.</p>
+<p><strong>PLAID</strong> showed late interaction could already be accelerated substantially — up to <strong>7x on GPU and 45x on CPU</strong> relative to vanilla ColBERTv2, with tens-of-milliseconds GPU latency even at 140M passages (arXiv 2205.09707).</p>
+<p><strong>SMVE</strong> (TopK, March 2026) makes the present-day production claim: use sparse approximations plus two-stage retrieval to retrieve candidates cheaply and then apply full MaxSim on a narrowed set. SMVE reduces end-to-end latency versus prior late-interaction systems while keeping recall competitive, positioning late interaction as a <strong>practical first-stage primitive</strong> rather than only a reranker (TopK, "SMVE: Multi-Vector Retrieval That Just Works", Mar 2026).</p>
+<h3 id="when-to-use-which">When to Use Which<a class="headerlink" href="#when-to-use-which" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Recommended Paradigm</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Small/simple corpora, high query volume</strong></td>
+<td>Single-vector</td>
+<td>Operationally clean; quality delta small on simple content</td>
+</tr>
+<tr>
+<td><strong>Enterprise docs, multimodal PDFs, tables, screenshots</strong></td>
+<td>Multi-vector (ColBERT/ColPali)</td>
+<td>One vector is too lossy for visually rich, long, or heterogeneous content</td>
+</tr>
+<tr>
+<td><strong>Best production setup</strong></td>
+<td><strong>Hybrid</strong></td>
+<td>Cheap coarse retrieval → multi-vector rerank or first-stage late interaction → optional cross-encoder/LLM final ranking</td>
+</tr>
+</tbody>
+</table>
+<p>The hybrid shape buys most of the quality benefit without taking the full infra hit everywhere. This is consistent with how TopK describes first retrieving candidates cheaply and then scoring with full MaxSim (TopK, Mar 2026).</p>
+<blockquote>
+<p><strong>Key — one-line mental models:</strong></p>
+<ul>
+<li><strong>Single-vector retrieval asks:</strong> "Are these two summaries similar?"</li>
+<li><strong>Multi-vector retrieval asks:</strong> "Does each important part of the query find a strong counterpart somewhere inside the document?"</li>
+</ul>
+<p>The second question is usually the better retrieval question.</p>
+</blockquote>
+<hr />
+<h2 id="knowledge-lifecycle">Knowledge Lifecycle<a class="headerlink" href="#knowledge-lifecycle" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Key -- Knowledge Freshness &amp; Contracts:</strong></p>
+<ul>
+<li>Define <strong>freshness SLAs</strong> per knowledge source (e.g., financial data: daily; policy docs: on-change)</li>
+<li>Establish <strong>knowledge contracts</strong>: required evidence types, provenance metadata, versioning policy</li>
+<li>Implement entity resolution and canonicalization to prevent duplicate/conflicting knowledge entries</li>
+</ul>
+</blockquote>
+<h3 id="retrieval-flywheel-self-expanding-knowledge-bases">Retrieval Flywheel: Self-Expanding Knowledge Bases<a class="headerlink" href="#retrieval-flywheel-self-expanding-knowledge-bases" title="Permanent link">&para;</a></h3>
+<p>RAG is no longer a static retrieval add-on — the strongest implementations treat it as a <strong>learning system</strong> where retrieval failures are the primary signal for corpus improvement. The core loop: <code>queries → failed retrievals → augment corpus → re-index → improve recall</code>. Every unanswered question or low-confidence retrieval is a direct pointer to a knowledge gap, and knowledge gaps are the highest-ROI signal in the entire stack — higher than model upgrades, prompt rewrites, or reranker swaps.</p>
+<p>The advanced pattern operationalizes this as a <strong>knowledge gap detector</strong>: log queries where retrieval confidence falls below a threshold or where the model abstains, cluster those queries by topic, and pipe the clusters directly into the content ingestion pipeline. Two auto-remediation paths feed from the detector:</p>
+<ol>
+<li><strong>Missing docs</strong> — the gap maps to a real-world document or data source that exists but hasn't been ingested. Action: add it to the corpus and re-index.</li>
+<li><strong>Synthetic Q&amp;A pairs</strong> — the gap maps to implicit knowledge that no single document covers (e.g., cross-document reasoning, procedural knowledge). Action: generate synthetic question-answer pairs from existing corpus content and expert input, then index them as first-class retrieval targets.</li>
+</ol>
+<p>The result is a corpus that <strong>grows in the direction of actual user need</strong> rather than whatever documents happen to be available. Teams running this loop report recall improvements that compound over time — each cycle closes gaps that the previous cycle surfaced, and the system converges toward comprehensive coverage of its operational domain (synthesized from emerging retrieval system patterns, 2025–2026).</p>
+<blockquote>
+<p><strong>Key:</strong> Treat retrieval gaps as product backlog, not as tolerable failure rates. A knowledge gap detector piped into the ingestion pipeline turns every failed retrieval into a self-healing action.</p>
+</blockquote>
+<hr />
+<h2 id="where-baseline-rag-breaks">Where Baseline RAG Breaks<a class="headerlink" href="#where-baseline-rag-breaks" title="Permanent link">&para;</a></h2>
+<p>Baseline RAG (chunk + embed + top-k vector similarity -&gt; stuff into prompt) has two structural limitations:</p>
+<ol>
+<li><strong>Multi-hop / "connect-the-dots" questions</strong>: required evidence distributed across documents; no single chunk is semantically similar enough</li>
+<li><strong>Global sensemaking questions</strong>: corpus-level themes, structure, or narratives; retrieving a few chunks cannot represent "the dataset"</li>
+</ol>
+<p>A third limitation surfaces in agentic contexts: static RAG goes stale, and even dynamic RAG that refreshes data still struggles with semantic ambiguity and operational context. For example, "Apple" in a Slack corpus could mean the company or a literal apple — similarity retrieval alone cannot reliably disambiguate for enterprise reasoning (Cognee demo, 2026). The fix is not better RAG but a <strong>memory layer above RAG</strong>: structured, evolving, graph-assisted memory that disambiguates through ontology and relational context rather than embedding distance alone.</p>
+<p><strong>GraphRAG</strong> is explicitly motivated by these failure modes, contrasting baseline RAG with graph-based indexing and community summaries for both local entity reasoning and global summarisation.</p>
+<h3 id="structure-preserving-retrieval-element-level-storage-and-top-down-pruning">Structure-Preserving Retrieval: Element-Level Storage and Top-Down Pruning<a class="headerlink" href="#structure-preserving-retrieval-element-level-storage-and-top-down-pruning" title="Permanent link">&para;</a></h3>
+<p>A distinct failure class emerges in <strong>heavily structured documents</strong> — procurement specs, legal contracts, technical manuals — where chunking destroys exactly the information agents need most: hierarchy, element type, and structural context. Three failure modes are specific to chunking structured content: <strong>lost hierarchy</strong> (a requirement like "must support SAML 2.0 SSO" gets separated from its heading chain "2.3.1 Authentication → 2.3 Access Control → 2. Security Requirements"), <strong>broken structural elements</strong> (tables, numbered lists, and matrices split across chunk boundaries become unusable fragments), and <strong>no type awareness</strong> (headings, paragraphs, table cells, and page footers are all flattened to the same kind of string, discarding distinctions that aid both retrieval and comprehension) (Philipp B., "Why We Stopped Chunking Documents," Feb 2026).</p>
+<p>The alternative is <strong>element-level storage</strong>: instead of chunking, store every document element (heading, paragraph, table, list item) as a typed record preserving its position in the document tree — parent element, heading level, element type, and content. Modern document parsers (IBM <strong>Docling</strong>, <strong>Unstructured.io</strong>, Adobe Extract API) already produce these trees; the insight is to index the tree rather than flatten it. Each element gets its own embedding, and <strong>heading descriptions</strong> — 2–4 sentence summaries generated by an LLM describing what a section covers — replace raw heading text as the embedding target, dramatically improving semantic retrieval for section-level queries.</p>
+<p><strong>Retrieval uses hybrid search</strong>: pgvector cosine similarity on element embeddings combined with PostgreSQL tsvector full-text search, weighted by default at 70/30 (semantic/lexical). Matches return not isolated chunks but <strong>element IDs with full hierarchy metadata</strong>, enabling the critical next step: <strong>top-down pruning</strong>.</p>
+<p>The pruning algorithm works on the full document tree rather than on retrieved fragments:</p>
+<ol>
+<li><strong>Load</strong> the complete document tree into memory</li>
+<li><strong>Mark</strong> elements that matched the query as <code>RELEVANT</code></li>
+<li><strong>Expand context</strong> — walk up and down from each relevant element within its section boundary, marking neighbours as <code>CONTEXT</code> (with distance-based trimming: elements farther from a hit get less content)</li>
+<li><strong>Add breadcrumbs</strong> — for every marked element, walk up to the root, marking ancestor headings as <code>BREADCRUMB</code> so the agent always sees the full heading chain</li>
+<li><strong>Prune</strong> — remove all unmarked elements from the tree</li>
+<li><strong>Enforce token budget</strong> — if the pruned tree exceeds the budget, trim <code>CONTEXT</code> elements first (farthest from hits), preserving all <code>RELEVANT</code> and <code>BREADCRUMB</code> elements</li>
+</ol>
+<p>The result is a <strong>structurally coherent document subset</strong>: agents receive relevant content with its full heading hierarchy intact, tables whole rather than split, and surrounding context bounded by section borders rather than arbitrary token windows. The three-role system (<code>RELEVANT</code> / <code>CONTEXT</code> / <code>BREADCRUMB</code>) gives fine-grained control over the density-vs-context trade-off.</p>
+<blockquote>
+<p><strong>Key:</strong> The trade-off is cost: element-level storage produces <strong>~200 elements vs ~30 chunks</strong> for a typical document (5–10x more records and embeddings), and heading description generation adds an LLM call per section at indexing time. The approach also <strong>degrades on flat or unstructured documents</strong> where there is no meaningful hierarchy to preserve. Best suited for document-heavy domains with consistent structure — legal, procurement, compliance, technical documentation — where the structural context is itself critical evidence for agent reasoning.</p>
+</blockquote>
+<h3 id="document-parsing-tooling-apr-2026">Document Parsing Tooling (Apr 2026)<a class="headerlink" href="#document-parsing-tooling-apr-2026" title="Permanent link">&para;</a></h3>
+<p>Two new tools strengthen the ingestion pipeline for structure-preserving RAG:</p>
+<ul>
+<li><strong>LiteParse (jerryjliu0, Apr 2026):</strong> Open-source document parser with <strong>spatial text parsing</strong> and <strong>bounding boxes</strong>, optimized for fast processing of large table-heavy PDFs. By preserving spatial layout information during ingestion, LiteParse enables audit trails back to source documents — directly useful for the element-level storage pattern described above, where positional metadata is as important as the text itself (AINews, Apr 2026).</li>
+<li><strong>LlamaIndex Extract v2 / LlamaParse (llama_index, jerryjliu0, Apr 2026):</strong> Redesigned with simplified pricing tiers, saved extract configs, and <strong>configurable parsing before extraction</strong> — allowing users to tune the parsing step independently of the enrichment step. This separation maps cleanly to the RAG ingestion pipeline: parse once (structure-aware), then run multiple extraction passes for different downstream uses (entities, tables, summaries). Transition period from v1 in progress (AINews, Apr 2026).</li>
+</ul>
+<hr />
+<h2 id="retrieval-strategies-comparison">Retrieval Strategies Comparison<a class="headerlink" href="#retrieval-strategies-comparison" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>What It Does</th>
+<th>Best For</th>
+<th>Latency &amp; Cost</th>
+<th>Common Failure Modes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dense top-k vector search</strong></td>
+<td>Retrieve semantically similar chunks</td>
+<td>Narrow questions; factual lookup</td>
+<td>Low (1 query + top-k fetch)</td>
+<td>Misses multi-hop evidence; retrieves "nearby but wrong" snippets</td>
+</tr>
+<tr>
+<td><strong>Hybrid (dense + sparse) + fusion</strong></td>
+<td>Combine lexical matching (BM25) and dense similarity; fuse rankings (RRF)</td>
+<td>High-precision QA; jargon and exact terms</td>
+<td>Moderate (two retrievals + fusion)</td>
+<td>Redundant/near-duplicate passages; needs reranking/filtering</td>
+</tr>
+<tr>
+<td><strong>Query rewriting / "multi-query" retrieval</strong></td>
+<td>Generate multiple paraphrases/sub-questions; retrieve per query and merge</td>
+<td>Recall-heavy domains; ambiguous queries</td>
+<td>Higher (multiple retrieval calls)</td>
+<td>Drifts into off-topic queries; increases noise without reranking</td>
+</tr>
+<tr>
+<td><strong>Reranking</strong> (cross-encoder / LLM-as-reranker)</td>
+<td>Re-score candidate passages using a stronger model</td>
+<td>Reducing hallucinations; improving grounding</td>
+<td>Moderate-high (additional inference)</td>
+<td>Overfits to superficial cues; adds cost and tail latency</td>
+</tr>
+<tr>
+<td><strong>Contextual compression</strong></td>
+<td>Compress/filter retrieved docs using query context</td>
+<td>Token-budgeted prompts; noisy corpora</td>
+<td>Moderate (extra compression pass)</td>
+<td>Drops the key sentence; compresses away provenance</td>
+</tr>
+<tr>
+<td><strong>Hierarchical retrieval (RAPTOR)</strong></td>
+<td>Build tree of clustered summaries; retrieve both local chunks and higher-level summaries</td>
+<td>Long documents; "what's the gist + details" queries</td>
+<td>Higher at indexing time; query-time moderate</td>
+<td>Summary drift accumulates; indexing complexity; tuning needed</td>
+</tr>
+<tr>
+<td><strong>Self-reflective adaptive RAG (Self-RAG)</strong></td>
+<td>Model decides when to retrieve and critiques/improves its answer using retrieved evidence</td>
+<td>High-stakes QA; reducing unsupported claims</td>
+<td>High (iterative loops)</td>
+<td>Loop instability; extra tokens and calls; requires careful stopping criteria</td>
+</tr>
+<tr>
+<td><strong>Tool-based agentic retrieval (A-RAG)</strong></td>
+<td>Provide retrieval tools at multiple granularities; agent plans retrieval strategy</td>
+<td>Complex tasks requiring targeted evidence navigation</td>
+<td>High (planning + multiple tool calls)</td>
+<td>Planning errors and tool misuse; expensive for simple queries</td>
+</tr>
+<tr>
+<td><strong>GraphRAG local search</strong></td>
+<td>Start from relevant entities; fan out to neighbours/claims/text units</td>
+<td>Entity-centric questions, relationship queries</td>
+<td>Moderate (graph traversal + context assembly)</td>
+<td>Entity extraction/linking errors; graph maintenance overhead</td>
+</tr>
+<tr>
+<td><strong>GraphRAG global search</strong></td>
+<td>Use community summaries to answer corpus-level "themes"</td>
+<td>Dataset summarisation; exploratory sensemaking</td>
+<td>Moderate at query time (many partial answers + synthesis)</td>
+<td>High indexing cost; summaries can be stale or overly generic</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="agentic-retrieval-as-rag-with-a-decision-maker">Agentic Retrieval as "RAG with a Decision-Maker"<a class="headerlink" href="#agentic-retrieval-as-rag-with-a-decision-maker" title="Permanent link">&para;</a></h2>
+<p>Two newer directions encode a shared design principle: <strong>retrieval is not a single step -- it is a policy</strong>.</p>
+<ul>
+<li><strong>Self-RAG / SR-RAG</strong>: model-driven mechanism to <em>decide whether to retrieve</em> and <em>self-critique</em> answers with retrieval evidence. Dynamically invokes retrieval and reflection when needed. Newer SR-RAG variants extend this into full <strong>retrieve → reason → critique → re-retrieve loops</strong>, showing strong gains on multi-hop QA by making retrieval iterative rather than single-pass. In production: implement strict budgets and stopping rules — iterative loops without exit conditions spiral.</li>
+<li><strong>A-RAG</strong>: frames agentic retrieval as a toolkit of retrieval interfaces across granularities (whole documents, summaries, passages, raw chunks) plus agent planning. Strong performance on agentic QA benchmarks but inherently trades throughput for reasoning depth.</li>
+</ul>
+<p>A frequently underrated dimension of agentic retrieval is <strong>knowing when to stop searching</strong>. Enterprise retrieval is fundamentally an <strong>explore/exploit judgment problem</strong>, not merely a retrieval problem. The model must decide whether to keep digging through additional sources, retry queries with different formulations, or admit that the answer may not exist in the available corpus. Systems that lack explicit <strong>stopping criteria</strong> and <strong>retrieval budgets</strong> tend to either give up too early — missing evidence that one more hop would have surfaced — or spiral into redundant searches that burn tokens without improving answer quality (Aaron Levie, Box, Mar 2026).</p>
+<blockquote>
+<p><strong>Key:</strong> If you expect <strong>high query volume with mostly simple lookup</strong>, baseline/hybrid RAG plus reranking typically dominates on cost. If you expect <strong>lower volume with complex multi-step investigations</strong>, agentic retrieval policies can be worth it -- especially if you cache intermediate artefacts across sessions. In either regime, design explicit <strong>stopping policies</strong> — the model needs a disciplined signal for when further retrieval is unlikely to improve the answer (Aaron Levie, Box, Mar 2026).</p>
+</blockquote>
+<h3 id="agents-multiply-retrieval">Agents Multiply Retrieval<a class="headerlink" href="#agents-multiply-retrieval" title="Permanent link">&para;</a></h3>
+<p>The common question — "is RAG dead?" — inverts the actual dynamic. <strong>Agents do not kill retrieval; they multiply it.</strong> Old-school RAG was "retrieve once, then answer." The agentic workload is fundamentally different: a single user action may explode into many concurrent tool calls across multiple steps, each requiring its own retrieval. A multi-step agent cannot rely on one perfect chunking-and-retrieval call up front — it needs iterative lookup, verification, exact matching, entity filtering, sometimes regex-like constraints, and often multiple retrieval modes within a single run (Simon Eskildsen, turbopuffer, Mar 2026).</p>
+<p>This shifts the retrieval infrastructure problem from offline benchmark quality toward <strong>systems design</strong>: concurrency, cache locality, warm/cold latency behavior, namespace isolation, query pricing, and operational simplicity. The question is not "which retriever is better?" but <strong>"what retrieval stack survives agent-scale concurrency and real product economics?"</strong></p>
+<h3 id="retrieval-as-truth-infrastructure">Retrieval as Truth Infrastructure<a class="headerlink" href="#retrieval-as-truth-infrastructure" title="Permanent link">&para;</a></h3>
+<p>A stronger framing than "RAG as context injection" is <strong>retrieval as truth infrastructure</strong>. In this view, models handle reasoning and synthesis; retrieval systems preserve <strong>full-fidelity facts</strong> — exact strings, filters, evolving corpora, structured metadata, and provenance. Models can learn reasoning patterns, but they cannot compress the world's full, current, high-fidelity knowledge into weights alone. Useful AI systems need external systems of record, and retrieval is the interface to those records (Simon Eskildsen, turbopuffer, Mar 2026).</p>
+<p>This framing is more durable than treating retrieval as a prompt-stuffing technique, because it survives model capability improvements — even as context windows grow and models memorize more, the need for authoritative, current, filterable external data does not disappear.</p>
+<h3 id="retrieval-economics-as-product-governor">Retrieval Economics as Product Governor<a class="headerlink" href="#retrieval-economics-as-product-governor" title="Permanent link">&para;</a></h3>
+<p>Many AI features fail not because quality is bad, but because <strong>unit economics are broken</strong>. The gap between "can demo" and "can ship" is often a cost structure problem. Readwise's origin story with turbopuffer illustrates this: their AI search feature worked technically, but the infrastructure cost was absurd relative to the company's budget. Only after moving to an architecture with compute-storage separation and object-storage-backed durability did 150M+ vectors become sustainable (turbopuffer, Readwise case study, 2026). turbopuffer now claims query prices reduced by up to <strong>94%</strong>, reflecting the agent-era pressure toward cheap, high-concurrency retrieval.</p>
+<blockquote>
+<p><strong>Key:</strong> The retrieval stack that wins the agent era will combine: (1) <strong>cheap wide first-stage retrieval</strong>, (2) <strong>strong hybrid filtering</strong> (semantic + lexical + structured), (3) <strong>richer second-stage interaction</strong> (late interaction, reranking, multimodal matching), and (4) <strong>orchestration-aware caching and query planning</strong> that respects the bursty, concurrent access patterns of multi-step agents.</p>
+</blockquote>
+<h3 id="retrieval-conditioned-reasoning-rcr">Retrieval-Conditioned Reasoning (RCR)<a class="headerlink" href="#retrieval-conditioned-reasoning-rcr" title="Permanent link">&para;</a></h3>
+<p>A newer direction makes generation explicitly conditioned on <strong>retrieval uncertainty</strong> rather than treating all retrieved context as equally trustworthy. In RCR, the model estimates its confidence over retrieved passages and adjusts its reasoning strategy accordingly — low confidence over retrieved context triggers reasoning expansion, alternative retrieval paths, or explicit hedging rather than proceeding with potentially noisy grounding. This reduces the failure mode where RAG systems over-trust low-quality chunks simply because they passed a similarity threshold, pushing RAG toward <strong>probabilistic reasoning systems</strong> rather than deterministic pipelines (arXiv, 2025–2026 on retrieval-conditioned reasoning).</p>
+<h3 id="retrieval-augmented-planning-rap">Retrieval-Augmented Planning (RAP)<a class="headerlink" href="#retrieval-augmented-planning-rap" title="Permanent link">&para;</a></h3>
+<p>A shift from retrieval supporting answers to retrieval supporting <strong>plans</strong>. Instead of retrieving facts or documents, the system retrieves <strong>task decompositions</strong> — previously successful plans, sub-task templates, or tool-use sequences — and the LLM executes the retrieved plan with <strong>iterative retrieval per step</strong>. Strong gains are reported in tool-use and multi-hop workflows where the bottleneck is not finding facts but knowing <em>what steps to take and in what order</em>. RAP represents RAG merging with <strong>planner architectures</strong>, not just QA — retrieval becomes a planning primitive, not merely a grounding mechanism. This is a natural extension of agentic retrieval: where A-RAG gives the agent retrieval tools, RAP gives it retrieval over <em>strategies</em> (arXiv, 2025–2026).</p>
+<h3 id="contrastive-rag">Contrastive RAG<a class="headerlink" href="#contrastive-rag" title="Permanent link">&para;</a></h3>
+<p>An evolution of <strong>Corrective RAG (CRAG)</strong> that goes beyond reranking by using <strong>contrast sets</strong>: the system retrieves both relevant documents and <strong>hard negatives</strong> (near-miss documents that are topically related but do not actually answer the query), then the LLM explicitly compares the two sets before filtering and synthesizing. This improves robustness to <strong>near-duplicate noise</strong> and reduces <strong>"top-k collapse"</strong> — a common failure mode where semantically similar chunks dominate the context window, creating an echo chamber of redundant information rather than diverse evidence. By forcing the model to articulate <em>why</em> a passage is relevant versus merely similar, Contrastive RAG produces more discriminating retrieval than standard reranking alone (arXiv, 2025–2026).</p>
+<h3 id="cross-index-rag-federated-retrieval">Cross-Index RAG (Federated Retrieval)<a class="headerlink" href="#cross-index-rag-federated-retrieval" title="Permanent link">&para;</a></h3>
+<p>The Mixture-of-Retrievers pattern (below) operates across multiple retriever types within a single system. Federated retrieval extends this further: instead of one index, the system queries <strong>multiple heterogeneous indices</strong> — internal document vector stores, external search APIs, structured databases, knowledge graphs — and unifies results via learned fusion. This is effectively <strong>retrieval as data federation</strong>, borrowing architectural patterns from distributed database query planning. The retrieval controller becomes a federated query planner that decides which indices to hit, how to merge results across schemas, and how to handle partial failures when one source is unavailable or slow (arXiv, 2025–2026 on federated retrieval).</p>
+<h3 id="mixture-of-retrievers-mor">Mixture-of-Retrievers (MoR)<a class="headerlink" href="#mixture-of-retrievers-mor" title="Permanent link">&para;</a></h3>
+<p>Static hybrid search (dense + sparse + fusion) is giving way to <strong>learned retriever mixtures</strong>. MoR trains multiple specialised retrievers — dense, sparse, graph, domain-specific — and combines them via a learned gating mechanism that routes queries to the retriever(s) most likely to produce useful results. The gating can be query-conditioned (different queries activate different retriever subsets) or learned end-to-end from relevance feedback.</p>
+<p>The analogy is Mixture-of-Experts but applied to retrieval: instead of one retriever doing everything adequately, specialised retrievers each handle the query types they excel at. MoR improves robustness across heterogeneous corpora where no single retrieval modality dominates, and is quietly replacing hand-tuned hybrid search configurations with something more adaptive and learnable (arXiv, 2025–2026).</p>
+<h3 id="multi-stage-reasoning-pipelines">Multi-Stage Reasoning Pipelines<a class="headerlink" href="#multi-stage-reasoning-pipelines" title="Permanent link">&para;</a></h3>
+<p>The emerging default architecture for complex RAG tasks:</p>
+<div class="highlight"><pre><span></span><code>planner → multi-query expansion
+        → multi-retriever fanout (MoR or static)
+        → fusion / rerank
+        → reasoning
+        → critique loop (SR-RAG)
+        → refinement
+</code></pre></div>
+<p>Each stage is independently configurable and evaluable. The planner decides <strong>when</strong> to retrieve, <strong>how many hops</strong>, <strong>which retriever(s)</strong>, and <strong>when to stop</strong> — retrieval is a policy problem, not a static pipeline step. This is often solved with RL (RouteRAG-style), heuristic + LLM planners, or lightweight classifiers. Production stacks increasingly maintain <strong>multi-representation knowledge stores</strong> — vector index (semantic recall), keyword index (precision/filtering), knowledge graph (relationships), hierarchical document tree (structure) — and orchestrate retrieval across all of them per query.</p>
+<p>The core abstraction is shifting from "retrieval pipeline" to <strong>retrieval controller</strong> — a component that manages query planning, retriever routing, and <strong>budget allocation</strong> (tokens and latency) as first-class concerns. The LLM becomes a component within this controller, not the system itself.</p>
+<h3 id="budget-aware-rag">Budget-Aware RAG<a class="headerlink" href="#budget-aware-rag" title="Permanent link">&para;</a></h3>
+<p>Production RAG increasingly operates under explicit <strong>resource constraints</strong> — token budgets, latency ceilings, and cost-per-query targets. Budget-aware pipelines allocate retrieval effort dynamically per query rather than using fixed top-k across all queries:</p>
+<ul>
+<li><strong>Token budget allocation</strong> — each query gets a retrieval token budget based on complexity classification; simple lookups get minimal context, complex multi-hop queries get fuller retrieval</li>
+<li><strong>Adaptive top-k</strong> — k is not fixed but determined per query based on estimated difficulty, available budget, and diminishing returns signals from the retriever</li>
+<li><strong>Early stopping</strong> — retrieval terminates when additional chunks stop improving answer confidence, rather than always fetching the full k</li>
+</ul>
+<p>These constraints are implemented via RL-trained policies, heuristic estimators, or lightweight classifiers that predict optimal retrieval effort from query features. Budget-aware RAG is critical for production margins — without it, simple queries that need two chunks consume the same retrieval resources as complex queries that genuinely need twenty (arXiv, 2025–2026).</p>
+<h3 id="entropy-aware-retrieval">Entropy-Aware Retrieval<a class="headerlink" href="#entropy-aware-retrieval" title="Permanent link">&para;</a></h3>
+<p>A refinement of adaptive retrieval that makes the retrieve-or-not decision an <strong>information-theoretic process</strong> rather than a fixed top-k operation. The retriever returns not just top-k results but an <strong>uncertainty distribution</strong> over candidates. <strong>High entropy</strong> (retriever is uncertain — many candidates with similar scores, no clear winners) triggers <strong>expansion</strong>: multi-retriever fan-out, query reformulation, or deeper retrieval. <strong>Low entropy</strong> (retriever is confident — a few candidates clearly dominate) enables a <strong>fast path</strong> with minimal retrieval and no reranking overhead. This pairs naturally with budget-aware RAG — entropy becomes the signal that governs how much retrieval budget to spend per query, replacing heuristic complexity classifiers with a principled uncertainty measure derived directly from retrieval scores (arXiv, 2025–2026).</p>
+<h3 id="emerging-retrieval-primitives">Emerging Retrieval Primitives<a class="headerlink" href="#emerging-retrieval-primitives" title="Permanent link">&para;</a></h3>
+<p><strong>Triplet / atomic retrieval (T²RAG)</strong> bypasses full knowledge graph construction by operating directly on subject-predicate-object units. Cheaper than GraphRAG, more structured than raw chunks — a practical middle ground for applications that need relational structure without the overhead of full KG pipelines.</p>
+<p><strong>Context staging layers</strong> — a refinement of context compression — introduce a multi-stage pipeline between raw retrieval and generation: raw retrieval → compression (LLM or model) → structured context (tables, triples, summaries) → generation. This reduces token cost while improving reasoning consistency by presenting the LLM with cleaned, structured context rather than raw passages. The pattern is becoming standard in production pipelines that need both cost control and high answer quality (arXiv, 2025–2026).</p>
+<p><strong>RAG + program synthesis</strong> — in structured domains, generating SQL, Cypher, or DSL queries and executing them against a database often beats text retrieval entirely. Rather than retrieving text chunks that mention the answer, the system synthesizes a precise query that returns exact results. This pattern dominates RAG for tabular data, relational databases, and graph stores where the answer is computable rather than extractable (arXiv, 2025–2026).</p>
+<p><strong>Semantic caching</strong> — production RAG systems are adopting <strong>semantic caching</strong> of queries, retrieved document sets, and final answers. Queries semantically similar to cached queries can reuse prior retrieval and generation results, yielding major latency and cost reductions. This is distinct from exact-match caching — it uses <strong>embedding similarity</strong> to match queries that are paraphrases or near-duplicates, with a configurable similarity threshold that trades cache hit rate against answer freshness. Semantic caching is especially effective for high-volume RAG deployments where query distributions are Zipfian (a small number of intents account for most traffic), and it composes well with budget-aware RAG by making repeated-intent queries nearly free (arXiv, 2025–2026).</p>
+<p><strong>Speculative retrieval</strong> — retrieves ahead of user intent by predicting likely next queries and pre-caching results. This is the latency optimization frontier for conversational and agentic RAG, where multi-turn interactions create predictable retrieval patterns. Early implementations reduce perceived latency substantially by overlapping retrieval with user think-time (arXiv, 2025–2026). A related optimization is <strong>retrieval caching at the representation level</strong> — caching not just final answers but intermediate artifacts: embeddings, subgraphs, and reranked candidate sets. For workloads with repeated query patterns (enterprise search, agent loops, support bots), representation-level caching eliminates redundant computation across the entire retrieval stack, not just the generation step (arXiv, 2025–2026).</p>
+<p><strong>Self-healing RAG (auto-curated corpora)</strong> — RAG pipelines are beginning to include automated index maintenance loops: when a bad answer is detected (via eval or user feedback), the system traces the failure back to the responsible retrieval path, then updates, prunes, or re-embeds the offending index entries and relinks graph edges. This closes the loop between evaluation and indexing, moving RAG systems toward <strong>self-maintaining infrastructure</strong> rather than requiring manual corpus curation (arXiv, 2025–2026).</p>
+<p><strong>Lightweight local RAG stacks</strong> — a growing trend toward edge-deployable RAG: Ollama-compatible RAG servers, embedded vector stores built on SQLite or DuckDB with extension-based embedding support, and on-device retrieval pipelines that run without cloud infrastructure. This push downstack makes RAG viable for privacy-sensitive deployments, offline-first applications, and resource-constrained environments where latency to a cloud vector DB is unacceptable (2025–2026).</p>
+<p><strong>RAG + memory convergence</strong> — long-term memory stores are evolving to maintain both embeddings and graphs, blending agent memory systems with retrieval infrastructure. The boundary between "retrieval system" and "agent memory" is dissolving as both need the same capabilities: structured storage, evolving state, contextual lookup, and temporal awareness.</p>
+<hr />
+<h2 id="query-rewriting-and-reranking-the-underrated-levers">Query Rewriting and Reranking: The Underrated Levers<a class="headerlink" href="#query-rewriting-and-reranking-the-underrated-levers" title="Permanent link">&para;</a></h2>
+<p>Strong evidence is accumulating that <strong>query rewriting outperforms embedding model upgrades</strong> as a retrieval quality lever. Better query expansion (generating multiple paraphrases and sub-questions) and better query decomposition (breaking complex questions into atomic retrieval units) consistently produce larger quality gains than swapping to a newer or larger embedding model — at a fraction of the cost, since the embedding index doesn't need to be rebuilt (arXiv, 2025–2026).</p>
+<p>Similarly, <strong>reranking remains under-optimized</strong> in most production stacks. Cross-encoder and late-interaction rerankers deliver outsized quality gains relative to their cost — they're cheap inference calls applied to a small candidate set, yet many teams skip reranking entirely or use weak models. For teams looking for the highest-leverage improvement to an existing RAG system, adding or upgrading the reranker is almost always the right first move before touching embeddings, chunking, or retrieval architecture.</p>
+<blockquote>
+<p><strong>Key:</strong> The optimization priority for most RAG systems should be: (1) query rewriting / expansion, (2) reranking, (3) retrieval diversity, then (4) embedding model quality. Most teams invert this order.</p>
+</blockquote>
+<hr />
+<h2 id="azure-ai-search-agentic-retrieval-as-a-managed-service">Azure AI Search: Agentic Retrieval as a Managed Service<a class="headerlink" href="#azure-ai-search-agentic-retrieval-as-a-managed-service" title="Permanent link">&para;</a></h2>
+<p>Azure AI Search ships <strong>agentic retrieval</strong> (public preview, <code>2025-11-01-preview</code> API) — implementing the agentic retrieval pattern as a fully managed, three-layer pipeline on top of existing search indexes.</p>
+<p><strong>Architecture — 3 layers:</strong></p>
+<ol>
+<li><strong>Knowledge Source</strong> — a thin wrapper around a search index (or blob storage, OneLake, SharePoint, web) that sets retrieval defaults: which fields to search, filters, reranking config.</li>
+<li><strong>Knowledge Base</strong> — the orchestrator. Connects one or more knowledge sources to an LLM deployment. Drives query planning, subquery execution, and result synthesis.</li>
+<li><strong>LLM (Azure OpenAI)</strong> — decomposes complex/multi-hop queries into focused subqueries, corrects spelling, incorporates chat history. Supported models: <code>gpt-4o</code>, <code>gpt-4o-mini</code>, <code>gpt-4.1</code> family, <code>gpt-5</code> family.</li>
+</ol>
+<p><strong>Workflow:</strong></p>
+<div class="highlight"><pre><span></span><code>App/Agent → Knowledge Base (retrieve) → LLM query planning
+                                             ↓
+                                       N subqueries (parallel)
+                                             ↓
+                                 Hybrid search + semantic reranking per subquery
+                                             ↓
+                                       Merged 3-part response:
+                                         1. Grounding data (merged content)
+                                         2. Source references (citations)
+                                         3. Activity plan (execution details)
+</code></pre></div>
+<p><strong>Output modes and reasoning effort:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Options</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Output mode</strong></td>
+<td><code>AnswerSynthesis</code> (LLM formulates answer with citations) / <code>ExtractedData</code> (raw results for downstream processing)</td>
+<td>Synthesis adds latency + tokens but gives ready-to-use answers</td>
+</tr>
+<tr>
+<td><strong>Retrieval reasoning effort</strong></td>
+<td><code>minimal</code> (no LLM, intents only) / <code>low</code> (default — LLM query planning + synthesis) / <code>medium</code> (aggressive expansion, iterative search)</td>
+<td>Higher effort = better multi-hop recall, higher cost/latency</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Prerequisites:</strong> semantic ranker enabled on the search service, an Azure OpenAI deployment with a supported model, RBAC roles (Search Service Contributor to manage, Search Index Data Reader to query, Cognitive Services User on the OpenAI resource for the search service's managed identity).</p>
+<p><strong>Agent integration via MCP:</strong> A knowledge base exposes an MCP endpoint at <code>{search-endpoint}/knowledgebases/{kb-name}/mcp?api-version=2025-11-01-preview</code>. Agents connect to it as a <code>RemoteTool</code> project connection and use <code>MCPTool</code> with <code>allowed_tools=["knowledge_base_retrieve"]</code>.</p>
+<p><strong>Cost model:</strong> Token-based billing for agentic reasoning tokens (50M free tokens/month on Free tier) plus standard Azure OpenAI pay-as-you-go for query planning and answer synthesis. Example: 2,000 retrievals x 3 subqueries avg ≈ $4.32 total.</p>
+<blockquote>
+<p><strong>Key:</strong> Agentic retrieval is a good fit when you already have Azure AI Search indexes and want multi-hop, spelling-tolerant, chat-history-aware retrieval without building the orchestration yourself. The main trade-off is added latency from the LLM query planning layer. For high-throughput simple lookups, stick with direct hybrid search + semantic reranking. For complex investigative queries at moderate volume, the managed agentic pipeline saves significant engineering effort.</p>
+</blockquote>
+<hr />
+<h2 id="graph-based-rag">Graph-Based RAG<a class="headerlink" href="#graph-based-rag" title="Permanent link">&para;</a></h2>
+<p>Graph-based context preserves <strong>structure</strong> that pure embeddings erase: entities, relations, communities, timelines, and provenance.</p>
+<h3 id="graph-rag-implementation-checklist">Graph RAG Implementation Checklist<a class="headerlink" href="#graph-rag-implementation-checklist" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Key -- Graph RAG Checklist:</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Define entity/edge schema (node types, relationship types, required properties)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Extraction evals on representative corpus (measure NER/RE precision)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Hybrid retrieve: graph paths + text chunks</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Good/Better/Best: simple entity linking -&gt; typed relations and path constraints -&gt; learned policies + feedback loops</li>
+<li>Architecture: <code>Text -&gt; NER/RE -&gt; Triples -&gt; Graph DB; Query (entities/paths) -&gt; Retrieve -&gt; Compose -&gt; Evals</code></li>
+</ul>
+</blockquote>
+<h3 id="graphrag-as-a-reference-design">GraphRAG as a Reference Design<a class="headerlink" href="#graphrag-as-a-reference-design" title="Permanent link">&para;</a></h3>
+<p>GraphRAG (From Local to Global): builds entity graph from source documents -&gt; partitions into communities (hierarchical clustering) -&gt; generates bottom-up community summaries -&gt; answers questions via (i) <strong>global search</strong> over community summaries or (ii) <strong>local search</strong> around query-relevant entities and neighbours. A <strong>"DRIFT" mode</strong> combines local search with community context.</p>
+<blockquote>
+<p><strong>Key:</strong> Indexing can be expensive. GraphRAG behaves like an <strong>offline compilation step</strong> plus a query-time "decoding" step. Defaults may underperform on your domain without tuning.</p>
+</blockquote>
+<h3 id="graph-integration-patterns">Graph Integration Patterns<a class="headerlink" href="#graph-integration-patterns" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>How It Works</th>
+<th>Where It Wins</th>
+<th>Where It Loses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Offline KG + query-time subgraph hydration</strong></td>
+<td>Extract entities/relations; store graph; retrieve ego-net/community reports and attach as context</td>
+<td>Multi-hop reasoning; entity-centric analytics; provenance</td>
+<td>High ingestion cost; entity resolution; schema drift</td>
+</tr>
+<tr>
+<td><strong>Community summaries (GraphRAG global search)</strong></td>
+<td>Cluster graph; pre-summarise communities; answer "themes" via summary composition</td>
+<td>Corpus-level questions; investigative sensemaking</td>
+<td>Expensive indexing; summaries can be generic/stale</td>
+</tr>
+<tr>
+<td><strong>Graph traversal to enrich vector results</strong></td>
+<td>Retrieve seed passages/entities then expand neighbours/claims/timelines</td>
+<td>Connecting retrieved snippets; relationship questions</td>
+<td>Over-expansion can flood context; needs strong budget controls</td>
+</tr>
+<tr>
+<td><strong>Temporal KG memory</strong></td>
+<td>Persist evolving facts as time-stamped nodes/edges; retrieve "what was true when"</td>
+<td>Long-lived assistants; business data changes; temporal reasoning</td>
+<td>Harder ops; requires change detection/invalidation policy</td>
+</tr>
+<tr>
+<td><strong>Graph extraction on-demand</strong></td>
+<td>Build/update small local graph per session/task; discard afterwards</td>
+<td>Ad-hoc investigations; privacy constraints</td>
+<td>Repeated build cost; inconsistent linking across sessions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="graphrag-gnn-fusion-graph-neural-retrieval">GraphRAG + GNN Fusion (Graph Neural Retrieval)<a class="headerlink" href="#graphrag-gnn-fusion-graph-neural-retrieval" title="Permanent link">&para;</a></h3>
+<p>An emerging direction integrates <strong>graph neural networks directly into retrieval scoring</strong> rather than using graphs only for traversal and context assembly. Node and edge embeddings are updated via message passing, making retrieval structure-aware at the representation level — not just post-hoc traversal over a static graph. Early benchmarks outperform static KG embeddings, and the likely convergence point is a <strong>GraphRAG + Graph ML stack</strong> where graph structure informs both retrieval and reasoning (arXiv, 2025–2026).</p>
+<p>This represents a shift in GraphRAG's role: from an "index trick" that fetches better chunks to a <strong>reasoning substrate</strong> where the graph executes reasoning paths — path finding, subgraph extraction, constraint propagation — not merely context assembly. The optimization frontier is now <strong>minimal reasoning subgraphs</strong>: instead of retrieving large subgraphs and hoping the model filters noise, systems extract the <strong>minimal paths</strong> that connect query entities to answer entities, often via <strong>Steiner tree approximations</strong> (finding the minimum-weight subtree spanning query-relevant nodes) or <strong>path scoring</strong> (ranking candidate paths by a combination of edge weight, hop count, and semantic relevance). This drastically reduces graph noise and token spend while preserving the multi-hop reasoning signal that justifies graph retrieval in the first place (synthesized from GraphRAG optimization research, 2025–2026).</p>
+<blockquote>
+<p><strong>Key:</strong> Graph augmentation is not automatically better than high-quality hybrid retrieval + reranking. "GraphRAG under Fire" (2025) is a critical evaluation showing the graph can add cost/latency without accuracy gains if the task is already well-served by chunk retrieval. Use graphs when queries <strong>need structure</strong> (relations, temporal constraints, corpus-level themes), not as a default. But watch the GNN fusion direction — if retrieval scoring becomes structure-aware by default, the cost/benefit calculus shifts.</p>
+</blockquote>
+<h3 id="hyperbolic-embeddings-for-graphrag">Hyperbolic Embeddings for GraphRAG<a class="headerlink" href="#hyperbolic-embeddings-for-graphrag" title="Permanent link">&para;</a></h3>
+<p>A distinct limitation of Euclidean-space GraphRAG is the <strong>hubness problem</strong>: high-dimensional Euclidean space lacks a geometric notion of hierarchical depth, so abstract concepts ("health," "stress") become <strong>semantic hubs</strong> that are close to everything, causing top-k retrieval and graph propagation to drift toward broad, generic subgraphs rather than specific causal chains. Real-world knowledge is tree-shaped — general categories branching into subcategories branching into individual facts — and Euclidean geometry flattens this hierarchy into a uniform plane.</p>
+<p><strong>HyperbolicRAG</strong> addresses this by introducing a <strong>Poincaré ball</strong> representation space alongside standard Euclidean embeddings. The architecture works in three stages (arXiv, "HyperbolicRAG," Mar 2026):</p>
+<ol>
+<li>
+<p><strong>Hierarchical embedding</strong> — Each passage, entity, and fact is first encoded into a Euclidean vector, then a type-specific predictor estimates a <strong>depth score</strong> (0–1). The depth score rescales the vector norm: abstract nodes are placed near the center of the Poincaré ball, specific facts near the boundary. A gating mechanism fuses semantic and hierarchical features before the mapping, preserving meaning while encoding hierarchy.</p>
+</li>
+<li>
+<p><strong>Unsupervised bidirectional alignment</strong> — Margin-based contrastive losses enforce that passages lie closer to their extracted facts than to unrelated facts (and vice versa) in hyperbolic space, grounding the geometric layout in actual textual containment structure.</p>
+</li>
+<li>
+<p><strong>Dual-space retrieval with mutual ranking</strong> — Two parallel <strong>Personalized PageRank</strong> processes run on the same passage–entity graph: one using cosine similarity in Euclidean space, one using negative geodesic distance in hyperbolic space. The rankings are fused via reciprocal rank scores with a consistency bonus: <code>s_hyb = (s_E + s_H) * (1 + b)</code>, balancing surface-level relevance with structural depth.</p>
+</li>
+</ol>
+<p><strong>Benchmarks</strong> (Llama-3.3-70B-Instruct, top-5 passages): HyperbolicRAG achieves <strong>51.4% EM / 63.3% F1</strong> vs HippoRAG2 at 51.0% / 62.7% and NV-Embed-v2-7B at 49.0% / 60.0%. The gains are <strong>concentrated on multi-hop datasets</strong> — +2.3 EM on MuSiQue (39.5% vs 37.2%), confirming that hierarchical awareness benefits complex reasoning chains most.</p>
+<blockquote>
+<p><strong>Key:</strong> HyperbolicRAG is best suited for domains with <strong>deeply hierarchical knowledge and multi-hop questions</strong> — medical, legal, scientific literature — where reducing hubness materially improves retrieval precision. For general-purpose search or single-hop QA, the added architectural complexity of maintaining dual-space representations (Euclidean + Poincaré) is likely overkill relative to simpler hybrid retrieval + reranking. The open question is whether hyperbolic representations can be made cheap enough to become a default GraphRAG enhancement rather than a domain-specific optimization.</p>
+</blockquote>
+<hr />
+<h2 id="signals-worth-watching">Signals Worth Watching<a class="headerlink" href="#signals-worth-watching" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Adaptive RAG routing</strong> (EA-GraphRAG) may become the standard architecture — dynamically selecting between dense, sparse, graph, and hybrid retrieval based on query characteristics.</li>
+<li><strong>Temporal and domain-aware GraphRAG</strong> frameworks are emerging for dynamic knowledge domains where facts change over time and retrieval must respect temporal validity.</li>
+<li><strong>Graph-centric retrieval frameworks</strong> (NodeRAG, RGL) are improving scalability and engineering ergonomics, lowering the barrier to graph-augmented retrieval in production. <strong>Hierarchical GraphRAG retrieval</strong> — traversing community summaries at multiple resolutions — is becoming the standard pattern for large graphs.</li>
+<li><strong>Graph foundation models</strong> may eventually replace task-specific graph retrievers, learning general graph representations that transfer across domains rather than requiring per-dataset entity extraction and linking pipelines.</li>
+<li><strong>RAG stacks evolving into full knowledge orchestration layers</strong> rather than simple retrieval pipelines — integrating routing, memory, evaluation, and multi-granularity retrieval into unified architectures.</li>
+<li><strong>Evaluation infrastructure (RAGAS + observability platforms) becoming a required layer</strong> in production RAG systems, not an afterthought. The pattern: RAGAS for offline eval (faithfulness, answer relevance, context precision) plus runtime observability (retrieval latency, reranker hit rates, grounding scores) wired into alerting and regression detection.</li>
+<li><strong>Multi-vector late interaction moving from research to dominance</strong>: SMVE (TopK, Mar 2026) and PLAID closed the infra gap; Reason-ModernColBERT (149M params) now leads the hardest agentic benchmark (BrowseComp-Plus, 87.59% accuracy, 54x smaller than 8B competitors); LateOn-Code/ColGrep top MTEB Code at 17M params. Late interaction is proving SOTA across text, code, and visual retrieval (ColPali) with dramatically fewer parameters than dense alternatives. The architecture, not the model size, is the moat.</li>
+<li><strong>Agent-era retrieval infrastructure</strong> reshaping the design space: concurrency, namespace isolation, warm/cold cache behavior, and query pricing are becoming first-order concerns as agentic workloads multiply retrieval demand per user action.</li>
+<li><strong>Compute-storage separated vector databases</strong> (turbopuffer) gaining traction for agent-scale workloads — object-storage durability with NVMe/memory caching, stateless compute, and dramatically lower query costs fit the bursty, high-concurrency retrieval pattern that agents produce.</li>
+<li><strong>Vector DB convergence toward multi-modal retrieval engines</strong> — vendors are collapsing separate infra layers into unified engines that combine vector + keyword + graph + structured filters in one system. Weaviate's hybrid search, Qdrant's advanced filtering, and Milvus's pipeline capabilities all reflect this convergence (Weaviate, Qdrant, Milvus release notes, 2025–2026).</li>
+<li><strong>Mixture-of-Retrievers (MoR) replacing static hybrid search</strong> — learned retriever mixtures with query-conditioned gating are more adaptive than hand-tuned dense+sparse configurations and improve robustness across heterogeneous corpora.</li>
+<li><strong>GraphRAG + GNN fusion</strong> emerging as the next frontier — integrating graph neural networks into retrieval scoring makes retrieval structure-aware at the representation level, not just via post-hoc traversal. GraphRAG is shifting from "index trick" to "reasoning substrate."</li>
+<li><strong>Iterative / self-correcting RAG (SR-RAG)</strong> dominating complex workflows — closed-loop retrieve → reason → critique → re-retrieve loops reduce hallucinations in long-tail queries and will likely become the default for multi-hop tasks.</li>
+<li><strong>Composable RAG (pipeline modularization)</strong> — shift toward fully decoupled retrieval pipelines where each stage (query understanding → retrieval planning → multi-retriever execution → fusion → reasoning) is independently swappable and optimizable, aligning with microservice-style RAG infrastructure (arXiv, 2025–2026 on composable RAG).</li>
+<li><strong>Streaming RAG / continuous ingestion</strong> — tools like <strong>Pathway</strong> are enabling incremental indexing over live data streams with real-time updates without full reindexing, useful for logs, financial data, and event pipelines. RAG is moving from batch ingestion to continuous ingestion systems (Pathway, 2025–2026).</li>
+<li><strong>LlamaIndex Workflows</strong> — introducing declarative workflows for multi-step retrieval that integrate planners, tool calling, and retrievers into a lightweight agentic RAG layer, becoming an alternative to full agent frameworks (LlamaIndex, 2025–2026).</li>
+<li><strong>Latent retrieval</strong> — models learning to implicitly retrieve from compressed latent stores without explicit vector DB calls. Still experimental but a potential paradigm shift for edge and latency-critical deployments.</li>
+<li><strong>Compiled RAG / retrieval distillation</strong> — distilling heavy multi-step pipelines (multi-query expansion + reranking + graph traversal) into <strong>single lightweight retrievers</strong> via teacher-student training. The teacher is the full pipeline; the student is a compact retriever that mimics its outputs. Early results show <strong>3–10× latency reduction</strong> with minimal quality loss. This applies the same logic as model distillation to the retrieval stack: run the expensive pipeline offline, distill it into a fast path, and serve the fast path online. "Compiled RAG" may become the standard deployment pattern for latency-sensitive production systems (arXiv, 2025–2026).</li>
+<li><strong>Multi-resolution indexing</strong> — indexing the same corpus simultaneously at <strong>chunk level, summary level, and entity level</strong>, with the query dynamically selecting the appropriate resolution. Chunk-level retrieval handles specific factual lookups; summary-level retrieval handles thematic or corpus-wide questions; entity-level retrieval handles relational queries. This is distinct from hierarchical GraphRAG (which uses community summaries) — it applies multi-granularity indexing to the vector retrieval layer itself, not just the graph layer (arXiv, 2025–2026).</li>
+<li><strong>Retrieval scaling laws</strong> — early evidence that RAG performance scales with retrieval diversity (more sources &gt; deeper top-k), with marginal gains dropping after ~20–40 chunks. Orchestration and source heterogeneity are becoming the differentiator, not retrieval depth.</li>
+<li><strong>Retrieval-conditioned reasoning (RCR)</strong> — generation explicitly conditioned on retrieval uncertainty; low confidence over retrieved context triggers reasoning expansion or alternative retrieval rather than over-trusting noisy chunks. Pushes RAG toward probabilistic reasoning systems.</li>
+<li><strong>Cross-index / federated retrieval</strong> — querying multiple heterogeneous indices (vector DB, external APIs, structured DBs, knowledge graphs) and unifying via learned fusion. Retrieval is becoming a data federation problem.</li>
+<li><strong>Self-healing RAG</strong> — pipelines that detect bad answers, trace failing retrieval, and automatically update/prune indexes and re-embed affected content. RAG systems are starting to maintain themselves.</li>
+<li><strong>Lightweight local RAG</strong> — Ollama-compatible servers, SQLite/DuckDB-backed vector stores, and on-device retrieval for edge and privacy-sensitive deployments. RAG is moving downstack.</li>
+<li><strong>Budget-aware RAG</strong> — token budget allocation, adaptive top-k, and early stopping per query via RL or learned estimators. Critical for production cost control.</li>
+<li><strong>Query rewriting &gt; embedding upgrades</strong> — strong evidence that better query expansion and decomposition outperform embedding model swaps as a retrieval quality lever.</li>
+<li><strong>Rust / systems-level RAG infra growing fast</strong> — GraphRAG-rs and similar projects signal that the performance-critical retrieval layer is shifting toward systems languages for better memory management and concurrency.</li>
+<li><strong>Evaluation stacks becoming debugging systems, not scoreboards</strong> — RAGVUE-style failure decomposition (retrieval miss, grounding failure, reasoning gap, hallucinated synthesis) and trace-level per-stage evaluation are replacing scalar output metrics with full pipeline introspection (see <a href="../rag_evals/">RAG Evals</a>).</li>
+<li><strong>Retrieval-Augmented State Machines (RASM)</strong> — modeling RAG pipelines explicitly as <strong>state transitions</strong> where state = {query, context, confidence} and each retrieval or reasoning step is a formal transition to a new state. This enables <strong>formal verification</strong> of RAG flows (provable compliance with retrieval policies), deterministic debugging (replay any state), and reproducibility. Early adoption in regulated domains where audit trails must demonstrate that the retrieval process itself was correct, not just the output. RAG is becoming <strong>stateful computation</strong>, not just pipelines (arXiv, 2025–2026).</li>
+<li><strong>Bidirectional RAG (Bi-RAG)</strong> — instead of the standard retrieve-then-generate or even iterative retrieve→generate→re-retrieve, Bi-RAG introduces <strong>continuous feedback between generation and retrieval during a single generation pass</strong>. Partial outputs trigger targeted retrieval mid-generation, with newly retrieved context influencing subsequent tokens. This is tighter coupling than iterative self-correcting RAG (which completes a full generation before re-retrieving) and improves long-form coherence by ensuring the retrieval context stays aligned with what the model is actually producing (arXiv, 2025–2026).</li>
+<li><strong>Semantic entropy as retrieval control signal</strong> — measuring <strong>disagreement across retrieved evidence</strong> and using it as a control signal: high disagreement triggers reranking, activation of alternative retrievers, or query decomposition. This shifts retrieval quality decisions from score-based (take the top-k highest-scoring chunks) to <strong>consensus-based</strong> (how much do the retrieved sources agree?). Particularly valuable for high-stakes domains where a single high-scoring but contradictory source could mislead generation (arXiv, 2025–2026).</li>
+<li><strong>RAG control planes</strong> — a separate architectural layer above the retrieval data plane that manages <strong>routing policies</strong> (which retriever handles which query type), <strong>budget enforcement</strong> (token/latency caps per query class), <strong>evaluation hooks</strong> (inline quality checks between pipeline stages), and <strong>observability</strong> (end-to-end trace collection). Mirrors the Kubernetes data plane / control plane separation: the data plane executes retrieval, the control plane governs how retrieval is orchestrated, monitored, and constrained. This standardizes how RAG systems are built and operated at scale (arXiv / production RAG teams, 2025–2026).</li>
+<li><strong>Retrieval canaries</strong> — injecting <strong>known facts with known answers</strong> into the retrieval index and periodically testing whether the system retrieves them correctly. A simple but powerful monitoring pattern that detects index degradation, embedding drift, or retrieval pipeline failures before they affect production answers. The RAG equivalent of synthetic monitoring in web operations (production RAG teams, 2025–2026).</li>
+<li><strong>Context versioning</strong> — tracking which <strong>index version</strong> produced which answer, enabling rollback to a previous index state when a new indexing run introduces regressions. Combined with retrieval canaries, this creates a reproducibility layer where any production answer can be traced to its exact retrieval context and re-generated deterministically (production RAG teams, 2025–2026).</li>
+<li><strong>Cross-query learning</strong> — lightweight online adaptation that learns from previous queries: which retrievers succeeded, which failed, which reranking strategies improved results for similar query patterns. This enables the retrieval system to improve its routing and retrieval strategy over time without full retraining — a form of retrieval-level meta-learning that sits between static configuration and full RL-based optimization (arXiv, 2025–2026).</li>
+<li><strong>Latent Query Planning (LQP)</strong> — instead of explicit query decomposition (multi-query expansion, sub-question generation), the model internally simulates multiple query paths and selects a retrieval strategy before issuing any queries. No visible subqueries are produced, but multi-hop performance improves because planning happens <strong>inside the model's forward pass</strong>, reducing orchestration overhead and eliminating the latency of sequential decompose → retrieve → recompose loops. LQP moves retrieval planning from the pipeline layer into the model layer — a step toward retrieval as an implicit model capability rather than an external orchestration concern (arXiv, 2025–2026).</li>
+<li><strong>Retrieval Gradient Signals (RGS)</strong> — early work on propagating <strong>training gradients through retrieval decisions</strong>, updating the retriever based on generation loss rather than treating retrieval as a frozen preprocessing step. The retriever learns to fetch documents that improve downstream reasoning quality, not just documents that score high on similarity. This is a step toward <strong>end-to-end trainable RAG</strong> where retrieval and generation are jointly optimized rather than stitched together with heuristic pipelines. If RGS matures, the current pattern of separately training embeddings, retrievers, and generators may collapse into unified training loops (arXiv, 2025–2026).</li>
+<li><strong>Answer-first retrieval</strong> — inverts the classic RAG order: generate a draft answer first, then retrieve only to <strong>verify weak points</strong> in the draft rather than to ground the entire response. The model identifies claims it is uncertain about and targets retrieval at those specific gaps. Strong latency gains because retrieval is narrowly scoped rather than broad, and the model's parametric knowledge handles what it already knows well. Best suited for domains where the model has strong baseline knowledge and retrieval serves as a verification layer rather than the primary knowledge source (arXiv, 2025–2026).</li>
+<li><strong>Index-time augmentation</strong> — enriching data <strong>before embedding</strong> with summaries, extracted entities, relationship links, and metadata rather than relying solely on query-time tricks (rewriting, reranking, expansion). Pre-computing these enrichments at ingestion time improves retrieval quality at zero query-time cost and often delivers higher ROI than query-time optimizations alone. The pattern: raw document → entity extraction → summary generation → link resolution → enriched document → embed. This front-loads intelligence into the index rather than compensating for a thin index at query time (arXiv, OSS RAG frameworks, 2025–2026).</li>
+<li><strong>Retrieval dropout (training robustness trick)</strong> — randomly removing relevant documents from the retrieval set during training, forcing the model to reason robustly even when retrieval is incomplete or noisy. Analogous to dropout in neural networks but applied to the retrieval input. Models trained with retrieval dropout are more resilient to retrieval failures in production — they degrade gracefully rather than hallucinating when key chunks are missing (arXiv, 2025–2026).</li>
+<li><strong>Asynchronous retrieval pipelines</strong> — issuing parallel retrieval calls across multiple retrievers/indices simultaneously, streaming partial results to the generator as they arrive, and beginning incremental generation before all retrieval completes. This reduces perceived latency significantly compared to sequential retrieve-then-generate and pairs naturally with multi-retriever architectures (MoR, federated retrieval) where different sources have different response times. The pattern mirrors async I/O in systems programming: don't block on the slowest retriever when faster ones have already returned useful context (arXiv, OSS RAG frameworks, 2025–2026).</li>
+<li><strong>All-in-one retrieval runtimes</strong> — emerging single-runtime platforms that handle ingestion, indexing, retrieval, reranking, and caching in a unified system rather than requiring separate services stitched together with glue code. Early examples appearing in OSS stacks (LlamaIndex, Haystack, Pathway) reduce operational complexity and enable tighter optimization across pipeline stages. The trend mirrors database evolution: from separate storage/query/cache layers to integrated engines (OSS RAG frameworks, 2025–2026).</li>
+<li><strong>Retrieval-aware token routing (RATR)</strong> — an emerging architecture where the decoder dynamically routes attention to different retrieved sources <strong>per token</strong> rather than conditioning on a static concatenated context. Each generated token can bind to a specific document or graph node based on learned relevance, reducing context blending (where retrieved sources interfere with each other) and improving long-form faithfulness. This collapses the traditional <code>retrieve → inject → generate</code> pipeline into <code>generate ↔ retrieve (token-conditioned)</code> — retrieval becomes <strong>token-level, not prompt-level</strong>, and the boundary between retriever and generator dissolves. Early results show improved coherence on multi-document synthesis tasks (synthesized from token-level retrieval integration research, arXiv, 2025–2026).</li>
+<li><strong>Retrieval cascades (formalized)</strong> — a staged retrieval architecture gaining traction as a cost-optimization pattern: <code>stage 1: ultra-fast (BM25 / cache) → stage 2: dense retrieval → stage 3: graph / structured → stage 4: rerank + compress</code>, with <strong>early exit</strong> if confidence exceeds a threshold at any stage. Simple queries resolve at stage 1 (sub-millisecond BM25 hits); only complex queries cascade to expensive graph traversal or cross-encoder reranking. This minimizes average retrieval cost while preserving quality on hard queries, and pairs naturally with budget-aware RAG and RAG control planes (synthesized from retrieval cascade research + production RAG teams, 2025–2026).</li>
+<li><strong>Index sharding by semantics</strong> — partitioning the corpus into <strong>topic/domain shards</strong> and routing queries to the relevant shard before retrieval, rather than searching the full index. This delivers large gains in both latency (smaller index per query) and relevance (shard-specific embeddings are more discriminative within their domain). Routing can be done with a lightweight classifier or embedding-based nearest-shard lookup. The pattern mirrors database sharding but applied to the semantic space — and is especially valuable for large heterogeneous corpora where a single embedding space struggles to represent all domains equally well (synthesized from retrieval optimization research, 2025–2026).</li>
+<li><strong>Retrieval SLA layers</strong> — bringing <strong>SRE thinking into RAG</strong> by enforcing formal guarantees on retrieval performance: minimum recall targets, maximum latency budgets, and explicit fallback strategies when primary retrieval fails to meet SLAs. This includes per-query-class SLA differentiation (high-stakes medical queries get stricter recall targets than general FAQ), automatic escalation (if the primary retriever misses latency budget, fall back to a cached or simpler retriever), and SLA violation alerting integrated into observability pipelines. The pattern treats retrieval as a <strong>service with contractual quality guarantees</strong>, not a best-effort pipeline (synthesized from production RAG teams + emerging RAG observability platforms, 2025–2026).</li>
+</ul>
+<hr />
+<h2 id="open-source-ecosystem">Open-Source Ecosystem<a class="headerlink" href="#open-source-ecosystem" title="Permanent link">&para;</a></h2>
+<h3 id="rag-app-frameworks">RAG / App Frameworks<a class="headerlink" href="#rag-app-frameworks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Language</th>
+<th>License</th>
+<th>Key Components</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LangChain</strong></td>
+<td>Python + JS/TS</td>
+<td>MIT</td>
+<td>Retrieval abstractions (vector, self-query, multi-vector), context compression, agent/tool patterns, adapter ecosystem</td>
+</tr>
+<tr>
+<td><strong>LlamaIndex</strong></td>
+<td>Python</td>
+<td>MIT</td>
+<td>"Index your data" core; orchestration, connectors, ingestion pipelines, pipeline building; <strong>Workflows</strong> add declarative multi-step retrieval with integrated planners + tool calling</td>
+</tr>
+<tr>
+<td><strong>Haystack</strong> (deepset)</td>
+<td>Python</td>
+<td>Apache-2.0</td>
+<td>Modular pipeline model; retrievers, routers, memory &amp; branching; agentic pipelines; production-oriented (traceable)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vector-databases">Vector Databases<a class="headerlink" href="#vector-databases" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Language</th>
+<th>License</th>
+<th>Key Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Qdrant</strong></td>
+<td>Rust</td>
+<td>Apache-2.0</td>
+<td>Vector + payload filtering; performance benchmarks published</td>
+</tr>
+<tr>
+<td><strong>Milvus</strong></td>
+<td>Go (+ C++)</td>
+<td>Apache-2.0</td>
+<td>Distributed vector DB; supports large-scale retrieval; cloud-native</td>
+</tr>
+<tr>
+<td><strong>Weaviate</strong></td>
+<td>Go (engine)</td>
+<td>BSD-3-Clause</td>
+<td>Vector + structured filtering; modular; "module" system for model-based extensions</td>
+</tr>
+<tr>
+<td><strong>Chroma</strong></td>
+<td>Rust (+ clients)</td>
+<td>Apache-2.0</td>
+<td>Embedded with client/server modes; supports retrieval + filtering</td>
+</tr>
+<tr>
+<td><strong>pgvector</strong></td>
+<td>C</td>
+<td>PostgreSQL License</td>
+<td>Vector search in Postgres; transactional; semantic + simple queries</td>
+</tr>
+</tbody>
+</table>
+<h3 id="graph-rag-evaluation">Graph RAG &amp; Evaluation<a class="headerlink" href="#graph-rag-evaluation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Language</th>
+<th>License</th>
+<th>Key Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Neo4j LLM Graph Builder</strong></td>
+<td>Python</td>
+<td>Apache-2.0</td>
+<td>Transform unstructured data into Neo4j KG; feeds into GraphRAG workflows</td>
+</tr>
+<tr>
+<td><strong>Neo4j GraphRAG for Python</strong></td>
+<td>Python</td>
+<td>Apache-2.0</td>
+<td>KG creation pipeline + retrievers (graph/vector/hybrid); production GraphRAG patterns</td>
+</tr>
+<tr>
+<td><strong>LightRAG</strong></td>
+<td>Python</td>
+<td>MIT</td>
+<td>Lightweight graph + vector RAG server; interactive KG exploration + API serving; rapid prototyping for GraphRAG systems</td>
+</tr>
+<tr>
+<td><strong>RAGAS</strong></td>
+<td>Python</td>
+<td>Apache-2.0</td>
+<td>Reference low-annotation evaluation for RAG pipelines; test set generation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="emerging-infra-aggregators">Emerging Infra &amp; Aggregators<a class="headerlink" href="#emerging-infra-aggregators" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Language</th>
+<th>Key Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GraphRAG-rs</strong></td>
+<td>Rust</td>
+<td>High-performance GraphRAG pipelines; better memory + concurrency vs Python stacks; signal that RAG infra layer is shifting toward systems languages</td>
+</tr>
+<tr>
+<td><strong>RAGHub</strong></td>
+<td>—</td>
+<td>Ecosystem aggregator tracking datasets, frameworks, and evaluation tools across the fast-moving RAG space</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="key-links">Key Links<a class="headerlink" href="#key-links" title="Permanent link">&para;</a></h2>
+<h3 id="core-papers">Core Papers<a class="headerlink" href="#core-papers" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>arxiv.org/abs/2404.16130</code> -- GraphRAG: From Local to Global</li>
+<li><code>arxiv.org/abs/2310.11578</code> -- Self-RAG</li>
+<li><code>arxiv.org/abs/2502.05014</code> -- A-RAG</li>
+<li><code>arxiv.org/abs/2507.02931</code> -- Agentic RAG survey</li>
+<li><code>arxiv.org/abs/2309.15217</code> -- RAGAS evaluation</li>
+<li><code>huggingface.co/papers/2401.18059</code> -- RAPTOR</li>
+<li><code>arxiv.org/abs/2407.01449</code> -- ColPali: Efficient Document Retrieval with Vision Language Models</li>
+<li><code>arxiv.org/abs/2205.09707</code> -- PLAID: An Efficient Engine for Late Interaction Retrieval</li>
+<li><code>openreview.net/pdf?id=yhVKwOXPCH</code> -- Random Sparse Embeddings Unlock Billion-Scale Late Interaction Retrieval</li>
+<li><code>arxiv.org/abs/2004.12832</code> -- ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT</li>
+<li><code>arxiv.org/abs/2112.01488</code> -- ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction</li>
+<li><code>github.com/stanford-futuredata/ColBERT</code> -- ColBERT: state-of-the-art neural search</li>
+<li><code>topk.io/blog/20260311-smve-multi-vector-retrieval</code> -- SMVE: Multi-Vector Retrieval That Just Works</li>
+</ul>
+<h3 id="official-docs">Official Docs<a class="headerlink" href="#official-docs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>learn.microsoft.com/en-us/azure/search/agentic-retrieval-overview</code> -- Azure AI Search Agentic Retrieval</li>
+<li><code>learn.microsoft.com/en-us/azure/search/agentic-retrieval-how-to-create-knowledge-base</code> -- Create a Knowledge Base</li>
+<li><code>learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/tools/knowledge-retrieval</code> -- Connect Agents to Agentic Retrieval</li>
+<li><code>neo4j.com/developer/genai-ecosystem/graphrag-python/</code> -- Neo4j GraphRAG</li>
+</ul>
+<h3 id="key-open-source-repos">Key Open-Source Repos<a class="headerlink" href="#key-open-source-repos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>github.com/langchain-ai/langchain</code> | <code>github.com/run-llama/llama_index</code></li>
+<li><code>github.com/deepset-ai/haystack</code> | <code>github.com/qdrant/qdrant</code></li>
+<li><code>github.com/milvus-io/milvus</code> | <code>github.com/weaviate/weaviate</code></li>
+<li><code>github.com/chroma-core/chroma</code> | <code>github.com/pgvector/pgvector</code></li>
+<li><code>github.com/neo4j-labs/llm-graph-builder</code> | <code>github.com/neo4j/neo4j-graphrag-python</code></li>
+<li><code>github.com/vibrantlabsai/ragas</code></li>
+<li><code>github.com/Azure-Samples/azure-search-python-samples/tree/main/Quickstart-Agentic-Retrieval</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

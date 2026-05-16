@@ -1,0 +1,3792 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal knowledge base on AI, engineering, and strategy">
+      
+      
+      
+        <link rel="canonical" href="https://ozgurgulerx.github.io/knowledge-vault/xxx%2002%20-%20Systems%20%26%20Inference%20Engineering/inference_engineering/">
+      
+      
+        <link rel="prev" href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/">
+      
+      
+        <link rel="next" href="../gpu_and_datacenter_infrastructure/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Inference Engineering - Knowledge Vault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#inference-engineering" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Vault" class="md-header__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Vault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Inference Engineering
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Vault" class="md-nav__button md-logo" aria-label="Knowledge Vault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Vault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AI Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Talk Points
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Talk Points
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2000%20-%20General%20talk%20points/ai_strategy_and_market_intelligence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Strategy & Market Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 00 - General talk points/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Generative AI + LLMs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Generative AI + LLMs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/generative_ai_and_llms.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative AI and LLMs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 01 - Generative AI + LLMs/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reinforcement Learning
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Reinforcement Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2012%20-%20RL%20/reinforcement_learning_principles_frontiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RL Principles & Frontiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quantum Computing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum Computing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2011%20-%20Quantum%20Computing/primer_quantum_ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primer on Quantum ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Engineering & Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engineering & Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Systems & Inference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Systems & Inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Inference Engineering
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpu_and_datacenter_infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPU & Datacenter Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../250821_multiuser_b2c_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-user B2C Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 02 - Systems & Inference Engineering/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RAG, Knowledge & Memory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            RAG, Knowledge & Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2003b%20-%20RAG%2C%20Knowledge%2C%20Memory/rag_knowledge_memory_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG Knowledge Memory Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 03b - RAG, Knowledge, Memory/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data & Knowledge Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data & Knowledge Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2008%20-%20Data%20%26%20Knowledge%20Engineering%20for%20GenAI/data_knowledge_engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Knowledge Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 08 - Data & Knowledge Engineering for GenAI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Multimodal + Real-time
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Multimodal + Real-time
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2009%20-%20Multimodal%20%2B%20Real-time/multimodal_and_realtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multimodal and Realtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 09 - Multimodal + Real-time/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Products & Operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Products & Operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Products + UX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Products + UX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/ai_products_and_ux.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Products and UX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2005%20-%20AI%20Products%20%2B%20UX%20UI/2603_figma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figma Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 05 - AI Products + UX UI/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Evals + GenAI Ops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Evals + GenAI Ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2004%20-%20AI%20Evals%20%2B%20GenAI%20Ops/llm_evaluation_and_evalops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Evaluation & EvalOps
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--stable"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 04 - AI Evals + GenAI Ops/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ClaudeCode & Codex
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            ClaudeCode & Codex
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 13 - ClaudeCode & Codex/claude_code_expert_guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code Expert Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Governance & Safety
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            AI Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2006%20-%20AI%20Security/251201_ai_security_resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Security Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 06 - AI Security/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI Safety & Alignment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI Safety & Alignment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2010%20-%20AI%20Safety%20%26%20Alignment%20Science/ai_safety_and_alignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Safety and Alignment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx 10 - AI Safety & Alignment Science/knowledge_graph.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Emerging & Frontier
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Emerging & Frontier
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    New & Emerging AI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            New & Emerging AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xxx%2014%20-%20New%20%26%20Emerging%20AI%20Themes/generative_optimisation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generative Optimisation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Personal
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Personal
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_healthy_snacks_turkey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Snacks Turkey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/atlas_learning_and_school_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning & School Path
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/healthy_parenting_attitudes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthy Parenting Attitudes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graph Atlas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Graph Atlas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/gcp_partner_playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP Partner Playbook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/turkey_ai_strategy_and_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turkey AI Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph%20atlas/knowledge_graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Investing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Investing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/260306_ai_investing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Investing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../investing/startup-differentiation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Startup Differentiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-briefing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening Briefing
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="inference-engineering">Inference Engineering<a class="headerlink" href="#inference-engineering" title="Permanent link">&para;</a></h1>
+<h2 id="opening-briefing">Opening Briefing<a class="headerlink" href="#opening-briefing" title="Permanent link">&para;</a></h2>
+<p>The defining misconception in LLM deployment is that inference performance is a GPU compute problem. It is not. Autoregressive token generation is <strong>memory-bandwidth bound</strong>, not compute bound: throughput during the decode phase scales with GB/s of HBM bandwidth, not TFLOPS of matrix units. An H100 delivers 3,958 TFLOPS at FP8 with sparsity, yet a single decoding step for a 70B model reads 140 GB of weights through 3.35 TB/s of HBM3 and waits. This inversion means that the entire optimization stack — from OS kernel tuning to serving runtime selection to quantization strategy — is fundamentally an exercise in memory system engineering, not in unlocking more arithmetic.</p>
+<p>The consequences run deeper than GPU selection. PagedAttention, vLLM's core contribution, applies operating system virtual memory principles — page tables, copy-on-write, demand paging — directly to the KV cache, cutting memory waste from 60-80% to under 4% and enabling up to 24x throughput gains. But the OS layer beneath the serving runtime matters just as much and is far less visible. The choice of userspace memory allocator alone introduces 10-18 GB of RSS variance on identical workloads: glibc malloc's arena fragmentation silently consumes memory that could hold thousands of additional KV cache pages. Transparent Huge Pages in their default mode inject 10-100ms compaction stalls into tail latency. NUMA misalignment between CPU cores and GPU PCIe root complexes adds microseconds per DMA transfer that compound across millions of token-generation steps. These are not exotic tuning opportunities; they are <strong>baseline correctness requirements</strong> for production inference.</p>
+<p>The prefill/decode phase split creates a second structural tension that shapes every architectural decision downstream. Prefill is compute-bound and parallelizable; decode is sequential and memory-bound. System-level benchmarks now confirm that <strong>&gt;70% of end-to-end inference time is spent in the decode phase</strong>, making decode optimization the dominant lever for throughput gains (arXiv, Mar 2026). The three highest-impact decode-phase interventions — <strong>KV cache locality</strong>, <strong>token-level parallelism</strong>, and <strong>speculative decoding</strong> — collectively deliver <strong>2–4x throughput improvement without increasing FLOPS</strong>, reinforcing that this is a memory-system and scheduling problem, not a compute problem. Continuous batching (ORCA-style iteration-level scheduling) resolves the static batching waste of 50-90% GPU idle time, but introduces new scheduling complexity — chunked prefill to prevent long-prompt starvation, preemption policies for SLA-tiered tenants, and token-bucket fairness across a shared GPU fleet. Speculative decoding attacks the decode bottleneck from a different angle, converting sequential token generation into parallel verification at the cost of draft-model overhead, yielding 1.5-2.5x speedups without altering the output distribution. However, recent benchmarks indicate speculative decoding is <strong>hitting scaling limits</strong>: gains plateau beyond <strong>~2–3× speedup</strong>, constrained by misprediction rates and KV cache duplication overhead. The next step requires hybrid approaches — speculative decoding combined with KV-sharing and partial verification — rather than pure speculation trees (arXiv, 2026).</p>
+<p>This document treats inference engineering as what it actually is: a <strong>full-stack systems discipline</strong> spanning GPU hardware and interconnects, kernel memory management, serving runtimes and schedulers, quantization and precision formats, multi-GPU topology, Kubernetes orchestration, and production observability. As of early 2026, the evidence is unambiguous: <strong>performance is dominated by software</strong> — schedulers, memory orchestration, and kernel fusion — not by hardware generation (arXiv, Mar 2026). It is organized in two parts — core concepts covering the layered architecture from hardware through workload patterns, followed by production-grade operational concerns from driver setup through security hardening — and is designed to serve as both a technical reference and an architectural reasoning framework for teams building inference infrastructure at scale.</p>
+<hr />
+<h1 id="part-i-core-concepts">Part I -- Core Concepts<a class="headerlink" href="#part-i-core-concepts" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="0-ten-key-themes">0. Ten Key Themes<a class="headerlink" href="#0-ten-key-themes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Theme</th>
+<th>Core Idea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Long Context &amp; Memory Management</strong></td>
+<td>PagedAttention treats KV cache as virtual-memory pages; eliminates 60-80% memory waste</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Continuous Batching &amp; Scheduling</strong></td>
+<td>ORCA-style iteration-level batching replaces static batching; 2-10x throughput gain</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>KV Cache Optimization</strong></td>
+<td>Compression, quantization (FP8/INT4), paged eviction, prefix sharing</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Quantization</strong></td>
+<td>GPTQ, AWQ (weight-only), SmoothQuant (W8A8); INT4 cuts memory ~4x with &lt;1% quality loss</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>High-Efficiency Architectures</strong></td>
+<td>GQA/MQA reduce KV heads; Mamba/SSMs offer O(n) vs O(n^2) attention</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Speculative &amp; Parallel Decoding</strong></td>
+<td>Draft model proposes k tokens, target verifies in one pass; Medusa adds parallel heads</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Multi-GPU / Multi-Node</strong></td>
+<td>Tensor parallelism (intra-node, NVLink), pipeline parallelism (inter-node), expert parallelism (MoE)</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Multi-Tenancy &amp; Isolation</strong></td>
+<td>Per-tenant rate limits, priority queues, fairness scheduling, resource quotas</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Observability &amp; Cost Analytics</strong></td>
+<td>TTFT, TPS, p50/p95/p99 latency, $/1M tokens, GPU utilization, queue depth</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Reliability &amp; Safety</strong></td>
+<td>Graceful degradation, circuit breakers, guardrails, output filtering</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-layered-landscape-map">1. Layered Landscape Map<a class="headerlink" href="#1-layered-landscape-map" title="Permanent link">&para;</a></h2>
+<h3 id="11-hardware-layer">1.1 Hardware Layer<a class="headerlink" href="#11-hardware-layer" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>GPUs:</strong> NVIDIA H100 (80 GB HBM3, 3.35 TB/s), A100 (80 GB HBM2e, 2 TB/s), L4 (24 GB, inference-optimized)</li>
+<li><strong>Interconnects:</strong> NVLink 4.0 (900 GB/s bidirectional per H100), NVSwitch, InfiniBand NDR (400 Gb/s)</li>
+<li><strong>Memory wall:</strong> Autoregressive decoding is <strong>memory-bandwidth bound</strong>, not compute bound -- throughput scales with GB/s, not TFLOPS</li>
+<li><strong>TPUs:</strong> Google TPU v5e (low-cost inference), v5p (training); HBM capacity and inter-chip interconnect (ICI) differ from GPU ecosystem</li>
+</ul>
+<h3 id="12-kernel-compiler-layer">1.2 Kernel &amp; Compiler Layer<a class="headerlink" href="#12-kernel-compiler-layer" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>FlashAttention (v1/v2/v3/v4):</strong> Fuses Q/K/V into a single kernel; reduces HBM reads from O(N^2) to O(N); 2-4x wall-clock speedup. FlashAttention 4 integrated into vLLM v0.17.0 (March 2026). <strong>FA4 on Blackwell (B200):</strong> 1.3× faster than cuDNN kernels, 2.7× faster than Triton implementations, achieves ~71% theoretical GPU utilization (~1613 TFLOP/s). Key insight: Blackwell doubled tensor-core throughput but <strong>shared-memory bandwidth and non-matmul units did not scale proportionally</strong> — kernel scheduling and algorithm-kernel co-design (pipelining compute and memory stages) become the optimization frontier, not raw FLOPS (arXiv, FlashAttention-4, Mar 2026)</li>
+<li><strong>TensorRT-LLM:</strong> NVIDIA's compiler for LLM inference; kernel fusion, quantization, in-flight batching</li>
+<li><strong>CUDA Graphs:</strong> Capture and replay GPU kernel sequences to eliminate CPU launch overhead; critical for small-batch latency</li>
+<li><strong>Triton (OpenAI):</strong> Python-based GPU kernel language; used in FlashAttention, custom fused kernels</li>
+<li><strong>vLLM Triton Attention Backend:</strong> ~800-line single-source attention kernel targeting NVIDIA/AMD/Intel from one codebase; claims H100 parity with SOTA and ~5.8x speedup on MI300 vs earlier implementations; uses Q-blocks, tiled softmax for decode, and persistent kernels for CUDA graph compatibility; now the default attention backend on ROCm</li>
+<li><strong>KernelAgent (Meta/PyTorch, March 2026):</strong> Closed-loop multi-agent workflow guided by GPU performance signals for Triton kernel optimization; 2.02x speedup vs correctness-focused baseline, 1.56x faster than out-of-box torch.compile, 88.7% roofline efficiency on H100; code open-sourced</li>
+<li><strong>IndexCache for DeepSeek Sparse Attention:</strong> Production sparse-attention stacks like DeepSeek recompute <strong>sparse-attention index information</strong> (which tokens attend to which) at every transformer layer, even though the index patterns are largely redundant across layers. <strong>IndexCache</strong> eliminates this redundancy by reusing index information across layers, yielding ~1.2× end-to-end speedup on GLM-5 (744B) with matching quality. On a 30B-scale model at 200K context, removing 75% of indexers via IndexCache produces 1.82× prefill and 1.48× decode speedup — a significant gain from minimal code change, which is exactly the <strong>practical optimization profile</strong> labs now prioritize over clean-sheet kernel rewrites (@realYushiBai, Mar 2026)</li>
+<li><strong>HF kernels library (Hugging Face, Mar 2026):</strong> Hugging Face released a new <strong>kernels</strong> library designed to make <strong>custom GPU kernels more shareable and easier to integrate</strong> via the Hub — lowering the pain of writing and distributing fused/custom kernels without hand-rolling installation scripts or build systems. The library provides a standardized packaging and discovery mechanism so that kernel authors can publish optimized kernels (e.g., fused attention variants, custom layernorm) and consumers can install and use them with minimal friction, analogous to how model weights are shared on the Hub today (ariG23498, HF, Mar 2026)</li>
+<li><strong>Kernel optimization stack (practical sequence):</strong> The emerging practical guidance for kernel-level optimization follows a <strong>three-step sequence</strong>: <strong>(1)</strong> close idle gaps between kernel launches (reduce CPU-side overhead, use CUDA graphs); <strong>(2)</strong> <strong>fuse ops with torch.compile</strong> to eliminate redundant memory round-trips; <strong>(3)</strong> only fall back to <strong>hand-written custom kernels</strong> where torch.compile fusion is insufficient. This hierarchy reflects the maturation of compiler-driven optimization — most teams should exhaust steps 1 and 2 before investing in custom kernel development (AINews, Mar 2026)</li>
+<li><strong>CUDA linear attention kernel (eliebakouch, Apr 2026):</strong> New open-source CUDA kernel for linear attention — provides a native GPU implementation for linear-complexity attention variants, reducing the gap between FlashAttention-optimized softmax attention and sub-quadratic alternatives. Relevant for teams exploring efficient attention beyond standard softmax in hybrid architectures (AINews, Apr 2026)</li>
+<li><strong>Kernel fusion ceiling — register pressure:</strong> Aggressive kernel fusion is hitting diminishing returns due to <strong>register pressure</strong> — fused kernels that combine too many operations exhaust the GPU register file, causing register spills to local memory and reducing SM occupancy. The result is that additional fusion can <em>decrease</em> performance rather than improve it. This represents a <strong>hardware-imposed ceiling</strong>: further fusion gains require larger register files in future GPU architectures, not just better compiler heuristics. Teams should profile register usage and occupancy when evaluating fusion strategies, as the optimal fusion granularity is now a function of register budget, not just memory traffic reduction (arXiv, 2026)</li>
+</ul>
+<h3 id="13-runtime-serving-layer">1.3 Runtime &amp; Serving Layer<a class="headerlink" href="#13-runtime-serving-layer" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Engine</th>
+<th>Key Feature</th>
+<th>Batching</th>
+<th>Quantization</th>
+<th>Multi-GPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>vLLM</strong></td>
+<td>PagedAttention, continuous batching</td>
+<td>Iteration-level</td>
+<td>GPTQ, AWQ, FP8</td>
+<td>TP (<code>--tensor-parallel-size N</code>)</td>
+</tr>
+<tr>
+<td><strong>TGI</strong> (HuggingFace)</td>
+<td>Production C++/Rust server, token streaming</td>
+<td>Continuous</td>
+<td>GPTQ, bitsandbytes</td>
+<td><code>--num-shard N</code></td>
+</tr>
+<tr>
+<td><strong>TensorRT-LLM</strong></td>
+<td>NVIDIA-optimized, Triton backend</td>
+<td>In-flight</td>
+<td>INT4/INT8/FP8, SmoothQuant</td>
+<td>Multi-GPU</td>
+</tr>
+<tr>
+<td><strong>llama.cpp</strong></td>
+<td>CPU/Metal inference, GGUF format</td>
+<td>Basic</td>
+<td>Q4_0, Q4_K_M, Q5_K_M</td>
+<td>--</td>
+</tr>
+<tr>
+<td><strong>SGLang</strong></td>
+<td>RadixAttention, prefix caching</td>
+<td>Continuous</td>
+<td>GPTQ, AWQ</td>
+<td>--</td>
+</tr>
+<tr>
+<td><strong>DeepSpeed-Inference</strong></td>
+<td>ZeRO-Inference, pipeline parallelism</td>
+<td>--</td>
+<td>INT8, SmoothQuant</td>
+<td><code>mp_size=N</code></td>
+</tr>
+<tr>
+<td><strong>FasterTransformer</strong></td>
+<td>NVIDIA C++ optimized kernels</td>
+<td>--</td>
+<td>INT8, FP8</td>
+<td>TP + PP</td>
+</tr>
+<tr>
+<td><strong>Transformers + Accelerate</strong></td>
+<td>Simplest; good for dev/testing</td>
+<td>--</td>
+<td>bitsandbytes</td>
+<td><code>device_map="auto"</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Choose <strong>vLLM</strong> for many parallel requests + memory efficiency, <strong>TGI</strong> for production multi-user serving, <strong>TensorRT-LLM</strong> for absolute peak NVIDIA performance. Most teams start with TGI or vLLM and add TensorRT if needed.</p>
+</blockquote>
+<p><strong>vLLM v0.17.0 (March 2026):</strong> FlashAttention 4 integration; Qwen3.5 support with GDN (Gated Delta Networks); Model Runner V2 maturation (pipeline parallel, decode context parallel, Eagle3 + CUDA graphs); new performance mode flag; Weight Offloading V2; elastic expert parallelism; direct loading of quantized LoRA adapters; kernel/hardware updates across NVIDIA SM100/120, AMD ROCm, Intel XPU, and CPU backends.</p>
+<p><strong>Configuration essentials:</strong></p>
+<ul>
+<li>Enable FP16 or lower precision (all frameworks support it)</li>
+<li>Set <code>--tensor-parallel-size</code> to match GPU count</li>
+<li>GPU memory should be close to full; SMs busy during generation (not just prefill)</li>
+<li>If GPU utilization drops during decode, consider FlashAttention or FasterTransformer kernels</li>
+</ul>
+<h3 id="14-model-architecture-layer">1.4 Model &amp; Architecture Layer<a class="headerlink" href="#14-model-architecture-layer" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>GQA (Grouped Query Attention):</strong> Llama 2 70B uses 8 KV heads vs 64 Q heads -- 8x KV cache reduction</li>
+<li><strong>MQA (Multi-Query Attention):</strong> Single KV head shared across all Q heads (Falcon, PaLM)</li>
+<li><strong>MoE (Mixture of Experts):</strong> Mixtral 8x7B activates 2 of 8 experts per token -- 12.9B active params from 46.7B total</li>
+<li><strong>SSMs (State Space Models):</strong> Mamba -- O(n) sequence processing, no KV cache, constant memory per token</li>
+<li><strong>Axolotl v0.16.x (winglian, Apr 2026):</strong> MoE + LoRA fine-tuning breakthrough — claimed <strong>15x faster</strong> and <strong>40x less memory</strong> for MoE fine-tuning. GRPO async training is <strong>58% faster</strong>. Includes docs overhaul and Gemma 4 support. Significant for teams fine-tuning MoE models with LoRA adapters under memory constraints (AINews, Apr 2026)</li>
+<li><strong>turbopuffer — multi-vector columns (Apr 2026):</strong> turbopuffer now supports <strong>multiple vector columns per document</strong> with different dimensions, types, and indexes per column — relevant for retrieval-augmented inference where documents need multi-representation indexing (e.g., dense + sparse + late-interaction embeddings on the same document) (turbopuffer, AINews, Apr 2026)</li>
+</ul>
+<h3 id="15-workload-product-layer">1.5 Workload &amp; Product Layer<a class="headerlink" href="#15-workload-product-layer" title="Permanent link">&para;</a></h3>
+<p><strong>Inference phase specialization.</strong> The inference stack is fragmenting into distinct workloads with fundamentally different hardware profiles: <strong>prefill</strong> is compute-bound and benefits from dense matrix math (high TFLOPS), <strong>decode</strong> is memory-bandwidth-bound and benefits from high-bandwidth memory (high GB/s), and <strong>wide reasoning</strong> (many parallel chains evaluated simultaneously, as in o3-style reasoning models) benefits from fast compute with cheap tokens. Each phase has a different optimal chip architecture, which is driving the industry toward <strong>heterogeneous datacenters</strong> where different chip types handle different inference phases rather than one GPU doing everything (see Section 5 for the business implications).</p>
+<p><strong>Two scaling paradigms</strong> are emerging around how compute is consumed at serving time:</p>
+<ul>
+<li><strong>Fast compute</strong> — minimize latency per token; optimize for interactive use cases where a human is waiting (chatbots, code completion, search). The constraint is time-to-first-token and inter-token latency.</li>
+<li><strong>Wide compute</strong> — maximize parallel reasoning chains; optimize for throughput of many concurrent inference streams. Reasoning models like o3 generate many parallel chains and pick the best result. This is fundamentally different from serving a chatbot — it demands cheap tokens at scale rather than minimal latency per token.</li>
+</ul>
+<p>These paradigms map onto different product categories:</p>
+<ul>
+<li><strong>Chatbot:</strong> Latency-sensitive, variable length, bursty; optimize TTFT. Archetypical <em>fast compute</em> workload.</li>
+<li><strong>Batch/offline:</strong> Throughput-sensitive; maximize tokens/sec/GPU</li>
+<li><strong>Code completion:</strong> Very low latency (&lt;200ms TTFT), short outputs, high prefix sharing. <em>Fast compute.</em></li>
+<li><strong>RAG:</strong> Long input context (retrieval chunks), moderate output; prefill-heavy</li>
+<li><strong>Agents:</strong> Multi-turn, tool-calling, variable compute per step</li>
+<li><strong>Reasoning / search:</strong> Many parallel inference chains evaluated and ranked. Archetypical <em>wide compute</em> workload — cost per token matters more than latency per token. Models like o3 may spawn dozens of parallel chains per query, making throughput-optimized hardware (or inference-specialized chips) the natural fit.</li>
+</ul>
+<hr />
+<h2 id="2-os-memory-layer">2. OS &amp; Memory Layer<a class="headerlink" href="#2-os-memory-layer" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>How Linux memory management directly impacts LLM inference latency, memory efficiency, and throughput.</p>
+</blockquote>
+<h3 id="21-os-kernel-tuning">2.1 OS &amp; Kernel Tuning<a class="headerlink" href="#21-os-kernel-tuning" title="Permanent link">&para;</a></h3>
+<p><strong>Recommended:</strong> 64-bit Linux -- Ubuntu LTS (base of NVIDIA DGX OS) or RHEL/Rocky for enterprise/HPC. Windows only via WSL2 if mandatory.</p>
+<table>
+<thead>
+<tr>
+<th>Optimization</th>
+<th>Setting</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CPU Frequency</strong></td>
+<td><code>cpupower frequency-set -g performance</code></td>
+<td>Locks max frequency; prevents throttling during inference I/O</td>
+</tr>
+<tr>
+<td><strong>CPU Pinning</strong></td>
+<td><code>isolcpus</code> or K8s <code>cpuManagerPolicy: static</code></td>
+<td>Dedicated cores; eliminates context switches</td>
+</tr>
+<tr>
+<td><strong>NUMA Balancing</strong></td>
+<td><code>kernel.numa_balancing=0</code></td>
+<td>Disables page migration overhead; bind with <code>numactl --cpunodebind</code></td>
+</tr>
+<tr>
+<td><strong>I/O Scheduler</strong></td>
+<td><code>echo none &gt; /sys/block/nvme0n1/queue/scheduler</code></td>
+<td>NVMe firmware handles optimization; removes kernel queuing</td>
+</tr>
+<tr>
+<td><strong>Kernel Mitigations</strong></td>
+<td><code>mitigations=off</code> (air-gapped only)</td>
+<td>Disables Spectre/Meltdown; a few percent gain but exposes vulnerabilities</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Goal: ensure the OS is never the bottleneck -- CPUs at full speed, hugepage-friendly memory, NUMA locality respected for GPU data paths.</p>
+</blockquote>
+<h3 id="22-cpu-pages-huge-pages-and-thp">2.2 CPU Pages, Huge Pages, and THP<a class="headerlink" href="#22-cpu-pages-huge-pages-and-thp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Page Type</th>
+<th>Size</th>
+<th>TLB Coverage per Entry</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Standard</strong></td>
+<td>4 KB</td>
+<td>4 KB</td>
+<td>Default; fine-grained</td>
+</tr>
+<tr>
+<td><strong>Huge (2M)</strong></td>
+<td>2 MB</td>
+<td>2 MB (512x more)</td>
+<td>Model weights, KV cache</td>
+</tr>
+<tr>
+<td><strong>Huge (1G)</strong></td>
+<td>1 GB</td>
+<td>1 GB</td>
+<td>Very large contiguous allocations</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>TLB misses</strong> dominate memory access cost for large models -- huge pages cut TLB miss rates by <strong>30-70%</strong></li>
+</ul>
+<p><strong>THP Modes:</strong></p>
+<ul>
+<li><code>always</code> -- Aggressively promotes; causes <strong>10-100ms latency spikes</strong> from compaction stalls. <strong>Avoid in production.</strong></li>
+<li><code>madvise</code> -- Only promotes on explicit request. <strong>Recommended.</strong></li>
+<li><code>never</code> -- Safe fallback if latency spikes observed.</li>
+</ul>
+<blockquote>
+<p>Use <code>madvise</code> mode. Explicit huge page reservation (<code>hugeadm --pool-pages-min</code>) for weight buffers gives deterministic performance without compaction jitter.</p>
+</blockquote>
+<h3 id="23-dma-iommu-and-pinned-memory">2.3 DMA, IOMMU, and Pinned Memory<a class="headerlink" href="#23-dma-iommu-and-pinned-memory" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>IOMMU</strong> translates device virtual addresses to physical -- adds overhead on every DMA transaction</li>
+<li><strong>Bare-metal GPU servers:</strong> disable with <code>intel_iommu=off</code> for max performance</li>
+<li><strong>Pinned memory</strong> (<code>cudaHostAlloc</code> / <code>mlock</code>) prevents OS from swapping pages -- <strong>mandatory</strong> for stable GPU DMA transfers</li>
+<li>Non-pinned memory causes <strong>unpredictable delays</strong> when OS swaps pages mid-transfer</li>
+</ul>
+<p><strong>Model Loading Performance:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Time (8B model)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cold load from S3/SSD</td>
+<td>~23-35 seconds</td>
+</tr>
+<tr>
+<td>NVIDIA Model Streamer (32 threads, S3)</td>
+<td>~4.8 seconds</td>
+</tr>
+<tr>
+<td>Warm cache (DRAM)</td>
+<td>Tens of GB/s throughput</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Pinned memory + huge pages + parallel streaming dramatically reduce cold-start latency. Pre-warm models in page cache for sub-second subsequent loads.</p>
+</blockquote>
+<h3 id="24-memory-allocators">2.4 Memory Allocators<a class="headerlink" href="#24-memory-allocators" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Allocator</th>
+<th>Behavior</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>glibc malloc</strong></td>
+<td>Default; many arenas; fragments heavily</td>
+<td><strong>10-18 GB RSS variance</strong>; memory not returned to OS</td>
+</tr>
+<tr>
+<td><strong>jemalloc</strong></td>
+<td>Background scavenging; size-class bins</td>
+<td><strong>30-40% lower post-peak RSS</strong>; more predictable</td>
+</tr>
+<tr>
+<td><strong>mimalloc</strong></td>
+<td>Segment-based; minimal fragmentation</td>
+<td><strong>5x higher throughput</strong> vs glibc in some benchmarks</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Cap glibc arenas:</strong> <code>MALLOC_ARENA_MAX=2</code></li>
+<li><strong>Switch to jemalloc:</strong> <code>LD_PRELOAD=/usr/lib/libjemalloc.so</code> -- drop-in replacement for vLLM</li>
+<li><strong>jemalloc tuning:</strong> <code>background_thread:true,dirty_decay_ms:1000</code></li>
+</ul>
+<blockquote>
+<p>Default glibc malloc is the <strong>silent killer</strong> of memory predictability in inference. Switch to jemalloc or mimalloc for production vLLM deployments.</p>
+</blockquote>
+<h3 id="25-linux-page-cache-cold-vs-warm-loads">2.5 Linux Page Cache -- Cold vs Warm Loads<a class="headerlink" href="#25-linux-page-cache-cold-vs-warm-loads" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Load Type</th>
+<th>Latency</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cold start</td>
+<td><strong>30+ seconds</strong></td>
+<td>Disk/NVMe/network</td>
+</tr>
+<tr>
+<td>Warm start</td>
+<td>Sub-second</td>
+<td>DRAM (tens of GB/s)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Warm-Start Strategies:</strong></p>
+<ul>
+<li><strong>Persistent model process</strong> -- keep vLLM running; don't restart between requests</li>
+<li><strong>Preload/warmup</strong> -- <code>MAP_POPULATE</code> loads entire file on <code>mmap()</code></li>
+<li><strong><code>mlock()</code></strong> -- pins model pages in RAM; prevents eviction</li>
+<li><strong><code>vmtouch</code></strong> -- CLI tool to pre-warm files into page cache</li>
+<li><strong>Fast NVMe</strong> -- reduces cold-start penalty when cache misses unavoidable</li>
+</ul>
+<h3 id="26-slms-as-osruntime-diagnostic-probes">2.6 SLMs as OS/Runtime Diagnostic Probes<a class="headerlink" href="#26-slms-as-osruntime-diagnostic-probes" title="Permanent link">&para;</a></h3>
+<p><strong>1-4B parameter models</strong> act as scalpels for performance testing -- small enough to isolate OS overhead from model compute.</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>What It Reveals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Toggle THP modes</td>
+<td>Compaction stall impact on tail latency</td>
+</tr>
+<tr>
+<td>Swap allocators</td>
+<td>RSS stability, fragmentation patterns</td>
+</tr>
+<tr>
+<td>Cold vs warm loads</td>
+<td>Page cache effectiveness</td>
+</tr>
+<tr>
+<td>CPU affinity / <code>taskset</code></td>
+<td>NUMA effects, scheduling overhead</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>SLMs are the cheapest, fastest way to diagnose whether performance problems originate in the OS/runtime layer vs the model/framework layer.</p>
+</blockquote>
+<hr />
+<h2 id="3-deep-technical-topics">3. Deep Technical Topics<a class="headerlink" href="#3-deep-technical-topics" title="Permanent link">&para;</a></h2>
+<h3 id="31-pagedattention-kv-cache-management">3.1 PagedAttention &amp; KV Cache Management<a class="headerlink" href="#31-pagedattention-kv-cache-management" title="Permanent link">&para;</a></h3>
+<p><strong>PagedAttention (vLLM):</strong></p>
+<ul>
+<li>KV cache divided into fixed-size <strong>blocks</strong> (e.g., 16-128 tokens)</li>
+<li>Block table maps logical to physical blocks (like OS page tables)</li>
+<li>Eliminates internal fragmentation -- memory waste drops from <strong>60-80%</strong> to <strong>&lt;4%</strong> (pre-vLLM systems used only <strong>20-40%</strong> of KV-cache space for actual token states; rest lost to internal fragmentation, reserved-but-unused space, and external fragmentation)</li>
+<li>Enables <strong>copy-on-write</strong> for parallel sampling (beam search, best-of-n) -- <strong>55% memory reduction</strong>. Multiple outputs from the same prompt share prefix KV blocks via reference counts; blocks are copied only when branches diverge, cutting both memory and redundant prompt compute</li>
+<li>Up to <strong>24x</strong> throughput over naive <code>model.generate()</code>, up to <strong>3.5x over HuggingFace TGI</strong> at time of publication</li>
+<li><strong>PagedAttention is the enabling kernel:</strong> attention operates over <strong>non-contiguous KV blocks</strong> -- without this, paging would be elegant but not useful for attention workloads</li>
+<li><strong>Design philosophy: throughput first, latency second.</strong> vLLM explicitly prioritized throughput because throughput reduces serving cost; they distinguish "pure latency optimizations" from approaches that trade throughput for latency</li>
+</ul>
+<blockquote>
+<p><strong>Key:</strong> The deepest contribution of vLLM is not PagedAttention alone but <strong>memory virtualization + scheduler/coherence model for dynamic decoding workloads</strong>. The core insight: training stacks assumed static tensor layouts; serving needed dynamic memory allocation semantics. Autoregressive generation behaves more like an OS process tree than a training batch. <strong>Autoregressive inference is a dynamic memory-management problem disguised as a deep-learning problem.</strong> This paging logic generalizes beyond transformers -- it helps whenever output length is unknown and state grows dynamically, making it a useful first-principles lens for future agent/runtime design.</p>
+</blockquote>
+<p><strong>vLLM as end-to-end engine:</strong> front-end, scheduler, centralized block-table management, GPU-side cache engine, Python/HuggingFace integration, CUDA kernels for PagedAttention, Megatron-LM for model parallel execution, Ray for cluster/control-plane management.</p>
+<p><strong>What vLLM solved and what remains:</strong> vLLM solved the first major systems problem (KV-cache layout policy) when the community was still overly focused on model weights, quantization, and GPU horsepower. Later serving bottlenecks extend beyond this: prefill vs decode separation, multi-tenant QoS, long-context prefix reuse across users, speculative decoding, disaggregated inference, heterogeneous memory hierarchies, and agentic workloads with bursty/irregular traffic.</p>
+<p><strong>KV Memory Formula:</strong></p>
+<div class="highlight"><pre><span></span><code>KV Memory = 2 x num_layers x num_heads x head_dim x context_length x bytes_per_value
+</code></pre></div>
+<p><strong><code>max_model_len</code> as Capacity Lever:</strong></p>
+<ul>
+<li>A model supporting 128K context but serving 4K-avg requests wastes <strong>32x</strong> memory if not tuned</li>
+<li>Set to <strong>p99 of real usage</strong> sequence length distribution</li>
+</ul>
+<p><strong>Prefix Caching:</strong></p>
+<ul>
+<li>System prompt KV cache computed once, shared across requests</li>
+<li>SGLang's <strong>RadixAttention</strong> uses a radix tree for automatic prefix matching</li>
+<li>Saves 20-80% prefill compute for shared-prefix workloads</li>
+</ul>
+<p><strong>KV Cache as Competitive Battleground:</strong></p>
+<p>KV-cache management is becoming the critical bottleneck and differentiator in production inference. At scale, the cost of inference is dominated by KV-cache memory, not compute — the memory required to hold attention state for concurrent requests dwarfs the arithmetic cost of generating tokens. Companies that solve KV-cache efficiency (compression, offloading, sharing across requests) gain massive cost advantages, because each byte saved in KV-cache translates directly into higher concurrency or longer context windows on the same hardware. This is also why inference-specialized chips (Groq, Cerebras) focus heavily on memory architecture: their competitive thesis is that purpose-built memory hierarchies can serve KV-cache-heavy workloads far more efficiently than general-purpose GPUs.</p>
+<p><strong>KV Cache Compression:</strong></p>
+<p>KV cache memory footprint scales linearly with context length and <strong>dominates HBM usage at long contexts (&gt;32k tokens)</strong>, making compression effectively mandatory for production long-context serving (arXiv, Mar 2026). The primary techniques, in order of maturity:</p>
+<ul>
+<li><strong>Quantized KV:</strong> Store K/V in FP8, <strong>INT4</strong>, or <strong>FP4</strong> (2-4x memory savings, &lt;1% quality loss). INT4/FP4 KV quantization is increasingly the default for long-context deployments.</li>
+<li><strong>Low-rank KV compression:</strong> Projects key/value representations into a lower-dimensional subspace, reducing per-head memory proportionally. Effective when combined with quantization for compounding savings (arXiv, Mar 2026).</li>
+<li><strong>Eviction policies:</strong> LRU, <strong>attention-score-aware eviction</strong> (StreamingLLM keeps attention sinks + recent window). Attention-aware policies outperform naive LRU by retaining tokens that carry disproportionate attention mass. Notably, smart eviction alone (attention-aware + recency-weighted) achieves <strong>~2–3× memory reduction</strong> with minimal quality loss — and in some workloads <strong>outperforms quantization-only compression</strong>, suggesting that <strong>what you keep matters more than how you compress it</strong> (arXiv, 2026).</li>
+<li><strong>Multi-tier:</strong> Hot KV in HBM, warm in CPU DRAM, cold in SSD (with async prefetch)</li>
+</ul>
+<p>When properly tuned, these techniques yield a <strong>2–8x effective memory capacity increase</strong> with minimal perplexity degradation — the lower end from quantization alone, the upper end from combining low-rank compression with quantization and eviction (arXiv, Mar 2026).</p>
+<p><strong>KV Cache Recomputation:</strong></p>
+<p>An emerging alternative to storing and compressing KV cache is <strong>selective recomputation</strong> — discarding KV entries and recomputing them on demand when needed. Recent results show <strong>~30–50% memory reduction</strong> at a cost of <strong>~10–20% additional compute</strong> (arXiv, KV recomputation tradeoffs, Mar 2026). The viability of this tradeoff reflects a fundamental shift in the compute-memory cost ratio: <strong>compute is now provably cheaper than memory</strong> in practice, making it economically rational to spend FLOPS to save bytes. Recomputation is not a wholesale replacement for KV caching — it works best as a <strong>selective strategy</strong>, applied to low-reuse KV entries (tokens unlikely to be attended to again) while keeping high-reuse entries cached. Combined with quantization and eviction, recomputation adds a third lever to the KV memory management toolkit: <strong>compress what you keep, evict what's cold, recompute what's cheap</strong>.</p>
+<h3 id="32-continuous-batching-scheduling">3.2 Continuous Batching &amp; Scheduling<a class="headerlink" href="#32-continuous-batching-scheduling" title="Permanent link">&para;</a></h3>
+<p><strong>Static vs Continuous:</strong></p>
+<ul>
+<li>Static: All sequences padded to max length, batch waits for slowest -- 50-90% GPU waste</li>
+<li><strong>Continuous (ORCA):</strong> Sequences enter/exit batch at each iteration; new requests fill freed slots immediately</li>
+</ul>
+<p><strong>Batching diminishing returns:</strong> While continuous batching delivers 2–10x throughput over static batching, throughput gains from increasing batch size hit a <strong>knee at approximately batch size 8–32</strong> (depending on model size and context length). Beyond this point, marginal throughput gains drop below ~10% while latency penalties exceed ~50%, driven by <strong>KV cache memory pressure</strong> that spikes non-linearly as concurrent sequences compete for HBM capacity (hyperscaler performance traces, 2026). This reinforces the decode-phase specialization trend — batching alone cannot overcome the memory-bandwidth wall, and the diminishing-returns knee is a practical ceiling that shapes capacity planning and autoscaling targets.</p>
+<p><strong>TTFT Anatomy:</strong></p>
+<div class="highlight"><pre><span></span><code>TTFT = queue_delay + tokenization + prefill_compute + misc_overhead
+</code></pre></div>
+<ul>
+<li><strong>Prefill compute</strong> is the dominant term for long prompts (GPU-bound)</li>
+</ul>
+<p><strong>Chunked Prefill:</strong></p>
+<ul>
+<li>Long prompts split into chunks interleaved with decode steps</li>
+<li>Prevents long-prompt prefill from starving decode of concurrent requests</li>
+<li>Control via <code>max_num_batched_tokens</code></li>
+</ul>
+<p><strong>Scheduling Strategies:</strong></p>
+<ul>
+<li><strong>FCFS:</strong> Simple but head-of-line blocking from long sequences</li>
+<li><strong>Shortest-Job-First:</strong> Lower average latency, starvation risk</li>
+<li><strong>Priority queues:</strong> Per-tier SLAs (premium &lt; 500ms TTFT, free &lt; 2s TTFT)</li>
+<li><strong>Preemption:</strong> Swap or recompute KV cache of low-priority requests under memory pressure</li>
+</ul>
+<p><strong>Fairness:</strong></p>
+<ul>
+<li>Token-bucket rate limiting per tenant</li>
+<li><strong>Max-min fairness</strong> across tenants when GPU is saturated</li>
+<li>Weighted fair queuing based on tier/SLA</li>
+</ul>
+<p><strong>Token-Level Load Balancing (Micro-Scheduling):</strong></p>
+<p>A finer-grained scheduling approach is emerging that moves beyond batch-level or iteration-level load balancing to <strong>token-level dynamic routing across GPUs</strong>. Instead of assigning entire requests or batches to specific devices, individual tokens are routed dynamically based on real-time GPU utilization and memory pressure. The effect is <strong>smoother utilization</strong> across the GPU fleet and <strong>reduced tail latency</strong> — spikes from uneven request lengths or variable expert activation patterns are absorbed by redistributing work at the token granularity. This is effectively <strong>micro-scheduling inside inference</strong>: the same principle that continuous batching applied at the request level, now applied at the token level. Early results show meaningful tail-latency reduction in MoE inference where expert activation patterns create inherently uneven load distribution across devices (arXiv, token-level scheduling, Mar 2026).</p>
+<h3 id="33-speculative-parallel-decoding">3.3 Speculative &amp; Parallel Decoding<a class="headerlink" href="#33-speculative-parallel-decoding" title="Permanent link">&para;</a></h3>
+<p><strong>Speculative Decoding:</strong></p>
+<ol>
+<li><strong>Draft model</strong> (small, fast) generates k candidate tokens autoregressively</li>
+<li><strong>Target model</strong> (large) verifies all k tokens in a <strong>single forward pass</strong></li>
+<li>Accept longest matching prefix; reject and resample at first divergence</li>
+<li>
+<p><strong>Guarantee:</strong> Output distribution identical to target model (rejection sampling)</p>
+</li>
+<li>
+<p>Typical speedup: <strong>1.5-2.5x</strong> for well-matched draft/target pairs</p>
+</li>
+<li>Speculative decoding is one of the three decode-phase optimizations (alongside <strong>KV cache locality</strong> and <strong>token-level parallelism</strong>) that together deliver <strong>2–4x throughput gains</strong> without additional FLOPS — confirming its role as a core systems-level technique, not an optional enhancement (arXiv, Mar 2026)</li>
+</ol>
+<p><strong>Medusa:</strong> Adds multiple <strong>prediction heads</strong> to the target model (no separate draft model). Each head predicts token at position +1, +2, ... +k. Tree-structured verification. Requires fine-tuning heads (~1-2 GPU-hours).</p>
+<p><strong>Lookahead Decoding:</strong> Jacobi iteration over future positions. No draft model; trades compute for parallelism.</p>
+<h3 id="34-multi-gpu-multi-node-inference">3.4 Multi-GPU / Multi-Node Inference<a class="headerlink" href="#34-multi-gpu-multi-node-inference" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Splits</th>
+<th>Communication</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tensor Parallelism (TP)</strong></td>
+<td>Each layer split across GPUs</td>
+<td>AllReduce per layer (NVLink)</td>
+<td>Intra-node, latency-sensitive</td>
+</tr>
+<tr>
+<td><strong>Pipeline Parallelism (PP)</strong></td>
+<td>Consecutive layers on different GPUs</td>
+<td>Point-to-point between stages</td>
+<td>Inter-node, throughput</td>
+</tr>
+<tr>
+<td><strong>Expert Parallelism (EP)</strong></td>
+<td>MoE experts across GPUs</td>
+<td>All-to-all for token routing</td>
+<td>MoE models (Mixtral)</td>
+</tr>
+<tr>
+<td><strong>Sequence Parallelism (SP)</strong></td>
+<td>Long sequence split across GPUs</td>
+<td>Ring attention</td>
+<td>Very long context (&gt;128K)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Practical Guidelines:</strong></p>
+<ul>
+<li>TP degree &lt;= 8 (single NVLink domain) for latency; going inter-node kills latency</li>
+<li>PP adds pipeline bubbles -- fill with microbatching</li>
+<li><strong>Llama 2 70B:</strong> TP=4 on 4xA100-80G or TP=2 on 2xH100-80G</li>
+<li><strong>Mixtral 8x7B:</strong> EP across GPUs, 2 active experts routed per token</li>
+</ul>
+<hr />
+<h3 id="37-batch-inference-ai-etl-pipelines">3.7 Batch Inference: AI ETL Pipelines<a class="headerlink" href="#37-batch-inference-ai-etl-pipelines" title="Permanent link">&para;</a></h3>
+<p>Batch inference — running a trained model over a large corpus of inputs (images, text, PDFs, audio) to produce predictions or transformations at scale — has become an <strong>AI data pipeline problem</strong> driven by unstructured and multimodal data, not just rows in tables. The workload category is underhyped compared with chatbots but is likely where a large share of enterprise AI value lands: enrichment, cleaning, extraction, classification, summarization, synthetic labeling, and multimodal processing.</p>
+<blockquote>
+<p><strong>Key:</strong> What Spark was to structured data pipelines, Ray is becoming for heterogeneous ML/LLM inference pipelines. Modern batch inference is a heterogeneous distributed pipeline problem: <strong>cluster orchestration layer + specialized model runtime + streaming dataflow</strong>.</p>
+</blockquote>
+<p><strong>The core systems problem is heterogeneous orchestration.</strong> Modern pipelines are not "GPU all the way down":</p>
+<div class="highlight"><pre><span></span><code>read on CPU -&gt; preprocess on CPU -&gt; infer on GPU -&gt; postprocess/write on CPU
+</code></pre></div>
+<p>The GPU stage is expensive, so the real operational objective is to <strong>keep GPUs saturated</strong> while everything else feeds them efficiently. If S3/IO is slower than GPU inference, the correct move is to scale CPU-side reading/preprocessing until GPUs are fed continuously — fix starvation before buying more GPU.</p>
+<p><strong>The durable systems architecture:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Role</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cluster orchestration</strong></td>
+<td>Distributed dataflow, CPU/GPU scheduling, streaming</td>
+<td>Ray / Ray Data, or Ray-like</td>
+</tr>
+<tr>
+<td><strong>Model runtime</strong></td>
+<td>Efficient intra-GPU inference (continuous batching, KV-cache)</td>
+<td>vLLM, SGLang, TensorRT-LLM</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>Data source/sink</td>
+<td>Object storage, lakehouse</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Two-layer batching for LLMs</strong> — the key architectural pattern: <strong>Ray Data handles dataset-level parallelism</strong> (distributing inputs across cluster), while <strong>vLLM handles intra-GPU continuous batching</strong> (efficient token generation). Ray batches across the cluster; vLLM batches inside the model runtime.</p>
+<p><strong>Ray Data specifics:</strong></p>
+<ul>
+<li><strong>Lazy execution</strong> — pipeline definition happens first, actual execution on <code>materialize</code>, <code>take</code>, or equivalent terminal operations. Enables pipelining/streaming instead of eagerly loading everything into memory</li>
+<li>Python-first: <code>read_*</code>, <code>map</code>, <code>map_batches</code>, <code>write_*</code> style API</li>
+<li><code>map</code> vs <code>map_batches</code>: use <code>map</code> when input sizes vary (e.g., images of different dimensions that don't fit clean batched tensor processing)</li>
+<li><strong>Logical partitioning</strong>, not hard physical isolation — user code can still OOM; memory management remains the user's responsibility</li>
+</ul>
+<p><strong>Tuning:</strong></p>
+<ul>
+<li>Batch as much as possible until you hit memory limits, then back off</li>
+<li>Scale CPU-side reading/preprocessing to match GPU throughput</li>
+<li>Monitor via Ray dashboard: inspect <code>map_batches</code> stages, track progress, tune batch size, GPU count, and concurrency</li>
+</ul>
+<p><strong>What production batch LLM systems still struggle with</strong> (undersold in vendor talks):</p>
+<ul>
+<li>Tokenizer/detokenizer overhead at scale</li>
+<li>KV-cache pressure across long-running jobs</li>
+<li>Prefill vs decode imbalance in batch workloads</li>
+<li>Network overhead at large cluster scale</li>
+<li>Fault semantics in long-running LLM jobs (checkpointing, retries)</li>
+<li>Data quality, prompt determinism, and eval loops</li>
+<li>Cost governance when LLM output quality is noisy</li>
+</ul>
+<p><strong>Why Ray over Spark for this workload:</strong> Spark was built for data-parallel compute, not GPU-heavy heterogeneous inference. Ray is more natural for CPU/GPU mixed stages, actor-based model loading, Python-native ML stacks, and dynamic distributed execution.</p>
+<hr />
+<h2 id="4-cluster-infrastructure-challenges">4. Cluster &amp; Infrastructure Challenges<a class="headerlink" href="#4-cluster-infrastructure-challenges" title="Permanent link">&para;</a></h2>
+<h3 id="41-capacity-planning">4.1 Capacity Planning<a class="headerlink" href="#41-capacity-planning" title="Permanent link">&para;</a></h3>
+<p><strong>Key metrics:</strong> Tokens/sec/GPU, TTFT p99, $/1M tokens, GPU utilization % (target &gt;70%)</p>
+<p><strong>Sizing formula:</strong></p>
+<div class="highlight"><pre><span></span><code>Required GPUs = (peak_concurrent_requests x avg_tokens_per_request x model_params_bytes)
+                / (GPU_memory x batch_efficiency x utilization_target)
+</code></pre></div>
+<p><strong>Model memory footprint:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>FP16 Memory</th>
+<th>INT4 Memory</th>
+<th>Min GPUs (A100-80G)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Llama 2 7B</td>
+<td>14 GB</td>
+<td>3.5 GB</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Llama 2 70B</td>
+<td>140 GB</td>
+<td>35 GB</td>
+<td>2 (INT4) or 4 (FP16)</td>
+</tr>
+<tr>
+<td>Mixtral 8x7B</td>
+<td>93 GB</td>
+<td>24 GB</td>
+<td>2 (INT4)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-scheduling-isolation-qos">4.2 Scheduling, Isolation &amp; QoS<a class="headerlink" href="#42-scheduling-isolation-qos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Kubernetes + GPU operator:</strong> NVIDIA device plugin, MIG for A100 partitioning</li>
+<li><strong>Time-sharing vs space-sharing:</strong> MPS for small models sharing a GPU vs dedicated GPU per model</li>
+<li><strong>SLA tiers:</strong> Platinum (&lt;200ms TTFT), Gold (&lt;500ms), Silver (&lt;2s)</li>
+<li><strong>Admission control:</strong> Reject or queue when GPU memory/compute saturated</li>
+<li><strong>Noisy neighbor prevention:</strong> Memory limits, compute time caps, request-level isolation</li>
+</ul>
+<h3 id="43-autoscaling">4.3 Autoscaling<a class="headerlink" href="#43-autoscaling" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Scaling signals:</strong> GPU utilization, queue depth, TTFT p95, pending requests</li>
+<li><strong>Scale-up latency:</strong> GPU node provisioning takes <strong>2-10 minutes</strong> -- must over-provision or use warm pools</li>
+<li><strong>Predictive scaling:</strong> Time-of-day patterns, event-driven pre-scaling</li>
+<li><strong>Scale-to-zero:</strong> Possible for low-traffic models with serverless GPU (Modal, Replicate, RunPod)</li>
+<li><strong>KV cache migration:</strong> On scale-down, drain in-flight requests before removing GPU</li>
+</ul>
+<h3 id="44-networking-topology">4.4 Networking &amp; Topology<a class="headerlink" href="#44-networking-topology" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Intra-node:</strong> NVLink/NVSwitch (900 GB/s) -- mandatory for tensor parallelism</li>
+<li><strong>Inter-node:</strong> InfiniBand NDR 400 Gb/s or RoCE -- needed for PP, EP</li>
+<li><strong>GPU topology awareness:</strong> Schedule TP groups on NVLink-connected GPUs; avoid PCIe-only paths. Cluster experiments show that <strong>topology-aware placement yields 20–40% throughput gains</strong> with no hardware change — the key principle is to <strong>minimize cross-rack attention traffic</strong> rather than increase per-GPU compute. Network-aware scheduling is now a first-order performance lever, with impact comparable to hardware generation upgrades (arXiv, 2026)</li>
+<li><strong>NCCL tuning:</strong> Ring vs tree allreduce, chunk size, threading model</li>
+<li><strong>KV-aware scheduling:</strong> A newer optimization layer that colocates KV-heavy requests on the same GPU to reduce cache duplication, and uses dynamic KV pinning to avoid eviction thrash. Production measurements show <strong>~20–35% reduction in $/token</strong> with no hardware change — effectively making memory locality scheduling a first-class cost primitive alongside topology-aware placement (arXiv / production inference teams, 2026)</li>
+</ul>
+<h3 id="45-structured-sparsity-for-decode-acceleration">4.5 Structured Sparsity for Decode Acceleration<a class="headerlink" href="#45-structured-sparsity-for-decode-acceleration" title="Permanent link">&para;</a></h3>
+<p><strong>Block and structured sparsity</strong> (hardware-aligned patterns where zeros are organized into contiguous blocks matching tensor core dimensions) is finally delivering meaningful speedups: <strong>~2–3× decode throughput improvement</strong> with acceptable accuracy after post-sparsity fine-tuning. Unstructured sparsity remains impractical — irregular zero patterns don't map to hardware efficiently and produce minimal real speedup. The key requirement for structured sparsity to work is <strong>compile-time layout alignment with tensor cores</strong>: the sparsity pattern must be decided before inference, not dynamically, and the memory layout must guarantee that sparse blocks map directly to the hardware's GEMM units. This makes structured sparsity a <strong>build-time optimization</strong> rather than a runtime one (arXiv, 2025–2026).</p>
+<h3 id="46-reliability-failure-modes">4.6 Reliability &amp; Failure Modes<a class="headerlink" href="#46-reliability-failure-modes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Single GPU failure</td>
+<td>Health checks, request retry, redundant replicas</td>
+</tr>
+<tr>
+<td>Node failure</td>
+<td>K8s pod anti-affinity, PodDisruptionBudget</td>
+</tr>
+<tr>
+<td>GPU memory OOM</td>
+<td>Memory monitoring, admission control, preemptive eviction</td>
+</tr>
+<tr>
+<td>NVLink failure</td>
+<td>Topology health checks, node cordon</td>
+</tr>
+<tr>
+<td>Model loading failure</td>
+<td>Model cache on local NVMe, pre-pulled images</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Graceful degradation:</strong> Fallback to smaller/quantized model, circuit breaker with backoff, request shedding by priority, partial response on timeout.</p>
+<h3 id="46-cost-engineering">4.6 Cost Engineering<a class="headerlink" href="#46-cost-engineering" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>GPU</th>
+<th>$/hr (on-demand)</th>
+<th>$/hr (spot)</th>
+<th>$/1M tokens (est.)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A100 80G</td>
+<td>$3.50-4.00</td>
+<td>$1.20-1.80</td>
+<td>$0.50-2.00</td>
+</tr>
+<tr>
+<td>H100 80G</td>
+<td>$8.00-12.00</td>
+<td>$3.00-5.00</td>
+<td>$0.20-1.00</td>
+</tr>
+<tr>
+<td>L4 24G</td>
+<td>$0.80-1.00</td>
+<td>$0.30-0.50</td>
+<td>$1.00-4.00</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cost optimization levers (ranked):</strong></p>
+<ol>
+<li><strong>Quantization</strong> -- INT4 halves GPU count (biggest single lever)</li>
+<li><strong>Batching efficiency</strong> -- continuous batching 2-10x throughput</li>
+<li><strong>Spot/preemptible instances</strong> -- 50-70% savings for batch workloads</li>
+<li><strong>Right-sizing</strong> -- match GPU to model size</li>
+<li><strong>Prefix caching</strong> -- saves prefill compute for repeated system prompts</li>
+<li><strong>Speculative decoding</strong> -- 1.5-2x throughput</li>
+<li><strong>Off-peak scheduling</strong> -- batch jobs during low-traffic windows</li>
+</ol>
+<hr />
+<h2 id="5-startup-business-opportunity-map">5. Startup / Business Opportunity Map<a class="headerlink" href="#5-startup-business-opportunity-map" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Opportunity</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Observability &amp; Cost Platform</strong></td>
+<td>Real-time GPU util, TTFT/TPS dashboards, $/token tracking, anomaly detection, multi-provider cost comparison</td>
+</tr>
+<tr>
+<td><strong>Long Context &amp; Memory Solutions</strong></td>
+<td>Managed KV cache offloading (HBM-&gt;DRAM-&gt;SSD), context compression middleware, semantic caching; context window growth has stalled at ~1M tokens for two years due to global HBM/DRAM shortages (swyx and Doug O'Laughlin, Latent Space podcast, Mar 2026), making efficient use of existing context the primary lever</td>
+</tr>
+<tr>
+<td><strong>QoS Orchestration &amp; Routing</strong></td>
+<td>Multi-model/provider routing with SLA guarantees, automatic failover, priority scheduling</td>
+</tr>
+<tr>
+<td><strong>Quantization-as-a-Service</strong></td>
+<td>One-click pipelines (GPTQ, AWQ, FP8), quality benchmarking, continuous quantization for fine-tuned models</td>
+</tr>
+<tr>
+<td><strong>Multi-Tenant Serving Platform</strong></td>
+<td>Managed vLLM/TGI with per-tenant isolation, billing, model versioning, canary deployment</td>
+</tr>
+<tr>
+<td><strong>Edge / On-Device Inference</strong></td>
+<td>Optimized runtimes for mobile/embedded, hybrid edge-cloud with dynamic offloading</td>
+</tr>
+</tbody>
+</table>
+<p>| <strong>Heterogeneous Inference Infrastructure</strong> | Hardware-aware orchestration that routes inference phases (prefill, decode, reasoning) to optimal chip types — mixing H100/B200 for training and compute-heavy prefill, cheaper/older GPUs or custom chips for memory-bound decode, and specialized silicon for wide-reasoning workloads. Replaces the current monoculture of "buy the biggest NVIDIA GPU for everything." |</p>
+<p><strong>The heterogeneous datacenter thesis.</strong> As inference workloads fragment into distinct phases with different hardware profiles (see Section 1.5), the datacenter itself becomes a design variable. Future inference infrastructure will mix GPU types and custom silicon within the same cluster: expensive flagship GPUs (H100, B200) handle training and compute-heavy prefill, cheaper or older GPUs handle memory-bandwidth-bound decode, and inference-specialized chips (Groq, Cerebras, or custom ASICs) handle specific workloads like wide reasoning where the goal is cheap tokens at massive parallelism. This is a structural shift away from homogeneous GPU fleets and creates opportunities for orchestration layers that can intelligently route work across heterogeneous hardware, as well as for chip startups targeting specific inference phases rather than competing with NVIDIA across the board.</p>
+<p><strong>Top 3 by market gap and defensibility:</strong></p>
+<ol>
+<li><strong>Observability &amp; Cost Analytics</strong> -- every team running inference needs this; no dominant player yet</li>
+<li><strong>Long Context &amp; Memory Management</strong> -- context windows have been stuck at ~1M tokens since Gemini's Feb 2024 launch, with growth under one order of magnitude in two years — far slower than cost, speed, or quality improvements. The bottleneck is physical: a global <strong>HBM and DRAM shortage</strong> means there is not enough memory at inference sites to absorb more context, leading to what swyx and Doug O'Laughlin call <strong>"context rationing"</strong> — the thesis that context window access will be tiered and priced as a scarce resource rather than expanded freely, and that windows will not meaningfully exceed 1M in the next two years (swyx and Doug O'Laughlin, Latent Space podcast, Mar 2026). This reframes the opportunity from "build for ever-longer windows" to "maximize utility within a hard ceiling," favoring compression, semantic caching, and intelligent retrieval over brute-force context expansion</li>
+<li><strong>QoS Orchestration &amp; Heterogeneous Routing</strong> -- enterprises need SLA guarantees across multiple models/providers, and as datacenters become heterogeneous, intelligent routing across chip types becomes a critical orchestration problem</li>
+</ol>
+<hr />
+<h1 id="part-ii-production-serving-optimization">Part II -- Production Serving &amp; Optimization<a class="headerlink" href="#part-ii-production-serving-optimization" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="6-gpu-driver-toolkit-setup">6. GPU Driver &amp; Toolkit Setup<a class="headerlink" href="#6-gpu-driver-toolkit-setup" title="Permanent link">&para;</a></h2>
+<h3 id="61-nvidia-stack">6.1 NVIDIA Stack<a class="headerlink" href="#61-nvidia-stack" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Driver</strong></td>
+<td>525+ for A100/H100; <code>nvidia-smi -pm 1</code> for persistence mode</td>
+</tr>
+<tr>
+<td><strong>CUDA Toolkit</strong></td>
+<td>Match driver (12.2 or 11.8 for Ampere); verify with <code>nvcc --version</code></td>
+</tr>
+<tr>
+<td><strong>cuDNN</strong></td>
+<td>Optimized tensor kernels for transformer ops</td>
+</tr>
+<tr>
+<td><strong>TensorRT</strong></td>
+<td>Kernel fusion, quantization (FP16/INT8/FP8)</td>
+</tr>
+<tr>
+<td><strong>TensorRT-LLM</strong></td>
+<td>Python API for LLM-specific engines; GQA, multi-stream, KV cache, FP8</td>
+</tr>
+<tr>
+<td><strong>NCCL</strong></td>
+<td>Multi-GPU collectives; enable RDMA via Fabric Manager for multi-node</td>
+</tr>
+<tr>
+<td><strong>MIG</strong></td>
+<td><code>nvidia-smi -mig 1</code>; A100 40G splits into 7 x ~5GB instances</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-tpu-setup-cloud-tpu">6.2 TPU Setup (Cloud TPU)<a class="headerlink" href="#62-tpu-setup-cloud-tpu" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cloud-only:</strong> Google Cloud TPU v4/v5; no on-premises for v4+</li>
+<li><strong>Frameworks:</strong> XLA via TensorFlow, JAX, or PyTorch XLA; HuggingFace <code>optimum-tpu</code></li>
+<li><strong>Serving:</strong> vLLM TPU mode (<code>--target-device=tpu</code>), TGI compiled for TPU, Vertex AI</li>
+<li><strong>Tuning:</strong> Lock CPU to NUMA node 0; large batch sizes to saturate matrix units</li>
+</ul>
+<hr />
+<h2 id="7-precision-formats-hardware-support">7. Precision Formats &amp; Hardware Support<a class="headerlink" href="#7-precision-formats-hardware-support" title="Permanent link">&para;</a></h2>
+<h3 id="71-nvidia-ampere-hopper">7.1 NVIDIA (Ampere / Hopper)<a class="headerlink" href="#71-nvidia-ampere-hopper" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>A100 Throughput</th>
+<th>H100 Throughput</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FP32</strong></td>
+<td>~19.5 TFLOPS</td>
+<td>--</td>
+<td>Baseline; universally supported</td>
+</tr>
+<tr>
+<td><strong>TF32</strong></td>
+<td>156 TFLOPS (312 w/ sparsity)</td>
+<td>--</td>
+<td>19-bit; FP32 range, FP16-like precision; auto on tensor cores</td>
+</tr>
+<tr>
+<td><strong>FP16 / BF16</strong></td>
+<td>~312 TFLOPS</td>
+<td>--</td>
+<td><strong>20x over FP32</strong>; native Ampere+</td>
+</tr>
+<tr>
+<td><strong>INT8</strong></td>
+<td>~624 TOPS</td>
+<td>2-3 PTOPS</td>
+<td><strong>32x over FP32</strong>; 4x memory reduction</td>
+</tr>
+<tr>
+<td><strong>FP8</strong></td>
+<td>--</td>
+<td><strong>3,958 TFLOPS</strong> (w/ sparsity)</td>
+<td>Hopper only; ~6x A100 FP16; Transformer Engine auto-manages</td>
+</tr>
+<tr>
+<td><strong>INT4</strong></td>
+<td>Supported on Hopper</td>
+<td>--</td>
+<td>Emerging; non-trivial accuracy challenges</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-amd-instinct">7.2 AMD Instinct<a class="headerlink" href="#72-amd-instinct" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>MI250X</strong> (CDNA2): ~383 TFLOPS/TOPS in BF16/INT8/INT4 -- roughly 4x FP32 speedup</li>
+<li><strong>MI300</strong> (CDNA3): Adds FP8, FP4/FP6 mixed formats, structured sparsity</li>
+</ul>
+<h3 id="73-google-tpus">7.3 Google TPUs<a class="headerlink" href="#73-google-tpus" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>v2/v3:</strong> BF16 primary in matrix units; FP32 accumulation</li>
+<li><strong>v4i (inference):</strong> INT8 alongside BF16</li>
+<li>Google reports no significant precision loss using BF16 vs FP32; Edge TPU is entirely INT8</li>
+</ul>
+<h3 id="74-numeric-formats-reference">7.4 Numeric Formats Reference<a class="headerlink" href="#74-numeric-formats-reference" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Bits</th>
+<th>Range</th>
+<th>Key Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FP32</strong></td>
+<td>32</td>
+<td>+-3.4e38</td>
+<td>Gold standard; slowest, most memory</td>
+</tr>
+<tr>
+<td><strong>FP16</strong></td>
+<td>16</td>
+<td>+-6.55e4</td>
+<td>Half memory; limited dynamic range (needs loss scaling)</td>
+</tr>
+<tr>
+<td><strong>BF16</strong></td>
+<td>16</td>
+<td>+-3.4e38</td>
+<td>Same range as FP32 with 7-bit fraction; no loss scaling needed; <strong>training default on TPUs</strong></td>
+</tr>
+<tr>
+<td><strong>INT8</strong></td>
+<td>8</td>
+<td>-128 to 127</td>
+<td>4x memory reduction; requires quantization mapping</td>
+</tr>
+<tr>
+<td><strong>FP8</strong></td>
+<td>8</td>
+<td>~+-448 (E5M2)</td>
+<td>New in H100/CDNA3; pushing memory/compute efficiency further</td>
+</tr>
+<tr>
+<td><strong>INT4</strong></td>
+<td>4</td>
+<td>-8 to 7</td>
+<td>8x memory reduction; requires mixed strategies (W4A8/W4A16)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>FP16/BF16 are <em>half-precision</em>. FP8 halves memory again but needs careful software handling. INT4 explored via GPTQ/AWQ with non-trivial accuracy challenges.</p>
+</blockquote>
+<hr />
+<h2 id="8-quantization-deep-dive">8. Quantization Deep Dive<a class="headerlink" href="#8-quantization-deep-dive" title="Permanent link">&para;</a></h2>
+<h3 id="81-methods-summary">8.1 Methods Summary<a class="headerlink" href="#81-methods-summary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Type</th>
+<th>Bits</th>
+<th>Quality Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GPTQ</strong></td>
+<td>Weight-only, post-training</td>
+<td>W4</td>
+<td>&lt;1% on most benchmarks</td>
+</tr>
+<tr>
+<td><strong>AWQ</strong></td>
+<td>Weight-only, activation-aware</td>
+<td>W4</td>
+<td>Slightly better than GPTQ</td>
+</tr>
+<tr>
+<td><strong>SmoothQuant</strong></td>
+<td>Weight + activation</td>
+<td>W8A8</td>
+<td>&lt;1%, good for batch inference</td>
+</tr>
+<tr>
+<td><strong>FP8 (E4M3/E5M2)</strong></td>
+<td>Weight + activation</td>
+<td>8-bit float</td>
+<td>Near-lossless on H100</td>
+</tr>
+<tr>
+<td><strong>GGUF Q4_K_M</strong></td>
+<td>Weight-only, k-quant</td>
+<td>Mixed 4-bit</td>
+<td>Good quality/size tradeoff</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>INT4 weight-only quantization (GPTQ/AWQ) is the production sweet spot -- halves GPU memory with minimal quality loss. FP8 on H100 is near-free performance.</p>
+</blockquote>
+<h3 id="82-accuracy-strategies-for-int8">8.2 Accuracy Strategies for INT8<a class="headerlink" href="#82-accuracy-strategies-for-int8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Description</th>
+<th>Quality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Per-channel scaling</strong></td>
+<td>Separate scale factors per output channel</td>
+<td>Greatly reduces quantization error</td>
+</tr>
+<tr>
+<td><strong>Calibration &amp; clipping</strong></td>
+<td>Percentile clipping (e.g., top 0.1% outliers)</td>
+<td>Better range utilization</td>
+</tr>
+<tr>
+<td><strong>QAT</strong></td>
+<td>Fine-tune with simulated quantization; <code>torch.quantization.prepare_qat</code></td>
+<td>Best accuracy (&lt;1% drop); expensive</td>
+</tr>
+<tr>
+<td><strong>LLM.int8()</strong></td>
+<td>Decompose matmul into INT8 + FP16 parts for outlier values</td>
+<td><strong>Zero degradation</strong> on 175B models</td>
+</tr>
+<tr>
+<td><strong>SmoothQuant</strong></td>
+<td>Smooth outlier activations by migrating difficulty to weights</td>
+<td>First W8A8 of GPT-3/OPT with negligible loss</td>
+</tr>
+<tr>
+<td><strong>AWQ</strong></td>
+<td>Activation-aware 4-bit weight quantization</td>
+<td>INT4 weights with small accuracy drop</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>With modern techniques, INT8 accuracy gap is <strong>sub-1% on most NLP benchmarks</strong>. Example: BERT SQuAD F1 drops 87.97 -&gt; 87.52 (delta 0.45) for 4x model size reduction.</p>
+</blockquote>
+<h3 id="83-memory-savings">8.3 Memory Savings<a class="headerlink" href="#83-memory-savings" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>FP32</th>
+<th>FP16/BF16</th>
+<th>INT8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10B params</td>
+<td>~40 GB</td>
+<td>~20 GB</td>
+<td>~10 GB</td>
+</tr>
+<tr>
+<td>BLOOM-176B</td>
+<td>~704 GB</td>
+<td>~352 GB</td>
+<td>~176 GB</td>
+</tr>
+</tbody>
+</table>
+<h3 id="84-throughput-latency">8.4 Throughput &amp; Latency<a class="headerlink" href="#84-throughput-latency" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A100 INT8 (624 TOPS) is <strong>32x</strong> its FP32 (19.5 TFLOPS)</li>
+<li><strong>BERT-Large on A100:</strong> ORT + TensorRT INT8 achieves <strong>7x faster</strong> vs PyTorch FP32; batch-1 latency &lt;2ms</li>
+<li>Quantization can deploy on <strong>single GPU</strong> instead of multi-GPU -- eliminates inter-GPU communication overhead</li>
+</ul>
+<h3 id="85-deployment-workflow-ptq">8.5 Deployment Workflow (PTQ)<a class="headerlink" href="#85-deployment-workflow-ptq" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Train/fine-tune in FP32 or mixed precision</li>
+<li>Calibrate on representative data (hundreds to thousands of samples)</li>
+<li>Quantize weights (and optionally activations)</li>
+<li>Validate accuracy on held-out set</li>
+<li>Deploy on optimized runtime (TensorRT, ORT, OpenVINO, TFLite)</li>
+</ol>
+<h3 id="86-mixed-deployment-hybrid-precision">8.6 Mixed Deployment (Hybrid Precision)<a class="headerlink" href="#86-mixed-deployment-hybrid-precision" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Most layers</strong> in INT8; keep FP16/FP32 for:</li>
+<li><strong>Softmax, LayerNorm</strong> (summation-heavy, precision-sensitive)</li>
+<li><strong>First/last layers</strong> (embedding input, final logit output)</li>
+<li>TensorRT Model Optimizer supports per-layer "W4A8" schemes</li>
+</ul>
+<h3 id="87-memory-headroom-uses">8.7 Memory Headroom Uses<a class="headerlink" href="#87-memory-headroom-uses" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Increase batch size for higher throughput</li>
+<li>Run multiple model instances (multi-tenant)</li>
+<li>Load larger models in same memory budget</li>
+<li>Enable larger context windows</li>
+</ul>
+<h3 id="88-framework-support">8.8 Framework Support<a class="headerlink" href="#88-framework-support" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>FP16/BF16</th>
+<th>INT8</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PyTorch</strong></td>
+<td><code>autocast</code> / AMP</td>
+<td>PTQ + QAT APIs; FBGEMM/QNNPACK</td>
+<td>Full gamut</td>
+</tr>
+<tr>
+<td><strong>TensorFlow</strong></td>
+<td><code>mixed_precision</code> API</td>
+<td>TFLite for INT8 with calibration</td>
+<td>XLA optimized</td>
+</tr>
+<tr>
+<td><strong>JAX</strong></td>
+<td>XLA BF16/FP16</td>
+<td>Research code; no full PTQ flow</td>
+<td>BF16 default on TPU</td>
+</tr>
+<tr>
+<td><strong>TensorRT</strong></td>
+<td>Strong FP16</td>
+<td>FP32-accuracy INT8 via calibration + selective fallback</td>
+<td>Maximum NVIDIA performance</td>
+</tr>
+<tr>
+<td><strong>ONNX Runtime</strong></td>
+<td>FP16</td>
+<td><code>quantize_dynamic</code>/<code>quantize_static</code>; 7x speedup on BERT-Large</td>
+<td>TensorRT EP delegation</td>
+</tr>
+<tr>
+<td><strong>HuggingFace</strong></td>
+<td><code>.half()</code>, <code>accelerate</code></td>
+<td>LLM.int8() via bitsandbytes, 4-bit experimental</td>
+<td><code>load_in_8bit=True</code></td>
+</tr>
+<tr>
+<td><strong>DeepSpeed</strong></td>
+<td>Mixed precision</td>
+<td>ZeroQuant compression</td>
+<td>Efficient CPU/GPU</td>
+</tr>
+<tr>
+<td><strong>OpenVINO</strong></td>
+<td>FP16</td>
+<td>INT8 PTQ + runtime</td>
+<td>CPU-side deployment</td>
+</tr>
+</tbody>
+</table>
+<h3 id="89-sparsity-complementary">8.9 Sparsity (Complementary)<a class="headerlink" href="#89-sparsity-complementary" title="Permanent link">&para;</a></h3>
+<ul>
+<li>NVIDIA Ampere/Hopper: <strong>2:4 structured sparsity</strong> -- additional ~2x throughput on top of FP16/INT8</li>
+<li>Pruning + quantization could yield ~4x over FP16 alone; exploiting in LLMs while preserving accuracy is active research</li>
+</ul>
+<hr />
+<h2 id="9-low-precision-in-training">9. Low Precision in Training<a class="headerlink" href="#9-low-precision-in-training" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>FP16 with loss scaling:</strong> Linear layers in FP16, accumulation in FP32; prevents gradient underflow. GPT-3 trained on V100s with FP16.</li>
+<li><strong>BF16 (preferred on Ampere+/TPUs):</strong> No loss scaling needed. PaLM trained on TPU-v4 with BF16. Speeds up training by <strong>2x+</strong>, halves memory.</li>
+<li><strong>FP8 in training:</strong> H100 Transformer Engine auto-uses FP8 for dot-products; up to <strong>4x faster</strong> vs FP16.</li>
+<li><strong>8-bit Adam:</strong> Stores optimizer states in INT8 with block-wise scaling -- saves up to <strong>8.5 GB</strong> for 1.5B model, no accuracy loss.</li>
+</ul>
+<hr />
+<h2 id="10-containerization-best-practices">10. Containerization Best Practices<a class="headerlink" href="#10-containerization-best-practices" title="Permanent link">&para;</a></h2>
+<p><strong>Base images:</strong> NVIDIA NGC (<code>nvcr.io/nvidia/pytorch:&lt;version&gt;-py3</code>) with CUDA/cuDNN pre-installed. Container should NOT include NVIDIA driver -- Container Toolkit injects host devices.</p>
+<p><strong>Image optimization:</strong></p>
+<ul>
+<li>Multi-stage builds; <code>pip cache purge</code> to shrink layers</li>
+<li>Model weights: bake into image or mount via volume/NFS/cloud storage</li>
+<li>Shared tmpfs for multiple instances loading same model from RAM</li>
+</ul>
+<p><strong>Runtime:</strong></p>
+<ul>
+<li><code>OMP_NUM_THREADS=1</code> (PyTorch); <code>--cpuset-cpus</code> for CPU pinning</li>
+<li>Non-root via SecurityContext; <code>hostNetwork: true</code> for latency-critical services</li>
+<li><strong>Singularity/Apptainer</strong> for HPC: rootless, <code>--nv</code> flag for GPU</li>
+</ul>
+<p><strong>Verification:</strong> <code>nvidia-smi</code> inside container; profile with <code>nsys</code>. Docker overhead: <strong>a few percent at most</strong>.</p>
+<hr />
+<h2 id="11-kubernetes-scheduling-gpu-management">11. Kubernetes Scheduling &amp; GPU Management<a class="headerlink" href="#11-kubernetes-scheduling-gpu-management" title="Permanent link">&para;</a></h2>
+<h3 id="111-gpu-scheduling">11.1 GPU Scheduling<a class="headerlink" href="#111-gpu-scheduling" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>NVIDIA Device Plugin</strong> advertises <code>nvidia.com/gpu</code>; pods request via <code>resources.limits</code></li>
+<li><strong>MIG in K8s:</strong> Device plugin advertises MIG types (e.g., <code>nvidia.com/mig-1g.5gb</code>); GPU Operator automates</li>
+</ul>
+<h3 id="112-topology-numa">11.2 Topology &amp; NUMA<a class="headerlink" href="#112-topology-numa" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Topology Manager:</strong> <code>--topology-manager-policy=restricted</code> -- pod fails if CPU/GPU can't co-locate on same NUMA node</li>
+<li><strong>CPU Manager:</strong> <code>--cpu-manager-policy=static</code> for dedicated core allocation</li>
+</ul>
+<h3 id="113-performance-scheduling">11.3 Performance Scheduling<a class="headerlink" href="#113-performance-scheduling" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Gang schedulers</strong> (Volcano, KubeRay) for distributed inference -- all-or-nothing placement</li>
+<li>Label nodes with GPU capabilities; use node selectors/affinities</li>
+<li><strong>PriorityClasses:</strong> Production inference &gt; research batch jobs</li>
+</ul>
+<h3 id="114-autoscaling">11.4 Autoscaling<a class="headerlink" href="#114-autoscaling" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>HPA:</strong> Custom metrics -- requests/sec, p95 latency, queue length (Prometheus Adapter)</li>
+<li><strong>Cluster Autoscaler:</strong> Cold-start latency (30GB model = tens of seconds); use warm standby pods</li>
+<li><strong>GPU Operator:</strong> Auto-installs drivers, device plugin, GPU Feature Discovery, DCGM Exporter</li>
+</ul>
+<h3 id="115-multi-node-communication">11.5 Multi-Node Communication<a class="headerlink" href="#115-multi-node-communication" title="Permanent link">&para;</a></h3>
+<ul>
+<li>RDMA or host networking with InfiniBand; Multus CNI for secondary networks</li>
+<li><code>NCCL_SOCKET_IFNAME</code> / <code>NCCL_IB_HCA</code> env vars for NCCL interface control</li>
+</ul>
+<hr />
+<h2 id="12-networking-disk-io-tuning">12. Networking &amp; Disk I/O Tuning<a class="headerlink" href="#12-networking-disk-io-tuning" title="Permanent link">&para;</a></h2>
+<h3 id="121-model-loading">12.1 Model Loading<a class="headerlink" href="#121-model-loading" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fast local <strong>NVMe</strong> SSDs (GB/s read); Linux page cache caches on first load</li>
+<li>Shared <strong>tmpfs</strong> for multiple instances of same model on one node</li>
+<li>Preload with <code>vmtouch</code> or <code>dd</code>; pin with <code>mlock</code></li>
+</ul>
+<h3 id="122-nvme-tuning">12.2 NVMe Tuning<a class="headerlink" href="#122-nvme-tuning" title="Permanent link">&para;</a></h3>
+<ul>
+<li>I/O scheduler: <code>noop</code>/<code>none</code></li>
+<li>Pin interrupts to NUMA-local cores via <code>/proc/irq/*/smp_affinity</code></li>
+<li>Interrupt coalescing and NVMe polling for latency optimization</li>
+</ul>
+<h3 id="123-network-tuning">12.3 Network Tuning<a class="headerlink" href="#123-network-tuning" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Jumbo frames</strong> (MTU 9000); HTTP/2 or gRPC for serving</li>
+<li>Disable <code>irqbalance</code>; manually pin NIC IRQs to NUMA-local cores</li>
+<li>Increase RX/TX ring buffers (<code>ethtool -G</code>); enable RSS</li>
+<li><strong>GPU Direct RDMA</strong> (<code>NVreg_EnableGpuDirectRDMA=1</code>) for NCCL</li>
+<li><code>net.core.somaxconn</code> increase; high <code>ulimit -n</code>; HTTP keep-alive</li>
+</ul>
+<hr />
+<h2 id="13-monitoring-observability">13. Monitoring &amp; Observability<a class="headerlink" href="#13-monitoring-observability" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Tool</th>
+<th>Key Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GPU hardware</strong></td>
+<td>NVIDIA DCGM Exporter</td>
+<td>Util %, memory, temperature, power, ECC errors</td>
+</tr>
+<tr>
+<td><strong>Application</strong></td>
+<td>vLLM/TGI built-in or custom Prometheus</td>
+<td>Req/sec, p50/p90/p99 latency, queue size, tokens/sec</td>
+</tr>
+<tr>
+<td><strong>System</strong></td>
+<td>Node Exporter</td>
+<td>CPU, memory, disk I/O, network, context switches</td>
+</tr>
+<tr>
+<td><strong>Logs</strong></td>
+<td>ELK or Grafana Loki</td>
+<td>Model load events, errors, timeouts</td>
+</tr>
+<tr>
+<td><strong>Traces</strong></td>
+<td>Jaeger or OpenTelemetry</td>
+<td>Request-level latency through pipeline</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Alerting:</strong> GPU util near 0 (stuck), GPU 100% + rising latency (scale needed), OOM events, ECC errors, thermal throttling.</p>
+<p><strong>Health checks:</strong> HTTP <code>/healthz</code>; optional periodic inference as deep check.</p>
+<hr />
+<h2 id="14-security-hardening-zerolow-cost">14. Security Hardening (Zero/Low-Cost)<a class="headerlink" href="#14-security-hardening-zerolow-cost" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>Performance Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Least privilege</strong> (non-root containers)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>Network segmentation</strong> (GPU VLAN)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>Firewall/DDoS</strong> (iptables + XDP)</td>
+<td>Negligible</td>
+</tr>
+<tr>
+<td><strong>Secure boot + firmware</strong></td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>SELinux/AppArmor</strong></td>
+<td>Few percent (not on GPU path)</td>
+</tr>
+<tr>
+<td><strong>Disk encryption</strong> (AES-NI)</td>
+<td>Negligible</td>
+</tr>
+<tr>
+<td><strong>API auth</strong> (offload to gateway)</td>
+<td>Microseconds/request</td>
+</tr>
+<tr>
+<td><strong>Audit logging</strong> (narrow event set)</td>
+<td>Negligible</td>
+</tr>
+<tr>
+<td><strong>Disable swap</strong></td>
+<td>None (prevents performance disaster)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Higher-cost measures:</strong> TEEs (AMD SEV, Intel TDX) -- single-digit percent. Kata/gVisor -- minor for GPU-bound. vGPU for hostile multi-tenant.</p>
+<hr />
+<h2 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TTFT</strong></td>
+<td>Time To First Token -- latency from request to first generated token</td>
+</tr>
+<tr>
+<td><strong>TPS</strong></td>
+<td>Tokens Per Second -- generation throughput</td>
+</tr>
+<tr>
+<td><strong>KV Cache</strong></td>
+<td>Key-Value cache storing attention state for all processed tokens</td>
+</tr>
+<tr>
+<td><strong>PagedAttention</strong></td>
+<td>vLLM's memory management treating KV cache as virtual-memory pages</td>
+</tr>
+<tr>
+<td><strong>Continuous Batching</strong></td>
+<td>Inserting/removing requests from batch at each decode iteration</td>
+</tr>
+<tr>
+<td><strong>GQA / MQA</strong></td>
+<td>Grouped / Multi-Query Attention -- fewer KV heads shared across Q heads</td>
+</tr>
+<tr>
+<td><strong>MoE</strong></td>
+<td>Mixture of Experts -- sparse model activating subset of parameters per token</td>
+</tr>
+<tr>
+<td><strong>TP / PP / EP</strong></td>
+<td>Tensor / Pipeline / Expert Parallelism</td>
+</tr>
+<tr>
+<td><strong>GPTQ / AWQ</strong></td>
+<td>Post-training weight quantization methods (INT4)</td>
+</tr>
+<tr>
+<td><strong>SmoothQuant</strong></td>
+<td>Weight + activation quantization (W8A8)</td>
+</tr>
+<tr>
+<td><strong>FlashAttention</strong></td>
+<td>Fused, memory-efficient attention kernel (v1/v2/v3/v4)</td>
+</tr>
+<tr>
+<td><strong>GDN (Gated Delta Networks)</strong></td>
+<td>Architecture used in Qwen3.5; supported in vLLM v0.17.0</td>
+</tr>
+<tr>
+<td><strong>Speculative Decoding</strong></td>
+<td>Draft-then-verify strategy for faster autoregressive generation</td>
+</tr>
+<tr>
+<td><strong>Prefill / Decode</strong></td>
+<td>Prefill = processing input prompt (compute-bound); Decode = generating tokens (memory-bandwidth-bound)</td>
+</tr>
+<tr>
+<td><strong>NVLink</strong></td>
+<td>NVIDIA high-bandwidth GPU interconnect (900 GB/s on H100)</td>
+</tr>
+<tr>
+<td><strong>MIG</strong></td>
+<td>Multi-Instance GPU -- partitioning one A100 into up to 7 isolated instances</td>
+</tr>
+<tr>
+<td><strong>THP</strong></td>
+<td>Transparent Huge Pages -- kernel auto-promotes 4KB to 2MB pages</td>
+</tr>
+<tr>
+<td><strong>Pinned Memory</strong></td>
+<td>Page-locked memory preventing OS swap; mandatory for stable GPU DMA</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="appendix-a-learning-path-beginner-to-expert">Appendix A: Learning Path (Beginner to Expert)<a class="headerlink" href="#appendix-a-learning-path-beginner-to-expert" title="Permanent link">&para;</a></h2>
+<h3 id="beginner">Beginner<a class="headerlink" href="#beginner" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Transformer Fundamentals</strong> -- Self-attention, tokens, why transformers work. Resources: Karpathy's intro, <em>The Illustrated Transformer</em>.</li>
+<li><strong>Basic LLM Inference</strong> -- Install HuggingFace Transformers, run text generation with GPT-2 or 1.3B LLaMA. Observe sequential generation, memory usage, latency per token.</li>
+<li><strong>Inference Challenges</strong> -- 70B model in FP16 needs ~140GB for weights alone. Memory fragmentation, underutilized GPU compute, inability to handle concurrent requests.</li>
+<li><strong>Introduction to vLLM</strong> -- PagedAttention, dynamic batching, OpenAI-compatible API. Read <em>"What is vLLM?"</em> (F22 Labs).</li>
+<li><strong>Hands-On vLLM (Basic)</strong> -- Install, serve TinyLlama, generate via <code>LLM.generate()</code>. Observe automatic batching.</li>
+</ol>
+<h3 id="intermediate">Intermediate<a class="headerlink" href="#intermediate" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>vLLM Architecture Deep Dive</strong> -- Engine, scheduler, KV Cache Manager, PagedAttention internals. Read <em>"Inside vLLM"</em> (vLLM Blog).</li>
+<li><strong>Request Flow</strong> -- Trace REST API to engine in vLLM GitHub. Read <em>"Life of an Inference Request (vLLM V1)"</em>.</li>
+<li><strong>Continuous Batching Experiments</strong> -- Send 5-10 concurrent requests, measure throughput vs sequential.</li>
+<li><strong>vLLM API Mastery</strong> -- SamplingParams, streaming, prefix caching, guided decoding. Build a multi-user chat server.</li>
+<li><strong>Ecosystem Integration</strong> -- HuggingFace Hub models in vLLM, compare with TGI (C++ optimized, 3x throughput on long prompts in some benchmarks).</li>
+<li><strong>DeepSpeed &amp; Offloading</strong> -- ZeRO-Inference: host weights on CPU/NVMe, stream to GPU. Serve 30B model on 16GB GPU.</li>
+<li><strong>Quantization Practice</strong> -- Load AWQ INT4 models in vLLM, measure memory/throughput vs FP16.</li>
+<li><strong>Transformer Variants</strong> -- RoPE, MQA/GQA, FlashAttention and their inference performance implications.</li>
+</ol>
+<h3 id="advanced">Advanced<a class="headerlink" href="#advanced" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Distributed Inference</strong> -- Data, Pipeline, Tensor, Expert parallelism. Serve 70B via TP across 2+ GPUs.</li>
+<li><strong>vLLM Distributed Design</strong> -- MultiProcExecutor, multi-node, <code>llm-d</code> scheduler, TP+PP composition.</li>
+<li><strong>Compiled Kernels</strong> -- TensorRT-LLM engine conversion, benchmark against vLLM. FasterTransformer with Triton Inference Server.</li>
+<li><strong>Engine Benchmarking</strong> -- Compare TGI, vLLM, TensorRT-LLM, FasterTransformer under controlled conditions (13B, 10 concurrent, 512 tokens). Also explore FlexGen for CPU/NVMe offloading.</li>
+<li><strong>Key Papers</strong> -- PagedAttention (SOSP 2023), ORCA (USENIX 2023), Speculative Decoding (2023).</li>
+<li><strong>Custom Kernels</strong> -- FlashAttention, xFormers, OpenAI Triton. Write a Triton kernel for softmax or layernorm.</li>
+</ol>
+<h3 id="expert">Expert<a class="headerlink" href="#expert" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Hardware-Aware Optimization</strong> -- H100 Transformer Engine (FP8/FP16 auto-management, up to 30x faster inference vs A100). Profile compute-bound vs memory-bound. Alternative hardware: TPU v4, Inferentia2, AMD MI300.</li>
+<li><strong>End-to-End System Design</strong> -- Full-stack serving for millions of users: containerized vLLM, KServe on K8s, QPS-based autoscaling, multi-model serving via MIG, failure handling.</li>
+<li><strong>Open-Source Contributions</strong> -- Tackle vLLM scheduler fairness, new attention variants, multi-node scheduling (<code>llm-d</code>).</li>
+<li><strong>Research Tracking</strong> -- MLSys, OSDI, arXiv weekly. Watch: KV cache offloading (SpecOffload), cross-device scheduling, 256K+ context serving.</li>
+<li><strong>Capstone: Custom Serving Stack</strong> -- Combine vLLM scheduling + TensorRT-LLM kernels + speculative decoding in a unified API. Benchmark against existing solutions.</li>
+</ol>
+<hr />
+<h2 id="appendix-b-annotated-bibliography">Appendix B: Annotated Bibliography<a class="headerlink" href="#appendix-b-annotated-bibliography" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwon et al., "PagedAttention" (SOSP 2023)</td>
+<td>vLLM's core innovation</td>
+</tr>
+<tr>
+<td>Yu et al., "ORCA" (USENIX 2022)</td>
+<td>Continuous batching</td>
+</tr>
+<tr>
+<td>Dao, "FlashAttention" (2022)</td>
+<td>Fused attention kernels</td>
+</tr>
+<tr>
+<td>Frantar et al., "GPTQ" (2023)</td>
+<td>Weight-only INT4 quantization</td>
+</tr>
+<tr>
+<td>Lin et al., "AWQ" (2023)</td>
+<td>Activation-aware weight quantization</td>
+</tr>
+<tr>
+<td>Xiao et al., "SmoothQuant" (ICML 2023)</td>
+<td>W8A8 via activation smoothing</td>
+</tr>
+<tr>
+<td>Leviathan et al., "Speculative Decoding" (2023)</td>
+<td>Draft-verify decoding theory</td>
+</tr>
+<tr>
+<td>Cai et al., "Medusa" (2024)</td>
+<td>Multi-head speculative</td>
+</tr>
+<tr>
+<td>Gu &amp; Dao, "Mamba" (2023)</td>
+<td>SSM architecture</td>
+</tr>
+<tr>
+<td>Zheng et al., "SGLang" (2024)</td>
+<td>RadixAttention, prefix caching</td>
+</tr>
+<tr>
+<td>Agrawal et al., "Sarathi" (2023)</td>
+<td>Chunked prefill scheduling</td>
+</tr>
+<tr>
+<td>Dettmers et al., "LLM.int8()" (2022)</td>
+<td>Outlier-aware INT8 for LLMs</td>
+</tr>
+<tr>
+<td>Dettmers et al., "8-bit Optimizers" (NeurIPS 2021)</td>
+<td>8-bit Adam</td>
+</tr>
+<tr>
+<td><em>"Life of an Inference Request (vLLM V1)"</em> -- Ubicloud Blog</td>
+<td>Request flow</td>
+</tr>
+<tr>
+<td><em>"Inside vLLM"</em> -- vLLM Blog</td>
+<td>Engine internals</td>
+</tr>
+<tr>
+<td><em>"FlexGen"</em> -- arXiv 2303.06865</td>
+<td>CPU/disk offloading</td>
+</tr>
+<tr>
+<td><em>"SpecOffload"</em> -- arXiv 2505.10259</td>
+<td>KV cache offloading</td>
+</tr>
+<tr>
+<td>NVIDIA TensorRT-LLM documentation</td>
+<td>Compiler + runtime reference</td>
+</tr>
+<tr>
+<td>NVIDIA -- Ampere/Hopper Architecture In-Depth</td>
+<td>H100, FP8, Transformer Engine, precision formats on tensor cores</td>
+</tr>
+<tr>
+<td>NVIDIA -- Optimizing LLMs with PTQ (2023)</td>
+<td>TensorRT Model Optimizer; FP8, INT8, AWQ</td>
+</tr>
+<tr>
+<td>HuggingFace -- 8-bit Matrix Multiplication (2022)</td>
+<td>LLM.int8() explainer</td>
+</tr>
+<tr>
+<td>NIST SP 800-223 -- HPC Security (2024)</td>
+<td>HPC security architecture</td>
+</tr>
+<tr>
+<td>Red Oak Consulting -- GPU K8s (2023)</td>
+<td>GPU Operator, MIG, scheduling</td>
+</tr>
+<tr>
+<td>NVIDIA DCGM Documentation</td>
+<td>GPU monitoring best practices</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>
